@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TransitService } from '../../services/transit.service';
-import { Convert, Transit } from '../../models/transit.model';
+import { Transit } from '../../models/transit.model';
 import { ActivatedRoute } from '@angular/router';
-import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { environment } from '../../../environments/environment';
+import { DiagramService } from '../../services/diagram.service';
 
 @Component({
   selector: 'app-transits',
@@ -13,18 +15,21 @@ export class TransitsComponent implements OnInit {
 
   categoryId: number;
   private sub: any;
+  averageRate;
 
-  transit = new Transit();
+  categoryIconURL = `${environment.serverURL}/category/img?link=`;
+  // averageRateURL = `${environment.serverURL}/feedback/rate/`;
+
+  displayedColumns = ['categoryIcon', 'name', 'routeName'/*, 'averageRate'*/];
 
   dataSource: MatTableDataSource<Transit> = new MatTableDataSource();
-
-  displayedColumns = ['id', 'name', 'categoryId', 'routeName'];
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private transitService: TransitService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private diagramService: DiagramService) {
   }
 
   ngOnInit() {
@@ -44,11 +49,19 @@ export class TransitsComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.transitService.addTransit(this.transit)
-      .subscribe(res => console.log(res));
-    alert('Transit added: ' + Convert.transitToJson(this.transit));
+  getTransitAverageRate(transitId: number): number {
+    this.diagramService.getResults(environment.serverURL + '/feedback/rate/' + transitId)
+      .subscribe(res => {
+        this.averageRate = (<number>res).toPrecision(3);
+      });
+    return this.averageRate;
   }
+
+  // onSubmit() {
+  //   this.transitService.addTransit(this.transit)
+  //     .subscribe(res => console.log(res));
+  //   alert('Transit added: ' + Convert.transitToJson(this.transit));
+  // }
 
   getAllByCategoryId(categoryId: number) {
     this.transitService.getTransitsByCategoryId(categoryId)
@@ -59,6 +72,7 @@ export class TransitsComponent implements OnInit {
     this.transitService.getTransitsByNextLevelCategoryName(categoryName)
       .subscribe(transits => this.dataSource.data = transits);
   }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
