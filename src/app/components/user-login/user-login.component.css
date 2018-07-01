@@ -1,18 +1,49 @@
 .LoginUserForm {
-  width: 800px;
-  margin: 200px auto;
-  font-size: 25px;
-}
+  width: 60%;
+  height: 70%;
+  margin: 120px 100px;
 
-.Button {
-  background-color: black;
-  width: 50%;
 }
-
-.email {
+.form-group{
+  display: inline-block;
+  margin: 1%;
   width: 100%;
+  height: 20%;
+
 }
 
-.password {
-  width: 100%;
+.mat-button{
+  background-color: gainsboro;
+  font-size: large;
+  font-family: Calibri;
+  width: 25%;
+  line-height: 50px;
+  margin-right: 23%;
+  float:right;
+  /* border-width: 3px;
+   border-color: orange;
+   border-style: solid;*/
 }
+
+
+.mat-icon{
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  height: 50px;
+  width: 50px;
+  margin: 1%;
+}
+
+
+.mat-form-f {
+  width: 70%;
+  height: 70%;
+  font-family: Calibri;
+  font-size: medium;
+
+}
+
+
+
+
