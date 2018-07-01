@@ -11,6 +11,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from 'src/app/app-routing.module';
 import {ExcategoryComponent} from './components/excategory/excategory.component';
 import { HttpModule } from '@angular/http';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 import {
@@ -235,4 +237,11 @@ export function createTranslateLoader(http: HttpClient) {
   entryComponents: [AddQuestionComponent, AddFeedbackComponent]
 })
 export class AppModule {
+  public constructor (
+    private domSanitizer: DomSanitizer,
+    public matIconRegistry: MatIconRegistry) {
+    matIconRegistry.addSvgIcon('fill', domSanitizer.bypassSecurityTrustResourceUrl('/assets/pencil.svg'));
+    matIconRegistry.addSvgIcon('email', domSanitizer.bypassSecurityTrustResourceUrl('/assets/email.svg'));
+    matIconRegistry.addSvgIcon('protection', domSanitizer.bypassSecurityTrustResourceUrl('/assets/padlock.svg'));
+  }
 }
