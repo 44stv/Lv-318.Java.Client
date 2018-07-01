@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { TransitService } from '../../services/transit.service';
 import { Transit } from '../../models/transit.model';
 import { ActivatedRoute } from '@angular/router';
@@ -11,14 +11,13 @@ import { DiagramService } from '../../services/diagram.service';
   templateUrl: './transits.component.html',
   styleUrls: ['./transits.component.css']
 })
-export class TransitsComponent implements OnInit {
+export class TransitsComponent implements OnInit, AfterViewInit {
 
   categoryId: number;
-  private sub: any;
+  cityName: string;
   averageRate;
 
   categoryIconURL = `${environment.serverURL}/category/img?link=`;
-  // averageRateURL = `${environment.serverURL}/feedback/rate/`;
 
   displayedColumns = ['categoryIcon', 'name', 'routeName'/*, 'averageRate'*/];
 
@@ -33,20 +32,51 @@ export class TransitsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllTransits();
     this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
   }
 
-  getAllTransits(): void {
-    this.sub = this.route.params.forEach(params => {
+  ngAfterViewInit() {
+    this.getTransits();
+    // this.dataSource.paginator = this.paginator;
+  }
+
+  getTransits(): void {
+    this.route.params.forEach(params => {
       if (params['id'] !== undefined) {
-        this.getAllByCategoryId(params['id']);
+        this.categoryId = params['id'];
+        this.getAllByCategoryId(this.categoryId, this.paginator.pageIndex, this.paginator.pageSize);
       }
       if (params['id'] === undefined) {
-        this.getAllByNextLevelCategoryName(params['city']);
+        this.cityName = params['city'];
+        this.getAllByNextLevelCategoryName(this.cityName, this.paginator.pageIndex, this.paginator.pageSize);
       }
     });
+
+    this.paginator.page.subscribe(() => {
+      if (this.categoryId !== undefined) {
+        this.getAllByCategoryId(this.categoryId, this.paginator.pageIndex, this.paginator.pageSize);
+      }
+      if (this.categoryId === undefined) {
+        this.getAllByNextLevelCategoryName(this.cityName, this.paginator.pageIndex, this.paginator.pageSize);
+      }
+    });
+  }
+
+  getAllByCategoryId(categoryId: number, page: number, size: number) {
+    this.transitService.getTransitsByCategoryId(categoryId, page, size)
+      .subscribe(transits => {
+        this.dataSource.data = transits.content;
+        this.paginator.length = transits.totalElements;
+      });
+  }
+
+  getAllByNextLevelCategoryName(categoryName: string, page: number, size: number) {
+    this.transitService.getTransitsByNextLevelCategoryName(categoryName, page, size)
+      .subscribe(allTransits => {
+        this.dataSource.data = allTransits.content;
+        this.paginator.length = allTransits.totalElements;
+        console.log(this.dataSource.paginator);
+      });
   }
 
   getTransitAverageRate(transitId: number): number {
@@ -62,16 +92,6 @@ export class TransitsComponent implements OnInit {
   //     .subscribe(res => console.log(res));
   //   alert('Transit added: ' + Convert.transitToJson(this.transit));
   // }
-
-  getAllByCategoryId(categoryId: number) {
-    this.transitService.getTransitsByCategoryId(categoryId)
-      .subscribe(transits => this.dataSource.data = transits);
-  }
-
-  getAllByNextLevelCategoryName(categoryName: string) {
-    this.transitService.getTransitsByNextLevelCategoryName(categoryName)
-      .subscribe(transits => this.dataSource.data = transits);
-  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
