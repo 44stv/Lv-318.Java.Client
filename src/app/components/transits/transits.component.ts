@@ -75,7 +75,6 @@ export class TransitsComponent implements OnInit, AfterViewInit {
       .subscribe(allTransits => {
         this.dataSource.data = allTransits.content;
         this.paginator.length = allTransits.totalElements;
-        console.log(this.dataSource.paginator);
       });
   }
 
