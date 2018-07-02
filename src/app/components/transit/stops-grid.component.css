@@ -1,8 +1,8 @@
 
 .demo-grid-list {
-  top: 50px;
+  /*top: 50px;*/
   width: auto;
-  margin: 100px 100px;
+  margin-left: 100px;
 }
 
 p {
@@ -12,7 +12,6 @@ p {
 .mat-grid-tile-class {
   background: rgba(0, 0, 0, 0.32);
   text-align: center;
-  text-align:center;
   font-size: 14px;
   max-width: 40px;
 }
@@ -23,7 +22,7 @@ p {
 
 
 
-.grid-list {
-  width: 1200px;
-}
+/*.grid-list {*/
+  /*width: 1200px;*/
+/*}*/
 

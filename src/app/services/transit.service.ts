@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Transit } from '../models/transit.model';
 import { environment } from '../../environments/environment';
+import { Paginator } from '../models/paginator.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +27,11 @@ export class TransitService {
     return this.http.get<Transit>(`${this.serviceUrl}/${id}`);
   }
 
-  getTransitsByCategoryId(id: number): Observable<Transit[]> {
-    return this.http.get<Transit[]>(`${this.serviceUrl}?categoryId=${id}`);
+  getTransitsByCategoryId(id: number, page: number, size: number): Observable<Paginator> {
+    return this.http.get<Paginator>(`${this.serviceUrl}?categoryId=${id}&page=${page}&size=${size}`);
   }
 
-  getTransitsByNextLevelCategoryName(categoryName: string): Observable<Transit[]> {
-    return this.http.get<Transit[]>(`${this.serviceUrl}?nextLevelCategoryName=${categoryName}`);
+  getTransitsByNextLevelCategoryName(categoryName: string, page: number, size: number): Observable<Paginator> {
+    return this.http.get<Paginator>(`${this.serviceUrl}?nextLevelCategoryName=${categoryName}&page=${page}&size=${size}`);
   }
 }

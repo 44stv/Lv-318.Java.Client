@@ -1,12 +1,20 @@
 <div class="mat-elevation-z8">
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
+  <div class="row">
+    <div class="col-xs-6">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+    <div class="col-xs-6">
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+
   <mat-table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
-      <mat-cell *matCellDef="let transit"> {{ transit.id }} </mat-cell>
+    <ng-container matColumnDef="categoryIcon">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
+      <mat-cell *matCellDef="let transit"> <img src="{{ categoryIconURL }}{{ transit.categoryIconURL }}"></mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
@@ -14,15 +22,15 @@
       <mat-cell *matCellDef="let transit"> {{ transit.name }} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="categoryId">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Category Id </mat-header-cell>
-      <mat-cell *matCellDef="let transit"> {{ transit.categoryId }} </mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="routeName">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Route </mat-header-cell>
       <mat-cell *matCellDef="let transit"> {{ transit.routeName }} </mat-cell>
     </ng-container>
+
+    <!--<ng-container matColumnDef="averageRate">-->
+      <!--<mat-header-cell *matHeaderCellDef mat-sort-header> Average rate </mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let transit">{{ getTransitAverageRate(transit.id) }}</mat-cell>-->
+    <!--</ng-container>-->
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let transit;"
@@ -30,7 +38,6 @@
              transit.id, transit.name]"></mat-row>
   </mat-table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
 <!--<div class="AddTransit">-->
 <!--<h2 class="mat-h2">Add transit</h2>-->
