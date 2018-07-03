@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DiagramService} from '../../../../services/diagram.service';
 import {Stop} from '../../../../models/stop.model';
+import {multi2} from './mock-2.data';
 
 @Component({
   selector: 'app-busy-stops-diagram',
