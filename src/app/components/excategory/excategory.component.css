@@ -3,8 +3,8 @@
 }
 
 .top-categories {
-  position: relative;
-  z-index: 20;
+  /*position: relative;*/
+  /*z-index: 20;*/
   width: 100px;
   height: 100px;
   margin: 0;
@@ -25,10 +25,10 @@
 }
 
 .city-icon {
-  position: absolute;
+  /*position: absolute;*/
   display: block;
   right: 0;
-  top: 2px;;
+  top: 2px;
 }
 
 a {

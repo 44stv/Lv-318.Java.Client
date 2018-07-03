@@ -1,64 +1,97 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { TransitService } from '../../services/transit.service';
-import { Convert, Transit } from '../../models/transit.model';
+import { Transit } from '../../models/transit.model';
 import { ActivatedRoute } from '@angular/router';
-import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { environment } from '../../../environments/environment';
+import { DiagramService } from '../../services/diagram.service';
 
 @Component({
   selector: 'app-transits',
   templateUrl: './transits.component.html',
   styleUrls: ['./transits.component.css']
 })
-export class TransitsComponent implements OnInit {
+export class TransitsComponent implements OnInit, AfterViewInit {
 
   categoryId: number;
-  private sub: any;
+  cityName: string;
+  averageRate;
 
-  transit = new Transit();
+  categoryIconURL = `${environment.serverURL}/category/img?link=`;
+
+  displayedColumns = ['categoryIcon', 'name', 'routeName'/*, 'averageRate'*/];
 
   dataSource: MatTableDataSource<Transit> = new MatTableDataSource();
-
-  displayedColumns = ['id', 'name', 'categoryId', 'routeName'];
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private transitService: TransitService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private diagramService: DiagramService) {
   }
 
   ngOnInit() {
-    this.getAllTransits();
     this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
   }
 
-  getAllTransits(): void {
-    this.sub = this.route.params.forEach(params => {
+  ngAfterViewInit() {
+    this.getTransits();
+    // this.dataSource.paginator = this.paginator;
+  }
+
+  getTransits(): void {
+    this.route.params.forEach(params => {
       if (params['id'] !== undefined) {
-        this.getAllByCategoryId(params['id']);
+        this.categoryId = params['id'];
+        this.getAllByCategoryId(this.categoryId, this.paginator.pageIndex, this.paginator.pageSize);
       }
       if (params['id'] === undefined) {
-        this.getAllByNextLevelCategoryName(params['city']);
+        this.cityName = params['city'];
+        this.getAllByNextLevelCategoryName(this.cityName, this.paginator.pageIndex, this.paginator.pageSize);
+      }
+    });
+
+    this.paginator.page.subscribe(() => {
+      if (this.categoryId !== undefined) {
+        this.getAllByCategoryId(this.categoryId, this.paginator.pageIndex, this.paginator.pageSize);
+      }
+      if (this.categoryId === undefined) {
+        this.getAllByNextLevelCategoryName(this.cityName, this.paginator.pageIndex, this.paginator.pageSize);
       }
     });
   }
 
-  onSubmit() {
-    this.transitService.addTransit(this.transit)
-      .subscribe(res => console.log(res));
-    alert('Transit added: ' + Convert.transitToJson(this.transit));
+  getAllByCategoryId(categoryId: number, page: number, size: number) {
+    this.transitService.getTransitsByCategoryId(categoryId, page, size)
+      .subscribe(transits => {
+        this.dataSource.data = transits.content;
+        this.paginator.length = transits.totalElements;
+      });
   }
 
-  getAllByCategoryId(categoryId: number) {
-    this.transitService.getTransitsByCategoryId(categoryId)
-      .subscribe(transits => this.dataSource.data = transits);
+  getAllByNextLevelCategoryName(categoryName: string, page: number, size: number) {
+    this.transitService.getTransitsByNextLevelCategoryName(categoryName, page, size)
+      .subscribe(allTransits => {
+        this.dataSource.data = allTransits.content;
+        this.paginator.length = allTransits.totalElements;
+      });
   }
 
-  getAllByNextLevelCategoryName(categoryName: string) {
-    this.transitService.getTransitsByNextLevelCategoryName(categoryName)
-      .subscribe(transits => this.dataSource.data = transits);
+  getTransitAverageRate(transitId: number): number {
+    this.diagramService.getResults(environment.serverURL + '/feedback/rate/' + transitId)
+      .subscribe(res => {
+        this.averageRate = (<number>res).toPrecision(3);
+      });
+    return this.averageRate;
   }
+
+  // onSubmit() {
+  //   this.transitService.addTransit(this.transit)
+  //     .subscribe(res => console.log(res));
+  //   alert('Transit added: ' + Convert.transitToJson(this.transit));
+  // }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
