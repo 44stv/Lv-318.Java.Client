@@ -1,7 +1,4 @@
-.container {
-  position: absolute;
-  top: 350px;
-  right: 0px;
-  width: 600px;
-  height: 375px;
+.chart-container {
+  position: relative;
+  top: 100px;
 }

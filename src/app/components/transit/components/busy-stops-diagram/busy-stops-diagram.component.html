@@ -1,6 +1,15 @@
-<div class="container">
-  <div class="row">
-    <p style="text-align: center">{{'By-Stop' | translate}}</p>
-    <canvas id="lineChart1"></canvas>
-  </div>
-</div>
+<ngx-charts-heat-map
+  *ngIf="visible"
+  class="chart-container"
+  [results]="data"
+  xAxis="true"
+  yAxis="true"
+  showXAxisLabel="true"
+  showYAxisLabel="true"
+  xAxisLabel="Години"
+  yAxisLabel="Зупинки"
+  scheme="vivid"
+  legend="true"
+  [view]="view"
+  title="Values in %">
+</ngx-charts-heat-map>
