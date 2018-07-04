@@ -15,6 +15,7 @@ export class AppComponent {
 
   constructor(private translate: TranslateService, private breadcrumbService: BreadcrumbService) {
     translate.setDefaultLang('ua');
+    this.breadcrumbService.addFriendlyNameForRoute('/main', 'Home');
   }
 
   switchLanguage(language: string) {
