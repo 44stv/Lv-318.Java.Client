@@ -81,7 +81,7 @@ import { AddFeedbackCriteriaComponent } from './components/feedback-criteria/add
 import { GlobalSearchComponent } from './components/global-search/global-search.component';
 import { GlobalSearchService } from './services/global-search.service';
 import { BusyStopsDiagramComponent } from './components/transit/components/busy-stops-diagram/busy-stops-diagram.component';
-import { httpInterceptorProviders } from './services/auth/interceptors/http-providers';
+import { InterceptorService } from './services/auth/interceptors/interceptor.service';
 
 
 import {BackToPreviousPageBtnComponent} from './components/transit/components/back-button/back-to-previous-page-btn.component';
@@ -216,7 +216,11 @@ export function createTranslateLoader(http: HttpClient) {
     NgxChartsModule
   ],
   providers: [
-    httpInterceptorProviders,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
     AdminGuardService,
     ClientGuardService,
     AuthGuardService,

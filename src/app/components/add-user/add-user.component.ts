@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
+import {AuthService} from "../../services/auth/auth.service";
 import { User } from '../../models/user.model';
 
 @Component({
@@ -13,16 +13,19 @@ export class AddUserComponent {
 
   user: User = new User();
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router,  public authService: AuthService) {
 
   }
 
   createUser(): void {
-    this.userService.createUser(this.user)
-      .subscribe(data => {
-        alert('User created successfully.');
-      });
-
+    this.authService.signUp(this.user).subscribe(
+      result => {
+        console.log(result);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
 }

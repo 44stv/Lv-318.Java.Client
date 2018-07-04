@@ -22,7 +22,7 @@ export class UserLoginComponent {
   logIn() {
     this.authService.signIn(this.login)
       .subscribe((token: TokenModel) => {
-        this.tokenStorage.saveToken(token);
+        this.authService.setToken(token);
         alert('User loged successfully.');
         this.router.navigate(['main']);
       });
