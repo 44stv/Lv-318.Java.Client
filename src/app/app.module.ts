@@ -14,7 +14,6 @@ import { HttpModule } from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 
-
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -55,6 +54,13 @@ import {
   MatTreeModule,
 } from '@angular/material';
 
+import {
+  MdcButtonModule,
+  MdcFabModule,
+  MdcIconModule,
+  MdcSliderModule
+} from '@angular-mdc/web';
+
 import { FormsModule } from '@angular/forms';
 import { ExcategoryService } from './services/excategory.service';
 import { MenuComponent } from './components/menu/menu.component';
@@ -84,7 +90,6 @@ import { GlobalSearchService } from './services/global-search.service';
 import { BusyStopsDiagramComponent } from './components/transit/components/busy-stops-diagram/busy-stops-diagram.component';
 import { httpInterceptorProviders } from './services/auth/interceptors/http-providers';
 import { UixMatNumberSpinnerModule } from 'uix-mat-number-spinner';
-import { MdcButtonModule , MdcFabModule, MdcIconModule,MdcSliderModule } from '@angular-mdc/web';
 
 
 import {BackToPreviousPageBtnComponent} from './components/transit/components/back-button/back-to-previous-page-btn.component';
@@ -107,7 +112,6 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    
     AppComponent,
     ExcategoryComponent,
     MenuComponent,
@@ -168,8 +172,6 @@ export function createTranslateLoader(http: HttpClient) {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-
-
   ],
   imports: [
     MdcButtonModule,
