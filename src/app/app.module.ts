@@ -53,6 +53,13 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+
+import {
+  MdcButtonModule,
+  MdcFabModule,
+  MdcIconModule,
+} from '@angular-mdc/web';
+
 import {ExcategoryService} from './services/excategory.service';
 import {MainComponent} from './components/main/main.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
@@ -168,10 +175,11 @@ export function createTranslateLoader(http: HttpClient) {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-
-
   ],
   imports: [
+    MdcButtonModule,
+    MdcFabModule,
+    MdcIconModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatSidenavModule,
