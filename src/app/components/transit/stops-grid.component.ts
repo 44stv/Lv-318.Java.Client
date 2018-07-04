@@ -17,7 +17,7 @@ export class StopsGridComponent implements OnInit {
   private sub: any;
   @Input() public idTransit: number;
   @Input() transitName: String;
-  stopsList: Observable<Stop[]>;
+  forwardStopsList: Observable<Stop[]>;
   stopArray: Stop[] = [];
   public selectedStops: Stop[] = [];
   categoryId: number;
@@ -32,8 +32,8 @@ export class StopsGridComponent implements OnInit {
       this.categoryId = params['categoryId'];
       this.transitName = params['name'];
     });
-    this.stopsList = this.stopService.getStopsByTransitId(this.idTransit);
-    this.stopsList.subscribe(stopArray =>
+    this.forwardStopsList = this.stopService.getStopsByTransitId(this.idTransit);
+    this.forwardStopsList.subscribe(stopArray =>
       this.stopArray = stopArray);
     this.checkedItems = new Array(this.stopArray.length);
 

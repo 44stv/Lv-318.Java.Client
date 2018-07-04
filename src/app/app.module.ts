@@ -12,6 +12,8 @@ import {AppRoutingModule} from 'src/app/app-routing.module';
 import {ExcategoryComponent} from './components/excategory/excategory.component';
 import { HttpModule } from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { MdcTabModule } from '@angular-mdc/web';
+
 
 
 import {
@@ -197,6 +199,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatCheckboxModule,
     MatPaginatorModule,
     MatListModule,
+    MdcTabModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

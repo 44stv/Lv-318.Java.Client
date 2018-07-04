@@ -1,8 +1,5 @@
-
 .demo-grid-list {
-  /*top: 50px;*/
   width: auto;
-  margin-left: 100px;
 }
 
 p {
@@ -20,9 +17,12 @@ p {
   margin: 15px 0;
 }
 
+.tile {
+  text-align: center;
+  font-size: 14px;
+}
 
-
-/*.grid-list {*/
-  /*width: 1200px;*/
-/*}*/
+.tab-group {
+  align-content: center;
+}
 
