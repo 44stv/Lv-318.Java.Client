@@ -11,6 +11,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from 'src/app/app-routing.module';
 import {ExcategoryComponent} from './components/excategory/excategory.component';
 import { HttpModule } from '@angular/http';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 
 import {
@@ -69,7 +70,6 @@ import { SlideshowModule } from 'ng-simple-slideshow';
 import { FeedbackCriteriaComponent } from './components/feedback-criteria/feedback-criteria.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
-import { BusyHoursDiagramComponent } from './components/transit/components/busy-hours-diagram/busy-hours-diagram.component';
 import { MessageComponent } from './components/message/message.component';
 import { UserService } from './services/user.service';
 import { TokenStorage } from './services/auth/token/token-storage';
@@ -123,7 +123,6 @@ export function createTranslateLoader(http: HttpClient) {
     AddQuestionComponent,
     RaitingDiagramComponent,
     AverageRateComponent,
-    BusyHoursDiagramComponent,
     OneFeedbackCriteriaComponent,
     AddFeedbackCriteriaComponent,
     GlobalSearchComponent,
@@ -221,6 +220,7 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
+    NgxChartsModule
   ],
   providers: [
     httpInterceptorProviders,
