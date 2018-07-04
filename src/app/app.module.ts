@@ -7,7 +7,7 @@ import 'hammerjs';
 import { AppComponent } from './app.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './services/auth/auth.service';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from 'src/app/app-routing.module';
 import {ExcategoryComponent} from './components/excategory/excategory.component';
 import { HttpModule } from '@angular/http';
