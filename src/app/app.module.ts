@@ -92,6 +92,7 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { MapsComponent } from './components/transit/components/maps/maps.component';
 import { AddFeedbackComponent } from './components/transit/components/add-feedback/add-feedback.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -126,7 +127,8 @@ export function createTranslateLoader(http: HttpClient) {
     AddFeedbackComponent,
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    AdminComponent
   ],
   exports: [
     MatAutocompleteModule,

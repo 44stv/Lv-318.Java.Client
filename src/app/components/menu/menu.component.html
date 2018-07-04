@@ -7,9 +7,16 @@
     <div class="Search" *ngIf="isHomeRouteActivated()">
         <input #search aria-label="search" placeholder="Search" (keyup.enter)="onEnter(search.value)">
     </div>
-    <div class="criteriaButton">
+
+  <div class="criteriaButton">
     <a [routerLink]="['/feedback-criteria']">
       <button mat-stroked-button type="submit">{{ 'Feedback'| translate}}</button>
+    </a>
+  </div>
+
+  <div class="adminButton">
+    <a [routerLink]="['/admin']">
+      <button mat-stroked-button type="submit">Admin</button>
     </a>
   </div>
 

@@ -13,6 +13,7 @@ import { GlobalSearchComponent } from './components/global-search/global-search.
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import {AddFeedbackComponent} from './components/transit/components/add-feedback/add-feedback.component';
 import { MapsComponent } from './components/transit/components/maps/maps.component';
+import {AdminComponent} from "./components/admin/admin.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/main', pathMatch: 'full'},
@@ -32,7 +33,8 @@ const routes: Routes = [
   {path: 'user/login', component: UserLoginComponent},
   {path: 'show-transit-scheme/:categoryId/:id/:name', component: StopsGridComponent},
   {path: 'feedback', component: AddFeedbackComponent},
-  {path: 'direction/:id', component: MapsComponent}
+  {path: 'direction/:id', component: MapsComponent},
+  {path: 'admin', component: AdminComponent}
 
 ];
 
