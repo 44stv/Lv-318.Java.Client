@@ -31,5 +31,10 @@ body {
   left: -5px;
 }
 
+breadcrumb {
+  position: relative;
+  width: 500px;
+}
+
 
 

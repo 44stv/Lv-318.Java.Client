@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSidenav } from '@angular/material';
+import {BreadcrumbService} from 'ng5-breadcrumb';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
 
   @ViewChild('sidenav') public sideNav: MatSidenav;
 
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService, private breadcrumbService: BreadcrumbService) {
     translate.setDefaultLang('ua');
   }
 
