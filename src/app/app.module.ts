@@ -53,6 +53,12 @@ import {
   MatTreeModule,
 } from '@angular/material';
 
+import {
+  MdcButtonModule,
+  MdcFabModule,
+  MdcIconModule,
+} from '@angular-mdc/web';
+
 import { FormsModule } from '@angular/forms';
 import { ExcategoryService } from './services/excategory.service';
 import { MenuComponent } from './components/menu/menu.component';
@@ -165,10 +171,11 @@ export function createTranslateLoader(http: HttpClient) {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-
-
   ],
   imports: [
+    MdcButtonModule,
+    MdcFabModule,
+    MdcIconModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatSidenavModule,
