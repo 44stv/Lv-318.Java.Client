@@ -13,6 +13,7 @@ import {ExcategoryComponent} from './components/excategory/excategory.component'
 import { HttpModule } from '@angular/http';
 
 
+
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -82,6 +83,8 @@ import { GlobalSearchComponent } from './components/global-search/global-search.
 import { GlobalSearchService } from './services/global-search.service';
 import { BusyStopsDiagramComponent } from './components/transit/components/busy-stops-diagram/busy-stops-diagram.component';
 import { httpInterceptorProviders } from './services/auth/interceptors/http-providers';
+import { UixMatNumberSpinnerModule } from 'uix-mat-number-spinner';
+import { MdcButtonModule , MdcFabModule, MdcIconModule,MdcSliderModule } from '@angular-mdc/web';
 
 
 import {BackToPreviousPageBtnComponent} from './components/transit/components/back-button/back-to-previous-page-btn.component';
@@ -104,6 +107,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   declarations: [
+    
     AppComponent,
     ExcategoryComponent,
     MenuComponent,
@@ -169,7 +173,15 @@ export function createTranslateLoader(http: HttpClient) {
 
   ],
   imports: [
+    MdcButtonModule,
+    MdcSliderModule ,
+   MdcFabModule,
+   MdcIconModule,
+    MatExpansionModule,
+    MatTabsModule,
+    MatSliderModule,
     BrowserModule,
+    UixMatNumberSpinnerModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     HttpModule,
@@ -183,6 +195,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatMenuModule,
     FormsModule,
     MatCardModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,

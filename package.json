@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@agm/core": "^1.0.0-beta.3",
+    "@angular-mdc/web": "^0.36.3",
     "@angular/animations": "^6.0.7",
     "@angular/cdk": "^6.3.1",
     "@angular/common": "^6.0.7",
@@ -40,6 +41,7 @@
     "ngx-bootstrap": "^3.0.1",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",
+    "uix-mat-number-spinner": "0.0.6",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

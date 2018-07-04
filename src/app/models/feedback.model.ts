@@ -1,30 +1,43 @@
 import {Stop} from './stop.model';
 
+export class Questioner {
+  // userId: number;
+  // transitId: number;
+  criteriaId: number;
+  type: String;
+  questions: String[];
+  answer: any;
+}
+
 export class Feedback {
   userId: number;
   transitId: number;
   criteriaId: number;
   type: String;
-  questions: String[];
-  answer: String;
-}
-
-export class FeedbackDTO {
-  userId: number;
-  transitId: number;
-  criteriaId: number;
   answer: any;
+  date:String;
 }
 
 export class RatingAnswer {
   answer: number;
   weight: number;
 }
+export class RatingAnswerArray{
+ answer: number[]=[];
 
+ constructor(lenght:number){
+   this.answer.length=lenght;
+ }
+}
 export class Answer {
   value: string;
 }
-
+export class AccepterAnswer{
+  answer: string;
+  toString(): string{
+    return `"${this.answer}"`;
+  }
+}
 export class CapacityAnswer {
   from: Stop;
   to: Stop;
@@ -33,12 +46,10 @@ export class CapacityAnswer {
   endTime: Time;
 
   toCapacityHoursString(): string {
-    const answer = '';
     return this.startTime.toString() + this.endTime.toString() + this.capacity.toString();
   }
 
   toCapacityRouteString(): string {
-    const answer = '';
     return this.from.toString() + this.endTime.toString() + this.capacity.toString();
   }
 }

@@ -1,12 +1,19 @@
 
-.addfeedback {
+.mat-card {
+    margin: 10px;
+  }
+  
+  .question-form {
+    width: 90%;
+    margin: 10px;
+  }
 
-margin: 5%;
-}
-.showFeedbacks{
-    margin: 5%;   
-}
-.buttons{
-    margin-top: 20%;
-    float :right;
+  .mat-slider{
+    width:  100%;
+  }
+  .comment{
+    width: 100%;
+  }
+.radio{
+  margin: 10px; 
 }
