@@ -4,6 +4,11 @@
 }
 
 .mat-elevation-z8 {
-  width: 1000px;
-  margin: 150px auto;
+  width: 87%;
+  margin: 50px auto;
+}
+
+.mat-form-field {
+  padding-top: 5px;
+  padding-left: 20px;
 }

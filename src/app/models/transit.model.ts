@@ -3,6 +3,7 @@ export class Transit {
   name: string;
   categoryId: number;
   routeName: string;
+  categoryIconURL: string;
 }
 
 // Converts JSON strings to/from your types
