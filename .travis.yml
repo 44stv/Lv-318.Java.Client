@@ -22,5 +22,3 @@ deploy:
   region: eu-central-1
   local_dir: dist/client
   skip_cleanup: true
-
-
