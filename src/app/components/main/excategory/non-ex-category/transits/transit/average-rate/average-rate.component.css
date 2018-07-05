@@ -1,5 +1,6 @@
-.form-group {
-  /*position: relative;*/
-  /*top: 50px;*/
-  /*left: 35%;*/
+div {
+  position: relative;
+  top: -100px;
+  display:inline-block;
+  margin-left: 400px;
 }

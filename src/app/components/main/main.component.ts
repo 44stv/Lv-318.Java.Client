@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 
 
 @Component({
@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, AfterViewInit {
+  latitude: string;
+  longtitude: string;
+
   imageSources: String[] = ['../../../assets/1.png',
     '../../../assets/2.png',
     '../../../assets/3.png'
@@ -17,8 +20,17 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     console.log('Position receiving...');
-    console.log(navigator.geolocation.getCurrentPosition(position => 'Latitude: ' + position.coords.latitude +
-      'Longitude: ' + position.coords.longitude));
+    console.log(navigator.geolocation.getCurrentPosition(position => {
+      this.latitude = position.coords.latitude.toString();
+      this.longtitude = position.coords.longitude.toString();
+    }));
+    console.log('Zaebcom');
+  }
+
+  ngAfterViewInit(): void {
+    console.log('Position :');
+    console.log('Latitude: ' + this.latitude);
+    console.log('Longitude: ' + this.longtitude);
     console.log('Zaebcom');
   }
 

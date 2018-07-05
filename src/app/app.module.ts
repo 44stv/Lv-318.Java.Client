@@ -101,6 +101,9 @@ import {
 import {
   BusyStopsDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-stops-diagram/busy-stops-diagram.component';
+import {
+  BusyHoursDiagramComponent
+} from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
 
 
 
@@ -137,7 +140,8 @@ export function createTranslateLoader(http: HttpClient) {
     AddFeedbackComponent,
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    BusyHoursDiagramComponent
   ],
   exports: [
     MatAutocompleteModule,
