@@ -9,10 +9,11 @@ branches:
 
 before_script:
   - npm install -g @angular/cli
+  - npm install @agm/core
   - npm install agm-direction
 
 script:
-  - ng build --prod
+  - ng build
 
 deploy:
   provider: s3
