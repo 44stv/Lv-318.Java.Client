@@ -17,8 +17,10 @@ export class StopsGridComponent implements OnInit {
   private sub: any;
   @Input() public idTransit: number;
   @Input() transitName: String;
-  forwardStopsList: Observable<Stop[]>;
+  stopsList: Observable<Stop[]>;
   stopArray: Stop[] = [];
+  forwardStops: Stop[] = [];
+  backwardStops: Stop[] = [];
   public selectedStops: Stop[] = [];
   categoryId: number;
 
@@ -32,10 +34,16 @@ export class StopsGridComponent implements OnInit {
       this.categoryId = params['categoryId'];
       this.transitName = params['name'];
     });
-    this.forwardStopsList = this.stopService.getStopsByTransitId(this.idTransit);
-    this.forwardStopsList.subscribe(stopArray =>
-      this.stopArray = stopArray);
-    this.checkedItems = new Array(this.stopArray.length);
+    this.stopsList = this.stopService.getStopsByTransitId(this.idTransit);
+    this.stopsList.subscribe(stopArray =>{
+      this.stopArray = stopArray;
+      this.checkedItems = new Array(this.stopArray.length);
+      this.forwardStops = this.stopArray.filter(stop => stop.direction === "FORWARD");
+      this.backwardStops = this.stopArray.filter(stop => stop.direction === "BACKWARD");
+      console.log(this.forwardStops);
+     });
+
+
 
   }
 

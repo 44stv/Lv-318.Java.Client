@@ -130,7 +130,8 @@ export function createTranslateLoader(http: HttpClient) {
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
     UserLoginComponent,
-    AdminComponent
+    AdminComponent,
+
   ],
   exports: [
     MatAutocompleteModule,
