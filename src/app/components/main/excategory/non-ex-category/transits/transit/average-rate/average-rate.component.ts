@@ -13,6 +13,7 @@ export class AverageRateComponent implements OnInit {
   @Input() id: number;
 
   averageRate;
+  showError = false;
 
   constructor(private diagramService: DiagramService) {
   }
@@ -21,6 +22,9 @@ export class AverageRateComponent implements OnInit {
     this.diagramService.getResults(environment.serverURL + '/feedback/rate/' + this.id)
       .subscribe(res => {
         this.averageRate = (<number>res).toPrecision(3);
+        if (this.averageRate === 0.00) {
+          this.showError = true;
+        }
       });
   }
 
