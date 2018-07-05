@@ -62,6 +62,7 @@ import {
 } from '@angular-mdc/web';
 
 import { FormsModule } from '@angular/forms';
+import { MomentModule } from 'angular2-moment/moment.module';
 import { ExcategoryService } from './services/excategory.service';
 import { MenuComponent } from './components/menu/menu.component';
 import { NonExCategoryComponent } from './components/non-ex-category/non-ex-category.component';
@@ -174,7 +175,9 @@ export function createTranslateLoader(http: HttpClient) {
     MatTreeModule,
   ],
   imports: [
+    MomentModule,
     MdcButtonModule,
+    MatDatepickerModule,
     MdcSliderModule ,
    MdcFabModule,
    MdcIconModule,

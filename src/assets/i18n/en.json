@@ -18,8 +18,11 @@
   "Backward direction": "Backward direction",
   "Log In" : "Log In",
   "Log Out" : "Log Out",
-  "Back": "Back",
+  "Capacity": "Capacity",
+ "Rating": "Rating",
   "yes": "Yes",
   "no": "No",
-  "maybe": "Maybe"
+  "maybe": "Maybe",
+  "Routes" :"Your Transit",
+  "Time" :"Time of your travel"
 }

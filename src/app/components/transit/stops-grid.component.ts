@@ -52,7 +52,7 @@ export class StopsGridComponent implements OnInit {
  }
 
   public openModal() {
-    this.dialog.open(AddFeedbackComponent, {width: '800px', height: '800',
+    this.dialog.open(AddFeedbackComponent, {width: '800px', height: 'auto',
         data: {number: this.idTransit, categoryId: this.categoryId,
         transitName: this.transitName}});
   }

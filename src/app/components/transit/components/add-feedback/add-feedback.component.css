@@ -1,19 +1,29 @@
 
-.mat-card {
-    margin: 10px;
-  }
-  
-  .question-form {
-    width: 90%;
-    margin: 10px;
-  }
-
-  .mat-slider{
-    width:  100%;
-  }
-  .comment{
-    width: 100%;
-  }
-.radio{
-  margin: 10px; 
+.question-form {
+  width: 100%;
+  /* margin: 10px; */
 }
+
+.mat-slider {
+  margin: 12px;
+  width: 90%;
+}
+
+.comment {
+  width: 100%;
+}
+
+.radio {
+  margin: 10px;
+}
+
+.capacity {
+  margin: 10px;
+  width: 15%;
+}
+
+.Hour {
+  width: 12%;
+  /* margin: 10px; */
+}
+
