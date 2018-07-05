@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^6.0.7",
     "@angular/router": "^6.0.7",
     "@auth0/angular-jwt": "^2.0.0",
+    "@material/typography": "^0.35.0",
     "@ngx-translate/core": "^10.0.2",
     "@ngx-translate/http-loader": "^3.0.1",
     "agm-direction": "^0.5.9",

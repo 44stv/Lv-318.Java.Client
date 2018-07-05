@@ -12,6 +12,7 @@ import {AppRoutingModule} from 'src/app/app-routing.module';
 import {ExcategoryComponent} from './components/excategory/excategory.component';
 import { HttpModule } from '@angular/http';
 
+import { AppMaterialModule } from './material.module';
 
 import {
   MatAutocompleteModule,
@@ -52,12 +53,6 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-
-import {
-  MdcButtonModule,
-  MdcFabModule,
-  MdcIconModule,
-} from '@angular-mdc/web';
 
 import { FormsModule } from '@angular/forms';
 import { ExcategoryService } from './services/excategory.service';
@@ -173,9 +168,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatTreeModule,
   ],
   imports: [
-    MdcButtonModule,
-    MdcFabModule,
-    MdcIconModule,
+    AppMaterialModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatSidenavModule,

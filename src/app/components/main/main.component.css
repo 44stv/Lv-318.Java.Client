@@ -1,14 +1,16 @@
-.slides{
+.slides {
   width: 800px;
   height: 600px;
   margin: 160px auto;
 }
-.pictures{
+
+.pictures {
   width: 800px;
   height: 400px;
-  box-shadow: 0px 0px 30px 0px rgba(36,77,201,1);
+  box-shadow: 0px 0px 30px 0px rgba(36, 77, 201, 1);
 }
-.sometext{
+
+.sometext {
   width: 800px;
   height: 120px;
   text-align: center;
@@ -16,3 +18,4 @@
   font-weight: normal;
   font-size: 20px;
 }
+

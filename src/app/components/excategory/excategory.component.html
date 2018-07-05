@@ -1,6 +1,5 @@
 <div *ngFor="let category of list | async">
 
-
   <button class="top-categories" mat-button [matMenuTriggerFor]="nextlevel" (click)="getCities(category.name)">
     {{category.name}}<br/>
     <img src="{{serverURL}}{{category.iconURL}}"/>
