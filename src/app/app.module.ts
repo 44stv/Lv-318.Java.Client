@@ -12,6 +12,7 @@ import {AppRoutingModule} from 'src/app/app-routing.module';
 import {ExcategoryComponent} from './components/excategory/excategory.component';
 import { HttpModule } from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {DataFilterPipe} from "./services/data-filter.pipe";
 
 
 import {
@@ -132,7 +133,8 @@ export function createTranslateLoader(http: HttpClient) {
     AddFeedbackComponent,
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    DataFilterPipe
   ],
   exports: [
     MatAutocompleteModule,
