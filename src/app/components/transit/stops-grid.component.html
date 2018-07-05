@@ -1,10 +1,11 @@
 <div class="demo-grid-list">
   <button mat-raised-button color="primary" (click)="openModal()">{{ 'Feedback' | translate}}</button>
-  <p style="text-align: center">{{"Route" | translate}}</p>
+  <app-back-to-previous-page-btn></app-back-to-previous-page-btn>
+  <p style="text-align: center">{{"Route" | translate}}<span>'? {{transitName}}'</span></p>
   <div class="tab-group">
     <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
-      <mat-tab label="Forward">
-        <mat-grid-list *ngIf="forwardStops.length" [cols]="forwardStops.length" rowHeight="50px">
+      <mat-tab label="{{'Forward' | translate }}">
+        <mat-grid-list *ngIf="forwardStops.length" [cols]="12" rowHeight="70px">
           <mat-grid-tile
             *ngFor="let i=index; let tile of forwardStops" class="tile">
             <label [for]="tile.id">
@@ -15,8 +16,8 @@
           </mat-grid-tile>
         </mat-grid-list>
       </mat-tab>
-      <mat-tab label="Backward">
-        <mat-grid-list *ngIf="backwardStops.length" [cols]="backwardStops.length" rowHeight="50px">
+      <mat-tab label="{{'Backward' | translate }}">
+        <mat-grid-list *ngIf="backwardStops.length" [cols]="12" rowHeight="70px">
           <mat-grid-tile
             *ngFor="let i=index; let tile of backwardStops" class="tile">
             <label [for]="tile.id">
@@ -34,5 +35,5 @@
   <app-raiting-diagram [id]="idTransit"></app-raiting-diagram>
   <app-busy-stops-diagram [id]="idTransit"></app-busy-stops-diagram>
 </div>
-<app-back-to-previous-page-btn></app-back-to-previous-page-btn>
+
 

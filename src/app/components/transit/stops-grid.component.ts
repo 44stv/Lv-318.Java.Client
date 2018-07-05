@@ -5,6 +5,7 @@ import {StopService} from '../../services/stop.service';
 import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material';
 import {AddFeedbackComponent} from './components/add-feedback/add-feedback.component';
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-stops-grid',
@@ -24,7 +25,7 @@ export class StopsGridComponent implements OnInit {
   public selectedStops: Stop[] = [];
   categoryId: number;
 
-  constructor(private stopService: StopService, private route: ActivatedRoute, public dialog: MatDialog) {
+  constructor(private stopService: StopService, private authService: AuthService, private route: ActivatedRoute, public dialog: MatDialog) {
   }
 
 
@@ -40,9 +41,8 @@ export class StopsGridComponent implements OnInit {
       this.checkedItems = new Array(this.stopArray.length);
       this.forwardStops = this.stopArray.filter(stop => stop.direction === "FORWARD");
       this.backwardStops = this.stopArray.filter(stop => stop.direction === "BACKWARD");
-      console.log(this.forwardStops);
      });
-
+    console.log(this.authService.decodedToken.auth);
 
 
   }

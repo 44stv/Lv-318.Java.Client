@@ -5,7 +5,7 @@ export enum Role {
 }
 
 export function determineRole(input: string): Role {
-  if (input === 'CLIENT') {
+  if (input === 'USER') {
     return Role.Client;
   } else if (input === 'ADMIN') {
     return Role.Admin;

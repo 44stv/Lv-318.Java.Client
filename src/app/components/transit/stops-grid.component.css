@@ -1,5 +1,7 @@
 .demo-grid-list {
-  width: auto;
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 p {
