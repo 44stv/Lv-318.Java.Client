@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { MatSidenav } from '@angular/material';
+import {Component, ViewChild} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {MatSidenav} from '@angular/material';
 import {BreadcrumbService} from 'ng5-breadcrumb';
 
 @Component({

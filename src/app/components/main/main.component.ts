@@ -16,6 +16,10 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('Position receiving...');
+    console.log(navigator.geolocation.getCurrentPosition(position => 'Latitude: ' + position.coords.latitude +
+      'Longitude: ' + position.coords.longitude));
+    console.log('Zaebcom');
   }
 
 }
