@@ -6,7 +6,7 @@
   "word" : "word",
   "Close": "Close",
   "Save" : "Save",
-"FeedbackInfo": "Feedback for Transit",
+  "FeedbackInfo": "Feedback for Transit",
   "By-Hour" : "Load by hours",
   "By-Stop" : "Load by stops",
   "Average-Rate" : "Average rate",
@@ -23,4 +23,6 @@
   "maybe": "Maybe",
   "UsersConf": "Users configuration",
   "CriteriaConf": "Feedback questions configuration"
+  "Users": "Users",
+  "FeedbackCriteria": "Feedback criteria"
 }
