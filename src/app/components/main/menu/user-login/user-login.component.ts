@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {BreadcrumbService} from 'ng5-breadcrumb';
 
 import {Login} from '../../../../models/login.model';
 import {AuthService} from '../../../../services/auth/auth.service';
@@ -15,8 +16,8 @@ export class UserLoginComponent {
 
   login: Login = new Login();
 
-  constructor(private router: Router, private authService: AuthService, private tokenStorage: TokenStorage) {
-
+  constructor(private router: Router, private authService: AuthService,
+              private tokenStorage: TokenStorage) {
   }
 
   logIn() {

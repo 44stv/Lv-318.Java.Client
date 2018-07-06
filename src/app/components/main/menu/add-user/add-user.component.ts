@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {BreadcrumbService} from 'ng5-breadcrumb';
 
 import {User} from '../../../../models/user.model';
 import {UserService} from '../../../../services/user.service';
@@ -14,8 +15,8 @@ export class AddUserComponent {
 
   user: User = new User();
 
-  constructor(private router: Router, private userService: UserService) {
-
+  constructor(private router: Router, private userService: UserService, private breadcrumbService: BreadcrumbService) {
+    this.breadcrumbService.hideRoute('/main/user');
   }
 
   createUser(): void {
