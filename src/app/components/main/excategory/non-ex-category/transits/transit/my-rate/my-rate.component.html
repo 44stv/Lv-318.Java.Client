@@ -1,0 +1,5 @@
+<div>
+  <p>{{'my-rate' | translate}}</p>
+  <button mat-fab color="accent" *ngIf="showError">{{myRate}}</button>
+  <p *ngIf="!showError">{{'not-yet-rated' | translate}}</p>
+</div>

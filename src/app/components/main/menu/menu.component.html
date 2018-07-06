@@ -1,0 +1,29 @@
+<mat-toolbar class="mat-toolbar">
+  <div class="ua"><a [routerLink]="['/main']" [ngStyle]="{'color' : 'black'}">UA</a></div>
+  <div class="transport"><a [routerLink]="['/main']" [ngStyle]="{'color' : 'black'}">Transport</a>
+    <a class="lang" (click)="switchLanguage('ua')"><img src="../../../../assets/img/ukraine.png"></a>
+    <a class="lang" (click)="switchLanguage('en')"><img src="../../../../assets/img/united-kingdom.png"></a></div>
+
+    <div class="Search" *ngIf="isHomeRouteActivated()">
+        <input #search aria-label="search" placeholder="Search" (keyup.enter)="onEnter(search.value)">
+    </div>
+    <div class="criteriaButton">
+    <a [routerLink]="['/main/feedback-criteria']">
+      <button mat-stroked-button type="submit">{{ 'Feedback'| translate}}</button>
+    </a>
+  </div>
+
+  <div class="NewUser">
+    <a [routerLink]="['/main/user/add']">
+      <button mat-stroked-button type="submit">{{'User' | translate}}</button>
+    </a>
+  </div>
+  <div class="LoginUser" >
+    <a [routerLink]="['/main/user/login']" *ngIf="!hasToken()">
+      <button mat-stroked-button type="submit">{{'Log In'| translate}}</button>
+    </a>
+    <a (click)="logOut()" *ngIf="hasToken()">
+      <button mat-stroked-button type="submit">{{'Log Out'| translate}}</button>
+    </a>
+  </div>
+</mat-toolbar>
