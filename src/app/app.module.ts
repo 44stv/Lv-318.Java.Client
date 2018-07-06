@@ -4,13 +4,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
-import { AppComponent } from './app.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {AppComponent} from './app.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './services/auth/auth.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from 'src/app/app-routing.module';
-import {ExcategoryComponent} from './components/excategory/excategory.component';
-import { HttpModule } from '@angular/http';
+import {HttpModule} from '@angular/http';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 
 import { AppMaterialModule } from './material.module';
 
@@ -54,6 +55,7 @@ import {
   MatTreeModule,
 } from '@angular/material';
 
+
 import { FormsModule } from '@angular/forms';
 import { ExcategoryService } from './services/excategory.service';
 import { MenuComponent } from './components/menu/menu.component';
@@ -84,15 +86,38 @@ import { GlobalSearchService } from './services/global-search.service';
 import { BusyStopsDiagramComponent } from './components/transit/components/busy-stops-diagram/busy-stops-diagram.component';
 import { httpInterceptorProviders } from './services/auth/interceptors/http-providers';
 
+import {TransitService} from './services/transit.service';
+import {FeedbackService} from './services/feedback.service';
+import {FeedbackCriteriaService} from './services/feedback-criteria.service';
+import {AgmCoreModule} from '@agm/core';
+import {AgmDirectionModule} from 'agm-direction';
+import {ExcategoryComponent} from './components/main/excategory/excategory.component';
+import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
+import {MenuComponent} from './components/main/menu/menu.component';
+import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
+import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
+import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
+import {AddQuestionComponent} from './components/main/menu/feedback-criteria/add-question/add-question.component';
+import {AverageRateComponent} from './components/main/excategory/non-ex-category/transits/transit/average-rate/average-rate.component';
+import {OneFeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
+import {AddFeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
+import {GlobalSearchComponent} from './components/main/menu/global-search/global-search.component';
+import {TransitsComponent} from './components/main/excategory/non-ex-category/transits/transits.component';
+import {MapsComponent} from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
+import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/feedback-criteria.component';
+import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
+import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
+import {
+  RaitingDiagramComponent
+} from './components/main/excategory/non-ex-category/transits/transit/raiting-diagram/raiting-diagram.component';
+import {
+  BusyStopsDiagramComponent
+} from './components/main/excategory/non-ex-category/transits/transit/busy-stops-diagram/busy-stops-diagram.component';
+import {
+  BusyHoursDiagramComponent
+} from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
 
-import {BackToPreviousPageBtnComponent} from './components/transit/components/back-button/back-to-previous-page-btn.component';
-import { TransitService } from './services/transit.service';
-import { FeedbackService } from './services/feedback.service';
-import { FeedbackCriteriaService } from './services/feedback-criteria.service';
-import { AgmCoreModule } from '@agm/core';
-import { AgmDirectionModule } from 'agm-direction';
-import { MapsComponent } from './components/transit/components/maps/maps.component';
-import { AddFeedbackComponent } from './components/transit/components/add-feedback/add-feedback.component';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -118,7 +143,6 @@ export function createTranslateLoader(http: HttpClient) {
     AddQuestionComponent,
     RaitingDiagramComponent,
     AverageRateComponent,
-    BusyHoursDiagramComponent,
     OneFeedbackCriteriaComponent,
     AddFeedbackCriteriaComponent,
     GlobalSearchComponent,
@@ -128,7 +152,8 @@ export function createTranslateLoader(http: HttpClient) {
     AddFeedbackComponent,
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    BusyHoursDiagramComponent
   ],
   exports: [
     MatAutocompleteModule,
@@ -213,7 +238,9 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
+    NgxChartsModule,
+    Ng5BreadcrumbModule.forRoot()
   ],
   providers: [
     httpInterceptorProviders,
