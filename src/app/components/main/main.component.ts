@@ -24,14 +24,12 @@ export class MainComponent implements OnInit, AfterViewInit {
       this.latitude = position.coords.latitude.toString();
       this.longtitude = position.coords.longitude.toString();
     }));
-    console.log('Zaebcom');
   }
 
   ngAfterViewInit(): void {
     console.log('Position :');
     console.log('Latitude: ' + this.latitude);
     console.log('Longitude: ' + this.longtitude);
-    console.log('Zaebcom');
   }
 
 }
