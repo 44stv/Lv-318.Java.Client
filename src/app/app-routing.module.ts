@@ -24,7 +24,6 @@ const routes: Routes = [
   {path: 'user/add', component: AddUserComponent},
   {path: 'stops/:city/:id', component: StopsGridComponent},
   {path: 'user/login', component: UserLoginComponent},
-  {path: 'show-transit-scheme/:city/:id', component: StopsGridComponent},
   {path: 'main', component: MainComponent},
   {path: 'search/?search=/:value', component: GlobalSearchComponent},
   {path: 'feedback-criteria', component: FeedbackCriteriaComponent},

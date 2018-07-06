@@ -29,3 +29,9 @@ p {
   align-content: center;
 }
 
+.tile-content{
+  font-weight: lighter;
+  font-size: 12px;
+  align-items: flex-end;
+}
+
