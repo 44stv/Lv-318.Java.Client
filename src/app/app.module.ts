@@ -95,6 +95,7 @@ import {MapsComponent} from './components/main/excategory/non-ex-category/transi
 import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/feedback-criteria.component';
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
+import {MyRateComponent} from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
 import {
   RaitingDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/raiting-diagram/raiting-diagram.component';
@@ -104,8 +105,6 @@ import {
 import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
-
-
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -141,7 +140,8 @@ export function createTranslateLoader(http: HttpClient) {
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
     UserLoginComponent,
-    BusyHoursDiagramComponent
+    BusyHoursDiagramComponent,
+    MyRateComponent
   ],
   exports: [
     MatAutocompleteModule,
