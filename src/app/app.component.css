@@ -12,6 +12,7 @@ body {
   /*left: 0;*/
   /*right: 0;*/
   width: auto;
+  height: 1000px;
 }
 
 .mainbutton {
@@ -29,5 +30,11 @@ body {
   /*top: 0;*/
   left: -5px;
 }
+
+breadcrumb {
+  position: relative;
+  width: 500px;
+}
+
 
 
