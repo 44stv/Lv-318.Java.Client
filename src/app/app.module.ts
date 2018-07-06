@@ -13,6 +13,7 @@ import {HttpModule} from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 import {MomentModule} from 'angular2-moment/moment.module';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 // import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 
 
@@ -186,6 +187,8 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   imports: [
     MomentModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
     MdcButtonModule,
     MatDatepickerModule,
     MdcSliderModule ,

@@ -4,7 +4,8 @@
   <mat-tab-group mat-stretch-tabs color="primary" backgroundColor="primary">
     <mat-tab label="{{ 'Rating' | translate}} ">
 
-      <mat-card-content style="height: 500px">
+      <mat-card-content >
+      
         <mat-list>
           <p *ngFor="let questioner of survey">
             <mat-list *ngIf="questioner.type == 'RATING'">
@@ -30,6 +31,7 @@
           <textarea matInput #message maxlength="256" placeholder="Comment"></textarea>
           <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
         </mat-form-field>
+        
       </mat-card-content>
     </mat-tab>
     <mat-tab label="{{ 'Capacity' | translate}} ">
