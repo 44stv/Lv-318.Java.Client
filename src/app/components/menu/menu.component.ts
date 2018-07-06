@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { GlobalSearchService } from '../../services/global-search.service';
 import { Location } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
+import {Role} from "../../services/auth/roles";
 
 @Component({
   selector: 'app-menu',
@@ -12,6 +13,7 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class MenuComponent implements OnInit, OnChanges {
   search = '';
+  role: any = Role;
 
   constructor(public app: AppComponent,
               private router: Router,
@@ -49,4 +51,9 @@ export class MenuComponent implements OnInit, OnChanges {
     this.authService.logOut();
     this.router.navigate(['main']);
   }
+
+  getRole(): Role {
+    return this.authService.getRole();
+  }
+
 }

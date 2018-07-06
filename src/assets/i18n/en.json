@@ -22,7 +22,8 @@
   "no": "No",
   "maybe": "Maybe",
   "UsersConf": "Users configuration",
-  "CriteriaConf": "Feedback questions configuration"
+  "CriteriaConf": "Feedback questions configuration",
   "Users": "Users",
-  "FeedbackCriteria": "Feedback criteria"
+  "FeedbackCriteria": "Feedback criteria",
+  "Admin": "Admin"
 }
