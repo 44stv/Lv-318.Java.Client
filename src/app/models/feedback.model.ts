@@ -6,7 +6,15 @@ export class Questioner {
   type: String;
   questions: Question[];
   answer: any;
+  timeQuestions: Question[];
+  routeQuestions: Question[];
 }
+// export class CapacityQuestioner{
+//   criteriaId: number;
+//   type: String;
+//   questions: Question[];
+//   answer: any;
+// }
 
 export class Feedback {
   userId: number;

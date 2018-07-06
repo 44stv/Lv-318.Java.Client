@@ -70,6 +70,9 @@ export class AddFeedbackComponent implements OnInit {
     questioner.criteriaId = criteria.id;
     questioner.type = criteria.type;
     questioner.questions = questions;
+    questioner.routeQuestions = this.getQuestionsByType(questioner, 'ROUTE');
+    questioner.timeQuestions = this.getQuestionsByType(questioner, 'TIME');
+
     this.buildAnswerModel(questioner, criteria);
     return questioner;
   }
@@ -83,10 +86,10 @@ export class AddFeedbackComponent implements OnInit {
         questioner.answer = new AccepterAnswer();
         break;
       case 'ROUTE_CAPACITY' :
-        questioner.answer = new Array<Stop>(this.getCountQuestionsByType(questioner, 'ROUTE'));
+        questioner.answer = new Array<Stop>(questioner.routeQuestions.length);
         break;
       case 'HOURS_CAPACITY' :
-        questioner.answer = new Array<String>(this.getCountQuestionsByType(questioner, 'TIME'));
+        questioner.answer = new Array<String>(questioner.timeQuestions.length);
         break;
     }
 
@@ -100,6 +103,7 @@ export class AddFeedbackComponent implements OnInit {
     const feedbacks: Feedback[] = this.toFeedbackList(this.survey);
     const capFeedbacks: Feedback[] = this.toFeedbackList(this.capacityFeedbacks);
     console.log(feedbacks.concat(capFeedbacks));
+    console.log(capFeedbacks);
     // this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks)).subscribe(data => {
     //   alert('Feedback created successfully.');
     // });
@@ -150,13 +154,11 @@ export class AddFeedbackComponent implements OnInit {
   }
 
   public buildCapacityRouteAnswer(questioner: Questioner): string {
-    let answer: string;
     const capacityRouteFeedback: CapacityRouteFeedback = new CapacityRouteFeedback();
     if (questioner.answer.stops && questioner.answer.stops > 1) {
       capacityRouteFeedback.from = questioner.answer.stops[0];
       capacityRouteFeedback.to = questioner.answer.stops[1];
       capacityRouteFeedback.capacity = this.checkCapacityValue(this.capacity);
-      answer = JSON.stringify(capacityRouteFeedback);
     }
 
     return JSON.stringify(capacityRouteFeedback);
@@ -166,8 +168,12 @@ export class AddFeedbackComponent implements OnInit {
     let capacityHourAnswer: CapacityHoursFeedback = new CapacityHoursFeedback();
     const times: Time[] = [];
     for (let i = 0; i < questioner.answer.length; i++) {
-      let time: Time = new Time(moment(questioner.answer[i], 'HH:mm').hour(), moment(questioner.answer[i], 'HH:mm').minute());
-      times.push(time);
+      if (this.isNull(moment(questioner.answer[i], 'HH:mm').hour()) || this.isNull(moment(questioner.answer[i], 'HH:mm').minute())) {
+
+      } else {
+        const time: Time = new Time(moment(questioner.answer[i], 'HH:mm').hour(), moment(questioner.answer[i], 'HH:mm').minute());
+        times.push(time);
+      }
     }
     times.sort((time1: Time, time2: Time) => {
       if (time1.hour > time2.hour) return 1;
@@ -180,13 +186,19 @@ export class AddFeedbackComponent implements OnInit {
     capacityHourAnswer.startTime = times[0];
     capacityHourAnswer.endTime = times[times.length - 1];
     capacityHourAnswer.capacity = this.checkCapacityValue(this.capacity);
+    console.log(JSON.stringify(times));
+    console.log(JSON.stringify(capacityHourAnswer));
     return JSON.stringify(capacityHourAnswer);
+  }
+
+  public isNull(value: any): value is null {
+    return value === null;
   }
 
   public checkCapacityValue(capacity: number): number {
     capacity = (capacity > 100) ? 100 : capacity;
     capacity = (capacity < 0) ? 0 : capacity;
-    return capacity
+    return capacity;
   }
 
   public getCountQuestionsByType(questioner: Questioner, type: String): number {
@@ -197,6 +209,16 @@ export class AddFeedbackComponent implements OnInit {
       }
     })
     return count;
+  }
+
+  public getQuestionsByType(questioner: Questioner, type: String): Question[] {
+    const questions: Question[] = [];
+    questioner.questions.forEach(question => {
+      if (question.type === type) {
+        questions.push(question);
+      }
+    })
+    return questions;
   }
 }
 

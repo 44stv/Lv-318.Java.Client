@@ -45,8 +45,8 @@
               </mat-expansion-panel-header>
               <p *ngFor="let questioner of capacityFeedbacks">
                 <mat-list>
-              <p *ngFor="let question of questioner.questions;let i =index">
-                <mat-list *ngIf="question.type == 'TIME'">
+              <p *ngFor="let question of questioner.timeQuestions ;let i =index">
+                <mat-list *ngIf="question.type == 'TIME'" >
 
                   <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
 
@@ -72,7 +72,7 @@
           </mat-expansion-panel-header>
           <p *ngFor="let questioner of capacityFeedbacks">
             <mat-list>
-          <p *ngFor="let question of questioner.questions;let i =index">
+          <p *ngFor="let question of questioner.routeQuestions;let i =index">
             <mat-list *ngIf="question.type == 'ROUTE'">
               <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
             </mat-list>
