@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {StopService} from '../../services/stop.service';
+import {StopService} from '../../../../../../services/stop.service';
 import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material';
-import {AddFeedbackComponent} from './components/add-feedback/add-feedback.component';
-import {AuthService} from "../../services/auth/auth.service";
+import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
+import {AuthService} from '../../../../../../services/auth/auth.service';
+import {Stop} from '../../../../../../models/stop.model';
 
 @Component({
   selector: 'app-stops-grid',
@@ -27,7 +28,7 @@ export class StopsGridComponent implements OnInit {
   constructor(private stopService: StopService,
               private authService: AuthService,
               private route: ActivatedRoute,
-              public dialog: MatDialog) {
+              public dialog: MatDialog) {}
 
 
   ngOnInit() {
@@ -71,3 +72,4 @@ export class StopsGridComponent implements OnInit {
   }
 
 }
+

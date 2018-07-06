@@ -1,12 +1,12 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 import {AppComponent} from '../../../app.component';
-import {TokenStorage} from '../../../services/auth/token/token-storage';
 import {GlobalSearchService} from '../../../services/global-search.service';
-import { AuthService } from '../../services/auth/auth.service';
-import {Role} from "../../services/auth/roles";
+import {AuthService} from '../../../services/auth/auth.service';
+import {Role} from '../../../services/auth/roles';
+
 
 @Component({
   selector: 'app-menu',
@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit, OnChanges {
 
   constructor(public app: AppComponent,
               private router: Router,
-              private tokenStorage: TokenStorage,
+              private authService: AuthService,
               private globalSearchComponent: GlobalSearchService,
               private location: Location) {
 

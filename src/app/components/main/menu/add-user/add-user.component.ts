@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {BreadcrumbService} from 'ng5-breadcrumb';
 
 import {User} from '../../../../models/user.model';
-import {UserService} from '../../../../services/user.service';
+import {AuthService} from "../../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-add-user',
