@@ -1,13 +1,33 @@
-<button class="mainbutton" (click)="open()"></button>
-<app-menu></app-menu>
-<mat-sidenav-container class="container">
-  <mat-sidenav #sidenav mode="side" hasBackdrop="false">
-    <app-excategory></app-excategory>
-  </mat-sidenav>
-  <mat-sidenav-content>
+<!--<button class="mainbutton" (click)="open()"></button>-->
+<!--<app-menu></app-menu>-->
+
+<!--<mat-sidenav-container class="container">-->
+<!--<mat-sidenav #sidenav mode="side" hasBackdrop="false">-->
+<!--<app-excategory></app-excategory>-->
+<!--</mat-sidenav>-->
+<!--<mat-sidenav-content>-->
+<!--<router-outlet></router-outlet>-->
+<!--</mat-sidenav-content>-->
+<!--</mat-sidenav-container>-->
+
+
+<mdc-toolbar>
+  <mdc-toolbar-row>
+      <mdc-toolbar-section [alignEnd]="true" [shrinkToFit]="true">
+        <app-menu></app-menu>
+      </mdc-toolbar-section>
+  </mdc-toolbar-row>
+</mdc-toolbar>
+<div class="demo-content__drawer--row">
+  <mdc-drawer class="sideMenu" drawer='permanent'>
+    <mdc-drawer-content>
+      <app-excategory></app-excategory>
+    </mdc-drawer-content>
+  </mdc-drawer>
+
+  <div class="router">
     <breadcrumb></breadcrumb>
     <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
 
-
+</div>

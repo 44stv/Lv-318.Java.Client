@@ -1,8 +1,8 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import 'hammerjs';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -15,6 +15,7 @@ import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 import {MomentModule} from 'angular2-moment/moment.module';
 // import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 
+import { AppMaterialModule } from './material.module';
 
 import {
   MatAutocompleteModule,
@@ -55,28 +56,20 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+import { ExcategoryService } from './services/excategory.service';
 
-import {
-  MdcButtonModule,
-  MdcFabModule,
-  MdcIconModule,
-  MdcSliderModule
-} from '@angular-mdc/web';
-
-import {ExcategoryService} from './services/excategory.service';
-import {MainComponent} from './components/main/main.component';
-import {SlideshowModule} from 'ng-simple-slideshow';
-import {MessageComponent} from './components/message/message.component';
-import {UserService} from './services/user.service';
-import {TokenStorage} from './services/auth/token/token-storage';
-import {StopService} from './services/stop.service';
-import {AdminGuardService} from './services/guard/admin-guard.service';
-import {AuthGuardService} from './services/guard/auth-guard.service';
-import {ClientGuardService} from './services/guard/client-guard.service';
-import {DiagramService} from './services/diagram.service';
-import {GlobalSearchService} from './services/global-search.service';
-import {httpInterceptorProviders} from './services/auth/interceptors/http-providers';
-import { UixMatNumberSpinnerModule } from 'uix-mat-number-spinner';
+import { MainComponent } from './components/main/main.component';
+import { SlideshowModule } from 'ng-simple-slideshow';
+import { MessageComponent } from './components/message/message.component';
+import { UserService } from './services/user.service';
+import { TokenStorage } from './services/auth/token/token-storage';
+import { StopService } from './services/stop.service';
+import { AdminGuardService } from './services/guard/admin-guard.service';
+import { AuthGuardService } from './services/guard/auth-guard.service';
+import { ClientGuardService } from './services/guard/client-guard.service';
+import { DiagramService } from './services/diagram.service';
+import { GlobalSearchService } from './services/global-search.service';
+import { httpInterceptorProviders } from './services/auth/interceptors/http-providers';
 
 import {TransitService} from './services/transit.service';
 import {FeedbackService} from './services/feedback.service';
@@ -186,16 +179,12 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   imports: [
     MomentModule,
-    MdcButtonModule,
     MatDatepickerModule,
-    MdcSliderModule ,
-   MdcFabModule,
-   MdcIconModule,
     MatExpansionModule,
     MatTabsModule,
     MatSliderModule,
+    AppMaterialModule,
     BrowserModule,
-    UixMatNumberSpinnerModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     HttpModule,

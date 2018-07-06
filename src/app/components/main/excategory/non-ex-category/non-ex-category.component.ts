@@ -28,6 +28,13 @@ export class NonExCategoryComponent implements OnInit {
   @ViewChild(TransitsComponent)
   private transitChild: TransitsComponent;
 
+  discreteInputEventValue: number;
+  discreteChangeEventValue: number;
+
+  discreteMin: number = 0;
+  discreteMax: number = 100;
+
+
   constructor(private service: NonExCategoryService,
               private route: ActivatedRoute,
               private breadcrumbService: BreadcrumbService) {
