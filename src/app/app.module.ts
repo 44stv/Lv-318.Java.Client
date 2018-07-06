@@ -12,6 +12,8 @@ import {AppRoutingModule} from 'src/app/app-routing.module';
 import {HttpModule} from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
+import {MomentModule} from 'angular2-moment/moment.module';
+// import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 
 
 import {
@@ -58,6 +60,7 @@ import {
   MdcButtonModule,
   MdcFabModule,
   MdcIconModule,
+  MdcSliderModule
 } from '@angular-mdc/web';
 
 import {ExcategoryService} from './services/excategory.service';
@@ -73,6 +76,7 @@ import {ClientGuardService} from './services/guard/client-guard.service';
 import {DiagramService} from './services/diagram.service';
 import {GlobalSearchService} from './services/global-search.service';
 import {httpInterceptorProviders} from './services/auth/interceptors/http-providers';
+import { UixMatNumberSpinnerModule } from 'uix-mat-number-spinner';
 
 import {TransitService} from './services/transit.service';
 import {FeedbackService} from './services/feedback.service';
@@ -181,10 +185,17 @@ export function createTranslateLoader(http: HttpClient) {
     MatTreeModule,
   ],
   imports: [
+    MomentModule,
     MdcButtonModule,
-    MdcFabModule,
-    MdcIconModule,
+    MatDatepickerModule,
+    MdcSliderModule ,
+   MdcFabModule,
+   MdcIconModule,
+    MatExpansionModule,
+    MatTabsModule,
+    MatSliderModule,
     BrowserModule,
+    UixMatNumberSpinnerModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     HttpModule,
@@ -194,10 +205,10 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     MatSortModule,
     MatTableModule,
-    MatTabsModule,
     MatMenuModule,
     FormsModule,
     MatCardModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,

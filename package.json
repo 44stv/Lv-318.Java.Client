@@ -32,6 +32,7 @@
     "angular-in-memory-web-api": "^0.6.0",
     "angular-simple-slideshow": "0.0.3",
     "angular2-jwt": "^0.2.3",
+    "angular2-moment": "^1.9.0",
     "angular4-carousel": "^3.1.8",
     "auth0-js": "^9.6.1",
     "bootstrap": "^3.3.7",
@@ -46,6 +47,7 @@
     "npm": "^6.1.0",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",
+    "uix-mat-number-spinner": "0.0.6",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

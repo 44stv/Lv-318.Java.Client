@@ -1,11 +1,29 @@
-.addfeedback {
 
-margin: 5%;
+.question-form {
+  width: 100%;
+  /* margin: 10px; */
 }
-.showFeedbacks{
-    margin: 5%;
+
+.mat-slider {
+  margin: 12px;
+  width: 90%;
 }
-.buttons{
-    margin-top: 20%;
-    float :right;
+
+.comment {
+  width: 100%;
 }
+
+.radio {
+  margin: 10px;
+}
+
+.capacity {
+  margin: 10px;
+  width: 15%;
+}
+
+.Hour {
+  width: 12%;
+  /* margin: 10px; */
+}
+
