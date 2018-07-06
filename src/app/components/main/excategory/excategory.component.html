@@ -1,0 +1,19 @@
+<div *ngFor="let category of list | async">
+
+
+  <button class="top-categories" mat-button [matMenuTriggerFor]="nextlevel" (click)="getCities(category.name)">
+    {{category.name}}<br/>
+    <img src="{{serverURL}}{{category.iconURL}}"/>
+  </button>
+
+  <mat-menu class="cities" #nextlevel="matMenu">
+    <div *ngFor="let city of cities | async">
+      <a [routerLink]="['/main', category.name, city.name]">
+        <button mat-menu-item class="city">{{city.name}} <img class="city-icon" src="{{serverURL}}{{city.iconURL}}"/>
+        </button>
+      </a>
+    </div>
+  </mat-menu>
+
+</div>
+
