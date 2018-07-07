@@ -1,8 +1,9 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, Input, ViewChild } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { Router } from '@angular/router';
 import { GlobalSearchService } from '../../services/global-search.service';
 import { Location } from '@angular/common';
+import { FormControl } from '@angular/forms';
 import { TokenStorage } from '../../services/auth/token/token-storage';
 
 @Component({
@@ -11,13 +12,14 @@ import { TokenStorage } from '../../services/auth/token/token-storage';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit, OnChanges {
-  search = '';
+  @ViewChild(FormControl) myControl = new FormControl();
+
 
   constructor(public app: AppComponent,
-              private router: Router,
-              private tokenStorage: TokenStorage,
-              private globalSearchComponent: GlobalSearchService,
-              private location: Location) {
+    private router: Router,
+    private tokenStorage: TokenStorage,
+    private globalSearchComponent: GlobalSearchService,
+    private location: Location) {
 
   }
 
@@ -25,21 +27,17 @@ export class MenuComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.search);
+
   }
 
   switchLanguage(language: string) {
     this.app.switchLanguage(language);
   }
 
-  onEnter(value: string) {
-    this.globalSearchComponent.setSearchValue(value);
-    this.router.navigate(['search/' + '?search=/' + value]);
-  }
-
   isHomeRouteActivated(): boolean {
     return this.location.path().indexOf('/show-transit-scheme/') > -1;
   }
+
   hasToken(): boolean {
     return this.tokenStorage.hasToken();
   }

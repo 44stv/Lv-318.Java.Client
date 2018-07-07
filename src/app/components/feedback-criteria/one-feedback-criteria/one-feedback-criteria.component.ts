@@ -17,9 +17,9 @@ export class OneFeedbackCriteriaComponent implements OnInit {
   isReadOnly = true;
 
   constructor(private feedbackCriteriaService: FeedbackCriteriaService,
-              private route: ActivatedRoute,
-              private location: Location,
-              private dialog: MatDialog) {
+    private route: ActivatedRoute,
+    private location: Location,
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {

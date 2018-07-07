@@ -1,16 +1,17 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import 'hammerjs';
 import { AppComponent } from './app.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import {AuthService} from './services/auth/auth.service';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {AppRoutingModule} from 'src/app/app-routing.module';
-import {ExcategoryComponent} from './components/excategory/excategory.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './services/auth/auth.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { ExcategoryComponent } from './components/excategory/excategory.component';
 import { HttpModule } from '@angular/http';
+
 
 
 import {
@@ -84,7 +85,7 @@ import { BusyStopsDiagramComponent } from './components/transit/components/busy-
 import { httpInterceptorProviders } from './services/auth/interceptors/http-providers';
 
 
-import {BackToPreviousPageBtnComponent} from './components/transit/components/back-button/back-to-previous-page-btn.component';
+import { BackToPreviousPageBtnComponent } from './components/transit/components/back-button/back-to-previous-page-btn.component';
 import { TransitService } from './services/transit.service';
 import { FeedbackService } from './services/feedback.service';
 import { FeedbackCriteriaService } from './services/feedback-criteria.service';
@@ -92,6 +93,7 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { MapsComponent } from './components/transit/components/maps/maps.component';
 import { AddFeedbackComponent } from './components/transit/components/add-feedback/add-feedback.component';
+import { SearchFieldComponent } from './components/menu/search-field/search-field.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -127,7 +129,8 @@ export function createTranslateLoader(http: HttpClient) {
     AddFeedbackComponent,
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    SearchFieldComponent
   ],
   exports: [
     MatAutocompleteModule,
@@ -194,6 +197,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatGridListModule,
     MatIconModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
     MatPaginatorModule,
     MatListModule,
     TranslateModule.forRoot({
@@ -213,7 +217,7 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g' }),
   ],
   providers: [
     httpInterceptorProviders,
