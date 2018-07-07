@@ -1,0 +1,14 @@
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-elevation-z8 {
+  width: 87%;
+  margin: 50px auto;
+}
+
+.mat-form-field {
+  padding-top: 5px;
+  padding-left: 20px;
+}

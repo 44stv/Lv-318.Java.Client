@@ -1,0 +1,9 @@
+//You can add global styles to this file, and also import other style files
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+$mdc-theme-primary: #00BCD4; // change primary color example
+$mdc-theme-secondary: #FF9800; // change secondary color example
+
+@import "~@angular-mdc/theme/material";
+//@import "~@material/typography/mdc-typography";
