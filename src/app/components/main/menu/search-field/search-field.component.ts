@@ -3,10 +3,10 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { delay } from 'rxjs/operators';
-import { GlobalSearchService } from '../../../services/global-search.service';
-import { StopService } from '../../../services/stop.service';
-import { Transit } from '../../../models/transit.model';
-import { Stop } from '../../../models/stop.model';
+import { GlobalSearchService } from '../../../../services/global-search.service';
+import { StopService } from '../../../../services/stop.service';
+import { Transit } from '../../../../models/transit.model';
+import { Stop } from '../../../../models/stop.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -39,12 +39,12 @@ export class SearchFieldComponent implements OnInit, OnChanges {
       this.filteredOptionsStops = this.myControl.valueChanges
         .pipe(delay(this.delayMs),
           startWith(this.myControl.value),
-          map(value => this.filterStrops(value))
+          map(valueLocal => this.filterStrops(valueLocal))
         );
       this.filteredOptions = this.myControl.valueChanges
         .pipe(delay(this.delayMs),
           startWith(this.myControl.value),
-          map(value => this._filter(value))
+          map(valueLocal => this._filter(valueLocal))
         );
     }
     if (value === null) {
@@ -75,7 +75,7 @@ export class SearchFieldComponent implements OnInit, OnChanges {
   getStops(searchTerm: string) {
     this.globalSearchService.getStopsResult(searchTerm).subscribe(stops => {
       this.stops = stops;
-    })
+    });
   }
 
   onEnter(choosenSearchTerm: string) {

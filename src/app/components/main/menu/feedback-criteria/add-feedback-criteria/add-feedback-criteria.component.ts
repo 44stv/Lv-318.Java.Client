@@ -16,7 +16,7 @@ export class AddFeedbackCriteriaComponent implements OnInit {
   feedbackCriteria = new FeedbackCriteria();
   questions: Question[] = [];
   enumTypes: any;
-  // enumTypeOfQuestion: any;
+  enumTypeOfQuestion: any;
   isReadOnly = true;
 
   constructor(private feedbackCriteriaService: FeedbackCriteriaService,
@@ -26,7 +26,7 @@ export class AddFeedbackCriteriaComponent implements OnInit {
 
   ngOnInit() {
     this.getAllEnumTypes();
-    // this.getAllEnumTypesOfQuestion();
+    this.getAllEnumTypesOfQuestion();
 
   }
 
@@ -69,11 +69,11 @@ export class AddFeedbackCriteriaComponent implements OnInit {
       });
   }
 
-  // getAllEnumTypesOfQuestion(): void {
-  //   this.feedbackCriteriaService.getAllEnumTypesOfQuestion()
-  //     .subscribe(enumTypeOfQuestion => {
-  //       this.enumTypeOfQuestion = enumTypeOfQuestion;
-  //     });
-  // }
+  getAllEnumTypesOfQuestion(): void {
+    this.feedbackCriteriaService.getAllEnumTypesOfQuestion()
+      .subscribe(enumTypeOfQuestion => {
+        this.enumTypeOfQuestion = enumTypeOfQuestion;
+      });
+  }
 
 }

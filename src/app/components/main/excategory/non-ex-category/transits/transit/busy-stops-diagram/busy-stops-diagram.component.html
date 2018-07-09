@@ -1,15 +1,16 @@
-<ngx-charts-heat-map
-  *ngIf="visible"
-  class="chart-container"
-  [results]="data"
-  xAxis="true"
-  yAxis="true"
-  showXAxisLabel="true"
-  showYAxisLabel="true"
-  xAxisLabel= '{{ "hours" | translate }}'
-  yAxisLabel='{{ "stops" | translate }}'
-  scheme="vivid"
-  legend="true"
-  [view]="view"
-  title="Values in %">
-</ngx-charts-heat-map>
+<div>
+  <ngx-charts-heat-map
+    *ngIf="visible"
+    class="chart-container"
+    [results]="data"
+    xAxis="true"
+    yAxis="true"
+    showXAxisLabel="true"
+    showYAxisLabel="true"
+    xAxisLabel='{{ "hours" | translate }}'
+    yAxisLabel='{{ "stops" | translate }}'
+    scheme="vivid"
+    legend="true"
+    title="Values in %">
+  </ngx-charts-heat-map>
+</div>
