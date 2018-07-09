@@ -1,0 +1,22 @@
+<div class="comment">
+  <div class="row">
+    <div class="col-xs-6">
+      {{ comment.userId }}
+    </div>
+    <div class="col-xs-6">
+      <div *ngIf="modified">
+        {{ comment.modifiedDate }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    {{ comment.commentText }}
+  </div>
+
+  <div class="childComments" *ngIf="comment.parent">
+    <div class="childComments" *ngFor="let comment of childComments">
+      <app-comment [comment]="comment"></app-comment>
+    </div>
+  </div>
+
+</div>
