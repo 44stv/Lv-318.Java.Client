@@ -15,11 +15,6 @@
         </a>
       </div>
 
-    </mdc-toolbar-section>
-    <div class="Search" *ngIf="isHomeRouteActivated()">
-      <input #search aria-label="search" placeholder="Search" (keyup.enter)="onEnter(search.value)">
-    </div>
-
     <div class="criteriaButton">
       <a [routerLink]="['/main/feedback-criteria']">
         <button mdc-button [secondary]="true" type="submit">{{ 'Feedback'| translate}}</button>
@@ -39,6 +34,11 @@
       <a (click)="logOut()" *ngIf="hasToken()">
         <button mdc-button [secondary]="true" type="submit">{{'Log Out'| translate}}</button>
       </a>
+    </div>
+
+    </mdc-toolbar-section>
+    <div class="Search" *ngIf="isHomeRouteActivated()">
+      <app-search-field></app-search-field>
     </div>
 
     <app-location-picker></app-location-picker>

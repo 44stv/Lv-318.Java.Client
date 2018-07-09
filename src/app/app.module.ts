@@ -1,8 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -13,9 +13,8 @@ import {HttpModule} from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 import {MomentModule} from 'angular2-moment/moment.module';
-// import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
+import {AppMaterialModule} from './material.module';
 
-import { AppMaterialModule } from './material.module';
 
 import {
   MatAutocompleteModule,
@@ -56,20 +55,20 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-import { ExcategoryService } from './services/excategory.service';
+import {ExcategoryService} from './services/excategory.service';
 
-import { MainComponent } from './components/main/main.component';
-import { SlideshowModule } from 'ng-simple-slideshow';
-import { MessageComponent } from './components/message/message.component';
-import { UserService } from './services/user.service';
-import { TokenStorage } from './services/auth/token/token-storage';
-import { StopService } from './services/stop.service';
-import { AdminGuardService } from './services/guard/admin-guard.service';
-import { AuthGuardService } from './services/guard/auth-guard.service';
-import { ClientGuardService } from './services/guard/client-guard.service';
-import { DiagramService } from './services/diagram.service';
-import { GlobalSearchService } from './services/global-search.service';
-import { httpInterceptorProviders } from './services/auth/interceptors/http-providers';
+import {MainComponent} from './components/main/main.component';
+import {SlideshowModule} from 'ng-simple-slideshow';
+import {MessageComponent} from './components/message/message.component';
+import {UserService} from './services/user.service';
+import {TokenStorage} from './services/auth/token/token-storage';
+import {StopService} from './services/stop.service';
+import {AdminGuardService} from './services/guard/admin-guard.service';
+import {AuthGuardService} from './services/guard/auth-guard.service';
+import {ClientGuardService} from './services/guard/client-guard.service';
+import {DiagramService} from './services/diagram.service';
+import {GlobalSearchService} from './services/global-search.service';
+import {httpInterceptorProviders} from './services/auth/interceptors/http-providers';
 
 import {TransitService} from './services/transit.service';
 import {FeedbackService} from './services/feedback.service';
@@ -79,6 +78,7 @@ import {AgmDirectionModule} from 'agm-direction';
 import {ExcategoryComponent} from './components/main/excategory/excategory.component';
 import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
 import {MenuComponent} from './components/main/menu/menu.component';
+import {SearchFieldComponent} from './components/main/menu/search-field/search-field.component';
 import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
 import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
 import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
@@ -138,6 +138,7 @@ export function createTranslateLoader(http: HttpClient) {
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
     UserLoginComponent,
+    SearchFieldComponent,
     BusyHoursDiagramComponent,
     MyRateComponent,
     LocationPickerComponent
@@ -211,6 +212,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatGridListModule,
     MatIconModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
     MatPaginatorModule,
     MatListModule,
     TranslateModule.forRoot({
