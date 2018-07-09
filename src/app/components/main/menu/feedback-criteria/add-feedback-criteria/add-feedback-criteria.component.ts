@@ -14,24 +14,30 @@ import {AddQuestionComponent} from '../add-question/add-question.component';
 export class AddFeedbackCriteriaComponent implements OnInit {
 
   feedbackCriteria = new FeedbackCriteria();
-  questions: Question [] = [];
+  questions: Question[] = [];
   enumTypes: any;
+  // enumTypeOfQuestion: any;
   isReadOnly = true;
 
   constructor(private feedbackCriteriaService: FeedbackCriteriaService,
-              private location: Location,
-              private dialog: MatDialog) {
+    private location: Location,
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.getAllEnumTypes();
+    // this.getAllEnumTypesOfQuestion();
 
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddQuestionComponent, {
       width: '400px',
-      data: this.isReadOnly
+      data: {
+        isReadOnly: this.isReadOnly
+        // enumTypeOfQuestion: this.enumTypeOfQuestion
+      }
+
     });
     dialogRef.afterClosed().subscribe(result => {
       if (!(result == null)) {
@@ -62,5 +68,12 @@ export class AddFeedbackCriteriaComponent implements OnInit {
         this.enumTypes = enumType;
       });
   }
+
+  // getAllEnumTypesOfQuestion(): void {
+  //   this.feedbackCriteriaService.getAllEnumTypesOfQuestion()
+  //     .subscribe(enumTypeOfQuestion => {
+  //       this.enumTypeOfQuestion = enumTypeOfQuestion;
+  //     });
+  // }
 
 }
