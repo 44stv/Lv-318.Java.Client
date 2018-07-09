@@ -1,3 +1,9 @@
+.wrapper{
+  width: 100%;
+  height: 400px;
+  background-image: url("../../../assets/2.png");
+  opacity : 0.2;
+}
 .slides {
   width: 800px;
   height: 600px;

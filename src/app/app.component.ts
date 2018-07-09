@@ -11,6 +11,7 @@ import {BreadcrumbService} from 'ng5-breadcrumb';
 export class AppComponent {
   title = 'uaTransport';
 
+
   @ViewChild('sidenav') public sideNav: MatSidenav;
 
   constructor(private translate: TranslateService, private breadcrumbService: BreadcrumbService) {

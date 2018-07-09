@@ -32,6 +32,7 @@
     "agm-direction": "^0.5.9",
     "angular-in-memory-web-api": "^0.6.0",
     "angular-simple-slideshow": "0.0.3",
+    "angular-video-background": "^1.0.3",
     "angular2-jwt": "^0.2.3",
     "angular2-moment": "^1.9.0",
     "angular4-carousel": "^3.1.8",

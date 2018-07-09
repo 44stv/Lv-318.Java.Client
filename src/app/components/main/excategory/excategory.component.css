@@ -1,6 +1,10 @@
 .mat-elevation-z8 {
   height: inherit;
 }
+.category-wrapper{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 .top-categories {
   /*position: relative;*/
@@ -45,4 +49,26 @@ a:hover {
 
 a:active {
   text-decoration: none;
+}
+.mat-expansion-panel {
+  background: #fff0;
+  color: rgba(0,0,0,.87);
+
+}
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+.title{
+}
+.text{
+  margin: 0 0 0 20px;
+  display: inline-block;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: black;
+  font-size: 14px;
+
+}
+.icon{
+  display: inline-block;
 }

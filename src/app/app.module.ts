@@ -13,7 +13,7 @@ import {HttpModule} from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 import {MomentModule} from 'angular2-moment/moment.module';
-// import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
+
 
 import { AppMaterialModule } from './material.module';
 
@@ -230,7 +230,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
     NgxChartsModule,
-    Ng5BreadcrumbModule.forRoot()
+    Ng5BreadcrumbModule.forRoot(),
   ],
   providers: [
     httpInterceptorProviders,
