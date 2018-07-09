@@ -60,8 +60,12 @@ table {
 .demo-drawer--custom {
   //@include mdc-drawer-ink-color(#fff);
 }
+.mdc-drawer--temporary .mdc-drawer__content{
+background: linear-gradient(180deg,#40c8d6 0,rgba(249, 246, 246, 0.7));
+}
 
 .demo-content__drawer {
+
   border: 1px solid rgba(0, 0, 0, 0.1);
   overflow-x: auto;
 
@@ -98,3 +102,37 @@ breadcrumb {
   position: relative;
   width: 500px;
 }
+.language{
+    position: fixed;
+    bottom: 0;
+    right: 25%;
+    margin: 10px 20px;
+    width: auto;
+    text-align: center;
+}
+
+.ua {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 20px 15px 20px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Tahoma;
+  color: #000000;
+
+}
+
+.transport {
+  position: fixed;
+   top: 2px;
+   left: 33px;
+  margin: 20px;
+  font-size: 18px;
+  font-weight: normal;
+  font-family: Tahoma;
+  color: black;
+}
+
+
+

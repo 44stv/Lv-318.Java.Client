@@ -16,6 +16,8 @@ import {MomentModule} from 'angular2-moment/moment.module';
 import {AppMaterialModule} from './material.module';
 
 
+
+
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -234,7 +236,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
     NgxChartsModule,
-    Ng5BreadcrumbModule.forRoot()
+    Ng5BreadcrumbModule.forRoot(),
   ],
   providers: [
     httpInterceptorProviders,
