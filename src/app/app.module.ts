@@ -102,6 +102,7 @@ import {
 import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
+import {LocationPickerComponent} from './components/main/menu/location-picker/location-picker.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -138,7 +139,8 @@ export function createTranslateLoader(http: HttpClient) {
     BackToPreviousPageBtnComponent,
     UserLoginComponent,
     BusyHoursDiagramComponent,
-    MyRateComponent
+    MyRateComponent,
+    LocationPickerComponent
   ],
   exports: [
     MatAutocompleteModule,

@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
 
-  // serverURL: 'http://localhost:8080',
-  serverURL: 'https://uatransport.tk',
+  serverURL: 'https://localhost:8443',
+  // serverURL: 'https://uatransport.tk',
 
   accessTokenHeader: 'Authorization',
   refreshTokenHeader: 'Refresh-token',
