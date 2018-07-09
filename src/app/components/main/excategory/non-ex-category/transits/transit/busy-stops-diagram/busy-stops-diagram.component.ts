@@ -13,7 +13,7 @@ export class BusyStopsDiagramComponent implements OnInit {
   @Input() stopList: Stop[];
 
   data;
-  view = [1000];
+  view = [1037];
   public visible = false;
 
   constructor(private diagramService: DiagramService) {

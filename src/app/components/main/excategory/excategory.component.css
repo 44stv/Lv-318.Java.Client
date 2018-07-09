@@ -5,7 +5,7 @@
 .top-categories {
   /*position: relative;*/
   /*z-index: 20;*/
-  width: 100px;
+  width: 100%;
   height: 100px;
   margin: 0;
   font-size: 10px;
@@ -21,7 +21,7 @@
 .city {
   display: block;
   width: 100px;
-  height: 50px;
+  height: auto;
 }
 
 .city-icon {

@@ -1,9 +1,10 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import * as moment from 'moment/moment';
+import {Observable} from 'rxjs';
 
 import {
-  AccepterAnswer,
+  SimpleAnswer,
   Feedback,
   Questioner,
   RatingAnswer,
@@ -12,6 +13,7 @@ import {
   Time
 } from '../../../../../../../models/feedback.model';
 import {FeedbackService} from '../../../../../../../services/feedback.service';
+import {StopService} from '../../../../../../../services/stop.service';
 import {FeedbackCriteriaService} from '../../../../../../../services/feedback-criteria.service';
 import {FeedbackCriteria} from '../../../../../../../models/feedback-criteria.model';
 import {Question} from '../../../../../../../models/question.model';
@@ -29,14 +31,21 @@ export class AddFeedbackComponent implements OnInit {
   @Input() capacity = 0;
   @Input() transitId: number = this.data.number;
   @Input() transitName: String = this.data.transitName;
+  private stops: Observable<Stop[]>;
   private categoryId: number = this.data.categoryId;
   private userId = 1;
   private checkBoxAnswers: String[] = ['YES', 'NO', 'MAYBE'];
+  // private directions: String[] = ['FORWARD', 'BACKWARD'];
+  // private direction: String;
 
   constructor(private dialogRef: MatDialogRef<AddFeedbackComponent>, @ Inject(MAT_DIALOG_DATA) public data: any,
-              private feedbackService: FeedbackService, private criteriaService: FeedbackCriteriaService) {
-    this.survey = this.buildSurveyByCriteriaType(['RATING', 'ACCEPTER']);
+              private feedbackService: FeedbackService, private criteriaService: FeedbackCriteriaService,
+              private stopService: StopService) {
+
+    this.survey = this.buildSurveyByCriteriaType(['RATING', 'SIMPLE']);
     this.capacityFeedbacks = this.buildSurveyByCriteriaType(['ROUTE_CAPACITY', 'HOURS_CAPACITY']);
+    this.stops = this.stopService.getStopsByTransitId(this.transitId);
+    // this.stops= this.stopService.getStopsByTransitIdAndDirection(this.transitId,this.direction);
 
   }
 
@@ -82,8 +91,8 @@ export class AddFeedbackComponent implements OnInit {
       case 'RATING' :
         questioner.answer = new Array<number>(criteria.questions.length);
         break;
-      case 'ACCEPTER' :
-        questioner.answer = new AccepterAnswer();
+      case 'SIMPLE' :
+        questioner.answer = new SimpleAnswer();
         break;
       case 'ROUTE_CAPACITY' :
         questioner.answer = new Array<Stop>(questioner.routeQuestions.length);
@@ -103,13 +112,15 @@ export class AddFeedbackComponent implements OnInit {
     const feedbacks: Feedback[] = this.toFeedbackList(this.survey);
     const capFeedbacks: Feedback[] = this.toFeedbackList(this.capacityFeedbacks);
     console.log(feedbacks.concat(capFeedbacks));
-    console.log(capFeedbacks);
-    // this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks)).subscribe(data => {
-    //   alert('Feedback created successfully.');
-    // });
-
+    if (feedbacks.concat(capFeedbacks).length > 0) {
+      this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks)).subscribe(data => {
+        alert('Feedback created successfully.');
+      });
+    } else {
+      alert('You dont make any answers');
+    }
     this.dialogRef.close();
-  }
+   }
 
 
   public toFeedbackList(survey: Questioner[]): Feedback[] {
@@ -121,8 +132,7 @@ export class AddFeedbackComponent implements OnInit {
       feedback.criteriaId = questioner.criteriaId;
       feedback.type = questioner.type;
       feedback.answer = this.answerFormatter(questioner);
-      // TODO: check to empty answer
-      if (questioner.answer && questioner.answer.length > 0) {
+      if (feedback.answer && feedback.answer.length > 0) {
         feedbacks.push(feedback);
       }
     });
@@ -133,8 +143,8 @@ export class AddFeedbackComponent implements OnInit {
     switch (questioner.type) {
       case 'RATING' :
         return this.buildRatingAnswer(questioner);
-      case 'ACCEPTER' :
-        return `"${questioner.answer}"`;
+      case 'SIMPLE' :
+        return this.buildSimpleAnswer(questioner);
       case 'ROUTE_CAPACITY' :
         return this.buildCapacityRouteAnswer(questioner);
       case 'HOURS_CAPACITY' :
@@ -142,73 +152,72 @@ export class AddFeedbackComponent implements OnInit {
     }
   }
 
+  public buildSimpleAnswer(questioner: Questioner): string {
+    const answer: string = questioner.answer;
+    if (answer && answer.length > 0) {
+      return `"${answer}"`;
+    } else {
+      return '';
+    }
+  }
+
+
   public buildRatingAnswer(questioner: Questioner): string {
     const rates: RatingAnswer[] = [];
     for (let i = 0; i < questioner.answer.length; i++) {
       const ratingAnswer: RatingAnswer = new RatingAnswer();
       ratingAnswer.answer = questioner.answer[i];
       ratingAnswer.weight = questioner.questions[i].weight;
-      rates.push(ratingAnswer);
+      if (ratingAnswer.answer) {
+        rates.push(ratingAnswer);
+      }
     }
-    return JSON.stringify(rates);
+    if (rates.length > 0) {
+      return JSON.stringify(rates);
+    } else
+      return '';
   }
 
   public buildCapacityRouteAnswer(questioner: Questioner): string {
     const capacityRouteFeedback: CapacityRouteFeedback = new CapacityRouteFeedback();
-    if (questioner.answer.stops && questioner.answer.stops > 1) {
-      capacityRouteFeedback.from = questioner.answer.stops[0];
-      capacityRouteFeedback.to = questioner.answer.stops[1];
+    if (questioner.answer && questioner.answer.length > 1) {
+      capacityRouteFeedback.from = questioner.answer[0];
+      capacityRouteFeedback.to = questioner.answer[1];
       capacityRouteFeedback.capacity = this.checkCapacityValue(this.capacity);
     }
-
-    return JSON.stringify(capacityRouteFeedback);
+    if (capacityRouteFeedback.from && capacityRouteFeedback.to) {
+      return JSON.stringify(capacityRouteFeedback);
+    } else
+      return '';
   }
 
   public buildCapacityHoursAnswer(questioner: Questioner): string {
     let capacityHourAnswer: CapacityHoursFeedback = new CapacityHoursFeedback();
     const times: Time[] = [];
     for (let i = 0; i < questioner.answer.length; i++) {
-      if (this.isNull(moment(questioner.answer[i], 'HH:mm').hour()) || this.isNull(moment(questioner.answer[i], 'HH:mm').minute())) {
-
-      } else {
-        const time: Time = new Time(moment(questioner.answer[i], 'HH:mm').hour(), moment(questioner.answer[i], 'HH:mm').minute());
+      const time: Time = new Time(moment(questioner.answer[i], 'HH:mm').hour(), moment(questioner.answer[i], 'HH:mm').minute());
+      if (time.hour && time.minute) {
         times.push(time);
       }
     }
-    times.sort((time1: Time, time2: Time) => {
-      if (time1.hour > time2.hour) return 1;
-      else if (time1.hour < time2.hour) return -1;
-      else if (time1.minute > time2.minute) return 1;
-      else if (time1.minute > time2.minute) return -1;
-      return 0;
-    });
 
-    capacityHourAnswer.startTime = times[0];
-    capacityHourAnswer.endTime = times[times.length - 1];
-    capacityHourAnswer.capacity = this.checkCapacityValue(this.capacity);
-    console.log(JSON.stringify(times));
-    console.log(JSON.stringify(capacityHourAnswer));
-    return JSON.stringify(capacityHourAnswer);
-  }
+    if (times.length > 1) {
+      times.sort((time1: Time, time2: Time) => {
+        if (time1.hour > time2.hour) return 1;
+        else if (time1.hour < time2.hour) return -1;
+        else if (time1.minute > time2.minute) return 1;
+        else if (time1.minute > time2.minute) return -1;
+        return 0;
+      });
 
-  public isNull(value: any): value is null {
-    return value === null;
-  }
-
-  public checkCapacityValue(capacity: number): number {
-    capacity = (capacity > 100) ? 100 : capacity;
-    capacity = (capacity < 0) ? 0 : capacity;
-    return capacity;
-  }
-
-  public getCountQuestionsByType(questioner: Questioner, type: String): number {
-    let count = 0;
-    questioner.questions.forEach(question => {
-      if (question.type === type) {
-        count++;
-      }
-    })
-    return count;
+      capacityHourAnswer.startTime = times[0];
+      capacityHourAnswer.endTime = times[times.length - 1];
+      capacityHourAnswer.capacity = this.checkCapacityValue(this.capacity);
+    }
+    if (capacityHourAnswer.startTime && capacityHourAnswer.endTime) {
+      return JSON.stringify(capacityHourAnswer);
+    } else
+      return '';
   }
 
   public getQuestionsByType(questioner: Questioner, type: String): Question[] {
@@ -220,5 +229,16 @@ export class AddFeedbackComponent implements OnInit {
     })
     return questions;
   }
+
+
+  public checkCapacityValue(capacity: number): number {
+    capacity = (capacity > 100) ? 100 : capacity;
+    capacity = (capacity < 0) ? 0 : capacity;
+    return capacity;
+  }
+
+  // public getByTransitAndDirection(direction: String){
+  //   this.stops =this.stopService.getStopsByTransitIdAndDirection(this.transitId,direction);
+  // }
 }
 

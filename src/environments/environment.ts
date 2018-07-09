@@ -6,7 +6,7 @@ export const environment = {
   production: false,
 
   serverURL: 'http://localhost:8080',
-  // serverURL: 'http://ec2-18-184-79-174.eu-central-1.compute.amazonaws.com',
+  // serverURL: 'https://uatransport.tk',
 
   accessTokenHeader: 'Authorization',
   refreshTokenHeader: 'Refresh-token',

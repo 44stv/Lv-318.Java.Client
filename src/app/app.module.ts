@@ -13,9 +13,13 @@ import {HttpModule} from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 import {MomentModule} from 'angular2-moment/moment.module';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+
+
 // import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 
+import {AppMaterialModule} from './material.module';
 
 import {
   MatAutocompleteModule,
@@ -56,15 +60,8 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-
-import {
-  MdcButtonModule,
-  MdcFabModule,
-  MdcIconModule,
-  MdcSliderModule
-} from '@angular-mdc/web';
-
 import {ExcategoryService} from './services/excategory.service';
+
 import {MainComponent} from './components/main/main.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import {MessageComponent} from './components/message/message.component';
@@ -77,7 +74,6 @@ import {ClientGuardService} from './services/guard/client-guard.service';
 import {DiagramService} from './services/diagram.service';
 import {GlobalSearchService} from './services/global-search.service';
 import {httpInterceptorProviders} from './services/auth/interceptors/http-providers';
-import { UixMatNumberSpinnerModule } from 'uix-mat-number-spinner';
 
 import {TransitService} from './services/transit.service';
 import {FeedbackService} from './services/feedback.service';
@@ -87,6 +83,7 @@ import {AgmDirectionModule} from 'agm-direction';
 import {ExcategoryComponent} from './components/main/excategory/excategory.component';
 import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
 import {MenuComponent} from './components/main/menu/menu.component';
+import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
 import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
 import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
@@ -142,6 +139,7 @@ export function createTranslateLoader(http: HttpClient) {
     BackToPreviousPageBtnComponent,
     MapsComponent,
     AddFeedbackComponent,
+    ChooseTransitComponent,
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
     UserLoginComponent,
@@ -186,19 +184,17 @@ export function createTranslateLoader(http: HttpClient) {
     MatTreeModule,
   ],
   imports: [
+    NgxMaterialTimepickerModule.forRoot(),
     MomentModule,
-    OwlDateTimeModule, 
+    MatAutocompleteModule,
+    OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    MdcButtonModule,
     MatDatepickerModule,
-    MdcSliderModule ,
-   MdcFabModule,
-   MdcIconModule,
     MatExpansionModule,
     MatTabsModule,
     MatSliderModule,
+    AppMaterialModule,
     BrowserModule,
-    UixMatNumberSpinnerModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     HttpModule,
@@ -211,6 +207,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatMenuModule,
     FormsModule,
     MatCardModule,
+    MatRadioModule,
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -263,7 +260,7 @@ export function createTranslateLoader(http: HttpClient) {
     FeedbackService,
     FeedbackCriteriaService],
   bootstrap: [AppComponent],
-  entryComponents: [AddQuestionComponent, AddFeedbackComponent]
+  entryComponents: [AddQuestionComponent, AddFeedbackComponent, ChooseTransitComponent]
 })
 export class AppModule {
 }

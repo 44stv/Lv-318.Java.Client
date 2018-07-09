@@ -1,7 +1,8 @@
 
 .question-form {
   width: 100%;
-  /* margin: 10px; */
+  height: 85%;
+
 }
 
 .mat-slider {
@@ -14,7 +15,8 @@
 }
 
 .radio {
-  margin: 10px;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .capacity {
@@ -22,11 +24,30 @@
   width: 15%;
 }
 
-.Hour {
-  width: 12%;
-  /* margin: 10px; */
+.stopSelect {
+  margin: 10px;
+  width: 40%;
 }
 
-.mat-card-actions{
- margin-top: 40%;
+.Hour {
+  width: 12%;
+}
+
+.mat-card-actions {
+  margin-top: 40%;
+}
+
+.scrollable-table {
+  overflow-y: auto;
+  min-height: 400px;
+  max-height: 450px;
+}
+
+.Time {
+  margin: 10px;
+  width: 15%;
+}
+
+.mat-card-footer {
+  color: gainsboro
 }
