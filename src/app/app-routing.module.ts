@@ -13,24 +13,52 @@ import {AddFeedbackCriteriaComponent} from './components/main/menu/feedback-crit
 import {OneFeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {MapsComponent} from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
-import {AdminComponent} from "./components/admin/admin.component";
+import {AdminComponent} from './components/admin/admin.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/main', pathMatch: 'full'},
-  {path: 'main', component: MainComponent},
-  {path: 'main/:top/:city', component: NonExCategoryComponent},
-  {path: 'main/:top/:city/:id', component: TransitsComponent},
-  {path: 'main/top/:city/:id/:id-transit/:name', component: StopsGridComponent},
-  {path: 'main/feedback-criteria', component: FeedbackCriteriaComponent},
-  {path: 'main/feedback-criteria/:id', component: OneFeedbackCriteriaComponent},
-  {path: 'main/feedback-criteria/add-feedback-criteria', component: AddFeedbackCriteriaComponent},
-  {path: 'main/user/add', component: AddUserComponent},
-  {path: 'main/user/login', component: UserLoginComponent},
+  {
+    path: 'main',
+    children: [
+      {
+        path: 'feedback-criteria',
+        children: [
+          {path: '', component: FeedbackCriteriaComponent},
+          {path: ':id', component: OneFeedbackCriteriaComponent},
+          {path: 'add-feedback-criteria', component: AddFeedbackCriteriaComponent},
+        ]
+
+      },
+      {
+        path: 'user',
+        children: [
+          {path: 'add', component: AddUserComponent},
+          {path: 'login', component: UserLoginComponent},
+        ]
+      },
+      {
+        path: ':top/:city',
+        children: [
+          {path: '', component: NonExCategoryComponent},
+          {
+            path: ':id',
+            children: [
+              {path: '', component: TransitsComponent},
+              {path: ':id-transit/:name', component: StopsGridComponent},
+            ]
+          },
+        ]
+      },
+      {
+        path: 'admin', component: AdminComponent
+      }
+    ]
+  },
   {path: 'search/?search=/:value', component: GlobalSearchComponent},
   {path: 'feedback', component: AddFeedbackComponent},
   {path: 'direction/:id', component: MapsComponent},
-  {path: 'admin', component: AdminComponent}
+
 
 ];
 
