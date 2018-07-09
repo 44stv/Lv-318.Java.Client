@@ -1,8 +1,9 @@
 
 .demo-grid-list {
-  /*top: 50px;*/
   width: auto;
-  margin-left: 20px;
+  /*margin-left: 20px;*/
+  /*margin-right: 20px;*/
+  margin: 20px;
 }
 
 p {

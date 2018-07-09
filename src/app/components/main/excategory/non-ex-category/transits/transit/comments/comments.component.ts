@@ -20,7 +20,6 @@ export class CommentsComponent implements OnInit {
 
   comments: MyComment[];
 
-
   constructor(private commentService: CommentService) {}
 
   ngOnInit() {
