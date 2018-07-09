@@ -1,9 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-
+import { MatDialogRef} from '@angular/material';
 
 import {AddFeedbackComponent} from '../excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {TransitService} from '../../../services/transit.service';
@@ -11,7 +9,6 @@ import {Transit} from '../../../models/transit.model';
 import {ExcategoryModel} from '../../../models/excategory.model';
 import {ExcategoryService} from '../../../services/excategory.service';
 import {NonExCategoryService} from '../../../services/non-ex-category.service';
-import {GlobalSearchService} from '../../../services/global-search.service';
 
 
 @Component({
@@ -25,9 +22,6 @@ export class ChooseTransitComponent implements OnInit {
   private transitlist: Transit[] = [];
   @Input() transit: Transit = new Transit();
   private topCategory = 'Public Transport';
-
-  // dataSource: MatTableDataSource<Transit> = new MatTableDataSource();
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private dialogRef: MatDialogRef<ChooseTransitComponent>,
               public dialog: MatDialog,
@@ -48,9 +42,7 @@ export class ChooseTransitComponent implements OnInit {
   getAllTransitsByCategoryId(typeOfTransportId: number) {
     this.transitService.getTransitsByCategoryId(typeOfTransportId, 0, 115)
       .subscribe(transits => {
-        // this.dataSource.data = transits.content;
         this.transitlist = transits.content;
-        // this.paginator.length = transits.totalElements;
       });
   }
 
@@ -67,7 +59,4 @@ export class ChooseTransitComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 }
