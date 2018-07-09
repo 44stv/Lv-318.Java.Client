@@ -14,15 +14,15 @@
   </div>
 
   <div class="NewUser">
-    <a [routerLink]="['/user/add']" *ngIf="!hasToken()">
+    <a [routerLink]="['main/user/add']" *ngIf="!hasToken()">
       <button mat-stroked-button type="submit">{{'User' | translate}}</button>
     </a>
-    <a [routerLink]="['/admin']"  *ngIf="getRole() === role.Admin">
+    <a [routerLink]="['main/admin']"  *ngIf="getRole() === role.Admin">
       <button mat-stroked-button type="submit">{{'Admin' | translate}}</button>
     </a>
   </div>
   <div class="LoginUser" >
-    <a [routerLink]="['/user/login']" *ngIf="!hasToken()">
+    <a [routerLink]="['main/user/login']" *ngIf="!hasToken()">
       <button mat-stroked-button type="submit">{{'Log In'| translate}}</button>
     </a>
     <a (click)="logOut()" *ngIf="hasToken()">

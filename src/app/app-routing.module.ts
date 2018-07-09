@@ -21,7 +21,7 @@ const routes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'main/:top/:city', component: NonExCategoryComponent},
   {path: 'main/:top/:city/:id', component: TransitsComponent},
-  {path: 'show-transit-scheme/:categoryId/:id/:name', component: StopsGridComponent},
+  {path: 'main/top/:city/:id/:id-transit/:name', component: StopsGridComponent},
   {path: 'main/feedback-criteria', component: FeedbackCriteriaComponent},
   {path: 'main/feedback-criteria/:id', component: OneFeedbackCriteriaComponent},
   {path: 'main/feedback-criteria/add-feedback-criteria', component: AddFeedbackCriteriaComponent},

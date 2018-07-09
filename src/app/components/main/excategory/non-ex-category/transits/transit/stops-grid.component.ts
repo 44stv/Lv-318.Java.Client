@@ -16,7 +16,7 @@ export class StopsGridComponent implements OnInit {
 
   checkedItems: boolean[];
   private sub: any;
-  @Input() public idTransit: number;
+  @Input() idTransit: number;
   @Input() transitName: String;
   stopsList: Observable<Stop[]>;
   stopArray: Stop[] = [];
@@ -33,8 +33,8 @@ export class StopsGridComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.forEach(params => {
-      this.idTransit = params['id'];
-      this.categoryId = params['categoryId'];
+      this.idTransit = params['id-transit'];
+      this.categoryId = params['id'];
       this.transitName = params['name'];
     });
     this.stopsList = this.stopService.getStopsByTransitId(this.idTransit);
