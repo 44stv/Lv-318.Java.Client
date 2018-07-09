@@ -63,8 +63,8 @@ export class AddFeedbackComponent implements OnInit {
           feedbackCriterias.forEach(criteria => {
             const questioner: Questioner = this.buildQuestioner(criteria, criteria.questions);
             questioner.questions.sort((a: Question, b: Question) => {
-              if (a.name > b.name) return 1;
-              else if (a.name < b.name) return -1;
+              if (a.name > b.name) { return 1; }
+              else if (a.name < b.name) { return -1; }
               return 0;
             });
             survey.push(questioner);
@@ -174,8 +174,9 @@ export class AddFeedbackComponent implements OnInit {
     }
     if (rates.length > 0) {
       return JSON.stringify(rates);
-    } else
+    } else {
       return '';
+    }
   }
 
   public buildCapacityRouteAnswer(questioner: Questioner): string {
@@ -187,12 +188,13 @@ export class AddFeedbackComponent implements OnInit {
     }
     if (capacityRouteFeedback.from && capacityRouteFeedback.to) {
       return JSON.stringify(capacityRouteFeedback);
-    } else
+    } else {
       return '';
+    }
   }
 
   public buildCapacityHoursAnswer(questioner: Questioner): string {
-    let capacityHourAnswer: CapacityHoursFeedback = new CapacityHoursFeedback();
+    const capacityHourAnswer: CapacityHoursFeedback = new CapacityHoursFeedback();
     const times: Time[] = [];
     for (let i = 0; i < questioner.answer.length; i++) {
       const time: Time = new Time(moment(questioner.answer[i], 'HH:mm').hour(), moment(questioner.answer[i], 'HH:mm').minute());
@@ -203,10 +205,10 @@ export class AddFeedbackComponent implements OnInit {
 
     if (times.length > 1) {
       times.sort((time1: Time, time2: Time) => {
-        if (time1.hour > time2.hour) return 1;
-        else if (time1.hour < time2.hour) return -1;
-        else if (time1.minute > time2.minute) return 1;
-        else if (time1.minute > time2.minute) return -1;
+        if (time1.hour > time2.hour) { return 1; }
+        else if (time1.hour < time2.hour) { return -1; }
+        else if (time1.minute > time2.minute) { return 1; }
+        else if (time1.minute > time2.minute) { return -1; }
         return 0;
       });
 
@@ -216,8 +218,9 @@ export class AddFeedbackComponent implements OnInit {
     }
     if (capacityHourAnswer.startTime && capacityHourAnswer.endTime) {
       return JSON.stringify(capacityHourAnswer);
-    } else
+    } else {
       return '';
+    }
   }
 
   public getQuestionsByType(questioner: Questioner, type: String): Question[] {
@@ -226,7 +229,7 @@ export class AddFeedbackComponent implements OnInit {
       if (question.type === type) {
         questions.push(question);
       }
-    })
+    });
     return questions;
   }
 
