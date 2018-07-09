@@ -2,36 +2,40 @@
 <div class="myToolbar">
   <mdc-toolbar-row>
     <mdc-toolbar-section>
-  <div class="ua"><a [routerLink]="['/main']" [ngStyle]="{'color' : 'black'}">UA</a></div>
-  <div class="transport"><a [routerLink]="['/main']" [ngStyle]="{'color' : 'black'}">Transport</a>
-    <a class="lang" (click)="switchLanguage('ua')"><img src="../../../../assets/img/ukraine.png"></a>
-    <a class="lang" (click)="switchLanguage('en')"><img src="../../../../assets/img/united-kingdom.png"></a></div>
+      <div class="ua">
+        <a [routerLink]="['/main']" [ngStyle]="{'color' : 'black'}">UA</a>
+      </div>
+      <div class="transport">
+        <a [routerLink]="['/main']" [ngStyle]="{'color' : 'black'}">Transport</a>
+      </div>
+
+    <div class="criteriaButton">
+      <a [routerLink]="['/main/feedback-criteria']">
+        <button mdc-button [secondary]="true" type="submit">{{ 'Feedback'| translate}}</button>
+      </a>
+    </div>
+
+    <div class="NewUser">
+      <a [routerLink]="['/main/user/add']">
+        <button mdc-button [secondary]="true" type="submit">{{'User' | translate}}</button>
+      </a>
+    </div>
+
+    <div class="LoginUser">
+      <a [routerLink]="['/main/user/login']" *ngIf="!hasToken()">
+        <button mdc-button [secondary]="true" type="submit">{{'Log In'| translate}}</button>
+      </a>
+      <a (click)="logOut()" *ngIf="hasToken()">
+        <button mdc-button [secondary]="true" type="submit">{{'Log Out'| translate}}</button>
+      </a>
+    </div>
 
     </mdc-toolbar-section>
-  <div class="Search" *ngIf="isHomeRouteActivated()">
-    <input #search aria-label="search" placeholder="Search" (keyup.enter)="onEnter(search.value)">
-  </div>
+    <div class="Search" *ngIf="isHomeRouteActivated()">
+      <app-search-field></app-search-field>
+    </div>
 
-  <div class="criteriaButton">
-    <a [routerLink]="['/feedback-criteria']">
-      <button mdc-button [secondary]="true" type="submit">{{ 'Feedback'| translate}}</button>
-    </a>
-  </div>
-
-  <div class="NewUser">
-    <a [routerLink]="['/user/add']">
-      <button mdc-button [secondary]="true" type="submit">{{'User' | translate}}</button>
-    </a>
-  </div>
-
-  <div class="LoginUser">
-    <a [routerLink]="['/user/login']" *ngIf="!hasToken()">
-      <button mdc-button [secondary]="true" type="submit">{{'Log In'| translate}}</button>
-    </a>
-    <a (click)="logOut()" *ngIf="hasToken()">
-      <button mdc-button [secondary]="true" type="submit">{{'Log Out'| translate}}</button>
-    </a>
-  </div>
+    <app-location-picker></app-location-picker>
   </mdc-toolbar-row>
   <!--</mat-toolbar>-->
 </div>

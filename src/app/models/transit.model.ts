@@ -1,3 +1,5 @@
+import { Stop } from './stop.model';
+
 export class Transit {
   id: number;
   name: string;

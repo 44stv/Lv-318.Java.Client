@@ -1,8 +1,13 @@
 <div class="feedbackCriteria">
-  <button  mat-stroked-button a routerLink="./add-feedback-criteria">Add new</button>
-  <mat-form-field>
-    <input matInput (keyup)="search($event.target.value)" placeholder="Filter">
-  </mat-form-field>
+  <div class="row">
+    <button mat-stroked-button a routerLink="/main/feedback-criteria/add-feedback-criteria">Add new</button>
+  </div>
+  <div class="row">
+    <mat-form-field>
+      <input matInput (keyup)="search($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <mat-paginator [pageSizeOptions]="[5, 10, 1]" showFirstLastButtons></mat-paginator>
+  </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="type">
       <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
@@ -10,18 +15,35 @@
     </ng-container>
     <ng-container matColumnDef="questions">
       <mat-header-cell *matHeaderCellDef> Questions </mat-header-cell>
-      <mat-cell *matCellDef="let feedbackCriteria">
-        <mat-list role="list" *ngFor="let questions of feedbackCriteria.questions ">
-          <mat-list-item role="listitem">{{questions.name}}</mat-list-item>
-          <mat-list-item role="listitem">weight: {{questions.weight}}</mat-list-item>
-        </mat-list>
+      <mat-cell *matCellDef="let feedbackCriteria" a routerLink="./{{feedbackCriteria.id}}">
+        <div>
+          <mat-list role="list" *ngFor="let questions of feedbackCriteria.questions ">
+            {{questions.name}}
+          </mat-list>
+        </div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+      <mat-cell *matCellDef="let feedbackCriteria" a routerLink="./{{feedbackCriteria.id}}">
+        <div>
+          <mat-list role="list" *ngFor="let questions of feedbackCriteria.questions ">
+            {{questions.weight}}
+          </mat-list>
+        </div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="questionType">
+      <mat-header-cell *matHeaderCellDef> Type of Question </mat-header-cell>
+      <mat-cell *matCellDef="let feedbackCriteria" a routerLink="./{{feedbackCriteria.id}}">
+        <div>
+          <mat-list role="list" *ngFor="let questions of feedbackCriteria.questions ">
+            {{questions.type}}
+          </mat-list>
+        </div>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </table>
-  <mat-paginator [pageSizeOptions]="[3, 5, 10]" showFirstLastButtons></mat-paginator>
 </div>
-
-
-

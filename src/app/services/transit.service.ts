@@ -34,4 +34,8 @@ export class TransitService {
   getTransitsByNextLevelCategoryName(categoryName: string, page: number, size: number): Observable<Paginator> {
     return this.http.get<Paginator>(`${this.serviceUrl}?nextLevelCategoryName=${categoryName}&page=${page}&size=${size}`);
   }
+
+  public countByCategoryId(id: number): Observable<number> {
+    return this.http.get<number>(`${this.serviceUrl}?count=${id}`);
+  }
 }

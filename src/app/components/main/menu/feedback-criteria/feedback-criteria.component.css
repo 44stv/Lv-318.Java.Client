@@ -8,5 +8,25 @@
   width: 100%; 
 }
 .mat-stroked-button{
-  float: right;
+  position: right;
+  margin-bottom: 2%;
+}
+.mat-form-field{
+  float: left;
+}
+.mat-paginator{
+  right: 1px;  
+}
+.mat-column-type{
+  max-width: 150px;
+}
+.mat-column-weight{
+  max-width: 100px; 
+}
+.mat-column-questionType{
+  max-width: 100px;
+  right: 5px;  
+}
+.mat-cell{
+  margin-bottom: 1%;
 }

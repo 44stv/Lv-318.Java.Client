@@ -15,7 +15,7 @@
 
     <ng-container matColumnDef="categoryIcon">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
-      <mat-cell *matCellDef="let transit"> <img src="{{ categoryIconURL }}{{ transit.categoryIconURL }}"></mat-cell>
+      <mat-cell *matCellDef="let transit"> <img height="32" width="32" src="{{ categoryIconURL }}{{ transit.categoryIconURL }}"></mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
