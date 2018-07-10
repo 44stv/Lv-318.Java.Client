@@ -4,6 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
+
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './services/auth/auth.service';
@@ -13,10 +14,11 @@ import {HttpModule} from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 import {MomentModule} from 'angular2-moment/moment.module';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+
+
 import {AppMaterialModule} from './material.module';
-
-
-
 
 import {
   MatAutocompleteModule,
@@ -55,7 +57,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule,
+  MatTreeModule
 } from '@angular/material';
 import {ExcategoryService} from './services/excategory.service';
 
@@ -81,6 +83,7 @@ import {ExcategoryComponent} from './components/main/excategory/excategory.compo
 import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
 import {MenuComponent} from './components/main/menu/menu.component';
 import {SearchFieldComponent} from './components/main/menu/search-field/search-field.component';
+import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
 import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
 import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
@@ -95,6 +98,9 @@ import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteri
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
 import {MyRateComponent} from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
+import { CommentComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comment/comment.component';
+import { CommentsComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
+import { CommentService } from './services/comment.service';
 import {
   RaitingDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/raiting-diagram/raiting-diagram.component';
@@ -137,12 +143,15 @@ export function createTranslateLoader(http: HttpClient) {
     BackToPreviousPageBtnComponent,
     MapsComponent,
     AddFeedbackComponent,
+    ChooseTransitComponent,
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
     UserLoginComponent,
     SearchFieldComponent,
     BusyHoursDiagramComponent,
     MyRateComponent,
+    CommentsComponent,
+    CommentComponent,
     LocationPickerComponent
   ],
   exports: [
@@ -183,7 +192,11 @@ export function createTranslateLoader(http: HttpClient) {
     MatTreeModule,
   ],
   imports: [
+    NgxMaterialTimepickerModule.forRoot(),
     MomentModule,
+    MatAutocompleteModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     MatDatepickerModule,
     MatExpansionModule,
     MatTabsModule,
@@ -202,6 +215,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatMenuModule,
     FormsModule,
     MatCardModule,
+    MatRadioModule,
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -253,9 +267,10 @@ export function createTranslateLoader(http: HttpClient) {
     DiagramService,
     GlobalSearchService,
     FeedbackService,
-    FeedbackCriteriaService],
+    FeedbackCriteriaService,
+    CommentService],
   bootstrap: [AppComponent],
-  entryComponents: [AddQuestionComponent, AddFeedbackComponent]
+  entryComponents: [AddQuestionComponent, AddFeedbackComponent, ChooseTransitComponent]
 })
 export class AppModule {
 }

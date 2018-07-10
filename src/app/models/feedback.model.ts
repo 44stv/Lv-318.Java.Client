@@ -29,7 +29,7 @@ export class RatingAnswer {
   weight: number;
 }
 
-export class AccepterAnswer {
+export class SimpleAnswer {
   answer: string;
 
 }

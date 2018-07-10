@@ -19,7 +19,7 @@ export class AverageRateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.diagramService.getResults(environment.serverURL + '/feedback/rate/' + this.id)
+    this.diagramService.getResults(environment.serverURL + '/feedback/rating/' + this.id)
       .subscribe(res => {
         this.averageRate = (<number>res).toPrecision(3);
         if (this.averageRate === 0.00) {
