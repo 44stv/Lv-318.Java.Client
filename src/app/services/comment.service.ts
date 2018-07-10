@@ -26,7 +26,8 @@ export class CommentService {
     return this.http.get<MyComment[]>(`${this.serviceUrl}?userId=${userId}`);
   }
 
-  addComment(params: HttpParams, newComment: MyComment) {
+  addComment(params: HttpParams, newComment: MyComment): Observable<MyComment> {
+    console.log('adding comment');
     return this.http.post<MyComment>(this.serviceUrl, newComment, { params: params });
   }
 }
