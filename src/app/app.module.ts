@@ -121,6 +121,8 @@ import {
 } from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
 
 import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
+import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
+import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
 
 
 
@@ -145,6 +147,8 @@ export function createTranslateLoader(http: HttpClient) {
     FeedbackCriteriaComponent,
     AddUserComponent,
     ForgetPasswordComponent,
+    UserProfileComponent,
+    FriendInvitationComponent,
     MessageComponent,
     StopsGridComponent,
     AddQuestionComponent,
@@ -294,7 +298,8 @@ export function createTranslateLoader(http: HttpClient) {
     AddUserComponent,
     UserLoginComponent,
     ForgetPasswordComponent,
-    ChooseTransitComponent]
+    ChooseTransitComponent,
+    FriendInvitationComponent]
 
 })
 export class AppModule {

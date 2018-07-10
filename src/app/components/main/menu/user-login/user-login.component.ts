@@ -13,18 +13,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ForgetPasswordComponent} from './forget-password/forget-password.component';
 
-export class PasswordValidation {
 
-  static MatchPassword(AC: AbstractControl) {
-    const password = AC.get('password').value;
-    const passwordConfirmation = AC.get('passwordConfirmation').value;
-    if (password !== passwordConfirmation) {
-      AC.get('passwordConfirmation').setErrors({MatchPassword: true});
-    } else {
-      return null;
-    }
-  }
-}
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -35,7 +24,6 @@ export class UserLoginComponent implements OnInit {
   login: Login ;
   loginForm: FormGroup;
   hide: boolean = true;
-  hideConfirm: boolean = true;
 
   constructor(public  matDialogRef: MatDialogRef<UserLoginComponent>,
               private snackBar: MatSnackBar,
@@ -90,9 +78,6 @@ export class UserLoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       email: this.emailControl,
       password: this.passwordControl,
-      passwordConfirmation: this. passwordConfirmationControl
-    }, {
-      validator: PasswordValidation.MatchPassword
     });
   }
 
