@@ -30,10 +30,27 @@
       </a>
     </div>
 
+
+  <div class="NewUser">
+    <a [routerLink]="['/main/user/add']">
+      <button mdc-button [secondary]="true" type="submit" (click)="openModal()">{{'User' | translate}}</button>
+    </a>
+  </div>
+
+  <div class="LoginUser">
+    <a [routerLink]="['/main/user/login']" *ngIf="!hasToken()">
+      <button mdc-button [secondary]="true" type="submit" (click)="openLogInModal()">{{'Log In'| translate}}</button>
+    </a>
+    <a (click)="logOut()" *ngIf="hasToken()">
+      <button mdc-button [secondary]="true" type="submit">{{'Log Out'| translate}}</button>
+    </a>
+  </div>
+
     </mdc-toolbar-section>
     <div class="Search">
       <app-search-field></app-search-field>
     </div>
+
 
   </mdc-toolbar-row>
   <!--</mat-toolbar>-->

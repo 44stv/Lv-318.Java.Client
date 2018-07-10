@@ -1,27 +1,71 @@
+
 <div class="NewUserForm">
-  <div class="col-md-7">
-    <form class="example-form">
-      <mat-form-field class="email">
-        <textarea matInput [(ngModel)]="user.email" placeholder="Email" name="email"></textarea>
+  <div class="title">Registration form</div>
+  <form [formGroup]="userForm" (ngSubmit)="createUser()" *ngIf="!_isSent">
+    <div class="form-group">
+      <mat-form-field class="mat-form-f">
+        <input matInput placeholder="Firstname" formControlName="firstName" required>
+        <mat-error *ngIf="firstnameControl.hasError('maxlength') && !emailControl.hasError('required')">
+          String is too long
+        </mat-error>
+        <mat-error *ngIf="firstnameControl.hasError('required')">
+          Firstname is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
-
-      <mat-form-field class="firstName">
-        <textarea matInput [(ngModel)]="user.firstName" placeholder="First Name" name="firstName"></textarea>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="mat-form-f" >
+        <input  matInput placeholder="Lastname" formControlName="lastName" required>
+        <mat-error *ngIf="lastnameControl.hasError('maxlength') && !emailControl.hasError('required')">
+          String is too long
+        </mat-error>
+        <mat-error *ngIf="lastnameControl.hasError('required')">
+          Lastname is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
-
-      <mat-form-field class="lastName">
-        <textarea matInput [(ngModel)]="user.lastName" placeholder="Last Name" name="lastName"></textarea>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="mat-form-f">
+        <input matInput placeholder="Enter your email" formControlName="email" [formControl]="email" required>
+        <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
-
-      <mat-form-field class="password">
-        <textarea matInput [(ngModel)]="user.password" placeholder="Password" name="password"></textarea>
+    </div>
+    <div class="form-group">
+      <mat-form-field  class="mat-form-f">
+        <input matInput placeholder="Password" formControlName="password" required
+        [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide" class="cursor">{{hide ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+        <mat-error *ngIf="passwordControl.hasError('minlength') && !passwordControl.hasError('required')">
+          Password must contain more than 6 characters
+        </mat-error>
+        <mat-error *ngIf="passwordControl.hasError('maxlength') && !passwordControl.hasError('required')">
+          Password must contain less than 16 characters
+        </mat-error>
+        <mat-error *ngIf="passwordControl.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
-
-      <button class="Button" mat-fab (click)="createUser()">Register</button>
-
-    </form>
+    </div>
+    <div class="form-group">
+      <button mat-button class="button">Register</button>
+    </div>
+  </form>
+  <div class="form-group" *ngIf="_isSent">
+    <div class="col-12 text-center">
+      <h4 style="color:black"><strong>Check your email and confirm registration</strong></h4>
+      <h5 style="color:black">If you did not get email. Fill and send confirmation form one more time</h5>
+    </div>
   </div>
 </div>
+
+
+
 
 
 
