@@ -19,7 +19,10 @@ export class InfoResponse {
     styleUrls: ['./forget-password.component.css']
 })
 export class ForgetPasswordComponent implements OnInit {
-    isSent: boolean = false;
+  set isSent(value: boolean) {
+    this._isSent = value;
+  }
+    private _isSent: boolean = false;
     hide: boolean = true;
     forgetPasswordForm: FormGroup;
     login: Login;
@@ -54,7 +57,7 @@ export class ForgetPasswordComponent implements OnInit {
             this.snackBar.open(info.response, null, {
                 duration: 5000
             });
-            this.isSent = true;
+            this._isSent = true;
         }, (error) => {
   if (error instanceof HttpErrorResponse) {
   this.snackBar.open(error.error.response, null, {

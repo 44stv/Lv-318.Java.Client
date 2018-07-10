@@ -54,7 +54,7 @@ export class MenuComponent implements OnInit, OnChanges {
     this.router.navigate(['main']);
   }
   openModal() {
-    this.dialog.open(AddUserComponent, {data: { title: 'Registration Form' } });
+    this.dialog.open(AddUserComponent);
   }
   openLogInModal() {
     this.dialog.open(UserLoginComponent);
