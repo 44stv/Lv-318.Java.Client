@@ -4,6 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
+
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './services/auth/auth.service';
@@ -18,9 +19,6 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 
 import {AppMaterialModule} from './material.module';
-
-
-
 
 import {
   MatAutocompleteModule,
@@ -59,7 +57,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule,
+  MatTreeModule
 } from '@angular/material';
 import {ExcategoryService} from './services/excategory.service';
 
@@ -100,6 +98,9 @@ import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteri
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
 import {MyRateComponent} from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
+import { CommentComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comment/comment.component';
+import { CommentsComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
+import { CommentService } from './services/comment.service';
 import {
   RaitingDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/raiting-diagram/raiting-diagram.component';
@@ -149,6 +150,8 @@ export function createTranslateLoader(http: HttpClient) {
     SearchFieldComponent,
     BusyHoursDiagramComponent,
     MyRateComponent,
+    CommentsComponent,
+    CommentComponent,
     LocationPickerComponent
   ],
   exports: [
@@ -264,7 +267,8 @@ export function createTranslateLoader(http: HttpClient) {
     DiagramService,
     GlobalSearchService,
     FeedbackService,
-    FeedbackCriteriaService],
+    FeedbackCriteriaService,
+    CommentService],
   bootstrap: [AppComponent],
   entryComponents: [AddQuestionComponent, AddFeedbackComponent, ChooseTransitComponent]
 })
