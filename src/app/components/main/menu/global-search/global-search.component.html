@@ -3,18 +3,17 @@
 </div>
 <div class="transit">
   <div class="row">
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
-  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
     </mat-paginator>
-    </div>
+  </div>
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="categoryId">
       <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
       <mat-cell *matCellDef="let transit">
-        <img src="transit.category.iconURL">
-        <!-- <img [src]=" {{transit.category.iconURL}}"/>  -->
+        <img height="32" width="32" src="{{ categoryIconURL }}{{ transit.category.iconURL }}">
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="name">

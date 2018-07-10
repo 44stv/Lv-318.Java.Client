@@ -4,22 +4,26 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
-
-import {AppComponent} from './app.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthService} from './services/auth/auth.service';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {MatDialogModule} from '@angular/material/dialog';
-import {AppRoutingModule} from 'src/app/app-routing.module';
-import {HttpModule} from '@angular/http';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
-import {MomentModule} from 'angular2-moment/moment.module';
+import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './services/auth/auth.service';
+import { SocialService } from './services/auth/social.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { HttpModule } from '@angular/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Ng5BreadcrumbModule } from 'ng5-breadcrumb';
+import { MomentModule } from 'angular2-moment/moment.module';
+import { AppMaterialModule } from './material.module';
+import {
+  AuthServiceConfig,
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialLoginModule
+} from 'angular-6-social-login';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatDialogModule} from '@angular/material/dialog';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
-
-
-import {AppMaterialModule} from './material.module';
 
 import {
   MatAutocompleteModule,
@@ -57,9 +61,9 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule
+  MatTreeModule,
 } from '@angular/material';
-import {ExcategoryService} from './services/excategory.service';
+import { ExcategoryService } from './services/excategory.service';
 
 import {MainComponent} from './components/main/main.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
@@ -73,7 +77,7 @@ import {ClientGuardService} from './services/guard/client-guard.service';
 import {DiagramService} from './services/diagram.service';
 import {GlobalSearchService} from './services/global-search.service';
 import {httpInterceptorProviders} from './services/auth/interceptors/http-providers';
-
+import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {TransitService} from './services/transit.service';
 import {FeedbackService} from './services/feedback.service';
 import {FeedbackCriteriaService} from './services/feedback-criteria.service';
@@ -83,7 +87,6 @@ import {ExcategoryComponent} from './components/main/excategory/excategory.compo
 import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
 import {MenuComponent} from './components/main/menu/menu.component';
 import {SearchFieldComponent} from './components/main/menu/search-field/search-field.component';
-import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
 import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
 import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
@@ -119,8 +122,8 @@ import {ForgetPasswordComponent} from './components/main/menu/user-login/forget-
 import {
   ForgetPasswordConfirmationComponent
 } from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
-
 import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
+import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
 
 
 
@@ -130,6 +133,21 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+export function getAuthServiceConfigs() {
+  const config = new AuthServiceConfig(
+    [
+      {
+        id: FacebookLoginProvider.PROVIDER_ID,
+        provider: new FacebookLoginProvider('198242184359664')
+      },
+      {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider('1021227322496-q7977jujlatadfoql9skbeasai2550mn.apps.googleusercontent.com')
+      }
+    ]
+  );
+  return config;
 }
 
 
@@ -167,7 +185,9 @@ export function createTranslateLoader(http: HttpClient) {
     RegistarationConfirmationComponent,
     CommentsComponent,
     CommentComponent,
-    LocationPickerComponent
+    LocationPickerComponent,
+    LocationPickerComponent,
+    SocialSingIn
 
   ],
   exports: [
@@ -205,7 +225,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule
+    MatTreeModule,
   ],
   imports: [
     NgxMaterialTimepickerModule.forRoot(),
@@ -248,6 +268,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatAutocompleteModule,
     MatPaginatorModule,
     MatListModule,
+    SocialLoginModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -285,7 +306,12 @@ export function createTranslateLoader(http: HttpClient) {
     GlobalSearchService,
     FeedbackService,
     FeedbackCriteriaService,
-    CommentService],
+    SocialService,
+    CommentService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }],
   bootstrap: [AppComponent],
 
   entryComponents: [
