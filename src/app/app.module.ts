@@ -4,16 +4,21 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
-import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './services/auth/auth.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from 'src/app/app-routing.module';
-import { HttpModule } from '@angular/http';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { Ng5BreadcrumbModule } from 'ng5-breadcrumb';
-import { MomentModule } from 'angular2-moment/moment.module';
-import { AppMaterialModule } from './material.module';
+
+import {AppComponent} from './app.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from './services/auth/auth.service';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from 'src/app/app-routing.module';
+import {HttpModule} from '@angular/http';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
+import {MomentModule} from 'angular2-moment/moment.module';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+
+
+import {AppMaterialModule} from './material.module';
 
 import {
   MatAutocompleteModule,
@@ -78,6 +83,7 @@ import {ExcategoryComponent} from './components/main/excategory/excategory.compo
 import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
 import {MenuComponent} from './components/main/menu/menu.component';
 import {SearchFieldComponent} from './components/main/menu/search-field/search-field.component';
+import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
 import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
 import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
@@ -137,6 +143,7 @@ export function createTranslateLoader(http: HttpClient) {
     BackToPreviousPageBtnComponent,
     MapsComponent,
     AddFeedbackComponent,
+    ChooseTransitComponent,
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
     UserLoginComponent,
@@ -185,7 +192,11 @@ export function createTranslateLoader(http: HttpClient) {
     MatTreeModule,
   ],
   imports: [
+    NgxMaterialTimepickerModule.forRoot(),
     MomentModule,
+    MatAutocompleteModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     MatDatepickerModule,
     MatExpansionModule,
     MatTabsModule,
@@ -204,6 +215,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatMenuModule,
     FormsModule,
     MatCardModule,
+    MatRadioModule,
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -258,7 +270,7 @@ export function createTranslateLoader(http: HttpClient) {
     FeedbackCriteriaService,
     CommentService],
   bootstrap: [AppComponent],
-  entryComponents: [AddQuestionComponent, AddFeedbackComponent]
+  entryComponents: [AddQuestionComponent, AddFeedbackComponent, ChooseTransitComponent]
 })
 export class AppModule {
 }
