@@ -11,9 +11,11 @@ import {ExcategoryService} from '../../../services/excategory.service';
   styleUrls: ['./excategory.component.css']
 })
 export class ExcategoryComponent implements OnInit {
-  private list: Observable<ExcategoryModel[]> = this.service.getTopCategories();
-  private cities: Observable<ExcategoryModel[]>;
-  private serverURL = environment.serverURL + '/category/img?link=';
+  public list: Observable<ExcategoryModel[]> = this.service.getTopCategories();
+  public cities: Observable<ExcategoryModel[]>;
+  public serverURL = environment.serverURL + '/category/img?link=';
+
+  panelOpenState = false;
 
   constructor(public service: ExcategoryService) {
   }

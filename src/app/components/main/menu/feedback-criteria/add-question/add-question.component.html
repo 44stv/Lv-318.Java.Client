@@ -1,17 +1,22 @@
-
-<h2 mat-dialog-title>Write question</h2>
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="name" [(ngModel)]="question.name" id="name" name="name">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-      <mat-label>Weight</mat-label>
-      <input [readonly]="isReadOnly" matInput placeholder="weight" [(ngModel)]="question.weight" id="name" name="weight">
-      <mat-hint align="end">Only RATING can have weight</mat-hint>
-    </mat-form-field>
-  <div class="button">
-      <button class="mat-raised-button"(click)="close(question.name, question.weight)">Close</button>
-      <button class="mat-raised-button mat-primary"(click)="add(question.name, question.weight)">Ok</button>  
-    </div>
-
-  
+<h2 mat-dialog-title>
+  Write question</h2>
+<mat-form-field appearance="standard">
+  <mat-select placeholder="Type" [(ngModel)]="question.type" name="type">
+    <mat-option *ngFor="let enumTypeOfQuestion of enumTypeOfQuestions" [value]="enumTypeOfQuestion">
+      {{ enumTypeOfQuestion }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>Name</mat-label>
+  <input matInput placeholder="name" [(ngModel)]="question.name" id="name" name="name">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>Weight</mat-label>
+  <input [readonly]="isReadOnly" matInput placeholder="weight" [(ngModel)]="question.weight" id="name" name="weight">
+  <mat-hint align="end">Only RATING can have weight</mat-hint>
+</mat-form-field>
+<div class="button">
+  <button class="mat-raised-button" (click)="close(question.name, question.weight, question.type)">Close</button>
+  <button class="mat-raised-button mat-primary" (click)="add(question.name, question.weight, question.type)">Ok</button>
+</div>

@@ -1,12 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
-import {BreadcrumbService} from 'ng5-breadcrumb';
-import {environment} from '../../../../../environments/environment';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { BreadcrumbService } from 'ng5-breadcrumb';
+import { environment } from '../../../../../environments/environment';
 
-import {ExcategoryModel} from '../../../../models/excategory.model';
-import {TransitsComponent} from './transits/transits.component';
-import {NonExCategoryService} from '../../../../services/non-ex-category.service';
+import { ExcategoryModel } from '../../../../models/excategory.model';
+import { TransitsComponent } from './transits/transits.component';
+import { NonExCategoryService } from '../../../../services/non-ex-category.service';
+import { TransitService } from "../../../../services/transit.service";
 
 @Component({
   selector: 'app-non-ex-category',
@@ -16,7 +17,6 @@ import {NonExCategoryService} from '../../../../services/non-ex-category.service
 
 export class NonExCategoryComponent implements OnInit {
   public list: Observable<ExcategoryModel[]>;
-
   serverURL = environment.serverURL + '/category/img?link=';
 
   displayedColumns = ['id', 'name', 'nextLevelCategory_name'];
@@ -41,11 +41,12 @@ export class NonExCategoryComponent implements OnInit {
     this.breadcrumbService.hideRoute('/main/Public%20Transport');
   }
 
-  ngOnInit() {
+   ngOnInit() {
     this.sub = this.route.params.forEach(params => {
-      this.top = params['top'];
       this.city = params['city'];
+      this.top = params['top'];
       this.list = this.service.getByNames(this.city, this.top);
+      console.log(this.city);
     });
   }
 }

@@ -7,8 +7,17 @@
               category.nextLevelCategory.nextLevelCategory.name,
               category.nextLevelCategory.name,
               category.id]">
-        <img src="{{serverURL}}{{category.iconURL}}"/><br/>
-        {{category.name}}
+        <div class="image">
+          <img src="{{serverURL}}{{category.iconURL}}"/>
+        </div>
+        <div class="text">
+          {{category.name}}
+        </div>
+        <div class="count">
+          <h3>{{category.countOfTransits}}</h3>
+          transits<br/>
+          available
+         </div>
       </div>
     </div>
   </div>
