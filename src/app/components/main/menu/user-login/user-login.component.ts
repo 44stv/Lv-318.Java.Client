@@ -6,13 +6,25 @@ import {Login} from '../../../../models/login.model';
 import {AuthService} from '../../../../services/auth/auth.service';
 import {TokenStorage} from '../../../../services/auth/token/token-storage';
 import {TokenModel} from '../../../../services/auth/token/token-model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {MatDialogRef} from '@angular/material/dialog';
 
 import {HttpErrorResponse} from '@angular/common/http';
 import {ForgetPasswordComponent} from './forget-password/forget-password.component';
 
+export class PasswordValidation {
+
+  static MatchPassword(AC: AbstractControl) {
+    const password = AC.get('password').value;
+    const passwordConfirmation = AC.get('passwordConfirmation').value;
+    if (password !== passwordConfirmation) {
+      AC.get('passwordConfirmation').setErrors({MatchPassword: true});
+    } else {
+      return null;
+    }
+  }
+}
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -22,6 +34,8 @@ export class UserLoginComponent implements OnInit {
 
   login: Login ;
   loginForm: FormGroup;
+  hide: boolean = true;
+  hideConfirm: boolean = true;
 
   constructor(public  matDialogRef: MatDialogRef<UserLoginComponent>,
               private snackBar: MatSnackBar,
@@ -36,6 +50,12 @@ export class UserLoginComponent implements OnInit {
   ]);
 
   passwordControl: FormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(16),
+  ]);
+
+  passwordConfirmationControl: FormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(6),
     Validators.maxLength(16),
@@ -70,6 +90,9 @@ export class UserLoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       email: this.emailControl,
       password: this.passwordControl,
+      passwordConfirmation: this. passwordConfirmationControl
+    }, {
+      validator: PasswordValidation.MatchPassword
     });
   }
 
@@ -77,7 +100,6 @@ export class UserLoginComponent implements OnInit {
     this.createForm();
   }
   openForgetPassword() {
-
     this.dialog.open(ForgetPasswordComponent);
     this.matDialogRef.close();
   }

@@ -2,7 +2,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 
 import { User } from '../../../../models/user.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material';
 
@@ -15,7 +15,18 @@ export class InfoResponse {
   response: string;
 }
 
+export class PasswordValidation {
 
+  static MatchPassword(AC: AbstractControl) {
+    const password = AC.get('password').value;
+    const passwordConfirmation = AC.get('passwordConfirmation').value;
+    if (password !== passwordConfirmation) {
+      AC.get('passwordConfirmation').setErrors({MatchPassword: true});
+    } else {
+      return null;
+    }
+  }
+}
 
 @Component({
   selector: 'app-add-user',
@@ -30,6 +41,7 @@ export class AddUserComponent implements OnInit {
   user: User;
 
   hide: boolean = true;
+  hideConfirm: boolean = true;
 
 
   userForm: FormGroup;
@@ -58,6 +70,11 @@ export class AddUserComponent implements OnInit {
     Validators.minLength(6),
     Validators.maxLength(16),
   ]);
+  passwordConfirmationControl: FormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(16),
+  ]);
 
   createForm() {
     this.userForm = this.fb.group({
@@ -65,6 +82,9 @@ export class AddUserComponent implements OnInit {
       lastName: this.lastnameControl,
       email: this.emailControl,
       password: this.passwordControl,
+      passwordConfirmation: this. passwordConfirmationControl
+    }, {
+      validator: PasswordValidation.MatchPassword
     });
   }
 
