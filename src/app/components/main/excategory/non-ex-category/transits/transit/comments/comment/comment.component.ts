@@ -41,7 +41,8 @@ export class CommentComponent implements OnInit {
     let params = new HttpParams();
     params = params.set('transitId', transitId.toString());
     params = params.set('userId', userId.toString());
-    console.log(this.commentService.addComment(params, newComment));
+    this.commentService.addComment(params, newComment)
+        .subscribe(comment => console.log(comment));
   }
 
   addChildComment(transitId: number, userId: number, parentId, newComment: MyComment) {
@@ -49,7 +50,8 @@ export class CommentComponent implements OnInit {
     params = params.set('transitId', transitId.toString());
     params = params.set('userId', userId.toString());
     params = params.set('parentId', parentId.toString());
-    this.commentService.addComment(params, newComment);
+    this.commentService.addComment(params, newComment)
+        .subscribe(comment => console.log(comment));
   }
 
 }
