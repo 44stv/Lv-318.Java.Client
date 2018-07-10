@@ -27,7 +27,6 @@ export class CommentService {
   }
 
   addComment(params: HttpParams, newComment: MyComment): Observable<MyComment> {
-    console.log('adding comment');
     return this.http.post<MyComment>(this.serviceUrl, newComment, { params: params });
   }
 }
