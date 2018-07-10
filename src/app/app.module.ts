@@ -68,7 +68,6 @@ import {MainComponent} from './components/main/main.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import {MessageComponent} from './components/message/message.component';
 import {UserService} from './services/user.service';
-import {TokenStorage} from './services/auth/token/token-storage';
 import {StopService} from './services/stop.service';
 import {AdminGuardService} from './services/guard/admin-guard.service';
 import {AuthGuardService} from './services/guard/auth-guard.service';
@@ -111,7 +110,7 @@ import {
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
 import {InterceptorService} from './services/auth/interceptors/interceptor.service';
 import { ForbiddenComponent } from './components/main/errors/forbidden/forbidden.component';
-import { ClientListComponent } from './components/admin/client-list/client-list.component';
+import { UpdateRoleComponent } from './components/admin/update-role/update-role.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -151,7 +150,7 @@ export function createTranslateLoader(http: HttpClient) {
     MyRateComponent,
     AdminComponent,
     ForbiddenComponent,
-    ClientListComponent
+    UpdateRoleComponent
   ],
   exports: [
     MatAutocompleteModule,
@@ -265,7 +264,6 @@ export function createTranslateLoader(http: HttpClient) {
     ExcategoryService,
     UserService,
     AuthService,
-    TokenStorage,
     StopService,
     TransitService,
     ExcategoryService,

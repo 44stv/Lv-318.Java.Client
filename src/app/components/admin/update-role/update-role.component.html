@@ -1,0 +1,18 @@
+<div class="addfeedbackcriteria">
+
+  <h2 mat-dialog-title>Type in user e-mail</h2>
+  <mat-form-field appearance="outline">
+    <mat-label>E-mail</mat-label>
+    <input matInput placeholder="email" [(ngModel)]="updateRoleModel.email" id="email" name="email ">
+  </mat-form-field>
+  <mat-form-field appearance="standard">
+    <mat-select placeholder="Role" [(ngModel)]="updateRoleModel.role" name="role">
+      <mat-option *ngFor="let role of roles" [value]="role">
+        {{ role }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+ <div class="button">
+   <button class="mat-raised-button"(click)="close()">Close</button>
+   <button mat-stroked-button (click) = "addFeedbackCriteria()" > UPDATE </button>
+</div>

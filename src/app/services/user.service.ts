@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { User } from '../models/user.model';
 import { environment } from '../../environments/environment';
+import {UpdateRoleModel} from '../models/update-role.model';
 
 
 const httpOptions = {
@@ -28,4 +29,9 @@ export class UserService {
   public logIn(login) {
     return this.http.post<User>(this.userUrl + '/', login);
   }
+
+  public updateRole(updateRoleModel: UpdateRoleModel) {
+    return this.http.put<User>(`${this.userUrl}/update-role`, updateRoleModel );
+  }
+
 }

@@ -17,6 +17,8 @@ import {AdminComponent} from './components/admin/admin.component';
 import {ClientGuardService} from './services/guard/client-guard.service';
 import {AdminGuardService} from './services/guard/admin-guard.service';
 import {ForbiddenComponent} from './components/main/errors/forbidden/forbidden.component';
+import {UpdateRoleComponent} from './components/admin/update-role/update-role.component';
+import {FeedbackCriteria} from './models/feedback-criteria.model';
 
 
 const routes: Routes = [
@@ -25,6 +27,7 @@ const routes: Routes = [
     path: 'main',
     children: [
       {path: '', component: MainComponent},
+
       {
         path: 'user',
         children: [
@@ -33,15 +36,18 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'admin',
+        component: AdminComponent,
+        canActivate: [AdminGuardService],
+        children: [
+          {path: 'update-role', component: UpdateRoleComponent},
+        ]
+      },
+      {
         path: 'error',
         children: [
           {path: 'forbidden', component: ForbiddenComponent}
         ]
-      },
-      {
-        path: 'admin',
-        component: AdminComponent,
-        canActivate: [AdminGuardService]
       },
       {
         path: 'feedback-criteria',
@@ -74,8 +80,6 @@ const routes: Routes = [
     canActivate: [ClientGuardService]
   },
   {path: 'direction/:id', component: MapsComponent},
-
-
 ];
 
 @NgModule({

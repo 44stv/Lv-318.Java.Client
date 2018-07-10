@@ -1,7 +1,8 @@
 export enum Role {
   Unauthorized,
   Client,
-  Admin
+  Manager,
+  Admin,
 }
 
 export function determineRole(input: string): Role {
@@ -12,4 +13,9 @@ export function determineRole(input: string): Role {
   } else {
     return Role.Unauthorized;
   }
+}
+
+export function getAllRoles(): string[] {
+  const roles: string[] = Object.keys(Role);
+  return roles.slice(roles.length / 2);
 }
