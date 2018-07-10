@@ -120,8 +120,6 @@ import {
   ForgetPasswordConfirmationComponent
 } from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
 
-import {LocationPickerComponent} from './components/main/menu/location-picker/location-picker.component';
-
 import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
 
 
@@ -166,7 +164,7 @@ export function createTranslateLoader(http: HttpClient) {
     SearchFieldComponent,
     BusyHoursDiagramComponent,
     MyRateComponent,
-    RegistarationConfirmationComponent
+    RegistarationConfirmationComponent,
     CommentsComponent,
     CommentComponent,
     LocationPickerComponent
@@ -290,7 +288,13 @@ export function createTranslateLoader(http: HttpClient) {
     CommentService],
   bootstrap: [AppComponent],
 
-  entryComponents: [AddQuestionComponent, AddFeedbackComponent, AddUserComponent, UserLoginComponent,ForgetPasswordComponent , ChooseTransitComponent]
+  entryComponents: [
+    AddQuestionComponent,
+    AddFeedbackComponent,
+    AddUserComponent,
+    UserLoginComponent,
+    ForgetPasswordComponent,
+    ChooseTransitComponent]
 
 })
 export class AppModule {

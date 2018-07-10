@@ -1,10 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges, Input, ViewChild } from '@angular/core';
-import { AppComponent } from '../../../app.component';
 import { Router } from '@angular/router';
-import { GlobalSearchService } from '../../../services/global-search.service';
 import { Location } from '@angular/common';
 import {AppComponent} from '../../../app.component';
-import {TokenStorage} from '../../../services/auth/token/token-storage';
 import {GlobalSearchService} from '../../../services/global-search.service';
 import {MatDialog} from '@angular/material';
 import {AddUserComponent} from './add-user/add-user.component';
