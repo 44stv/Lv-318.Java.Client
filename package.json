@@ -30,6 +30,7 @@
     "@ngx-translate/http-loader": "^3.0.1",
     "@swimlane/ngx-charts": "^8.1.0",
     "agm-direction": "^0.5.9",
+    "angular-6-social-login": "^1.1.1",
     "angular-in-memory-web-api": "^0.6.0",
     "angular-simple-slideshow": "0.0.3",
     "angular-video-background": "^1.0.3",
@@ -50,6 +51,7 @@
     "npm": "^6.1.0",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",
+    "start": "^5.1.0",
     "uix-mat-number-spinner": "0.0.6",
     "zone.js": "^0.8.26"
   },
