@@ -1,9 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
+
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './services/auth/auth.service';
@@ -14,9 +15,11 @@ import {HttpModule} from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 import {MomentModule} from 'angular2-moment/moment.module';
-// import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
-import { AppMaterialModule } from './material.module';
+
+import {AppMaterialModule} from './material.module';
 
 import {
   MatAutocompleteModule,
@@ -54,22 +57,22 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule,
+  MatTreeModule
 } from '@angular/material';
-import { ExcategoryService } from './services/excategory.service';
+import {ExcategoryService} from './services/excategory.service';
 
-import { MainComponent } from './components/main/main.component';
-import { SlideshowModule } from 'ng-simple-slideshow';
-import { MessageComponent } from './components/message/message.component';
-import { UserService } from './services/user.service';
-import { TokenStorage } from './services/auth/token/token-storage';
-import { StopService } from './services/stop.service';
-import { AdminGuardService } from './services/guard/admin-guard.service';
-import { AuthGuardService } from './services/guard/auth-guard.service';
-import { ClientGuardService } from './services/guard/client-guard.service';
-import { DiagramService } from './services/diagram.service';
-import { GlobalSearchService } from './services/global-search.service';
-import { httpInterceptorProviders } from './services/auth/interceptors/http-providers';
+import {MainComponent} from './components/main/main.component';
+import {SlideshowModule} from 'ng-simple-slideshow';
+import {MessageComponent} from './components/message/message.component';
+import {UserService} from './services/user.service';
+import {TokenStorage} from './services/auth/token/token-storage';
+import {StopService} from './services/stop.service';
+import {AdminGuardService} from './services/guard/admin-guard.service';
+import {AuthGuardService} from './services/guard/auth-guard.service';
+import {ClientGuardService} from './services/guard/client-guard.service';
+import {DiagramService} from './services/diagram.service';
+import {GlobalSearchService} from './services/global-search.service';
+import {httpInterceptorProviders} from './services/auth/interceptors/http-providers';
 
 import {TransitService} from './services/transit.service';
 import {FeedbackService} from './services/feedback.service';
@@ -79,6 +82,8 @@ import {AgmDirectionModule} from 'agm-direction';
 import {ExcategoryComponent} from './components/main/excategory/excategory.component';
 import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
 import {MenuComponent} from './components/main/menu/menu.component';
+import {SearchFieldComponent} from './components/main/menu/search-field/search-field.component';
+import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
 import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
 import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
@@ -93,6 +98,9 @@ import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteri
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
 import {MyRateComponent} from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
+import { CommentComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comment/comment.component';
+import { CommentsComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
+import { CommentService } from './services/comment.service';
 import {
   RaitingDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/raiting-diagram/raiting-diagram.component';
@@ -102,6 +110,8 @@ import {
 import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
+
+
 import {
   RegistarationConfirmationComponent
 } from './components/main/menu/add-user/registaration-confirmation/registaration-confirmation.component';
@@ -109,6 +119,12 @@ import {ForgetPasswordComponent} from './components/main/menu/user-login/forget-
 import {
   ForgetPasswordConfirmationComponent
 } from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
+
+import {LocationPickerComponent} from './components/main/menu/location-picker/location-picker.component';
+
+import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
+
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -143,12 +159,18 @@ export function createTranslateLoader(http: HttpClient) {
     BackToPreviousPageBtnComponent,
     MapsComponent,
     AddFeedbackComponent,
+    ChooseTransitComponent,
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
     UserLoginComponent,
+    SearchFieldComponent,
     BusyHoursDiagramComponent,
     MyRateComponent,
     RegistarationConfirmationComponent
+    CommentsComponent,
+    CommentComponent,
+    LocationPickerComponent
+
   ],
   exports: [
     MatAutocompleteModule,
@@ -188,8 +210,12 @@ export function createTranslateLoader(http: HttpClient) {
     MatTreeModule
   ],
   imports: [
+    NgxMaterialTimepickerModule.forRoot(),
     MomentModule,
     MatProgressBarModule,
+    MatAutocompleteModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     MatDatepickerModule,
     MatExpansionModule,
     MatTabsModule,
@@ -208,6 +234,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatMenuModule,
     FormsModule,
     MatCardModule,
+    MatRadioModule,
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -220,6 +247,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatGridListModule,
     MatIconModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
     MatPaginatorModule,
     MatListModule,
     TranslateModule.forRoot({
@@ -241,7 +269,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
     NgxChartsModule,
-    Ng5BreadcrumbModule.forRoot()
+    Ng5BreadcrumbModule.forRoot(),
   ],
   providers: [
     httpInterceptorProviders,
@@ -258,9 +286,12 @@ export function createTranslateLoader(http: HttpClient) {
     DiagramService,
     GlobalSearchService,
     FeedbackService,
-    FeedbackCriteriaService],
+    FeedbackCriteriaService,
+    CommentService],
   bootstrap: [AppComponent],
-  entryComponents: [AddQuestionComponent, AddFeedbackComponent, AddUserComponent, UserLoginComponent,ForgetPasswordComponent ]
+
+  entryComponents: [AddQuestionComponent, AddFeedbackComponent, AddUserComponent, UserLoginComponent,ForgetPasswordComponent , ChooseTransitComponent]
+
 })
 export class AppModule {
 }

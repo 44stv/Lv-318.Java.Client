@@ -1,27 +1,27 @@
-<!--<button class="mainbutton" (click)="open()"></button>-->
-<!--<app-menu></app-menu>-->
-
-<!--<mat-sidenav-container class="container">-->
-<!--<mat-sidenav #sidenav mode="side" hasBackdrop="false">-->
-<!--<app-excategory></app-excategory>-->
-<!--</mat-sidenav>-->
-<!--<mat-sidenav-content>-->
-<!--<router-outlet></router-outlet>-->
-<!--</mat-sidenav-content>-->
-<!--</mat-sidenav-container>-->
-
-
 <mdc-toolbar>
   <mdc-toolbar-row>
-      <mdc-toolbar-section [alignEnd]="true" [shrinkToFit]="true">
-        <app-menu></app-menu>
-      </mdc-toolbar-section>
+    <mdc-toolbar-section [alignEnd]="true" [shrinkToFit]="true">
+      <mdc-icon mdc-toolbar-menu-icon material-icon (click)="temporary.open()">menu</mdc-icon>
+      <app-menu></app-menu>
+    </mdc-toolbar-section>
   </mdc-toolbar-row>
 </mdc-toolbar>
 <div class="demo-content__drawer--row">
-  <mdc-drawer class="sideMenu" drawer='permanent'>
+
+  <mdc-drawer class="sideMenu" #temporary drawer='temporary' [closeOnClick]="false"
+              [fixedAdjustElement]="demoTemporaryContent" class="demo-drawer--custom">
+    <mdc-drawer-header>
+      <mdc-drawer-header-content>
+        <div class="ua">UA</div>
+        <div class="transport">Transport</div>
+      </mdc-drawer-header-content>
+    </mdc-drawer-header>
     <mdc-drawer-content>
       <app-excategory></app-excategory>
+      <div class="language">
+        <a class="lang" (click)="switchLanguage('ua')"><img height="20" width="20" src="../assets/img/ukraine.png" style=""> Українська</a>
+        <a class="lang" (click)="switchLanguage('en')"><img height="20" width="20" src="../assets/img/united-kingdom.png"> English</a>
+      </div>
     </mdc-drawer-content>
   </mdc-drawer>
 
@@ -29,5 +29,10 @@
     <breadcrumb></breadcrumb>
     <router-outlet></router-outlet>
   </div>
-
 </div>
+
+   <div class="add-Feedback" *ngIf="!isFeedbackActivated()">
+    <button class="add" mdc-fab position='bottom-right' (click)="openChooseTransitModal()">
+        <mdc-icon>edit</mdc-icon>
+      </button>
+  </div>
