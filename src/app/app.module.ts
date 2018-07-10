@@ -9,6 +9,7 @@ import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './services/auth/auth.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
 import {AppRoutingModule} from 'src/app/app-routing.module';
 import {HttpModule} from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
@@ -30,7 +31,6 @@ import {
   MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
-  MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
@@ -110,7 +110,21 @@ import {
 import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
+
+
+import {
+  RegistarationConfirmationComponent
+} from './components/main/menu/add-user/registaration-confirmation/registaration-confirmation.component';
+import {ForgetPasswordComponent} from './components/main/menu/user-login/forget-password/forget-password.component';
+import {
+  ForgetPasswordConfirmationComponent
+} from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
+
 import {LocationPickerComponent} from './components/main/menu/location-picker/location-picker.component';
+
+import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
+
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -125,12 +139,14 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     ExcategoryComponent,
+    ForgetPasswordConfirmationComponent,
     MenuComponent,
     NonExCategoryComponent,
     TransitsComponent,
     MainComponent,
     FeedbackCriteriaComponent,
     AddUserComponent,
+    ForgetPasswordComponent,
     MessageComponent,
     StopsGridComponent,
     AddQuestionComponent,
@@ -150,9 +166,11 @@ export function createTranslateLoader(http: HttpClient) {
     SearchFieldComponent,
     BusyHoursDiagramComponent,
     MyRateComponent,
+    RegistarationConfirmationComponent
     CommentsComponent,
     CommentComponent,
     LocationPickerComponent
+
   ],
   exports: [
     MatAutocompleteModule,
@@ -189,11 +207,12 @@ export function createTranslateLoader(http: HttpClient) {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule,
+    MatTreeModule
   ],
   imports: [
     NgxMaterialTimepickerModule.forRoot(),
     MomentModule,
+    MatProgressBarModule,
     MatAutocompleteModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
@@ -270,7 +289,9 @@ export function createTranslateLoader(http: HttpClient) {
     FeedbackCriteriaService,
     CommentService],
   bootstrap: [AppComponent],
-  entryComponents: [AddQuestionComponent, AddFeedbackComponent, ChooseTransitComponent]
+
+  entryComponents: [AddQuestionComponent, AddFeedbackComponent, AddUserComponent, UserLoginComponent,ForgetPasswordComponent , ChooseTransitComponent]
+
 })
 export class AppModule {
 }

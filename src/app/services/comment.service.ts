@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MyComment } from '../models/comment.model';
 
@@ -24,5 +24,9 @@ export class CommentService {
 
   getUserComments(userId: number): Observable<MyComment[]> {
     return this.http.get<MyComment[]>(`${this.serviceUrl}?userId=${userId}`);
+  }
+
+  addComment(params: HttpParams, newComment: MyComment) {
+    return this.http.post<MyComment>(this.serviceUrl, newComment, { params: params });
   }
 }
