@@ -14,28 +14,43 @@ import {OneFeedbackCriteriaComponent} from './components/main/menu/feedback-crit
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {MapsComponent} from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
 import {AdminComponent} from './components/admin/admin.component';
+import {ClientGuardService} from './services/guard/client-guard.service';
+import {AdminGuardService} from './services/guard/admin-guard.service';
+import {ForbiddenComponent} from './components/main/errors/forbidden/forbidden.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/main', pathMatch: 'full'},
+  {path: 'index', redirectTo: '/main', pathMatch: 'full'},
   {
     path: 'main',
     children: [
-      {
-        path: 'feedback-criteria',
-        children: [
-          {path: '', component: FeedbackCriteriaComponent},
-          {path: ':id', component: OneFeedbackCriteriaComponent},
-          {path: 'add-feedback-criteria', component: AddFeedbackCriteriaComponent},
-        ]
-
-      },
+      {path: '', component: MainComponent},
       {
         path: 'user',
         children: [
           {path: 'add', component: AddUserComponent},
           {path: 'login', component: UserLoginComponent},
         ]
+      },
+      {
+        path: 'error',
+        children: [
+          {path: 'forbidden', component: ForbiddenComponent}
+        ]
+      },
+      {
+        path: 'admin',
+        component: AdminComponent,
+        canActivate: [AdminGuardService]
+      },
+      {
+        path: 'feedback-criteria',
+        children: [
+          {path: '', component: FeedbackCriteriaComponent},
+          {path: 'add-feedback-criteria', component: AddFeedbackCriteriaComponent},
+          {path: ':id', component: OneFeedbackCriteriaComponent}
+        ]
+
       },
       {
         path: ':top/:city',
@@ -49,14 +64,15 @@ const routes: Routes = [
             ]
           },
         ]
-      },
-      {
-        path: 'admin', component: AdminComponent
       }
     ]
   },
   {path: 'search/?search=/:value', component: GlobalSearchComponent},
-  {path: 'feedback', component: AddFeedbackComponent},
+  {
+    path: 'feedback',
+    component: AddFeedbackComponent,
+    canActivate: [ClientGuardService]
+  },
   {path: 'direction/:id', component: MapsComponent},
 
 

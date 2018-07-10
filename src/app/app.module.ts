@@ -13,6 +13,7 @@ import {HttpModule} from '@angular/http';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
 import {MomentModule} from 'angular2-moment/moment.module';
+import { MdcIconButtonModule } from '@angular-mdc/web';
 
 
 import {
@@ -108,7 +109,9 @@ import {
 import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
-import {InterceptorService} from "./services/auth/interceptors/interceptor.service";
+import {InterceptorService} from './services/auth/interceptors/interceptor.service';
+import { ForbiddenComponent } from './components/main/errors/forbidden/forbidden.component';
+import { ClientListComponent } from './components/admin/client-list/client-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -146,7 +149,9 @@ export function createTranslateLoader(http: HttpClient) {
     UserLoginComponent,
     BusyHoursDiagramComponent,
     MyRateComponent,
-    AdminComponent
+    AdminComponent,
+    ForbiddenComponent,
+    ClientListComponent
   ],
   exports: [
     MatAutocompleteModule,
@@ -226,6 +231,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatCheckboxModule,
     MatPaginatorModule,
     MatListModule,
+    MdcIconButtonModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

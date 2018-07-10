@@ -32,5 +32,9 @@
   "CriteriaConf": "Feedback questions configuration",
   "Users": "Users",
   "FeedbackCriteria": "Feedback criteria",
-  "Admin": "Admin"
+  "Admin": "Admin",
+  "Forbidden": "Acces denied",
+  "ErrorText": "You do not have permissions to access this resource",
+  "ErrorText2": "If you wish you can return on the",
+  "ErrorText3": "main page"
 }
