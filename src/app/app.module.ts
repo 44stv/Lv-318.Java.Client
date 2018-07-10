@@ -24,15 +24,7 @@ import {
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
-import {AppComponent} from './app.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthService} from './services/auth/auth.service';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import {AppRoutingModule} from 'src/app/app-routing.module';
-import {HttpModule} from '@angular/http';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
-import {MomentModule} from 'angular2-moment/moment.module';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import { MdcIconButtonModule } from '@angular-mdc/web';
 
 
@@ -86,10 +78,8 @@ import {AuthGuardService} from './services/guard/auth-guard.service';
 import {ClientGuardService} from './services/guard/client-guard.service';
 import {DiagramService} from './services/diagram.service';
 import {GlobalSearchService} from './services/global-search.service';
-import { UixMatNumberSpinnerModule } from 'uix-mat-number-spinner';
 import { AdminComponent } from './components/admin/admin.component';
 
-import {httpInterceptorProviders} from './services/auth/interceptors/http-providers';
 import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {TransitService} from './services/transit.service';
 import {FeedbackService} from './services/feedback.service';
@@ -199,7 +189,7 @@ export function getAuthServiceConfigs() {
     BusyHoursDiagramComponent,
     AdminComponent,
     ForbiddenComponent,
-    UpdateRoleComponent
+    UpdateRoleComponent,
     MyRateComponent,
     RegistarationConfirmationComponent,
     CommentsComponent,

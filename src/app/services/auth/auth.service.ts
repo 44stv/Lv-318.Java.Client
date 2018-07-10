@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
-import {Login} from '../../models/login.model';
 import {environment} from '../../../environments/environment';
 import {User} from '../../models/user.model';
 import {TokenModel} from './token/token-model';

@@ -20,7 +20,6 @@ import {ClientGuardService} from './services/guard/client-guard.service';
 import {AdminGuardService} from './services/guard/admin-guard.service';
 import {ForbiddenComponent} from './components/main/errors/forbidden/forbidden.component';
 import {UpdateRoleComponent} from './components/admin/update-role/update-role.component';
-import {FeedbackCriteria} from './models/feedback-criteria.model';
 
 
 const routes: Routes = [

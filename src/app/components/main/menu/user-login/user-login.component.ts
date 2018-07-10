@@ -19,14 +19,14 @@ import {ForgetPasswordComponent} from './forget-password/forget-password.compone
 })
 export class UserLoginComponent implements OnInit {
 
-  login: Login ;
+  login: Login;
   loginForm: FormGroup;
 
-  constructor(private router: Router, private authService: AuthService) {
   constructor(public  matDialogRef: MatDialogRef<UserLoginComponent>,
               private snackBar: MatSnackBar,
-              private fb: FormBuilder, private router: Router, private authService: AuthService,
-              private tokenStorage: TokenStorage,
+              private fb: FormBuilder,
+              private router: Router,
+              private authService: AuthService,
               private dialog: MatDialog) {
   }
 
@@ -52,18 +52,18 @@ export class UserLoginComponent implements OnInit {
         });
         this.router.navigate(['main']);
       }, (error) => {
-      if (error instanceof HttpErrorResponse) {
-        if (error.error.description === 'User is disabled') {
-          this.snackBar.open('Your account is not activated. Please confirm the registration', null, {
-            duration: 5000
-          });
-        } else {
-          this.snackBar.open(error.error.response, null, {
-            duration: 5000
-          });
+        if (error instanceof HttpErrorResponse) {
+          if (error.error.description === 'User is disabled') {
+            this.snackBar.open('Your account is not activated. Please confirm the registration', null, {
+              duration: 5000
+            });
+          } else {
+            this.snackBar.open(error.error.response, null, {
+              duration: 5000
+            });
+          }
         }
-      }
-    });
+      });
   }
 
   createForm() {
@@ -76,6 +76,7 @@ export class UserLoginComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
   }
+
   openForgetPassword() {
 
     this.dialog.open(ForgetPasswordComponent);
