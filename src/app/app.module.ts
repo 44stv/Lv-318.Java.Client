@@ -21,9 +21,7 @@ import {
   GoogleLoginProvider,
   SocialLoginModule
 } from 'angular-6-social-login';
-import {AppMaterialModule} from './material.module';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {MatDialogModule} from '@angular/material/dialog';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
@@ -125,6 +123,7 @@ import {
   ForgetPasswordConfirmationComponent
 } from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
 import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
+import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
 
 
 
@@ -314,7 +313,13 @@ export function getAuthServiceConfigs() {
       useFactory: getAuthServiceConfigs
     }],
   bootstrap: [AppComponent],
-  entryComponents: [AddQuestionComponent, AddFeedbackComponent, AddUserComponent, UserLoginComponent, ForgetPasswordComponent, ChooseTransitComponent]
+  entryComponents: [
+    AddQuestionComponent,
+    AddFeedbackComponent,
+    AddUserComponent,
+    UserLoginComponent,
+    ForgetPasswordComponent,
+    ChooseTransitComponent]
 
 })
 export class AppModule {
