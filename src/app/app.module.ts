@@ -17,8 +17,6 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 
-// import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
-
 import {AppMaterialModule} from './material.module';
 
 
