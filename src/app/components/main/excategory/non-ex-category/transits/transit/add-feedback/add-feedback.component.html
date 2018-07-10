@@ -28,7 +28,7 @@
         </p>
         </mat-list>
         <mat-form-field appearance="outline" class="comment">
-          <textarea matInput #message maxlength="256" placeholder="Comment"></textarea>
+          <textarea matInput #message maxlength="256" placeholder="Comment" [(ngModel)]="transitComment.commentText" [ngModelOptions]="{standalone: true}"></textarea>
           <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
         </mat-form-field>
 

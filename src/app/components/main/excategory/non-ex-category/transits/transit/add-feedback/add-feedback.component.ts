@@ -18,6 +18,8 @@ import {FeedbackCriteriaService} from '../../../../../../../services/feedback-cr
 import {FeedbackCriteria} from '../../../../../../../models/feedback-criteria.model';
 import {Question} from '../../../../../../../models/question.model';
 import {Stop} from '../../../../../../../models/stop.model';
+import {MyComment} from '../../../../../../../models/comment.model';
+import {CommentService} from "../../../../../../../services/comment.service";
 
 
 @Component({
@@ -35,12 +37,14 @@ export class AddFeedbackComponent implements OnInit {
   private categoryId: number = this.data.categoryId;
   private userId = 1;
   private checkBoxAnswers: String[] = ['YES', 'NO', 'MAYBE'];
+  @Input() private transitComment: MyComment = new MyComment();
   // private directions: String[] = ['FORWARD', 'BACKWARD'];
   // private direction: String;
 
   constructor(private dialogRef: MatDialogRef<AddFeedbackComponent>, @ Inject(MAT_DIALOG_DATA) public data: any,
               private feedbackService: FeedbackService, private criteriaService: FeedbackCriteriaService,
-              private stopService: StopService) {
+              private stopService: StopService,
+              private commentService: CommentService) {
 
     this.survey = this.buildSurveyByCriteriaType(['RATING', 'SIMPLE']);
     this.capacityFeedbacks = this.buildSurveyByCriteriaType(['ROUTE_CAPACITY', 'HOURS_CAPACITY']);
@@ -63,8 +67,12 @@ export class AddFeedbackComponent implements OnInit {
           feedbackCriterias.forEach(criteria => {
             const questioner: Questioner = this.buildQuestioner(criteria, criteria.questions);
             questioner.questions.sort((a: Question, b: Question) => {
-              if (a.name > b.name) { return 1; }
-              else if (a.name < b.name) { return -1; }
+              if (a.name > b.name) {
+                return 1;
+              }
+              else if (a.name < b.name) {
+                return -1;
+              }
               return 0;
             });
             survey.push(questioner);
@@ -119,8 +127,13 @@ export class AddFeedbackComponent implements OnInit {
     } else {
       alert('You dont make any answers');
     }
+
+    if (this.transitComment.commentText.length > 0) {
+      this.transitComment = this.buildComment(this.transitComment);
+      console.log(JSON.stringify(this.transitComment));
+    }
     this.dialogRef.close();
-   }
+  }
 
 
   public toFeedbackList(survey: Questioner[]): Feedback[] {
@@ -205,10 +218,18 @@ export class AddFeedbackComponent implements OnInit {
 
     if (times.length > 1) {
       times.sort((time1: Time, time2: Time) => {
-        if (time1.hour > time2.hour) { return 1; }
-        else if (time1.hour < time2.hour) { return -1; }
-        else if (time1.minute > time2.minute) { return 1; }
-        else if (time1.minute > time2.minute) { return -1; }
+        if (time1.hour > time2.hour) {
+          return 1;
+        }
+        else if (time1.hour < time2.hour) {
+          return -1;
+        }
+        else if (time1.minute > time2.minute) {
+          return 1;
+        }
+        else if (time1.minute > time2.minute) {
+          return -1;
+        }
         return 0;
       });
 
@@ -238,6 +259,12 @@ export class AddFeedbackComponent implements OnInit {
     capacity = (capacity > 100) ? 100 : capacity;
     capacity = (capacity < 0) ? 0 : capacity;
     return capacity;
+  }
+
+  public buildComment(comment: MyComment): MyComment {
+    comment.transitId = this.transitId;
+    comment.userId = this.userId;
+    return comment;
   }
 
   // public getByTransitAndDirection(direction: String){
