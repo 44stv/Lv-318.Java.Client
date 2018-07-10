@@ -1,8 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,8 +21,11 @@ import {
   GoogleLoginProvider,
   SocialLoginModule
 } from 'angular-6-social-login';
-
-
+import {AppMaterialModule} from './material.module';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import {MatDialogModule} from '@angular/material/dialog';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 import {
   MatAutocompleteModule,
@@ -34,7 +37,6 @@ import {
   MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
-  MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
@@ -62,46 +64,48 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
-
 } from '@angular/material';
 import { ExcategoryService } from './services/excategory.service';
 
-import { MainComponent } from './components/main/main.component';
-import { SlideshowModule } from 'ng-simple-slideshow';
-import { MessageComponent } from './components/message/message.component';
-import { UserService } from './services/user.service';
-import { TokenStorage } from './services/auth/token/token-storage';
-import { StopService } from './services/stop.service';
-import { AdminGuardService } from './services/guard/admin-guard.service';
-import { AuthGuardService } from './services/guard/auth-guard.service';
-import { ClientGuardService } from './services/guard/client-guard.service';
-import { DiagramService } from './services/diagram.service';
-import { GlobalSearchService } from './services/global-search.service';
-import { httpInterceptorProviders } from './services/auth/interceptors/http-providers';
-import { SocialSingIn } from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
-import { TransitService } from './services/transit.service';
-import { FeedbackService } from './services/feedback.service';
-import { FeedbackCriteriaService } from './services/feedback-criteria.service';
-import { AgmCoreModule } from '@agm/core';
-import { AgmDirectionModule } from 'agm-direction';
-import { ExcategoryComponent } from './components/main/excategory/excategory.component';
-import { NonExCategoryComponent } from './components/main/excategory/non-ex-category/non-ex-category.component';
-import { MenuComponent } from './components/main/menu/menu.component';
-import { SearchFieldComponent } from './components/main/menu/search-field/search-field.component';
-import { BackToPreviousPageBtnComponent } from './components/main/back-button/back-to-previous-page-btn.component';
-import { AddUserComponent } from './components/main/menu/add-user/add-user.component';
-import { StopsGridComponent } from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
-import { AddQuestionComponent } from './components/main/menu/feedback-criteria/add-question/add-question.component';
-import { AverageRateComponent } from './components/main/excategory/non-ex-category/transits/transit/average-rate/average-rate.component';
-import { OneFeedbackCriteriaComponent } from './components/main/menu/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
-import { AddFeedbackCriteriaComponent } from './components/main/menu/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
-import { GlobalSearchComponent } from './components/main/menu/global-search/global-search.component';
-import { TransitsComponent } from './components/main/excategory/non-ex-category/transits/transits.component';
-import { MapsComponent } from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
-import { FeedbackCriteriaComponent } from './components/main/menu/feedback-criteria/feedback-criteria.component';
-import { AddFeedbackComponent } from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
-import { UserLoginComponent } from './components/main/menu/user-login/user-login.component';
-import { MyRateComponent } from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
+import {MainComponent} from './components/main/main.component';
+import {SlideshowModule} from 'ng-simple-slideshow';
+import {MessageComponent} from './components/message/message.component';
+import {UserService} from './services/user.service';
+import {TokenStorage} from './services/auth/token/token-storage';
+import {StopService} from './services/stop.service';
+import {AdminGuardService} from './services/guard/admin-guard.service';
+import {AuthGuardService} from './services/guard/auth-guard.service';
+import {ClientGuardService} from './services/guard/client-guard.service';
+import {DiagramService} from './services/diagram.service';
+import {GlobalSearchService} from './services/global-search.service';
+import {httpInterceptorProviders} from './services/auth/interceptors/http-providers';
+import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
+import {TransitService} from './services/transit.service';
+import {FeedbackService} from './services/feedback.service';
+import {FeedbackCriteriaService} from './services/feedback-criteria.service';
+import {AgmCoreModule} from '@agm/core';
+import {AgmDirectionModule} from 'agm-direction';
+import {ExcategoryComponent} from './components/main/excategory/excategory.component';
+import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
+import {MenuComponent} from './components/main/menu/menu.component';
+import {SearchFieldComponent} from './components/main/menu/search-field/search-field.component';
+import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
+import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
+import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
+import {AddQuestionComponent} from './components/main/menu/feedback-criteria/add-question/add-question.component';
+import {AverageRateComponent} from './components/main/excategory/non-ex-category/transits/transit/average-rate/average-rate.component';
+import {OneFeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
+import {AddFeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
+import {GlobalSearchComponent} from './components/main/menu/global-search/global-search.component';
+import {TransitsComponent} from './components/main/excategory/non-ex-category/transits/transits.component';
+import {MapsComponent} from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
+import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/feedback-criteria.component';
+import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
+import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
+import {MyRateComponent} from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
+import { CommentComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comment/comment.component';
+import { CommentsComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
+import { CommentService } from './services/comment.service';
 import {
   RaitingDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/raiting-diagram/raiting-diagram.component';
@@ -111,7 +115,21 @@ import {
 import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
-import { LocationPickerComponent } from './components/main/menu/location-picker/location-picker.component';
+
+
+import {
+  RegistarationConfirmationComponent
+} from './components/main/menu/add-user/registaration-confirmation/registaration-confirmation.component';
+import {ForgetPasswordComponent} from './components/main/menu/user-login/forget-password/forget-password.component';
+import {
+  ForgetPasswordConfirmationComponent
+} from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
+
+import {LocationPickerComponent} from './components/main/menu/location-picker/location-picker.component';
+
+import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
+
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -141,12 +159,14 @@ export function getAuthServiceConfigs() {
   declarations: [
     AppComponent,
     ExcategoryComponent,
+    ForgetPasswordConfirmationComponent,
     MenuComponent,
     NonExCategoryComponent,
     TransitsComponent,
     MainComponent,
     FeedbackCriteriaComponent,
     AddUserComponent,
+    ForgetPasswordComponent,
     MessageComponent,
     StopsGridComponent,
     AddQuestionComponent,
@@ -159,12 +179,18 @@ export function getAuthServiceConfigs() {
     BackToPreviousPageBtnComponent,
     MapsComponent,
     AddFeedbackComponent,
+    ChooseTransitComponent,
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
     UserLoginComponent,
     SearchFieldComponent,
     BusyHoursDiagramComponent,
     MyRateComponent,
+    RegistarationConfirmationComponent
+    CommentsComponent,
+    CommentComponent,
+    LocationPickerComponent
+
     LocationPickerComponent,
     SocialSingIn
 
@@ -207,7 +233,12 @@ export function getAuthServiceConfigs() {
     MatTreeModule,
   ],
   imports: [
+    NgxMaterialTimepickerModule.forRoot(),
     MomentModule,
+    MatProgressBarModule,
+    MatAutocompleteModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     MatDatepickerModule,
     MatExpansionModule,
     MatTabsModule,
@@ -226,6 +257,7 @@ export function getAuthServiceConfigs() {
     MatMenuModule,
     FormsModule,
     MatCardModule,
+    MatRadioModule,
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -259,7 +291,7 @@ export function getAuthServiceConfigs() {
         deps: [HttpClient]
       }
     }),
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g' }),
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
     NgxChartsModule,
     Ng5BreadcrumbModule.forRoot(),
   ],
@@ -280,12 +312,14 @@ export function getAuthServiceConfigs() {
     FeedbackService,
     FeedbackCriteriaService,
     SocialService,
+    CommentService,
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
     }],
   bootstrap: [AppComponent],
-  entryComponents: [AddQuestionComponent, AddFeedbackComponent]
+  entryComponents: [AddQuestionComponent, AddFeedbackComponent, AddUserComponent, UserLoginComponent, ForgetPasswordComponent, ChooseTransitComponent]
+
 })
 export class AppModule {
 }

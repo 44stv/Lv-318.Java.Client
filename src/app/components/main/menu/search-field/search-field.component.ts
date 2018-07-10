@@ -1,13 +1,12 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { delay } from 'rxjs/operators';
-import { GlobalSearchService } from '../../../../services/global-search.service';
-import { StopService } from '../../../../services/stop.service';
-import { Transit } from '../../../../models/transit.model';
-import { Stop } from '../../../../models/stop.model';
-import { Router } from '@angular/router';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {delay, map, startWith} from 'rxjs/operators';
+import {GlobalSearchService} from '../../../../services/global-search.service';
+import {StopService} from '../../../../services/stop.service';
+import {Transit} from '../../../../models/transit.model';
+import {Stop} from '../../../../models/stop.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search-field',
@@ -22,9 +21,12 @@ export class SearchFieldComponent implements OnInit, OnChanges {
   filteredOptionsStops: Observable<Stop[]>;
   transits: Transit[] = [];
   stops: Stop[] = [];
+  currentLocation: string;
+
   constructor(private globalSearchService: GlobalSearchService,
-    private stopService: StopService,
-    private router: Router) { }
+              private stopService: StopService,
+              private router: Router) {
+  }
 
   ngOnInit() {
   }

@@ -1,26 +1,41 @@
 .NewUserForm {
-  width: 800px;
-  margin: 200px auto;
-  font-size: 25px;
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  font-size: large;
 }
-
-.Button {
-  background-color: black;
-  width: 50%;
-}
-
-.email {
+.title{
   width: 100%;
+  background-color: #00BCD4;
+  height: 15%;
+  vertical-align: middle;
+  text-align: center;
+  font-size: large;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center;
+  border-radius: 10px;
+
 }
 
-.firstName {
-  width: 100%;
+.button{
+  background-color: orange;
+  float: right;
+
+}
+.mat-form-f{
+  width: 75%;
+  padding: 10px;
+}
+.col-12 text-center{
+  background-color: gainsboro ;
+  border-radius: 10px;
 }
 
-.lastName {
-  width: 100%;
-}
 
-.password {
-  width: 100%;
-}
+
+
+
+
+
+

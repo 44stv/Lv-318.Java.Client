@@ -3,10 +3,10 @@
   <mdc-toolbar-row>
     <mdc-toolbar-section>
       <div class="ua">
-        <a [routerLink]="['/main']" [ngStyle]="{'color' : 'black'}">UA</a>
+        <a [routerLink]="['/main']" [ngStyle]="{'color' : 'white'}">UA</a>
       </div>
       <div class="transport">
-        <a [routerLink]="['/main']" [ngStyle]="{'color' : 'black'}">Transport</a>
+        <a [routerLink]="['/main']" [ngStyle]="{'color' : 'white'}">Transport</a>
       </div>
 
     <div class="criteriaButton">
@@ -30,12 +30,28 @@
       </a>
     </div>
 
+
+  <div class="NewUser">
+    <a [routerLink]="['/main/user/add']">
+      <button mdc-button [secondary]="true" type="submit" (click)="openModal()">{{'User' | translate}}</button>
+    </a>
+  </div>
+
+  <div class="LoginUser">
+    <a [routerLink]="['/main/user/login']" *ngIf="!hasToken()">
+      <button mdc-button [secondary]="true" type="submit" (click)="openLogInModal()">{{'Log In'| translate}}</button>
+    </a>
+    <a (click)="logOut()" *ngIf="hasToken()">
+      <button mdc-button [secondary]="true" type="submit">{{'Log Out'| translate}}</button>
+    </a>
+  </div>
+
     </mdc-toolbar-section>
     <div class="Search">
       <app-search-field></app-search-field>
     </div>
 
-    <app-location-picker></app-location-picker>
+
   </mdc-toolbar-row>
   <!--</mat-toolbar>-->
 </div>

@@ -2,7 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { User } from '../models/user.model';
+import { Login } from '../models/login.model';
 import { environment } from '../../environments/environment';
+import {Observable} from 'rxjs';
 
 
 const httpOptions = {
@@ -21,11 +23,20 @@ export class UserService {
     return this.http.delete(this.userUrl, user);
   }
 
-  public createUser(user) {
-    return this.http.post<User>(this.userUrl + '/', user);
+  public createUser(user: User): Observable<any> {
+    return this.http.post(this.userUrl + '/signup', user);
   }
 
   public logIn(login) {
     return this.http.post<User>(this.userUrl + '/', login);
+  }
+  activateUser(uuid: string): Observable<any> {
+    return this.http.post(this.userUrl + '/activate', uuid);
+  }
+  sendForgetPasswordConfirmation(login: Login): Observable<any> {
+    return this.http.post(this.userUrl + '/forget/password/confirm', login);
+  }
+  changePassword(uuid: string): Observable<any> {
+    return this.http.post(this.userUrl + '/update/password', uuid);
   }
 }

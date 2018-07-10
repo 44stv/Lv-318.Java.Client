@@ -73,15 +73,14 @@ a:active {
 
 
 .Search {
-  position: relative;
-  margin-right: 20px;
   font-size: 10.5px;
   font-family: sans-serif;
   color: darkgray;
   font-weight: bold;
-  padding-bottom: 2px;
-  margin-top: 17px;
+  /*padding-bottom: 15px;*/
+  display: inline-block;
 }
+
 
 
 
