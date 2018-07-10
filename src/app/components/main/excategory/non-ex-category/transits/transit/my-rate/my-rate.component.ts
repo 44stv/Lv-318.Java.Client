@@ -19,7 +19,7 @@ export class MyRateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.diagramService.getResults(environment.serverURL + '/feedback/rate/' + this.id + '/' + this.userId)
+    this.diagramService.getResults(environment.serverURL + '/feedback/rating/' + this.id + '/user/' + this.userId)
       .subscribe(res => {
         this.myRate = (<number>res).toPrecision(3);
         if (this.myRate === 0.00) {
