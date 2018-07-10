@@ -18,11 +18,11 @@ export class TransitsComponent implements OnInit, AfterViewInit {
 
   categoryId: number;
   cityName: string;
-  averageRate;
+  averageRateArray: Map<number, number> = new Map<number, number>();
 
   categoryIconURL = `${environment.serverURL}/category/img?link=`;
 
-  displayedColumns = ['categoryIcon', 'name', 'routeName'/*, 'averageRate'*/];
+  displayedColumns = ['categoryIcon', 'name', 'routeName', 'averageRate'];
 
   dataSource: MatTableDataSource<Transit> = new MatTableDataSource();
 
@@ -71,6 +71,7 @@ export class TransitsComponent implements OnInit, AfterViewInit {
     this.transitService.getTransitsByCategoryId(categoryId, page, size)
       .subscribe(transits => {
         this.dataSource.data = transits.content;
+        this.getAllRate(this.dataSource.data);
         this.paginator.length = transits.totalElements;
       });
   }
@@ -79,16 +80,24 @@ export class TransitsComponent implements OnInit, AfterViewInit {
     this.transitService.getTransitsByNextLevelCategoryName(categoryName, page, size)
       .subscribe(allTransits => {
         this.dataSource.data = allTransits.content;
+        this.getAllRate(this.dataSource.data);
         this.paginator.length = allTransits.totalElements;
       });
   }
 
+  getAllRate(array: Transit[]) {
+    for (const transit of array) {
+        this.getTransitAverageRate(transit.id);
+    }
+  }
+
   getTransitAverageRate(transitId: number): number {
-    this.diagramService.getResults(environment.serverURL + '/feedback/rate/' + transitId)
-      .subscribe(res => {
-        this.averageRate = (<number>res).toPrecision(3);
-      });
-    return this.averageRate;
+    let rate;
+    this.transitService.getTransitRateById(transitId).subscribe(res => {
+      rate = Number((<number>res).toPrecision(3));
+      this.averageRateArray.set(transitId, rate);
+    });
+    return rate;
   }
 
   // onSubmit() {

@@ -28,10 +28,11 @@
       <mat-cell *matCellDef="let transit"> {{ transit.routeName }} </mat-cell>
     </ng-container>
 
-    <!--<ng-container matColumnDef="averageRate">-->
-      <!--<mat-header-cell *matHeaderCellDef mat-sort-header> Average rate </mat-header-cell>-->
-      <!--<mat-cell *matCellDef="let transit">{{ getTransitAverageRate(transit.id) }}</mat-cell>-->
-    <!--</ng-container>-->
+    <ng-container matColumnDef="averageRate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Average rate </mat-header-cell>
+      <mat-cell *matCellDef="let transit"> {{ averageRateArray.get(transit.id) }} </mat-cell>
+    </ng-container>
+
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let transit;"
