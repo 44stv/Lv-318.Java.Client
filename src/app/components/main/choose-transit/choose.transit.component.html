@@ -2,9 +2,9 @@
   <mat-toolbar color="primary">{{ 'TransitInfo' | translate}}</mat-toolbar>
   <mat-card-content>
     <mat-horizontal-stepper [linear]="false" #stepper>
-      <mat-step [stepControl]="firstFormGroup">
+      <mat-step [stepControl]="firstFormGroup" class="firstFormGroup">
         <form>
-          <ng-template matStepLabel>{{ 'City' | translate}}</ng-template>
+          <ng-template matStepLabel >{{ 'City' | translate}}</ng-template>
 
           <mat-form-field>
             <mat-select placeholder="{{'Choose City' | translate}}" [(ngModel)]="city" name="city">
