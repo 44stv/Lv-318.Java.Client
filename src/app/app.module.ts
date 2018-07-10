@@ -21,6 +21,9 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 import {AppMaterialModule} from './material.module';
 
+
+
+
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -83,6 +86,7 @@ import {AgmDirectionModule} from 'agm-direction';
 import {ExcategoryComponent} from './components/main/excategory/excategory.component';
 import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
 import {MenuComponent} from './components/main/menu/menu.component';
+import {SearchFieldComponent} from './components/main/menu/search-field/search-field.component';
 import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
 import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
@@ -107,6 +111,7 @@ import {
 import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
+import {LocationPickerComponent} from './components/main/menu/location-picker/location-picker.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -143,8 +148,10 @@ export function createTranslateLoader(http: HttpClient) {
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
     UserLoginComponent,
+    SearchFieldComponent,
     BusyHoursDiagramComponent,
-    MyRateComponent
+    MyRateComponent,
+    LocationPickerComponent
   ],
   exports: [
     MatAutocompleteModule,
@@ -220,6 +227,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatGridListModule,
     MatIconModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
     MatPaginatorModule,
     MatListModule,
     TranslateModule.forRoot({
@@ -241,7 +249,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
     NgxChartsModule,
-    Ng5BreadcrumbModule.forRoot()
+    Ng5BreadcrumbModule.forRoot(),
   ],
   providers: [
     httpInterceptorProviders,

@@ -79,7 +79,7 @@ export class AddFeedbackComponent implements OnInit {
     questioner.criteriaId = criteria.id;
     questioner.type = criteria.type;
     questioner.questions = questions;
-    questioner.routeQuestions = this.getQuestionsByType(questioner, 'ROUTE');
+    questioner.routeQuestions = this.getQuestionsByType(questioner, 'STOP');
     questioner.timeQuestions = this.getQuestionsByType(questioner, 'TIME');
 
     this.buildAnswerModel(questioner, criteria);

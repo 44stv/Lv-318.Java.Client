@@ -43,5 +43,6 @@
  "Trolleybus" : "Тролейбус",
  "Bus" : "Автобус",
  "Marshrutka" : "Маршрутка",
- "Choose NumberTransit" :"Виберіть номер маршруту"
+ "Choose NumberTransit" :"Виберіть номер маршруту",
+  "back": "Повернутись"
   }

@@ -14,6 +14,7 @@ import { ChooseTransitComponent } from './components/main/choose-transit/choose.
 export class AppComponent {
   title = 'uaTransport';
 
+
   @ViewChild('sidenav') public sideNav: MatSidenav;
 
   constructor(private translate: TranslateService, private breadcrumbService: BreadcrumbService, 

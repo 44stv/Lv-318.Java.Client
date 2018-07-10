@@ -76,7 +76,7 @@
           <p *ngFor="let questioner of capacityFeedbacks">
             <mat-list>
           <p *ngFor="let question of questioner.routeQuestions;let i =index">
-            <mat-list *ngIf="question.type == 'ROUTE'">
+            <mat-list *ngIf="question.type == 'STOP'">
               <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
               <mat-form-field class="stopSelect">
                 <mat-select [(ngModel)]="questioner.answer[i]" name="stop">

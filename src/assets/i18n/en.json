@@ -43,5 +43,6 @@
  "Trolleybus" : "Trolleybus",
  "Bus" : "Bus",
  "Marshrutka" : "Marshrutka",
-"Choose NumberTransit" :"Choose Number of Transit"
+"Choose NumberTransit" :"Choose Number of Transit",
+  "back": "Back"
 }

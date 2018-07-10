@@ -6,6 +6,7 @@ export class ExcategoryModel {
     name: string;
   };
   iconURL: string;
+  countOfTransits: number;
 
   constructor(fields: Object) {
     Object.assign(this, fields);
