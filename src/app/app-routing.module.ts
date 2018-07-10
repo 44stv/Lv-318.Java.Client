@@ -34,6 +34,8 @@ const routes: Routes = [
         children: [
           {path: 'add', component: AddUserComponent},
           {path: 'login', component: UserLoginComponent},
+          {path: 'activate/:uuid', component: RegistarationConfirmationComponent},
+          {path: 'forgetpass/:uuid', component: ForgetPasswordConfirmationComponent}
         ]
       },
       {
@@ -80,9 +82,7 @@ const routes: Routes = [
     component: AddFeedbackComponent,
     canActivate: [ClientGuardService]
   },
-  {path: 'direction/:id', component: MapsComponent},
-  {path: 'main/user/activate/:uuid', component: RegistarationConfirmationComponent},
-  {path: 'main/user/forgetpass/:uuid', component: ForgetPasswordConfirmationComponent},
+  {path: 'direction/:id', component: MapsComponent}
 ];
 
 @NgModule({
