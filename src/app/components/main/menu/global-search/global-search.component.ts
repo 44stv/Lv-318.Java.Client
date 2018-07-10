@@ -3,9 +3,9 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-
-import {Transit} from '../../../../models/transit.model';
-import {GlobalSearchService} from '../../../../services/global-search.service';
+import { environment } from '../../../../../environments/environment';
+import { Transit } from '../../../../models/transit.model';
+import { GlobalSearchService } from '../../../../services/global-search.service';
 
 @Component({
   selector: 'app-global-search',
@@ -17,6 +17,7 @@ export class GlobalSearchComponent implements OnInit {
   searchValue: string;
   displayedColumns = ['categoryId', 'name', 'routeName'];
   dataSource = new MatTableDataSource();
+  categoryIconURL = `${environment.serverURL}/category/img?link=`;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
