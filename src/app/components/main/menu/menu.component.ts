@@ -1,9 +1,14 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Router} from '@angular/router';
-import {Location} from '@angular/common';
-
-import {AppComponent} from '../../../app.component';
+import { Component, OnChanges, OnInit, SimpleChanges, Input, ViewChild } from '@angular/core';
+import { AppComponent } from '../../../app.component';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import {GlobalSearchService} from '../../../services/global-search.service';
+import {MatDialog} from '@angular/material';
+import {AddUserComponent} from './add-user/add-user.component';
+import {UserLoginComponent} from './user-login/user-login.component';
+import { FormControl } from '@angular/forms';
+import { TokenStorage } from '../../../services/auth/token/token-storage';
+
 import {AuthService} from '../../../services/auth/auth.service';
 import {Role} from '../../../services/auth/roles';
 
@@ -16,12 +21,17 @@ import {Role} from '../../../services/auth/roles';
 export class MenuComponent implements OnInit, OnChanges {
   search = '';
   role: any = Role;
+  @ViewChild(FormControl) myControl = new FormControl();
+
 
   constructor(public app: AppComponent,
+
               private router: Router,
               private authService: AuthService,
               private globalSearchComponent: GlobalSearchService,
-              private location: Location) {
+              private location: Location,
+              private dialog: MatDialog ) {
+
 
   }
 
@@ -29,16 +39,11 @@ export class MenuComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.search);
+
   }
 
   switchLanguage(language: string) {
     this.app.switchLanguage(language);
-  }
-
-  onEnter(value: string) {
-    this.globalSearchComponent.setSearchValue(value);
-    this.router.navigate(['search/' + '?search=/' + value]);
   }
 
   isHomeRouteActivated(): boolean {
@@ -58,4 +63,10 @@ export class MenuComponent implements OnInit, OnChanges {
     return this.authService.getRole();
   }
 
+  openModal() {
+    this.dialog.open(AddUserComponent);
+  }
+  openLogInModal() {
+    this.dialog.open(UserLoginComponent);
+  }
 }

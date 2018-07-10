@@ -8,7 +8,7 @@ import { Question } from '../models/question.model';
 import { environment } from '../../environments/environment';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({
@@ -18,8 +18,8 @@ export class FeedbackCriteriaService {
   private feedbackCriteriaUrl = environment.serverURL + '/feedback-criteria';
 
 
-  constructor(private  http: HttpClient,
-              private messageService: MessageService) {
+  constructor(private http: HttpClient,
+    private messageService: MessageService) {
   }
 
   getAllFeedbackCriteria(): Observable<FeedbackCriteria[]> {
@@ -33,6 +33,11 @@ export class FeedbackCriteriaService {
     const feedbackCriteriaUrl = `${this.feedbackCriteriaUrl}/enums`;
     return this.http.get<String>(feedbackCriteriaUrl);
   }
+  getAllEnumTypesOfQuestion(): Observable<String> {
+    const feedbackCriteriaUrl = `${this.feedbackCriteriaUrl}/questionEnums`;
+    return this.http.get<String>(feedbackCriteriaUrl);
+  }
+
 
   addFeedbackCritea(feedbackCriteria: FeedbackCriteria): Observable<FeedbackCriteria> {
     return this.http.post<FeedbackCriteria>(this.feedbackCriteriaUrl, feedbackCriteria);
@@ -76,14 +81,14 @@ export class FeedbackCriteriaService {
 
   updateFeedbackCriteria(feedbackCriteria: FeedbackCriteria): Observable<FeedbackCriteria> {
     return this.http.put(this.feedbackCriteriaUrl + '/' + feedbackCriteria.id, feedbackCriteria, httpOptions)
-    .pipe(tap(_ => this.log(`update feedbackCriteria id=${feedbackCriteria.id}`)),
-  catchError(this.handleError<any>('update Feedback Criteria'))
-);
+      .pipe(tap(_ => this.log(`update feedbackCriteria id=${feedbackCriteria.id}`)),
+        catchError(this.handleError<any>('update Feedback Criteria'))
+      );
   }
 
   addQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(this.feedbackCriteriaUrl, question);
-}
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -10,7 +10,12 @@ import {TokenModel} from './token/token-model';
 import {determineRole, Role} from './roles';
 
 const helper = new JwtHelperService();
+import { HttpHeaders } from '@angular/common/http';
+import { Login } from '../../models/login.model';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable()
 export class AuthService {
 

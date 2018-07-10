@@ -6,6 +6,7 @@ import {environment} from '../../../../../../environments/environment';
 import {Transit} from '../../../../../models/transit.model';
 import {TransitService} from '../../../../../services/transit.service';
 import {DiagramService} from '../../../../../services/diagram.service';
+import {BreadcrumbService} from 'ng5-breadcrumb';
 
 
 @Component({
@@ -30,7 +31,9 @@ export class TransitsComponent implements OnInit, AfterViewInit {
 
   constructor(private transitService: TransitService,
               private route: ActivatedRoute,
-              private diagramService: DiagramService) {
+              private diagramService: DiagramService,
+              private breadcrumbService: BreadcrumbService) {
+    this.breadcrumbService.hideRoute('/main/Public%20Transport');
   }
 
   ngOnInit() {

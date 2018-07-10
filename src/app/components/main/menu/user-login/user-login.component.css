@@ -1,18 +1,48 @@
-.LoginUserForm {
-  width: 800px;
-  margin: 200px auto;
-  font-size: 25px;
-}
 
-.Button {
-  background-color: black;
-  width: 50%;
+.NewUserForm {
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  font-size: large;
 }
-
-.email {
+.title{
   width: 100%;
+  background-color: #00BCD4;
+  height: 15%;
+  vertical-align: middle;
+  text-align: center;
+  font-size: large;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center;
+  border-radius: 10px;
+
 }
 
-.password {
-  width: 100%;
+.button{
+  background-color: orange;
+  float: right;
+
 }
+.button2{
+  background-color: orange;
+  float: left;
+
+}
+.mat-form-f{
+  width: 75%;
+  padding: 10px;
+}
+.col-12 text-center{
+  background-color: gainsboro ;
+  border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+

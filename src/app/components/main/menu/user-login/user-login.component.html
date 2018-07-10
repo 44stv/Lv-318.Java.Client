@@ -1,16 +1,40 @@
-<div class="LoginUserForm">
-  <div class="col-md-7">
-    <form class="example-form">
-      <mat-form-field class="email">
-        <textarea matInput [(ngModel)]="login.email" placeholder="Email" name="email"></textarea>
+<div class="NewUserForm">
+  <div class="title">Log in </div>
+  <form [formGroup]="loginForm" (ngSubmit)="logIn()" *ngIf="!isSent">
+    <div class="form-group">
+      <mat-form-field class="mat-form-f">
+        <input matInput placeholder="Enter your email" formControlName="email" [formControl]="email" required>
+        <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
-
-      <mat-form-field class="password">
-        <textarea matInput [(ngModel)]="login.password" placeholder="Password" name="password"></textarea>
+    </div>
+    <div class="form-group">
+      <mat-form-field  class="mat-form-f">
+        <input matInput placeholder="Password" formControlName="password" required
+               [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide" class="cursor">{{hide ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+        <mat-error *ngIf="passwordControl.hasError('minlength') && !passwordControl.hasError('required')">
+          Password must contain more than 6 characters
+        </mat-error>
+        <mat-error *ngIf="passwordControl.hasError('maxlength') && !passwordControl.hasError('required')">
+          Password must contain less than 16 characters
+        </mat-error>
+        <mat-error *ngIf="passwordControl.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
-
-      <button class="Button" mat-fab (click)="logIn()">Login</button>
-
-    </form>
-  </div>
+    </div>
+    <div class="form-group">
+      <button mat-button class="button">Log in</button>
+    </div>
+    <div class="form-group">
+      <button mat-button class="button2" (click)="openForgetPassword()">Forget password</button>
+    </div>
+  </form>
+  <app-social-sing-in></app-social-sing-in>
 </div>
