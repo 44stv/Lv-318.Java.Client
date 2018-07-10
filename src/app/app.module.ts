@@ -111,6 +111,7 @@ import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
 
+
 import {
   RegistarationConfirmationComponent
 } from './components/main/menu/add-user/registaration-confirmation/registaration-confirmation.component';
@@ -120,6 +121,9 @@ import {
 } from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
 
 import {LocationPickerComponent} from './components/main/menu/location-picker/location-picker.component';
+
+import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {

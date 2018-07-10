@@ -14,6 +14,7 @@ const httpOptions = {
 })
 export class GlobalSearchService {
   private globalSearchUrl = environment.serverURL + '/search';
+  private curentLocation: string;
 
   constructor(private http: HttpClient) {
   }
@@ -23,8 +24,15 @@ export class GlobalSearchService {
     return this.http.get<Transit[]>(globalSearchUrl);
   }
   getStopsResult(searchValue: string): Observable<Stop[]> {
-    const stopSearchUlr = `${this.globalSearchUrl}/?searchStop=${searchValue}`
+    const stopSearchUlr = `${this.globalSearchUrl}/?searchStop=${searchValue}`;
     return this.http.get<Stop[]>(stopSearchUlr);
   }
 
+  setCurentLocation(value: string) {
+    this.curentLocation = value;
+  }
+
+  getCurentLocation(): string {
+    return this.curentLocation;
+  }
 }
