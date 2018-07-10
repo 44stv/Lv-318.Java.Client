@@ -36,7 +36,7 @@ export class GlobalSearchComponent implements OnInit {
     this.globalSearchService.getResults(this.searchValue).subscribe(transits => {
       this.dataSource.data = transits;
       this.dataSource.paginator = this.paginator;
-      if (transits.length == 1) {
+      if (transits.length === 1) {
         this.transitOne = transits;
         this.transitOne.map(tmp => {
           this.router.navigate(['show-transit-scheme/' + tmp.categoryId + '/' + tmp.id + '/' + tmp.name]);
