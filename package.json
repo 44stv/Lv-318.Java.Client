@@ -50,7 +50,7 @@
     "ng5-breadcrumb": "0.0.6",
     "ngx-bootstrap": "^3.0.1",
     "ngx-charts": "^3.0.2",
-    "ngx-material-timepicker": "^2.2.3",
+    "ngx-material-timepicker": "^2.2.5",
     "npm": "^6.1.0",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",

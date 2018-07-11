@@ -16,6 +16,11 @@
   <input [readonly]="isReadOnly" matInput placeholder="weight" [(ngModel)]="question.weight" id="name" name="weight">
   <mat-hint align="end">Only RATING can have weight</mat-hint>
 </mat-form-field>
+<mat-form-field appearance="outline">
+  <mat-label>Priority</mat-label>
+  <input matInput placeholder="priority" [(ngModel)]="question.priority" id="name" name="priority">
+  <mat-hint align="end">Priority</mat-hint>
+</mat-form-field>
 <div class="button">
   <button class="mat-raised-button" (click)="close(question.name, question.weight, question.type)">Close</button>
   <button class="mat-raised-button mat-primary" (click)="add(question.name, question.weight, question.type)">Ok</button>

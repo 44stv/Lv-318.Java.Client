@@ -6,6 +6,7 @@ import { TokenStorage } from '../../../../../services/auth/token/token-storage';
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Location } from '@angular/common';
 import {
     AuthService,
     FacebookLoginProvider,
@@ -19,14 +20,15 @@ import { Login } from '../../../../../models/login.model';
     styleUrls: ['./social-sing-in.component.css']
 })
 export class SocialSingIn {
-    user= new User;
+    user = new User;
     login: boolean = false;
     constructor(private socialAuthService: AuthService,
         private authService: AuthService,
         private tokenStorage: TokenStorage,
         private router: Router,
         private snackBar: MatSnackBar,
-        private socialService: SocialService) { }
+        private socialService: SocialService,
+        private location: Location) { }
 
     public socialSignIn(socialPlatform: string) {
         let socialPlatformProvider;
@@ -63,19 +65,26 @@ export class SocialSingIn {
             (SocialUser) => {
                 console.log(socialPlatform + " sign in data : ", SocialUser);
                 console.log(SocialUser.email);
-                this.user.email=SocialUser.email;
+                this.user.email = SocialUser.email;
                 this.user.firstName = SocialUser.name;
-                this.user.password = SocialUser.name;
                 this.user.provider = SocialUser.provider;
-                this.socialService.signInWithSocial(this.user);
+                this.socialService.signInWithSocial(this.user).subscribe((token: TokenModel) => {
+                    this.tokenStorage.saveToken(token);
+                    alert('User loged successfully.');
+                    this.snackBar.open('User loged successfully', null, {
+                        duration: 4000
+                    });
+                 
+                }
+                );
+                this.login = true;
             }
         );
-       this.login=true;
-        
+       
+
     }
-    public socialSignOut(){
-    this.socialAuthService.signOut();
-    this.login = false;
+    public socialSignOut() {
+        this.socialAuthService.signOut();
+        this.login = false;
     }
-    
 }

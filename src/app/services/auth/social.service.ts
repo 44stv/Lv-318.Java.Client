@@ -10,13 +10,13 @@ const httpOptions = {
 @Injectable({ providedIn: 'root' })
 export class SocialService {
 
-  private socialUrl = environment.serverURL + '/user/social';
+  private socialUrl = environment.serverURL + '/user'+'/social';
 
   constructor(private http: HttpClient) {
   }
   signInWithSocial(user: User): Observable<any> {
     console.log('service');
-    console.log('servie'+ user.email);
+    console.log('servie'+ user);
     return this.http.post<User>(this.socialUrl, user);
   }
 

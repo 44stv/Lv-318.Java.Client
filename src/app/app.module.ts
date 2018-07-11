@@ -15,17 +15,17 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Ng5BreadcrumbModule } from 'ng5-breadcrumb';
 import { MomentModule } from 'angular2-moment/moment.module';
 import { AppMaterialModule } from './material.module';
+import { SocialSingIn } from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
 import {
   AuthServiceConfig,
   FacebookLoginProvider,
   GoogleLoginProvider,
   SocialLoginModule
 } from 'angular-6-social-login';
-import {AppMaterialModule} from './material.module';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {MatDialogModule} from '@angular/material/dialog';
-import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+
 
 import {
   MatAutocompleteModule,

@@ -15,22 +15,6 @@
       </a>
     </div>
 
-    <div class="NewUser">
-      <a [routerLink]="['/main/user/add']">
-        <button mdc-button [secondary]="true" type="submit">{{'User' | translate}}</button>
-      </a>
-    </div>
-
-    <div class="LoginUser">
-      <a [routerLink]="['/main/user/login']" *ngIf="!hasToken()">
-        <button mdc-button [secondary]="true" type="submit">{{'Log In'| translate}}</button>
-      </a>
-      <a (click)="logOut()" *ngIf="hasToken()">
-        <button mdc-button [secondary]="true" type="submit">{{'Log Out'| translate}}</button>
-      </a>
-    </div>
-
-
   <div class="NewUser">
     <a [routerLink]="['/main/user/add']">
       <button mdc-button [secondary]="true" type="submit" (click)="openModal()">{{'User' | translate}}</button>
