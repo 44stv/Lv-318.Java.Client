@@ -79,7 +79,6 @@ import {ClientGuardService} from './services/guard/client-guard.service';
 import {DiagramService} from './services/diagram.service';
 import {GlobalSearchService} from './services/global-search.service';
 import {httpInterceptorProviders} from './services/auth/interceptors/http-providers';
-import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {TransitService} from './services/transit.service';
 import {FeedbackService} from './services/feedback.service';
 import {FeedbackCriteriaService} from './services/feedback-criteria.service';
@@ -130,7 +129,6 @@ import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/soc
 import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
 import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
