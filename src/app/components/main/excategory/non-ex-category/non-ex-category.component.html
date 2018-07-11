@@ -13,27 +13,46 @@
         <div class="text">
           {{category.name}}
         </div>
-        <div class="count">
-          <h3>{{category.countOfTransits}}</h3>
-          transits<br/>
-          available
-         </div>
+        <div class="rating">
+          <div class="rating-number">{{category.rating}}</div>
+          <div class="rating-text">Average rating</div>
+          <circle-progress
+            [percent]="category.rating * 10"
+            [maxPercent]="100"
+            [radius]="38"
+            [outerStrokeWidth]="4"
+            [innerStrokeWidth]="0"
+            [outerStrokeColor]="'#43659c'"
+            [showTitle]="false"
+            [showSubtitle]="false"
+            [showUnits]="false"
+            [outerStrokeLinecap]="round"
+            [animation]="true"
+            [animationDuration]="300"
+          ></circle-progress>
+      </div>
+      <div class="count">
+        {{category.countOfTransits}} transits
       </div>
     </div>
   </div>
-  <div class="cityTransits">
-    <app-transits></app-transits>
-  </div>
+</div>
+<div class="cityTransits">
+  <app-transits></app-transits>
+</div>
 </div>
 
 <div class="demo-content">
   <h3>Discrete Slider</h3>
-  <mdc-slider #demodiscrete [min]="discreteMin" [max]="discreteMax" [discrete]="true" [value]="50" (input)="discreteInputEventValue = $event.value"
+  <mdc-slider #demodiscrete [min]="discreteMin" [max]="discreteMax" [discrete]="true" [value]="50"
+              (input)="discreteInputEventValue = $event.value"
               (change)="discreteChangeEventValue = $event.value"></mdc-slider>
   <mdc-text-field [(ngModel)]="discreteMin" label="Min" type="number"></mdc-text-field>
   <mdc-text-field [(ngModel)]="discreteMax" label="Max" type="number"></mdc-text-field>
   <div class="demo-content--row">
-    <button mdc-button (click)="demodiscrete.disabled = !demodiscrete.disabled">Disabled: {{demodiscrete.disabled ? 'On' : 'Off'}}</button>
+    <button mdc-button (click)="demodiscrete.disabled = !demodiscrete.disabled">Disabled: {{demodiscrete.disabled ? 'On'
+      : 'Off'}}
+    </button>
   </div>
   <p>Slider value: {{demodiscrete.value}}</p>
   <p>Value from input event: {{discreteInputEventValue}}</p>
