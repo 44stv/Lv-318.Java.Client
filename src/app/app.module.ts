@@ -25,6 +25,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
+
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -124,6 +125,8 @@ import {
 } from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
 import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
 import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
+import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
+import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
 
 
 
@@ -163,6 +166,8 @@ export function getAuthServiceConfigs() {
     FeedbackCriteriaComponent,
     AddUserComponent,
     ForgetPasswordComponent,
+    UserProfileComponent,
+    FriendInvitationComponent,
     MessageComponent,
     StopsGridComponent,
     AddQuestionComponent,
@@ -313,13 +318,15 @@ export function getAuthServiceConfigs() {
       useFactory: getAuthServiceConfigs
     }],
   bootstrap: [AppComponent],
+
   entryComponents: [
     AddQuestionComponent,
     AddFeedbackComponent,
     AddUserComponent,
     UserLoginComponent,
     ForgetPasswordComponent,
-    ChooseTransitComponent]
+    ChooseTransitComponent,
+    FriendInvitationComponent]
 
 })
 export class AppModule {

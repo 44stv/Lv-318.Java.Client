@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { User } from '../models/user.model';
+import { Friend } from '../models/friend.model';
 import { Login } from '../models/login.model';
 import { environment } from '../../environments/environment';
 import {Observable} from 'rxjs';
@@ -25,6 +26,9 @@ export class UserService {
 
   public createUser(user: User): Observable<any> {
     return this.http.post(this.userUrl + '/signup', user);
+  }
+  public sendInvitation(friend: Friend): Observable<any> {
+    return this.http.post(this.userUrl + '/invite', friend);
   }
 
   public logIn(login) {

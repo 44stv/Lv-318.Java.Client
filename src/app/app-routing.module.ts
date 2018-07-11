@@ -15,6 +15,7 @@ import {AddFeedbackComponent} from './components/main/excategory/non-ex-category
 import {MapsComponent} from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
 import {RegistarationConfirmationComponent} from './components/main/menu/add-user/registaration-confirmation/registaration-confirmation.component';
 import {ForgetPasswordConfirmationComponent} from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
+import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'main/feedback-criteria/:id', component: OneFeedbackCriteriaComponent},
   {path: 'main/user/add', component: AddUserComponent},
   {path: 'main/user/login', component: UserLoginComponent},
+  {path: 'main/user/profile', component: UserProfileComponent},
   {path: 'main/user/activate/:uuid', component: RegistarationConfirmationComponent},
   {path: 'main/user/forgetpass/:uuid', component: ForgetPasswordConfirmationComponent},
   {path: 'search/?search=/:value', component: GlobalSearchComponent},

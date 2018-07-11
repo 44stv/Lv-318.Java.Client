@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges, Input, ViewChild } from '@angular/core';
-import { AppComponent } from '../../../app.component';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import {AppComponent} from '../../../app.component';
 import {GlobalSearchService} from '../../../services/global-search.service';
 import {MatDialog} from '@angular/material';
 import {AddUserComponent} from './add-user/add-user.component';
