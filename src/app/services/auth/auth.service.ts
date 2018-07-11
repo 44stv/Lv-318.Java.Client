@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
@@ -12,9 +12,6 @@ import {determineRole, Role} from './roles';
 const helper = new JwtHelperService();
 
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 @Injectable()
 export class AuthService {
 

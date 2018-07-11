@@ -10,6 +10,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 
 import {UserService} from '../../../../services/user.service';
+import {BreadcrumbService} from 'ng5-breadcrumb';
 
 export class InfoResponse {
   response: string;

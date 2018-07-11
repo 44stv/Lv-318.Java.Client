@@ -1,6 +1,3 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Router} from '@angular/router';
-import {Location} from '@angular/common';
 import { Component, OnChanges, OnInit, SimpleChanges, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';

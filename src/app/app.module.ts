@@ -4,17 +4,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
-import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './services/auth/auth.service';
-import { SocialService } from './services/auth/social.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from 'src/app/app-routing.module';
-import { HttpModule } from '@angular/http';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { Ng5BreadcrumbModule } from 'ng5-breadcrumb';
-import { MomentModule } from 'angular2-moment/moment.module';
-import { AppMaterialModule } from './material.module';
+import {AppComponent} from './app.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from './services/auth/auth.service';
+import {SocialService} from './services/auth/social.service';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from 'src/app/app-routing.module';
+import {HttpModule} from '@angular/http';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
+import {MomentModule} from 'angular2-moment/moment.module';
+import {AppMaterialModule} from './material.module';
 import {
   AuthServiceConfig,
   FacebookLoginProvider,
@@ -24,17 +24,9 @@ import {
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
-import { StarRatingModule } from 'angular-star-rating';
-import {AppComponent} from './app.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthService} from './services/auth/auth.service';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import {AppRoutingModule} from 'src/app/app-routing.module';
-import {HttpModule} from '@angular/http';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
-import {MomentModule} from 'angular2-moment/moment.module';
-import { MdcIconButtonModule } from '@angular-mdc/web';
+import {StarRatingModule} from 'angular-star-rating';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {MdcIconButtonModule} from '@angular-mdc/web';
 
 
 import {
@@ -75,7 +67,7 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-import { ExcategoryService } from './services/excategory.service';
+import {ExcategoryService} from './services/excategory.service';
 
 import {MainComponent} from './components/main/main.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
@@ -87,7 +79,7 @@ import {AuthGuardService} from './services/guard/auth-guard.service';
 import {ClientGuardService} from './services/guard/client-guard.service';
 import {DiagramService} from './services/diagram.service';
 import {GlobalSearchService} from './services/global-search.service';
-import { AdminComponent } from './components/admin/admin.component';
+import {AdminComponent} from './components/admin/admin.component';
 
 import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {TransitService} from './services/transit.service';
@@ -113,9 +105,9 @@ import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteri
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
 import {MyRateComponent} from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
-import { CommentComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comment/comment.component';
-import { CommentsComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
-import { CommentService } from './services/comment.service';
+import {CommentComponent} from './components/main/excategory/non-ex-category/transits/transit/comments/comment/comment.component';
+import {CommentsComponent} from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
+import {CommentService} from './services/comment.service';
 import {
   RaitingDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/raiting-diagram/raiting-diagram.component';
@@ -126,10 +118,10 @@ import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
 import {InterceptorService} from './services/auth/interceptors/interceptor.service';
-import { ForbiddenComponent } from './components/main/errors/forbidden/forbidden.component';
-import { UpdateRoleComponent } from './components/admin/update-role/update-role.component';
-import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
-import { AddTopCategoryComponent } from './components/admin/add-category/add-top-category/add-top-category.component';
+import {ForbiddenComponent} from './components/main/errors/forbidden/forbidden.component';
+import {UpdateRoleComponent} from './components/admin/update-role/update-role.component';
+import {AddCategoryComponent} from './components/admin/add-category/add-category.component';
+import {AddTopCategoryComponent} from './components/admin/add-category/add-top-category/add-top-category.component';
 
 
 import {
@@ -145,7 +137,6 @@ import {UserProfileComponent} from './components/main/menu/user-profile/user-pro
 import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
 
 
-
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -153,6 +144,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig(
     [
@@ -208,7 +200,7 @@ export function getAuthServiceConfigs() {
     CommentComponent,
     LocationPickerComponent,
     LocationPickerComponent,
-    SocialSingIn
+    SocialSingIn,
     AdminComponent,
     ForbiddenComponent,
     UpdateRoleComponent,
@@ -271,7 +263,6 @@ export function getAuthServiceConfigs() {
     HttpModule,
     HttpClientModule,
     MatNativeDateModule,
-    ReactiveFormsModule,
     AppRoutingModule,
     MatSortModule,
     MatTableModule,

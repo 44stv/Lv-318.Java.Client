@@ -26,7 +26,7 @@ export class UserLoginComponent implements OnInit {
 
   constructor(public  matDialogRef: MatDialogRef<UserLoginComponent>,
               private snackBar: MatSnackBar,
-              private fb: FormBuilder, private router: Router, private authService: AuthService,
+              private fb: FormBuilder, private router: Router,
               private authService: AuthService,
               private dialog: MatDialog) {
   }

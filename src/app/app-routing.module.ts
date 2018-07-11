@@ -21,7 +21,6 @@ import {ClientGuardService} from './services/guard/client-guard.service';
 import {AdminGuardService} from './services/guard/admin-guard.service';
 import {ForbiddenComponent} from './components/main/errors/forbidden/forbidden.component';
 import {UpdateRoleComponent} from './components/admin/update-role/update-role.component';
-import {FeedbackCriteria} from './models/feedback-criteria.model';
 import {AddCategoryComponent} from './components/admin/add-category/add-category.component';
 
 
@@ -31,7 +30,6 @@ const routes: Routes = [
     path: 'main',
     children: [
       {path: '', component: MainComponent},
-
       {
         path: 'user',
         children: [
@@ -40,8 +38,6 @@ const routes: Routes = [
           {path: 'profile', component: UserProfileComponent},
           {path: 'activate/:uuid', component: RegistarationConfirmationComponent},
           {path: 'forgetpass/:uuid', component: ForgetPasswordConfirmationComponent},
-
-
         ]
       },
       {
@@ -66,7 +62,6 @@ const routes: Routes = [
           {path: 'add-feedback-criteria', component: AddFeedbackCriteriaComponent},
           {path: ':id', component: OneFeedbackCriteriaComponent}
         ]
-
       },
       {
         path: ':top/:city',

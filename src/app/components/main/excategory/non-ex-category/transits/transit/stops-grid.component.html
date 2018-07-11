@@ -10,10 +10,6 @@
             *ngFor="let i=index; let tile of forwardStops" class="tile">
             <label [for]="tile.id" class = "tile-content">
               <div>{{tile.street}}</div>
-              <form #demoForm="ngForm" id="demoForm">
-                <button mdcIconButton name="demoiconbutton" #demoiconbutton ngModel #demoIconButtonModel="ngModel" iconOn="favorite" iconOff="favorite_border"
-                        labelOn="Add to Favorites" labelOff="Remove from Favorites"></button>
-              </form>
               <input type="checkbox" [(ngModel)]="checkedItems[i]" [id]="tile.id" (change)='selectStops()'>
               <img src="../../../assets/img/list.png">
             </label>
