@@ -111,6 +111,8 @@ import {
 import {InterceptorService} from './services/auth/interceptors/interceptor.service';
 import { ForbiddenComponent } from './components/main/errors/forbidden/forbidden.component';
 import { UpdateRoleComponent } from './components/admin/update-role/update-role.component';
+import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
+import { AddTopCategoryComponent } from './components/admin/add-category/add-top-category/add-top-category.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -150,7 +152,9 @@ export function createTranslateLoader(http: HttpClient) {
     MyRateComponent,
     AdminComponent,
     ForbiddenComponent,
-    UpdateRoleComponent
+    UpdateRoleComponent,
+    AddCategoryComponent,
+    AddTopCategoryComponent
   ],
   exports: [
     MatAutocompleteModule,

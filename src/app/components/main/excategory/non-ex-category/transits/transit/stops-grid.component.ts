@@ -28,7 +28,8 @@ export class StopsGridComponent implements OnInit {
   constructor(private stopService: StopService,
               private authService: AuthService,
               private route: ActivatedRoute,
-              public dialog: MatDialog) {}
+              public dialog: MatDialog) {
+  }
 
 
   ngOnInit() {
@@ -38,12 +39,12 @@ export class StopsGridComponent implements OnInit {
       this.transitName = params['name'];
     });
     this.stopsList = this.stopService.getStopsByTransitId(this.idTransit);
-    this.stopsList.subscribe(stopArray =>{
+    this.stopsList.subscribe(stopArray => {
       this.stopArray = stopArray;
       this.checkedItems = new Array(this.stopArray.length);
-      this.forwardStops = this.stopArray.filter(stop => stop.direction === "FORWARD");
-      this.backwardStops = this.stopArray.filter(stop => stop.direction === "BACKWARD");
-     });
+      this.forwardStops = this.stopArray.filter(stop => stop.direction === 'FORWARD');
+      this.backwardStops = this.stopArray.filter(stop => stop.direction === 'BACKWARD');
+    });
     console.log(this.authService.decodedToken.auth);
 
 

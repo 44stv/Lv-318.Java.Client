@@ -23,7 +23,7 @@ updateRoleModel = new UpdateRoleModel();
     console.log(this.roles);
   }
 
-  addFeedbackCriteria(): void {
+  updateRole(): void {
     this.userService.updateRole(this.updateRoleModel)
         .subscribe(() => this.gotBack());
   }

@@ -6,7 +6,7 @@
         <h4 class="mb-4">{{'UsersConf' | translate}}</h4>
         <div class="row">
         </div>
-        <button mat-raised-button [routerLink]="['update-role/']"
+        <button mat-raised-button [routerLink]="['/main/admin/update-role']"
                 color="primary" class="mb-4" style="width:100%;">{{'Users' | translate}}
         </button>
 
@@ -19,13 +19,25 @@
         <h4 class="mb-4">{{'CriteriaConf' | translate}}</h4>
         <div class="row">
         </div>
-        <button mat-raised-button [routerLink]="['main/feedback-criteria']"
+        <button mat-raised-button [routerLink]="['/main/feedback-criteria']"
                 color="primary" class="mb-4" style="width:100%;">{{'FeedbackCriteria' | translate}}
         </button>
 
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-12">
+        <hr>
+        <h4 class="mb-4">{{'CategoryConfiguration' | translate}}</h4>
+        <div class="row">
+        </div>
+        <button mat-raised-button [routerLink]="['/main/admin/add-category']"
+                color="primary" class="mb-4" style="width:100%;">{{'Categories' | translate}}
+        </button>
+
+      </div>
+    </div>
+
   </div>
-  <app-update-role></app-update-role>
 </div>
