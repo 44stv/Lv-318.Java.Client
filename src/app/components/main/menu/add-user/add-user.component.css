@@ -2,7 +2,7 @@
   width: 500px;
   height: 500px;
   background-color: white;
-  font-size: large;
+  font-size: medium;
 }
 .title{
   width: 100%;
@@ -19,13 +19,13 @@
 }
 
 .button{
-  background-color: orange;
+  background-color: #ff4081;
   float: right;
 
 }
 .mat-form-f{
   width: 75%;
-  padding: 10px;
+  padding: 8px;
 }
 .col-12 text-center{
   background-color: gainsboro ;

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import {UserService} from '../../../../../../services/user.service';
 import {MatDialogRef} from '@angular/material/dialog';
+import {HttpErrorResponse} from '@angular/common/http';
 
 
 
@@ -39,13 +40,13 @@ export class ForgetPasswordConfirmationComponent implements OnInit {
         });
           this._isChanging = true;
         //  this.router.navigate(['/']);
-      },
-       error => {
-        this.snackBar.open('error', null, {
-            duration: 5000
-          });
-          this.router.navigate(['/']);
-      });
-  }
+      }, (error) => {
+  if (error instanceof HttpErrorResponse) {
+  this.snackBar.open(error.error.response, null, {
+  duration: 5000
+});
+}
+});
+}
 
 }

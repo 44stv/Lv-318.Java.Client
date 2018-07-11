@@ -20,17 +20,17 @@
 }
 
 .button{
-  background-color: orange;
+  background-color: #ff4081;
   float: right;
 
 }
 .button2{
-  background-color: orange;
+  background-color: #ff4081;
   float: left;
 
 }
 .mat-form-f{
-  width: 75%;
+  width: 90%;
   padding: 10px;
 }
 .col-12 text-center{

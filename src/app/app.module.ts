@@ -4,18 +4,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
-import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './services/auth/auth.service';
-import { SocialService } from './services/auth/social.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from 'src/app/app-routing.module';
-import { HttpModule } from '@angular/http';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { Ng5BreadcrumbModule } from 'ng5-breadcrumb';
-import { MomentModule } from 'angular2-moment/moment.module';
-import { AppMaterialModule } from './material.module';
-import { SocialSingIn } from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
+import {AppComponent} from './app.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from './services/auth/auth.service';
+import {SocialService} from './services/auth/social.service';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from 'src/app/app-routing.module';
+import {HttpModule} from '@angular/http';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
+import {MomentModule} from 'angular2-moment/moment.module';
+import {AppMaterialModule} from './material.module';
+
 import {
   AuthServiceConfig,
   FacebookLoginProvider,
@@ -23,8 +23,11 @@ import {
   SocialLoginModule
 } from 'angular-6-social-login';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {MatDialogModule} from '@angular/material/dialog';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import {StarRatingModule} from 'angular-star-rating';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {MdcIconButtonModule} from '@angular-mdc/web';
 
 
 import {
@@ -65,20 +68,20 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-import { ExcategoryService } from './services/excategory.service';
+import {ExcategoryService} from './services/excategory.service';
 
 import {MainComponent} from './components/main/main.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import {MessageComponent} from './components/message/message.component';
 import {UserService} from './services/user.service';
-import {TokenStorage} from './services/auth/token/token-storage';
 import {StopService} from './services/stop.service';
 import {AdminGuardService} from './services/guard/admin-guard.service';
 import {AuthGuardService} from './services/guard/auth-guard.service';
 import {ClientGuardService} from './services/guard/client-guard.service';
 import {DiagramService} from './services/diagram.service';
 import {GlobalSearchService} from './services/global-search.service';
-import {httpInterceptorProviders} from './services/auth/interceptors/http-providers';
+import {AdminComponent} from './components/admin/admin.component';
+
 import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {TransitService} from './services/transit.service';
 import {FeedbackService} from './services/feedback.service';
@@ -115,6 +118,11 @@ import {
 import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
+import {InterceptorService} from './services/auth/interceptors/interceptor.service';
+import {ForbiddenComponent} from './components/main/errors/forbidden/forbidden.component';
+import {UpdateRoleComponent} from './components/admin/update-role/update-role.component';
+import {AddCategoryComponent} from './components/admin/add-category/add-category.component';
+import {AddTopCategoryComponent} from './components/admin/add-category/add-top-category/add-top-category.component';
 
 
 import {
@@ -125,7 +133,9 @@ import {
   ForgetPasswordConfirmationComponent
 } from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
 import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
-
+import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
+import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
+import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -135,6 +145,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig(
     [
@@ -164,6 +175,8 @@ export function getAuthServiceConfigs() {
     FeedbackCriteriaComponent,
     AddUserComponent,
     ForgetPasswordComponent,
+    UserProfileComponent,
+    FriendInvitationComponent,
     MessageComponent,
     StopsGridComponent,
     AddQuestionComponent,
@@ -188,8 +201,12 @@ export function getAuthServiceConfigs() {
     CommentComponent,
     LocationPickerComponent,
     LocationPickerComponent,
-    SocialSingIn
-
+    SocialSingIn,
+    AdminComponent,
+    ForbiddenComponent,
+    UpdateRoleComponent,
+    AddCategoryComponent,
+    AddTopCategoryComponent
   ],
   exports: [
     MatAutocompleteModule,
@@ -230,6 +247,7 @@ export function getAuthServiceConfigs() {
   ],
   imports: [
     NgxMaterialTimepickerModule.forRoot(),
+    StarRatingModule.forRoot(),
     MomentModule,
     MatProgressBarModule,
     MatAutocompleteModule,
@@ -246,10 +264,10 @@ export function getAuthServiceConfigs() {
     HttpModule,
     HttpClientModule,
     MatNativeDateModule,
-    ReactiveFormsModule,
     AppRoutingModule,
     MatSortModule,
     MatTableModule,
+    MatTabsModule,
     MatMenuModule,
     FormsModule,
     MatCardModule,
@@ -269,6 +287,7 @@ export function getAuthServiceConfigs() {
     MatAutocompleteModule,
     MatPaginatorModule,
     MatListModule,
+    MdcIconButtonModule,
     SocialLoginModule,
     TranslateModule.forRoot({
       loader: {
@@ -292,14 +311,17 @@ export function getAuthServiceConfigs() {
     Ng5BreadcrumbModule.forRoot(),
   ],
   providers: [
-    httpInterceptorProviders,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
     AdminGuardService,
     ClientGuardService,
     AuthGuardService,
     ExcategoryService,
     UserService,
     AuthService,
-    TokenStorage,
     StopService,
     TransitService,
     ExcategoryService,
@@ -314,7 +336,15 @@ export function getAuthServiceConfigs() {
       useFactory: getAuthServiceConfigs
     }],
   bootstrap: [AppComponent],
-  entryComponents: [AddQuestionComponent, AddFeedbackComponent, AddUserComponent, UserLoginComponent, ForgetPasswordComponent, ChooseTransitComponent]
+
+  entryComponents: [
+    AddQuestionComponent,
+    AddFeedbackComponent,
+    AddUserComponent,
+    UserLoginComponent,
+    ForgetPasswordComponent,
+    ChooseTransitComponent,
+    FriendInvitationComponent]
 
 })
 export class AppModule {

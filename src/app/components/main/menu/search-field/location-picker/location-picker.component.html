@@ -1,6 +1,6 @@
 <div>
-  <mdc-select ngModel="Geotag" (selectionChange)="onSelectionChange($event)">
-    <option *ngFor="let location of availableLocations" [value]="location.name.substring(1)">
+  <mdc-select #select ngModel="Geotag" (selectionChange)="onSelectionChange($event)">
+    <option *ngFor="let location of availableLocations" [value]="location.name.substring(1)" [selected]="select.setValue(currentlocation)">
       {{location.name.substring(1)}}
     </option>
   </mdc-select>

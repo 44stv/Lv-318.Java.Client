@@ -1,4 +1,3 @@
-<!--<mat-toolbar class="mat-toolbar">-->
 <div class="myToolbar">
   <mdc-toolbar-row>
     <mdc-toolbar-section>
@@ -15,9 +14,13 @@
       </a>
     </div>
 
+
   <div class="NewUser">
-    <a [routerLink]="['/main/user/add']">
+    <a [routerLink]="['/main/user/add']" *ngIf="!hasToken()">
       <button mdc-button [secondary]="true" type="submit" (click)="openModal()">{{'User' | translate}}</button>
+    </a>
+    <a [routerLink]="['/main/admin']" *ngIf="getRole() === role.Admin">
+    <button mdc-button [secondary]="true" type="submit">{{'Admin' | translate}}</button>
     </a>
   </div>
 
@@ -30,12 +33,16 @@
     </a>
   </div>
 
+      <div class="userProfile" >
+        <a [routerLink]="['/main/user/profile']">
+          <button mdc-button [secondary]="true" type="submit">MyProfile</button>
+        </a>
+      </div>
+
     </mdc-toolbar-section>
     <div class="Search">
       <app-search-field></app-search-field>
     </div>
 
-
   </mdc-toolbar-row>
-  <!--</mat-toolbar>-->
 </div>
