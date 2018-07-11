@@ -33,8 +33,7 @@ export class TransitsComponent implements OnInit, AfterViewInit {
   constructor(private transitService: TransitService,
               private route: ActivatedRoute,
               private diagramService: DiagramService,
-              private breadcrumbService: BreadcrumbService,
-              private nonExtCategoryServ: NonExCategoryService) {
+              private breadcrumbService: BreadcrumbService) {
     this.breadcrumbService.hideRoute('/main/Public%20Transport');
   }
 
@@ -48,7 +47,6 @@ export class TransitsComponent implements OnInit, AfterViewInit {
 
   getTransits(): void {
     this.route.params.forEach(params => {
-
       if (params['id'] !== undefined) {
         this.categoryId = params['id'];
         this.getAllByCategoryId(this.categoryId, this.paginator.pageIndex, this.paginator.pageSize);
@@ -92,12 +90,6 @@ export class TransitsComponent implements OnInit, AfterViewInit {
       });
     return this.averageRate;
   }
-
-  // onSubmit() {
-  //   this.transitService.addTransit(this.transit)
-  //     .subscribe(res => console.log(res));
-  //   alert('Transit added: ' + Convert.transitToJson(this.transit));
-  // }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
