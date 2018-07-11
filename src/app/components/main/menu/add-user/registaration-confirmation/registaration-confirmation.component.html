@@ -1,0 +1,19 @@
+<!-- Waiting -->
+<div class="registrationConfirm">
+<div class="container-fluid" *ngIf="!_isChanging">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h3>Your account is activating, please wait</h3>
+      <mat-progress-bar mode="buffer"></mat-progress-bar>
+    </div>
+  </div>
+</div>
+<!-- Successfully -->
+<div class="container-fluid" *ngIf="_isChanging">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h3>Your account  activated successfully! Now you can to log in.</h3>
+    </div>
+  </div>
+</div>
+</div>

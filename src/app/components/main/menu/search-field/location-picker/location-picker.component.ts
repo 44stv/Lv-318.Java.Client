@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {LocationService} from '../../../../services/location.service';
-import {Geotag} from '../../../../models/geotag.model';
+import {Component, OnInit, Output} from '@angular/core';
+import {LocationService} from '../../../../../services/location.service';
+import {Geotag} from '../../../../../models/geotag.model';
+import {GlobalSearchService} from '../../../../../services/global-search.service';
+import {select} from 'd3-selection';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-location-picker',
@@ -11,7 +14,7 @@ export class LocationPickerComponent implements OnInit {
   currentlocation: string;
   availableLocations: Geotag[];
 
-  constructor(private locationService: LocationService) {
+  constructor(private locationService: LocationService, private globalSearchService: GlobalSearchService) {
   }
 
   ngOnInit(): void {
@@ -20,6 +23,7 @@ export class LocationPickerComponent implements OnInit {
         .getCurrentLocation(position.coords.latitude, position.coords.longitude)
         .subscribe(data => {
           this.currentlocation = data.name.substring(1);
+          this.globalSearchService.setCurentLocation(this.currentlocation);
           console.log('Current location OnInit: ' + this.currentlocation);
         });
     });
@@ -29,5 +33,6 @@ export class LocationPickerComponent implements OnInit {
 
   onSelectionChange(event: { index: any, value: any }) {
     this.currentlocation = event.value;
+    this.globalSearchService.setCurentLocation(this.currentlocation);
   }
 }

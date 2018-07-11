@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { ExcategoryModel } from '../models/excategory.model';
-import { environment } from '../../environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {ExcategoryModel} from '../models/excategory.model';
+import {environment} from '../../environments/environment';
+import {Category} from '../models/category';
 
 
 @Injectable({
