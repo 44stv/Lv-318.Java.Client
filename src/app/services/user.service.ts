@@ -6,6 +6,7 @@ import { Friend } from '../models/friend.model';
 import { Login } from '../models/login.model';
 import { environment } from '../../environments/environment';
 import {Observable} from 'rxjs';
+import {UpdatePassword} from '../models/update-password.model';
 
 
 const httpOptions = {
@@ -42,5 +43,10 @@ export class UserService {
   }
   changePassword(uuid: string): Observable<any> {
     return this.http.post(this.userUrl + '/update/password', uuid);
+  }
+
+  sendUpdatePassword(updatePassword: UpdatePassword): Observable<any> {
+    return this.http.post(this.userUrl + '/profile/update/password', updatePassword);
+
   }
 }

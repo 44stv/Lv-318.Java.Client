@@ -128,6 +128,7 @@ import {LocationPickerComponent} from './components/main/menu/search-field/locat
 import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
 import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
 import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
+import {UpdatePasswordComponent} from './components/main/menu/user-profile/update-password/update-password.component';
 
 
 
@@ -168,6 +169,7 @@ export function getAuthServiceConfigs() {
     AddUserComponent,
     ForgetPasswordComponent,
     UserProfileComponent,
+    UpdatePasswordComponent,
     FriendInvitationComponent,
     MessageComponent,
     StopsGridComponent,
@@ -328,7 +330,8 @@ export function getAuthServiceConfigs() {
     UserLoginComponent,
     ForgetPasswordComponent,
     ChooseTransitComponent,
-    FriendInvitationComponent]
+    FriendInvitationComponent,
+    UpdatePasswordComponent]
 
 })
 export class AppModule {
