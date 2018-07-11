@@ -13,11 +13,12 @@
   width: 60%;
 }
 
-.mat-raised-button {
-  margin-top: 2%;
+.stroked-button-left {
+  padding-top: 2%;
 }
 
-.mat-stroked-button {
-  margin: 2% 40% 0 0;
+.stroked-button-right {
+  padding: 2% 40% 0 0;
   float: right;
+  clear: right;
 }

@@ -1,15 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {getAllRoles} from '../../../../services/auth/roles';
 import {Location} from '@angular/common';
-import {UserService} from '../../../../services/user.service';
-import {UpdateRoleModel} from '../../../../models/update-role.model';
 import {Category} from '../../../../models/category.model';
-import {Observable} from 'rxjs';
-import {ExcategoryModel} from '../../../../models/excategory.model';
 import {ExcategoryService} from '../../../../services/excategory.service';
-import {HttpResponse} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -45,11 +39,7 @@ export class AddTopCategoryComponent implements OnInit {
     });
   }
 
-  gotBack(): void {
-    this.location.back();
-  }
-
   close() {
-    this.gotBack();
+    this.location.back();
   }
 }

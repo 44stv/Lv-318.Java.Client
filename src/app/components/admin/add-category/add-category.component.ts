@@ -1,12 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ExcategoryService} from '../../../services/excategory.service';
-import {NonExCategoryService} from '../../../services/non-ex-category.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {HttpResponse} from '@angular/common/http';
-import {MatSnackBar} from '@angular/material';
-import {Router} from '@angular/router';
-import {CategoryLevel, getAllCategoryLevel} from './category-level.model';
-import {Observable} from 'rxjs';
+import {FormBuilder} from '@angular/forms';
+import {getAllCategoryLevel} from './category-level.model';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-add-category',
@@ -20,7 +16,7 @@ export class AddCategoryComponent implements OnInit {
 
   constructor(private exCategotyService: ExcategoryService,
               private formBuilder: FormBuilder,
-              private router: Router) {
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -28,6 +24,10 @@ export class AddCategoryComponent implements OnInit {
     // this.topCategories = this.exCategotyService.getTopCategories();
     console.log(this.levels);
 
+  }
+
+  close() {
+    this.location.back();
   }
 
 }
