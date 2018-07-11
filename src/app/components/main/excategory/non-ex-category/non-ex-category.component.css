@@ -74,23 +74,3 @@
   text-decoration: none solid rgb(68, 68, 68);
   font-style: italic;
 }
-
-
-
-.demo-content {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  margin: 15px;
-}
-
-.demo-content--column {
-  display: flex;
-  flex-direction: column;
-}
-
-.demo-content--row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 10px 0 10px 0;
-}

@@ -6,6 +6,8 @@ export class User {
   email: string;
   password: string;
   passwordConfirmation: string;
+  provider: string;
+
 
   constructor(values: Object = {}) {
     Object.assign(this, values);
