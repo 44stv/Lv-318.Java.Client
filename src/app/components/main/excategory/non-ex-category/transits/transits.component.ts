@@ -7,6 +7,7 @@ import {Transit} from '../../../../../models/transit.model';
 import {TransitService} from '../../../../../services/transit.service';
 import {DiagramService} from '../../../../../services/diagram.service';
 import {BreadcrumbService} from 'ng5-breadcrumb';
+import {NonExCategoryService} from '../../../../../services/non-ex-category.service';
 
 
 @Component({
@@ -32,7 +33,8 @@ export class TransitsComponent implements OnInit, AfterViewInit {
   constructor(private transitService: TransitService,
               private route: ActivatedRoute,
               private diagramService: DiagramService,
-              private breadcrumbService: BreadcrumbService) {
+              private breadcrumbService: BreadcrumbService,
+              private nonExtCategoryServ: NonExCategoryService) {
     this.breadcrumbService.hideRoute('/main/Public%20Transport');
   }
 
@@ -42,11 +44,11 @@ export class TransitsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.getTransits();
-    // this.dataSource.paginator = this.paginator;
   }
 
   getTransits(): void {
     this.route.params.forEach(params => {
+
       if (params['id'] !== undefined) {
         this.categoryId = params['id'];
         this.getAllByCategoryId(this.categoryId, this.paginator.pageIndex, this.paginator.pageSize);
