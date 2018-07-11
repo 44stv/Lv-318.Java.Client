@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ExcategoryModel} from '../models/excategory.model';
 import {environment} from '../../environments/environment';
+import {Category} from '../models/category';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class NonExCategoryService {
   }
 
   public getByNames(name: String, nextlevel: String): Observable<ExcategoryModel[]> {
-    return this.http.get<ExcategoryModel[]>(this.serviceUrl + '?firstNestedCategoryName=' + name
+    return this.http.get<ExcategoryModel[]>(this.serviceUrl + '/count' + '?firstNestedCategoryName=' + name
       + '&secondNestedCategoryName=' + nextlevel);
   }
 }

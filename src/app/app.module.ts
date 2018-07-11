@@ -4,6 +4,27 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
+import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './services/auth/auth.service';
+import { SocialService } from './services/auth/social.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { HttpModule } from '@angular/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Ng5BreadcrumbModule } from 'ng5-breadcrumb';
+import { MomentModule } from 'angular2-moment/moment.module';
+import { AppMaterialModule } from './material.module';
+import {
+  AuthServiceConfig,
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialLoginModule
+} from 'angular-6-social-login';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatDialogModule} from '@angular/material/dialog';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import { StarRatingModule } from 'angular-star-rating';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './services/auth/auth.service';
@@ -26,7 +47,6 @@ import {
   MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
-  MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
@@ -55,15 +75,8 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+import { ExcategoryService } from './services/excategory.service';
 
-import {
-  MdcButtonModule,
-  MdcFabModule,
-  MdcIconModule,
-  MdcSliderModule
-} from '@angular-mdc/web';
-
-import {ExcategoryService} from './services/excategory.service';
 import {MainComponent} from './components/main/main.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import {MessageComponent} from './components/message/message.component';
@@ -74,9 +87,9 @@ import {AuthGuardService} from './services/guard/auth-guard.service';
 import {ClientGuardService} from './services/guard/client-guard.service';
 import {DiagramService} from './services/diagram.service';
 import {GlobalSearchService} from './services/global-search.service';
-import { UixMatNumberSpinnerModule } from 'uix-mat-number-spinner';
 import { AdminComponent } from './components/admin/admin.component';
 
+import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {TransitService} from './services/transit.service';
 import {FeedbackService} from './services/feedback.service';
 import {FeedbackCriteriaService} from './services/feedback-criteria.service';
@@ -85,6 +98,7 @@ import {AgmDirectionModule} from 'agm-direction';
 import {ExcategoryComponent} from './components/main/excategory/excategory.component';
 import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
 import {MenuComponent} from './components/main/menu/menu.component';
+import {SearchFieldComponent} from './components/main/menu/search-field/search-field.component';
 import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
 import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
 import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
@@ -99,6 +113,9 @@ import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteri
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
 import {MyRateComponent} from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
+import { CommentComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comment/comment.component';
+import { CommentsComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
+import { CommentService } from './services/comment.service';
 import {
   RaitingDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/raiting-diagram/raiting-diagram.component';
@@ -114,6 +131,21 @@ import { UpdateRoleComponent } from './components/admin/update-role/update-role.
 import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
 import { AddTopCategoryComponent } from './components/admin/add-category/add-top-category/add-top-category.component';
 
+
+import {
+  RegistarationConfirmationComponent
+} from './components/main/menu/add-user/registaration-confirmation/registaration-confirmation.component';
+import {ForgetPasswordComponent} from './components/main/menu/user-login/forget-password/forget-password.component';
+import {
+  ForgetPasswordConfirmationComponent
+} from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
+import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
+import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
+import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
+import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
+
+
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -121,18 +153,37 @@ export function HttpLoaderFactory(http: HttpClient) {
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+export function getAuthServiceConfigs() {
+  const config = new AuthServiceConfig(
+    [
+      {
+        id: FacebookLoginProvider.PROVIDER_ID,
+        provider: new FacebookLoginProvider('198242184359664')
+      },
+      {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider('1021227322496-q7977jujlatadfoql9skbeasai2550mn.apps.googleusercontent.com')
+      }
+    ]
+  );
+  return config;
+}
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ExcategoryComponent,
+    ForgetPasswordConfirmationComponent,
     MenuComponent,
     NonExCategoryComponent,
     TransitsComponent,
     MainComponent,
     FeedbackCriteriaComponent,
     AddUserComponent,
+    ForgetPasswordComponent,
+    UserProfileComponent,
+    FriendInvitationComponent,
     MessageComponent,
     StopsGridComponent,
     AddQuestionComponent,
@@ -145,11 +196,19 @@ export function createTranslateLoader(http: HttpClient) {
     BackToPreviousPageBtnComponent,
     MapsComponent,
     AddFeedbackComponent,
+    ChooseTransitComponent,
     BackToPreviousPageBtnComponent,
     BackToPreviousPageBtnComponent,
     UserLoginComponent,
+    SearchFieldComponent,
     BusyHoursDiagramComponent,
     MyRateComponent,
+    RegistarationConfirmationComponent,
+    CommentsComponent,
+    CommentComponent,
+    LocationPickerComponent,
+    LocationPickerComponent,
+    SocialSingIn
     AdminComponent,
     ForbiddenComponent,
     UpdateRoleComponent,
@@ -192,21 +251,21 @@ export function createTranslateLoader(http: HttpClient) {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-
-
   ],
   imports: [
+    NgxMaterialTimepickerModule.forRoot(),
+    StarRatingModule.forRoot(),
     MomentModule,
-    MdcButtonModule,
+    MatProgressBarModule,
+    MatAutocompleteModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     MatDatepickerModule,
-    MdcSliderModule ,
-   MdcFabModule,
-   MdcIconModule,
     MatExpansionModule,
     MatTabsModule,
     MatSliderModule,
+    AppMaterialModule,
     BrowserModule,
-    UixMatNumberSpinnerModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     HttpModule,
@@ -220,6 +279,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatMenuModule,
     FormsModule,
     MatCardModule,
+    MatRadioModule,
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -232,9 +292,11 @@ export function createTranslateLoader(http: HttpClient) {
     MatGridListModule,
     MatIconModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
     MatPaginatorModule,
     MatListModule,
     MdcIconButtonModule,
+    SocialLoginModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -254,7 +316,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
     NgxChartsModule,
-    Ng5BreadcrumbModule.forRoot()
+    Ng5BreadcrumbModule.forRoot(),
   ],
   providers: [
     {
@@ -274,9 +336,24 @@ export function createTranslateLoader(http: HttpClient) {
     DiagramService,
     GlobalSearchService,
     FeedbackService,
-    FeedbackCriteriaService],
+    FeedbackCriteriaService,
+    SocialService,
+    CommentService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }],
   bootstrap: [AppComponent],
-  entryComponents: [AddQuestionComponent, AddFeedbackComponent]
+
+  entryComponents: [
+    AddQuestionComponent,
+    AddFeedbackComponent,
+    AddUserComponent,
+    UserLoginComponent,
+    ForgetPasswordComponent,
+    ChooseTransitComponent,
+    FriendInvitationComponent]
+
 })
 export class AppModule {
 }

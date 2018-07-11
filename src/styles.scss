@@ -2,7 +2,15 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-$mdc-theme-primary: #1565c0; // change primary color example
-$mdc-theme-secondary: #388e3c; // change secondary color example
+$mdc-theme-primary: #00BCD4; // change primary color example
+$mdc-theme-secondary:#ff4081; // change secondary color example
 
 @import "~@angular-mdc/theme/material";
+@import "~@material/typography/mdc-typography";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+@import '~angular-star-rating/scss/star-rating.scss';
+
+.add{
+    @include mdc-fab-accessible($material-color-blue-500);
+    background-color: #00BCD4 !important;
+}

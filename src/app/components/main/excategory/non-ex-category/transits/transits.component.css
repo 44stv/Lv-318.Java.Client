@@ -12,3 +12,19 @@
   padding-top: 5px;
   padding-left: 20px;
 }
+
+.mat-column-categoryIcon {
+  flex: 0 0 15%;
+}
+
+.mat-column-name {
+  flex: 0 0 15%;
+}
+
+.mat-column-routeName {
+  flex: 0 0 50%;
+}
+
+.mat-column-averageRate {
+  flex: 0 0 20%;
+}

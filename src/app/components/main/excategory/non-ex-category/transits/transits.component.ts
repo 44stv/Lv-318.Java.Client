@@ -6,6 +6,8 @@ import {environment} from '../../../../../../environments/environment';
 import {Transit} from '../../../../../models/transit.model';
 import {TransitService} from '../../../../../services/transit.service';
 import {DiagramService} from '../../../../../services/diagram.service';
+import {BreadcrumbService} from 'ng5-breadcrumb';
+import {NonExCategoryService} from '../../../../../services/non-ex-category.service';
 
 
 @Component({
@@ -17,11 +19,11 @@ export class TransitsComponent implements OnInit, AfterViewInit {
 
   categoryId: number;
   cityName: string;
-  averageRate;
+  averageRateArray: Map<number, number> = new Map<number, number>();
 
   categoryIconURL = `${environment.serverURL}/category/img?link=`;
 
-  displayedColumns = ['categoryIcon', 'name', 'routeName'/*, 'averageRate'*/];
+  displayedColumns = ['categoryIcon', 'name', 'routeName', 'averageRate'];
 
   dataSource: MatTableDataSource<Transit> = new MatTableDataSource();
 
@@ -30,7 +32,9 @@ export class TransitsComponent implements OnInit, AfterViewInit {
 
   constructor(private transitService: TransitService,
               private route: ActivatedRoute,
-              private diagramService: DiagramService) {
+              private diagramService: DiagramService,
+              private breadcrumbService: BreadcrumbService) {
+    this.breadcrumbService.hideRoute('/main/Public%20Transport');
   }
 
   ngOnInit() {
@@ -39,7 +43,6 @@ export class TransitsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.getTransits();
-    // this.dataSource.paginator = this.paginator;
   }
 
   getTransits(): void {
@@ -68,6 +71,7 @@ export class TransitsComponent implements OnInit, AfterViewInit {
     this.transitService.getTransitsByCategoryId(categoryId, page, size)
       .subscribe(transits => {
         this.dataSource.data = transits.content;
+        this.getAllRate(this.dataSource.data);
         this.paginator.length = transits.totalElements;
       });
   }
@@ -76,23 +80,25 @@ export class TransitsComponent implements OnInit, AfterViewInit {
     this.transitService.getTransitsByNextLevelCategoryName(categoryName, page, size)
       .subscribe(allTransits => {
         this.dataSource.data = allTransits.content;
+        this.getAllRate(this.dataSource.data);
         this.paginator.length = allTransits.totalElements;
       });
   }
 
-  getTransitAverageRate(transitId: number): number {
-    this.diagramService.getResults(environment.serverURL + '/feedback/rate/' + transitId)
-      .subscribe(res => {
-        this.averageRate = (<number>res).toPrecision(3);
-      });
-    return this.averageRate;
+  getAllRate(array: Transit[]) {
+    for (const transit of array) {
+        this.getTransitAverageRate(transit.id);
+    }
   }
 
-  // onSubmit() {
-  //   this.transitService.addTransit(this.transit)
-  //     .subscribe(res => console.log(res));
-  //   alert('Transit added: ' + Convert.transitToJson(this.transit));
-  // }
+  getTransitAverageRate(transitId: number): number {
+    let rate;
+    this.transitService.getTransitRateById(transitId).subscribe(res => {
+      rate = Number((<number>res).toPrecision(3));
+      this.averageRateArray.set(transitId, rate);
+    });
+    return rate;
+  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
