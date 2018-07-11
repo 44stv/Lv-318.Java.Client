@@ -71,7 +71,7 @@ const routes: Routes = [
             path: ':id',
             children: [
               {path: '', component: TransitsComponent},
-              {path: ':id-transit/:name', component: StopsGridComponent},
+              {path: ':id-transit/:name/:iconUrl', component: StopsGridComponent},
             ]
           },
         ]

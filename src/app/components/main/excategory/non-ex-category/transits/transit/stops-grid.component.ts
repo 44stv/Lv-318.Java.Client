@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {StopService} from '../../../../../../services/stop.service';
 import {Observable} from 'rxjs';
@@ -6,16 +6,21 @@ import {MatDialog} from '@angular/material';
 import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
 import {AuthService} from '../../../../../../services/auth/auth.service';
 import {Stop} from '../../../../../../models/stop.model';
+import {environment} from '../../../../../../../environments/environment';
+import {Transit} from '../../../../../../models/transit.model';
 
 @Component({
   selector: 'app-stops-grid',
   templateUrl: './stops-grid.component.html',
-  styleUrls: ['./stops-grid.component.css']
+  styleUrls: ['./stops-grid.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class StopsGridComponent implements OnInit {
 
   checkedItems: boolean[];
   private sub: any;
+  transit: Transit;
   @Input() idTransit: number;
   @Input() transitName: String;
   stopsList: Observable<Stop[]>;
@@ -24,6 +29,9 @@ export class StopsGridComponent implements OnInit {
   backwardStops: Stop[] = [];
   public selectedStops: Stop[] = [];
   categoryId: number;
+  categoryIconURL = `${environment.serverURL}/category/img?link=`;
+  iconURL: string;
+
 
   constructor(private stopService: StopService,
               private authService: AuthService,
@@ -35,9 +43,11 @@ export class StopsGridComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.forEach(params => {
       this.idTransit = params['id-transit'];
-      this.categoryId = params['id'];
+      this.categoryId = params['categoryId'];
       this.transitName = params['name'];
+      this.iconURL = params['iconUrl'];
     });
+    // this.categoryId = this.transit.categoryId;
     this.stopsList = this.stopService.getStopsByTransitId(this.idTransit);
     this.stopsList.subscribe(stopArray => {
       this.stopArray = stopArray;
@@ -45,8 +55,39 @@ export class StopsGridComponent implements OnInit {
       this.forwardStops = this.stopArray.filter(stop => stop.direction === 'FORWARD');
       this.backwardStops = this.stopArray.filter(stop => stop.direction === 'BACKWARD');
     });
-    console.log(this.authService.decodedToken.auth);
+    console.log(this.transit);
 
+
+  }
+
+  public selectStop(stop: Stop) {
+    if (!this.selectedStops.length) {
+      this.selectedStops.push(Object.assign({}, stop));
+
+    } else {
+      this.selectedStops.forEach(
+        (value) => {
+          if (value.id !== stop.id) {
+            this.selectedStops.push(Object.assign({}, stop));
+          } else {
+            console.log(this.selectedStops.indexOf(value));
+            this.selectedStops.splice(this.selectedStops.indexOf(value), 1);
+          }
+        }
+      );
+    }
+
+
+    // if (!this.selectedStops.includes(stop, 0)) {
+    //   this.selectedStops.push(Object.assign({}, stop));
+    // }
+    // if (this.selectedStops.includes(stop, 0)) {
+    //   this.selectedStops.splice(this.selectedStops.indexOf(stop), 1);
+    // }
+    console.log(this.selectedStops);
+    // console.log(this.selectedStops.indexOf(stop));
+    // console.log(stop);
+    // console.log(Object.assign({}, stop));
 
   }
 
@@ -60,11 +101,12 @@ export class StopsGridComponent implements OnInit {
       }
     }
     console.log(this.selectedStops);
+
   }
 
   public openModal() {
     this.dialog.open(AddFeedbackComponent, {
-      width: '60%', 
+      width: '60%',
       data: {
         number: this.idTransit, categoryId: this.categoryId,
         transitName: this.transitName

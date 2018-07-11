@@ -4,4 +4,5 @@ export class Stop {
   lng: number;
   direction: string;
   street: string;
+  index: number;
  }
