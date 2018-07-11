@@ -24,6 +24,8 @@ import {
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { StarRatingModule } from 'angular-star-rating';
 
 import {
   MatAutocompleteModule,
@@ -229,6 +231,8 @@ export function getAuthServiceConfigs() {
   ],
   imports: [
     NgxMaterialTimepickerModule.forRoot(),
+    NgCircleProgressModule.forRoot(),
+    StarRatingModule.forRoot(),
     MomentModule,
     MatProgressBarModule,
     MatAutocompleteModule,
