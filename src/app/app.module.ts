@@ -79,7 +79,6 @@ import {ClientGuardService} from './services/guard/client-guard.service';
 import {DiagramService} from './services/diagram.service';
 import {GlobalSearchService} from './services/global-search.service';
 import {httpInterceptorProviders} from './services/auth/interceptors/http-providers';
-import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {TransitService} from './services/transit.service';
 import {FeedbackService} from './services/feedback.service';
 import {FeedbackCriteriaService} from './services/feedback-criteria.service';
@@ -89,6 +88,7 @@ import {ExcategoryComponent} from './components/main/excategory/excategory.compo
 import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
 import {MenuComponent} from './components/main/menu/menu.component';
 import {SearchFieldComponent} from './components/main/menu/search-field/search-field.component';
+import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
 import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
 import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
 import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
@@ -128,8 +128,7 @@ import {LocationPickerComponent} from './components/main/menu/search-field/locat
 import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
 import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
 import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
-
-
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -296,6 +295,7 @@ export function getAuthServiceConfigs() {
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
     NgxChartsModule,
     Ng5BreadcrumbModule.forRoot(),
+    NgCircleProgressModule.forRoot(),
   ],
   providers: [
     httpInterceptorProviders,

@@ -281,18 +281,22 @@ export class MapsComponent implements OnInit {
     ;
   }
 
-  clickedMarker(marker) {
+  clickedMarker(index , marker) {
+    console.log(index);
     if (this.firstStopMarker.name === undefined) {
       this.firstStopMarker.name = marker.name;
       this.firstStopMarker.lat = marker.lat;
       this.firstStopMarker.lng = marker.lng;
       this.firstStopMarker.order = marker.order;
+      this.markers[index].animation = 'BOUNCE';
     } else {
       if (marker.order > this.firstStopMarker.order) {
+        this.markers[this.secondStopMarker.order].animation = null;
         this.secondStopMarker.name = marker.name;
         this.secondStopMarker.lat = marker.lat;
         this.secondStopMarker.lng = marker.lng;
         this.secondStopMarker.order = marker.order;
+        this.markers[index].animation = 'BOUNCE';
         this.stopList = new Array(this.secondStopMarker.order - this.firstStopMarker.order - 1);
         for (let i = this.firstStopMarker.order + 1, j = 0; i < this.secondStopMarker.order; i++, j++) {
           this.stopList[j] = this.markers[i];
@@ -314,9 +318,10 @@ export class MapsComponent implements OnInit {
 }
 
 export class MarkerModel {
-  name: String;
+  name: string;
   lat: number;
   lng: number;
   draggable: boolean;
   order: number;
+  animation: string;
 }
