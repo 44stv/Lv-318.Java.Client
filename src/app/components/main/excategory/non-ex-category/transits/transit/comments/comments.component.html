@@ -1,25 +1,43 @@
 <div class="allComments">
 
-  <div class="addComment" mdcTypography>
+  <div class="addComment">
     <div class="row">
 
       <mat-form-field appearance="outline" class="leaveComment">
-        <textarea matInput maxlength="256" placeholder="Leave comment" [(ngModel)]="commentText" [required]="true"></textarea>
+        <textarea matInput maxlength="256"
+                  placeholder="Leave comment"
+                  [(ngModel)]="addCommentText"
+                  [required]="true"></textarea>
       </mat-form-field>
-
-      <button class="postButton"
-              mdc-button
-              [secondary]="true"
-              [raised]="true"
-              type="submit" (click)="addTopLevelComment(4)">Post comment</button>
     </div>
+
+    <div class="row">
+      <div class="col-xs-4">
+        <button class="postButton"
+                mdc-button
+                [secondary]="true"
+                [raised]="true"
+                type="submit" (click)="addTopLevelComment(4)">Post comment
+        </button>
+      </div>
+
+      <div class="col-xs-4 sortComments">
+        <mat-form-field>
+          <mat-select placeholder="Select sort type"
+                      [(value)]="sortMode"
+                      (selectionChange)="sortComments()">
+            <mat-option value="DESC">Date desc</mat-option>
+            <mat-option value="ASC">Date asc</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+
   </div>
 
   <div class="underline"></div>
 
-  <div *ngFor="let comment of comments">
+  <app-top-level-comments [comments]="comments"></app-top-level-comments>
 
-    <app-comment class="oneComment" [comment]="comment"></app-comment>
-
-  </div>
 </div>
