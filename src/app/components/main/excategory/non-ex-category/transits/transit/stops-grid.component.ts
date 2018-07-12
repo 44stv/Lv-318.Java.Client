@@ -32,7 +32,6 @@ export class StopsGridComponent implements OnInit {
               public dialog: MatDialog,
               private breadcrumbService: BreadcrumbService) {
     this.breadcrumbService.hideRouteRegex('/main/.+/[A-Za-z]+/[0-9]+/[0-9]+/[0-9]+');
-    // this.breadcrumbService.addFriendlyNameForRouteRegex('/main/.+/[A-Za-z]+/[0-9]+/[0-9]+', this.transitName);
   }
 
 
