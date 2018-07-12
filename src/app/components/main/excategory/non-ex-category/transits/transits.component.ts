@@ -33,7 +33,8 @@ export class TransitsComponent implements OnInit, AfterViewInit {
   constructor(private transitService: TransitService,
               private route: ActivatedRoute,
               private diagramService: DiagramService,
-              private breadcrumbService: BreadcrumbService) {
+              private breadcrumbService: BreadcrumbService,
+              private nonExCatServ: NonExCategoryService) {
     this.breadcrumbService.hideRoute('/main/Public%20Transport');
   }
 
@@ -50,6 +51,10 @@ export class TransitsComponent implements OnInit, AfterViewInit {
       if (params['id'] !== undefined) {
         this.categoryId = params['id'];
         this.getAllByCategoryId(this.categoryId, this.paginator.pageIndex, this.paginator.pageSize);
+        this.nonExCatServ.getNameByCategoryId(this.categoryId)
+          .subscribe(data => {
+            this.breadcrumbService.addFriendlyNameForRouteRegex('/main/Public%20Transport/Lviv/[0-9]+', data[0].name);
+          });
       }
       if (params['id'] === undefined) {
         this.cityName = params['city'];

@@ -20,5 +20,9 @@ export class NonExCategoryService {
     return this.http.get<ExcategoryModel[]>(this.serviceUrl + '/count' + '?firstNestedCategoryName=' + name
       + '&secondNestedCategoryName=' + nextlevel);
   }
+
+  public getNameByCategoryId(id: number) {
+    return this.http.get<Category[]>(this.serviceUrl + '?id=' + id);
+  }
 }
 
