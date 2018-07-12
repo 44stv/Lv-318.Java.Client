@@ -1,8 +1,21 @@
 <div class="allComments">
 
-  <div class="addComment">
+  <div class="addComment" mdcTypography>
+    <div class="row">
 
+      <mat-form-field appearance="outline" class="leaveComment">
+        <textarea matInput maxlength="256" placeholder="Leave comment" [(ngModel)]="commentText" [required]="true"></textarea>
+      </mat-form-field>
+
+      <button class="postButton"
+              mdc-button
+              [secondary]="true"
+              [raised]="true"
+              type="submit" (click)="addTopLevelComment(4)">Post comment</button>
+    </div>
   </div>
+
+  <div class="underline"></div>
 
   <div *ngFor="let comment of comments">
 
