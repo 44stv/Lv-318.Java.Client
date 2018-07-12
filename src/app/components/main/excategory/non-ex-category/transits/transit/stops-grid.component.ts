@@ -9,6 +9,7 @@ import {Stop} from '../../../../../../models/stop.model';
 import {BreadcrumbService} from 'ng5-breadcrumb';
 import {environment} from '../../../../../../../environments/environment';
 import {Transit} from '../../../../../../models/transit.model';
+import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
 
 @Component({
   selector: 'app-stops-grid',
@@ -36,8 +37,20 @@ export class StopsGridComponent implements OnInit {
               private authService: AuthService,
               private route: ActivatedRoute,
               public dialog: MatDialog,
-              private breadcrumbService: BreadcrumbService) {
-    this.breadcrumbService.hideRouteRegex('/main/.+/[A-Za-z]+/[0-9]+/[0-9]+/[0-9]+');
+              private breadcrumbService: BreadcrumbService,
+              private nonExCatServ: NonExCategoryService) {
+    this.route.params.subscribe(params => {
+      this.nonExCatServ.getNameByCategoryId(params['id']).subscribe(data => {
+        this.breadcrumbService.addFriendlyNameForRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
+          '/' + params['city'] + '/' + params['id'], data[0].name);
+      });
+      this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20'));
+      this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
+        '/' + params['city'] + '/' + params['id'] + '/' + params['id-transit'] + '/' + params['name'] +
+        '/' + (<string>params['iconUrl']).replace('/', '%2F'));
+      this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
+        '/' + params['city'] + '/' + params['id'] + '/' + params['id-transit']);
+    });
   }
 
 
