@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {environment} from '../../../../../../../../environments/environment';
-import {MapsService} from '../../../../../../../services/maps.service';
-import {Location, WaypointModel} from '../../../../../../../models/waypoint.model';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { environment } from '../../../../../../../../environments/environment';
+import { MapsService } from '../../../../../../../services/maps.service';
+import { Location, WaypointModel } from '../../../../../../../models/waypoint.model';
 
 @Component({
   selector: 'app-maps',
@@ -133,7 +133,9 @@ export class MapsComponent implements OnInit {
   public lngStatic: Number = 24.028803095222;
   public firstStopMarker: MarkerModel = new MarkerModel();
   public secondStopMarker: MarkerModel = new MarkerModel();
-  public icon = environment.serverURL + '/category/img?link=static/bus-stop.png';
+  public icon = "../../../../../../../../assets/img/stop.png";
+  public iconSelectedA = "../../../../../../../../assets/img/a.png";
+  public iconSelectedB = "../../../../../../../../assets/img/b.png";
   public direction = undefined;
   public directionSecond = undefined;
   public travelMode = 'DRIVING';
@@ -158,6 +160,8 @@ export class MapsComponent implements OnInit {
   };
   public waypoints;
   public waypointsSecond;
+  public myLocation = new MarkerModel();
+  public geolocationPosition;
 
   public markerOptions = {
     origin: {
@@ -183,6 +187,31 @@ export class MapsComponent implements OnInit {
       this.transitId = param['id'];
     });
     this.initPoints();
+    this.getMyPosition();
+  }
+
+  getMyPosition(){
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+        position => {
+          this.geolocationPosition = position,
+            console.log(position)
+        },
+        error => {
+          switch (error.code) {
+            case 1:
+              console.log('Permission Denied');
+              break;
+            case 2:
+              console.log('Position Unavailable');
+              break;
+            case 3:
+              console.log('Timeout');
+              break;
+          }
+        }
+      );
+    };
   }
 
   setDirectionAndRefresh(routeDirection) {
@@ -201,6 +230,8 @@ export class MapsComponent implements OnInit {
       marker.lng = this.points[i].lng;
       marker.draggable = false;
       marker.order = i;
+      marker.icon = this.icon;
+      marker.animation = 'DROP';
       this.markers[i] = marker;
     }
   }
@@ -281,25 +312,35 @@ export class MapsComponent implements OnInit {
     ;
   }
 
-  clickedMarker(marker) {
-    if (this.firstStopMarker.name === undefined) {
-      this.firstStopMarker.name = marker.name;
-      this.firstStopMarker.lat = marker.lat;
-      this.firstStopMarker.lng = marker.lng;
-      this.firstStopMarker.order = marker.order;
-    } else {
-      if (marker.order > this.firstStopMarker.order) {
-        this.secondStopMarker.name = marker.name;
-        this.secondStopMarker.lat = marker.lat;
-        this.secondStopMarker.lng = marker.lng;
-        this.secondStopMarker.order = marker.order;
-        this.stopList = new Array(this.secondStopMarker.order - this.firstStopMarker.order - 1);
-        for (let i = this.firstStopMarker.order + 1, j = 0; i < this.secondStopMarker.order; i++, j++) {
-          this.stopList[j] = this.markers[i];
-        }
-      } else {
-        alert('Wrong stop order.');
+  clickedMarker(index, marker) {
+    if (this.firstStopMarker.order === undefined) {
+      this.firstStopMarker = marker;
+      this.markers[index].icon = this.iconSelectedA;
+      this.markers[index].animation = 'BOUNCE';
+    }
+    else if (this.firstStopMarker.order === index) {
+      this.markers[index].icon = this.icon;
+      this.markers[index].animation = null;
+      this.firstStopMarker = new MarkerModel();
+    }
+    else if (this.secondStopMarker.order === index) {
+      this.markers[index].icon = this.icon;
+      this.markers[index].animation = null;
+      this.secondStopMarker = new MarkerModel();
+    }
+    else if (marker.order > this.firstStopMarker.order) {
+      this.secondStopMarker = marker;
+      this.markers[index].icon = this.iconSelectedB;
+      this.markers[index].animation = 'BOUNCE';
+      this.stopList = new Array(this.secondStopMarker.order - this.firstStopMarker.order - 1);
+      for (let i = this.firstStopMarker.order + 1, j = 0; i < this.secondStopMarker.order; i++, j++) {
+        this.stopList[j] = this.markers[i];
       }
+    } else {
+      alert('Wrong stop order.');
+    }
+    if (this.firstStopMarker.order === undefined || this.secondStopMarker.order === undefined) {
+      this.stopList = new Array();
     }
   }
 
@@ -314,9 +355,11 @@ export class MapsComponent implements OnInit {
 }
 
 export class MarkerModel {
-  name: String;
+  name: string;
   lat: number;
   lng: number;
   draggable: boolean;
   order: number;
+  icon: string;
+  animation: string;
 }

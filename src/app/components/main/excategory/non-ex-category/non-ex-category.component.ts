@@ -32,7 +32,7 @@ export class NonExCategoryComponent implements OnInit {
     this.breadcrumbService.hideRoute('/main/Public%20Transport');
   }
 
-   ngOnInit() {
+  ngOnInit() {
     this.sub = this.route.params.forEach(params => {
       this.city = params['city'];
       this.top = params['top'];
