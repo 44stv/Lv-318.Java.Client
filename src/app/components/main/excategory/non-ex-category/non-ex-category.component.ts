@@ -46,7 +46,6 @@ export class NonExCategoryComponent implements OnInit {
       this.city = params['city'];
       this.top = params['top'];
       this.list = this.service.getByNames(this.city, this.top);
-      console.log(this.city);
     });
   }
 }
