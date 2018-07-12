@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
-import { TokenStorage } from '../auth/token/token-storage';
+import {AuthService} from '../auth/auth.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate, CanActivateChild {
 
-  constructor(private tokenStorage: TokenStorage,
-              private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -18,7 +17,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
   }
 
   checkRights(): boolean {
-    if (this.tokenStorage.hasToken()) {
+    if (this.authService.hasToken()) {
       this.router.navigate(['/error/']);
       return false;
     } else {

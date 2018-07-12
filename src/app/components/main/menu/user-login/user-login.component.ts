@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 
 import {Login} from '../../../../models/login.model';
 import {AuthService} from '../../../../services/auth/auth.service';
-import {TokenStorage} from '../../../../services/auth/token/token-storage';
 import {TokenModel} from '../../../../services/auth/token/token-model';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatSnackBar} from '@angular/material';
@@ -27,8 +26,8 @@ export class UserLoginComponent implements OnInit {
 
   constructor(public  matDialogRef: MatDialogRef<UserLoginComponent>,
               private snackBar: MatSnackBar,
-              private fb: FormBuilder, private router: Router, private authService: AuthService,
-              private tokenStorage: TokenStorage,
+              private fb: FormBuilder, private router: Router,
+              private authService: AuthService,
               private dialog: MatDialog) {
   }
 
@@ -53,7 +52,7 @@ export class UserLoginComponent implements OnInit {
     this.login = this.loginForm.value;
     this.authService.signIn(this.login)
       .subscribe((token: TokenModel) => {
-        this.tokenStorage.saveToken(token);
+        this.authService.setToken(token);
         alert('User loged successfully.');
         this.snackBar.open('User loged successfully', null, {
           duration: 4000

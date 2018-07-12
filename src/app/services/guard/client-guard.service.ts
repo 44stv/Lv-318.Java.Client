@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { TokenStorage } from '../auth/token/token-storage';
+import { AuthService } from '../auth/auth.service';
 import { Role } from '../auth/roles';
 
 @Injectable()
 export class ClientGuardService {
 
-  constructor(private tokenStorage: TokenStorage,
+  constructor(private authService: AuthService,
               private router: Router) {
   }
 
@@ -19,7 +19,8 @@ export class ClientGuardService {
   }
 
   checkRights(): boolean {
-    return this.tokenStorage.getRole() === Role.Client || this.tokenStorage.getRole() === Role.Admin;
+    console.log('AuthGuard#canActivate called');
+    return this.authService.getRole() === Role.Client || this.authService.getRole() === Role.Admin;
   }
 
 }

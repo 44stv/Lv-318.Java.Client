@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { TokenStorage } from '../auth/token/token-storage';
+import { AuthService } from '../auth/auth.service';
 import { Role } from '../auth/roles';
 
 @Injectable()
 export class AdminGuardService {
 
-  constructor(private tokenStorage: TokenStorage,
+  constructor(private authService: AuthService,
               private router: Router) {
   }
 
@@ -19,10 +19,11 @@ export class AdminGuardService {
   }
 
   checkRights(): boolean {
-    if (this.tokenStorage.getRole() === Role.Admin) {
+    console.log('inside AdminGuard');
+    if (this.authService.getRole() === Role.Admin) {
       return true;
     } else {
-      this.router.navigate(['/error/']);
+      this.router.navigate(['main/error/forbidden']);
       return false;
     }
   }

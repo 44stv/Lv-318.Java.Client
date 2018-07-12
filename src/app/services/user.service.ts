@@ -6,6 +6,7 @@ import { Friend } from '../models/friend.model';
 import { Login } from '../models/login.model';
 import { environment } from '../../environments/environment';
 import {Observable} from 'rxjs';
+import {UpdateRoleModel} from '../models/update-role.model';
 
 
 const httpOptions = {
@@ -43,4 +44,9 @@ export class UserService {
   changePassword(uuid: string): Observable<any> {
     return this.http.post(this.userUrl + '/update/password', uuid);
   }
+
+  public updateRole(updateRoleModel: UpdateRoleModel) {
+    return this.http.put<User>(`${this.userUrl}/update-role`, updateRoleModel );
+  }
+
 }
