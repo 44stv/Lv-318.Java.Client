@@ -19,8 +19,8 @@ export class DiagramService {
     return this.http.get(url);
   }
 
-  getHeatMapData(transitId, stopList: Stop[]) {
-
-    return this.http.get(environment.serverURL + '/feedback/heat-map/' + transitId + '?stop-list=' + stopList);
+  getHeatMapData(transitId, stopList) {
+    stopList.map(data => JSON.stringify(data));
+    return this.http.post(environment.serverURL + '/feedback/heat-map/' + transitId, stopList);
   }
 }
