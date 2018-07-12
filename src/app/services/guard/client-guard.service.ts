@@ -20,7 +20,7 @@ export class ClientGuardService {
 
   checkRights(): boolean {
     console.log('AuthGuard#canActivate called');
-    return this.authService.getRole() === Role.Client || this.authService.getRole() === Role.Admin;
+    return this.authService.getRole() === Role.User || this.authService.getRole() === Role.Admin;
   }
 
 }
