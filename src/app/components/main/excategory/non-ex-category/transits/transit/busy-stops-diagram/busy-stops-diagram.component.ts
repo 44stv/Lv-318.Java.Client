@@ -19,7 +19,7 @@ export class BusyStopsDiagramComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.diagramService.getHeatMapData(this.id)
+    this.diagramService.getHeatMapData(this.id, this.stopList)
       .subscribe(res => this.data = res);
     this.visible = true;
   }

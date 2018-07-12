@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {Stop} from '../models/stop.model';
 
 const httpOptions = {
   headers: new HttpHeaders(({
-    // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' ,
     'Accept': 'application/json',
     'Content-Type': 'application/json'
   })),
@@ -19,7 +19,7 @@ export class DiagramService {
     return this.http.get(url);
   }
 
-  getHeatMapData(transitId) {
-    return this.http.get(environment.serverURL + '/feedback/heat-map/' + transitId);
+  getHeatMapData(transitId, stopList: Stop[]) {
+    return this.http.get(environment.serverURL + '/feedback/heat-map/' + transitId + '?stop-list[]=' + stopList);
   }
 }
