@@ -69,7 +69,7 @@ export class UserLoginComponent implements OnInit {
       this.login = this.loginForm.value;
       this.authService.signIn(this.login)
         .subscribe((token: TokenModel) => {
-          this.tokenStorage.saveToken(token);
+          this.authService.setToken(token);
           this.snackBar.open('User loged successfully', null, {
             duration: 4000
           });
