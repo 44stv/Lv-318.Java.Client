@@ -12,8 +12,8 @@ export class CommentComponent implements OnInit {
 
   @Input() comment: MyComment;
   modified: boolean;
-
-  testComment: MyComment = new MyComment();
+  postCommentDate: string;
+  modifiedCommentDate: string;
 
   childComments: MyComment[];
 
@@ -21,8 +21,10 @@ export class CommentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.testComment.commentText = 'testangular';
     this.modified = this.comment.modifiedDate != null;
+    this.postCommentDate = this.calculateTimeDiffBetweenNowAndDate(new Date(this.comment.postDate));
+    this.modifiedCommentDate = this.calculateTimeDiffBetweenNowAndDate(new Date(this.comment.modifiedDate));
+
     if (this.comment.parent) {
       this.getChildrenComments();
     }
@@ -43,6 +45,28 @@ export class CommentComponent implements OnInit {
     params = params.set('parentId', this.comment.id.toString());
     this.commentService.addComment(params, newComment)
         .subscribe(comment => console.log(comment));
+  }
+
+  calculateTimeDiffBetweenNowAndDate(end: Date): string {
+    const nowTimeInSec = Date.now();
+    const postCommentDateInSec = end.getTime();
+    const timeDiffInMs = (nowTimeInSec - postCommentDateInSec);
+    const timeDiffInMin = timeDiffInMs / 1000 / 60;
+    const timeDiffInHours = timeDiffInMin / 60;
+    const timeDiffInDays = timeDiffInHours / 24;
+
+    if (timeDiffInMin < 60) {
+      return `${Math.round(timeDiffInMin)} minutes ago`;
+      // this.postCommentDate = `${Math.round(timeDiffInMin)} minutes ago`;
+    }
+    if (timeDiffInMin >= 60 && timeDiffInHours < 24) {
+      return `${Math.round(timeDiffInHours)} hours ago`;
+      // this.postCommentDate = `${Math.round(timeDiffInHours)} hours ago`;
+    }
+    if (timeDiffInHours >= 24) {
+      return `${Math.round(timeDiffInDays)} days ago`;
+      // this.postCommentDate = `${Math.round(timeDiffInDays)} days ago`;
+    }
   }
 
 }

@@ -4,7 +4,10 @@
     <div class="row">
 
       <mat-form-field appearance="outline" class="leaveComment">
-        <textarea matInput maxlength="256" placeholder="Leave comment" [(ngModel)]="commentText" [required]="true"></textarea>
+        <textarea matInput maxlength="256"
+                  placeholder="Leave comment"
+                  [(ngModel)]="addCommentText"
+                  [required]="true"></textarea>
       </mat-form-field>
 
       <button class="postButton"

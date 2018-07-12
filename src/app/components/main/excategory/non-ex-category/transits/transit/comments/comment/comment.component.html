@@ -4,10 +4,9 @@
     <div class="row">
       <!--{{ comment.userId }}-->
       Firstname Lastname
-      <div class="modified">
-        <div *ngIf="modified">
-          {{ comment.modifiedDate }}
-        </div>
+      {{ postCommentDate }}
+      <div class="modified" *ngIf="modified">
+        Changed {{ modifiedCommentDate }}
       </div>
     </div>
     <div class="row">
