@@ -33,7 +33,7 @@
 
   <app-raiting-diagram [id]="idTransit"></app-raiting-diagram>
   <app-average-rate [id]="idTransit"></app-average-rate>
-  <app-my-rate [id]="idTransit" [userId]="1"></app-my-rate>
+  <app-my-rate [id]="idTransit" [userId]="1" *ngIf="this.authService.hasToken()"></app-my-rate>
   <app-busy-stops-diagram [id]="idTransit"></app-busy-stops-diagram>
   <app-busy-hours-diagram [id]="idTransit"></app-busy-hours-diagram>
   <app-comments [id]="idTransit"></app-comments>
