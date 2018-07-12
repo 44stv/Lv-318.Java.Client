@@ -136,6 +136,7 @@ import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/soc
 import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
 import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
 import { TopLevelCommentsComponent } from "./components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/top-level-comments.component";
+import {UpdatePasswordComponent} from './components/main/menu/user-profile/update-password/update-password.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -175,6 +176,7 @@ export function getAuthServiceConfigs() {
     AddUserComponent,
     ForgetPasswordComponent,
     UserProfileComponent,
+    UpdatePasswordComponent,
     FriendInvitationComponent,
     MessageComponent,
     StopsGridComponent,
@@ -344,7 +346,8 @@ export function getAuthServiceConfigs() {
     UserLoginComponent,
     ForgetPasswordComponent,
     ChooseTransitComponent,
-    FriendInvitationComponent]
+    FriendInvitationComponent,
+    UpdatePasswordComponent]
 
 })
 export class AppModule {

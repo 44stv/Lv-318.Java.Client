@@ -43,7 +43,7 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let transit;"
              [routerLink]="['/main/',topName , cityName, categoryId,
-             transit.id, transit.name]"></mat-row>
+             transit.id, transit.name, transit.categoryIconURL]"></mat-row>
   </mat-table>
 
 </div>
