@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MyComment } from '../../../../../../../../models/comment.model';
-import { CommentService } from '../../../../../../../../services/comment.service';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { MyComment } from '../../../../../../../../../models/comment.model';
+import { CommentService } from '../../../../../../../../../services/comment.service';
 import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.scss']
+  styleUrls: ['./comment.component.scss'],
 })
 export class CommentComponent implements OnInit {
 
@@ -44,7 +44,7 @@ export class CommentComponent implements OnInit {
     params = params.set('userId', userId.toString());
     params = params.set('parentId', this.comment.id.toString());
     this.commentService.addComment(params, newComment)
-        .subscribe(comment => console.log(comment));
+      .subscribe(comment => console.log(comment));
   }
 
   calculateTimeDiffBetweenNowAndDate(end: Date): string {
@@ -57,15 +57,12 @@ export class CommentComponent implements OnInit {
 
     if (timeDiffInMin < 60) {
       return `${Math.round(timeDiffInMin)} minutes ago`;
-      // this.postCommentDate = `${Math.round(timeDiffInMin)} minutes ago`;
     }
     if (timeDiffInMin >= 60 && timeDiffInHours < 24) {
       return `${Math.round(timeDiffInHours)} hours ago`;
-      // this.postCommentDate = `${Math.round(timeDiffInHours)} hours ago`;
     }
     if (timeDiffInHours >= 24) {
       return `${Math.round(timeDiffInDays)} days ago`;
-      // this.postCommentDate = `${Math.round(timeDiffInDays)} days ago`;
     }
   }
 

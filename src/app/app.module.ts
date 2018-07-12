@@ -105,7 +105,7 @@ import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteri
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
 import {MyRateComponent} from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
-import {CommentComponent} from './components/main/excategory/non-ex-category/transits/transit/comments/comment/comment.component';
+import {CommentComponent} from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/comment/comment.component';
 import {CommentsComponent} from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
 import {CommentService} from './services/comment.service';
 import {
@@ -135,7 +135,7 @@ import {LocationPickerComponent} from './components/main/menu/search-field/locat
 import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
 import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
 import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
-
+import { TopLevelCommentsComponent } from "./components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/top-level-comments.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -198,6 +198,7 @@ export function getAuthServiceConfigs() {
     RegistarationConfirmationComponent,
     CommentsComponent,
     CommentComponent,
+    TopLevelCommentsComponent,
     LocationPickerComponent,
     LocationPickerComponent,
     SocialSingIn,

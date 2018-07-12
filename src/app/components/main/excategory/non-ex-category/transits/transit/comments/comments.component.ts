@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommentService } from '../../../../../../../services/comment.service';
 import { MyComment } from '../../../../../../../models/comment.model';
-import { Location } from '@angular/common';
 import 'rxjs/add/observable/of';
 import { HttpParams } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
@@ -22,13 +21,13 @@ export class CommentsComponent implements OnInit {
   failedMessage = 'Empty comment';
   loginMessage = 'Please, log in';
   action = 'Hide';
+  sortMode = 'DESC';
 
   comments: MyComment[];
 
   constructor(private commentService: CommentService,
               public snackBar: MatSnackBar,
-              private authService: AuthService,
-              private location: Location) {
+              private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -42,7 +41,7 @@ export class CommentsComponent implements OnInit {
     });
   }
 
-  //TODO: get user id form authService
+  // TODO: get user id form authService
   addTopLevelComment(userId: number) {
     if (this.authService.hasToken()) {
       console.log(userId);
@@ -53,7 +52,10 @@ export class CommentsComponent implements OnInit {
         params = params.set('transitId', this.id.toString());
         params = params.set('userId', userId.toString());
         this.commentService.addComment(params, newComment)
-          .subscribe(comment => console.log(comment));
+          .subscribe(comment => {
+            console.log(comment);
+            this.getTopLevelComments();
+          });
         this.openSnackBar(this.successMessage);
       } else {
         this.openSnackBar(this.failedMessage);
@@ -61,14 +63,21 @@ export class CommentsComponent implements OnInit {
     } else {
       this.openSnackBar(this.loginMessage);
     }
-    window.location.reload();
-    // this.location.back();
   }
 
   openSnackBar(message: string) {
     this.snackBar.open(message, this.action, {
       duration: 2000,
     });
+  }
+
+  sortComments(): void {
+    if (this.sortMode === 'DESC') {
+      this.comments.sort((a, b) => a.postDate.localeCompare(b.postDate));
+    }
+    if (this.sortMode === 'ASC') {
+      this.comments.sort((a, b) => b.postDate.localeCompare(a.postDate));
+    }
   }
 }
 
