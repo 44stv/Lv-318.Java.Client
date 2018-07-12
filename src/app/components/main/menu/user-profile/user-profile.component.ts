@@ -8,6 +8,7 @@ import {TokenStorage} from '../../../../services/auth/token/token-storage';
 import {Location} from '@angular/common';
 import {GlobalSearchService} from '../../../../services/global-search.service';
 import {FriendInvitationComponent} from './friend-invitation/friend-invitation.component';
+import {UpdatePasswordComponent} from './update-password/update-password.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -28,6 +29,10 @@ export class UserProfileComponent implements OnInit {
 
   openModal() {
     this.dialog.open(FriendInvitationComponent);
+  }
+
+  openUpdatePassModal() {
+    this.dialog.open(UpdatePasswordComponent);
   }
 
 

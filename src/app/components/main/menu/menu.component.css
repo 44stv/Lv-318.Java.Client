@@ -84,6 +84,10 @@ a:active {
   font-weight: bold;
   margin-bottom: 25px;
 }
+.userProfile{
+  position: relative;
+  margin-left: 20px;
+}
 
 
 

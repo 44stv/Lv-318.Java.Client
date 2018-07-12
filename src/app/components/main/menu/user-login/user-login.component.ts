@@ -49,7 +49,7 @@ export class UserLoginComponent implements OnInit {
   ]);
 
   logIn() {
-    this.login = this.loginForm.value;
+   /* this.login = this.loginForm.value;
     this.authService.signIn(this.login)
       .subscribe((token: TokenModel) => {
         this.authService.setToken(token);
@@ -60,18 +60,36 @@ export class UserLoginComponent implements OnInit {
         this.router.navigate(['main']);
       }, (error) => {
       if (error instanceof HttpErrorResponse) {
-        if (error.error.description === 'User is disabled') {
-          this.snackBar.open('Your account is not activated. Please confirm the registration', null, {
-            duration: 5000
-          });
-        } else {
-          this.snackBar.open(error.error.response, null, {
+          this.snackBar.open(error.error.message, null, {
             duration: 5000
           });
         }
-      }
-    });
-  }
+      });*/
+
+      this.login = this.loginForm.value;
+      this.authService.signIn(this.login)
+        .subscribe((token: TokenModel) => {
+          this.authService.setToken(token);
+          this.snackBar.open('User loged successfully', null, {
+            duration: 4000
+          });
+          this.router.navigate(['main']);
+        }, (error) => {
+          if (error instanceof HttpErrorResponse) {
+            if (error.error.description === 'User is disabled') {
+              this.snackBar.open('Your account is not activated. Please confirm the registration', null, {
+                duration: 5000
+              });
+            } else {
+              this.snackBar.open(error.error.message, null, {
+                duration: 5000
+              });
+            }
+          }
+        });
+    }
+
+
 
   createForm() {
     this.loginForm = this.fb.group({
