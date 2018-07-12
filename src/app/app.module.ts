@@ -229,6 +229,7 @@ export function getAuthServiceConfigs() {
   ],
   imports: [
     NgxMaterialTimepickerModule.forRoot(),
+    MatButtonToggleModule,
     MomentModule,
     MatProgressBarModule,
     MatAutocompleteModule,

@@ -14,17 +14,6 @@
                         [(ngModel)]="questioner.answer[i]" [ngModelOptions]="{standalone: true}"></mat-slider>
           </p>
         </mat-list>
-        <mat-list *ngIf="questioner.type == 'SIMPLE'">
-          <p *ngFor="let question of questioner.questions">
-            <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
-            <mat-radio-group class="radio" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
-              <mat-radio-button class="example-radio-button" *ngFor="let answer of checkBoxAnswers" [value]="answer">
-                {{ answer | lowercase | translate }}
-              </mat-radio-button>
-            </mat-radio-group>
-          </p>
-
-        </mat-list>
         </p>
         </mat-list>
         <mat-form-field appearance="outline" class="comment">
@@ -32,6 +21,37 @@
           <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
         </mat-form-field>
 
+      </mat-card-content>
+    </mat-tab>
+    <mat-tab label="{{ 'Quantity' | translate}}" style="height: 500px">
+      <mat-card-content>
+        <mat-list>
+          <p *ngFor="let questioner of qualitySurvey">
+            <mat-list *ngIf="questioner.type == 'SIMPLE'">
+          <p *ngFor="let question of questioner.questions">
+            <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
+            <mat-radio-group class="radio" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
+              <mat-radio-button class="example-radio-button" *ngFor="let answer of checkBoxAnswers" [value]="answer">
+                {{ answer | lowercase | translate }}
+              </mat-radio-button>
+            </mat-radio-group>
+           </p>
+           </mat-list>
+
+
+
+        <mat-list *ngIf="questioner.type == 'QUANTITY_LOAD'">
+          <p *ngFor="let question of questioner.questions">
+            <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
+            <mat-radio-group class="radio" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
+              <mat-radio-button class="example-radio-button" *ngFor="let answer of quantityLoadAnswers" [value]="answer">
+                {{ answer | lowercase | translate }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </p>
+        </mat-list>
+        </p>
+        </mat-list>
       </mat-card-content>
     </mat-tab>
     <mat-tab label="{{ 'Capacity' | translate}} ">
@@ -45,7 +65,7 @@
                   {{ 'Time' | translate}}
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <p *ngFor="let questioner of capacityFeedbacks">
+              <p *ngFor="let questioner of capacitySurvey">
                 <mat-list>
               <p *ngFor="let question of questioner.timeQuestions ;let i =index">
                 <mat-list *ngIf="question.type == 'TIME'">
@@ -73,7 +93,7 @@
               </mat-radio-button>
           </mat-radio-group> -->
 
-          <p *ngFor="let questioner of capacityFeedbacks">
+          <p *ngFor="let questioner of capacitySurvey">
             <mat-list>
           <p *ngFor="let question of questioner.routeQuestions;let i =index">
             <mat-list *ngIf="question.type == 'STOP'">

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import {
+  MdcChipsModule,
   MdcAppBarModule,
   MdcButtonModule,
   MdcCardModule,
@@ -52,6 +53,7 @@ import {
     MdcThemeModule,
     MdcToolbarModule,
     MdcTypographyModule,
+    MdcChipsModule
   ]
 })
 export class AppMaterialModule { }

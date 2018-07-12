@@ -19,7 +19,8 @@ import {FeedbackCriteria} from '../../../../../../../models/feedback-criteria.mo
 import {Question} from '../../../../../../../models/question.model';
 import {Stop} from '../../../../../../../models/stop.model';
 import {MyComment} from '../../../../../../../models/comment.model';
-import {CommentService} from "../../../../../../../services/comment.service";
+import {CommentService} from '../../../../../../../services/comment.service';
+import {HttpParams} from '@angular/common/http';
 
 
 @Component({
@@ -29,7 +30,8 @@ import {CommentService} from "../../../../../../../services/comment.service";
 })
 export class AddFeedbackComponent implements OnInit {
   @Input() survey: Questioner[] = [];
-  @Input() capacityFeedbacks: Questioner[] = [];
+  @Input() qualitySurvey: Questioner[] = [];
+  @Input() capacitySurvey: Questioner[] = [];
   @Input() capacity = 0;
   @Input() transitId: number = this.data.number;
   @Input() transitName: String = this.data.transitName;
@@ -37,6 +39,7 @@ export class AddFeedbackComponent implements OnInit {
   private categoryId: number = this.data.categoryId;
   private userId = 1;
   private checkBoxAnswers: String[] = ['YES', 'NO', 'MAYBE'];
+  private quantityLoadAnswers: String[] = ['SIT', 'STAY', 'HARD_LOAD', 'LOSER'];
   @Input() private transitComment: MyComment = new MyComment();
   // private directions: String[] = ['FORWARD', 'BACKWARD'];
   // private direction: String;
@@ -46,17 +49,35 @@ export class AddFeedbackComponent implements OnInit {
               private stopService: StopService,
               private commentService: CommentService) {
 
-    this.survey = this.buildSurveyByCriteriaType(['RATING', 'SIMPLE']);
-    this.capacityFeedbacks = this.buildSurveyByCriteriaType(['ROUTE_CAPACITY', 'HOURS_CAPACITY']);
+    this.survey = this.buildSurveyByCriteriaType(['RATING']);
+    this.qualitySurvey = this.buildSurveyByCriteriaType(['SIMPLE', 'QUALITY'])
+    this.capacitySurvey = this.buildSurveyByCriteriaType(['ROUTE_CAPACITY', 'HOURS_CAPACITY']);
     this.stops = this.stopService.getStopsByTransitId(this.transitId);
     // this.stops= this.stopService.getStopsByTransitIdAndDirection(this.transitId,this.direction);
 
   }
 
   ngOnInit() {
-    console.log(this.survey);
-    console.log(this.capacityFeedbacks);
+  }
 
+  public close() {
+    this.dialogRef.close();
+  }
+
+  public saveAllFeedback(): void {
+    const feedbacks: Feedback[] = this.toFeedbackList(this.survey);
+    const capFeedbacks: Feedback[] = this.toFeedbackList(this.capacitySurvey);
+    const quantityFeedbacks: Feedback[] = this.toFeedbackList(this.qualitySurvey);
+    console.log(feedbacks.concat(capFeedbacks, quantityFeedbacks));
+    if (this.transitComment.commentText) {
+      this.addComment();
+    }
+    if (feedbacks.concat(capFeedbacks, quantityFeedbacks).length > 0) {
+      this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks)).subscribe(data => {
+        alert('Feedback created successfully.');
+      });
+    }
+    this.dialogRef.close();
   }
 
   public buildSurveyByCriteriaType(types: String []): Questioner[] {
@@ -67,13 +88,7 @@ export class AddFeedbackComponent implements OnInit {
           feedbackCriterias.forEach(criteria => {
             const questioner: Questioner = this.buildQuestioner(criteria, criteria.questions);
             questioner.questions.sort((a: Question, b: Question) => {
-              if (a.name > b.name) {
-                return 1;
-              }
-              else if (a.name < b.name) {
-                return -1;
-              }
-              return 0;
+              return b.priority - a.priority;
             });
             survey.push(questioner);
           });
@@ -102,6 +117,9 @@ export class AddFeedbackComponent implements OnInit {
       case 'SIMPLE' :
         questioner.answer = new SimpleAnswer();
         break;
+      case 'QUALITY' :
+        questioner.answer = new SimpleAnswer();
+        break;
       case 'ROUTE_CAPACITY' :
         questioner.answer = new Array<Stop>(questioner.routeQuestions.length);
         break;
@@ -110,29 +128,6 @@ export class AddFeedbackComponent implements OnInit {
         break;
     }
 
-  }
-
-  public close() {
-    this.dialogRef.close();
-  }
-
-  public saveAllFeedback(): void {
-    const feedbacks: Feedback[] = this.toFeedbackList(this.survey);
-    const capFeedbacks: Feedback[] = this.toFeedbackList(this.capacityFeedbacks);
-    console.log(feedbacks.concat(capFeedbacks));
-    if (feedbacks.concat(capFeedbacks).length > 0) {
-      this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks)).subscribe(data => {
-        alert('Feedback created successfully.');
-      });
-    } else {
-      alert('You dont make any answers');
-    }
-
-    if (this.transitComment.commentText.length > 0) {
-      this.transitComment = this.buildComment(this.transitComment);
-      console.log(JSON.stringify(this.transitComment));
-    }
-    this.dialogRef.close();
   }
 
 
@@ -157,6 +152,8 @@ export class AddFeedbackComponent implements OnInit {
       case 'RATING' :
         return this.buildRatingAnswer(questioner);
       case 'SIMPLE' :
+        return this.buildSimpleAnswer(questioner);
+      case 'QUALITY' :
         return this.buildSimpleAnswer(questioner);
       case 'ROUTE_CAPACITY' :
         return this.buildCapacityRouteAnswer(questioner);
@@ -206,6 +203,12 @@ export class AddFeedbackComponent implements OnInit {
     }
   }
 
+  public checkCapacityValue(capacity: number): number {
+    capacity = (capacity > 100) ? 100 : capacity;
+    capacity = (capacity < 0) ? 0 : capacity;
+    return capacity;
+  }
+
   public buildCapacityHoursAnswer(questioner: Questioner): string {
     const capacityHourAnswer: CapacityHoursFeedback = new CapacityHoursFeedback();
     const times: Time[] = [];
@@ -216,18 +219,16 @@ export class AddFeedbackComponent implements OnInit {
       }
     }
 
+// TODO:new sorting
     if (times.length > 1) {
       times.sort((time1: Time, time2: Time) => {
         if (time1.hour > time2.hour) {
           return 1;
-        }
-        else if (time1.hour < time2.hour) {
+        } else if (time1.hour < time2.hour) {
           return -1;
-        }
-        else if (time1.minute > time2.minute) {
+        } else if (time1.minute > time2.minute) {
           return 1;
-        }
-        else if (time1.minute > time2.minute) {
+        } else if (time1.minute > time2.minute) {
           return -1;
         }
         return 0;
@@ -254,17 +255,12 @@ export class AddFeedbackComponent implements OnInit {
     return questions;
   }
 
-
-  public checkCapacityValue(capacity: number): number {
-    capacity = (capacity > 100) ? 100 : capacity;
-    capacity = (capacity < 0) ? 0 : capacity;
-    return capacity;
-  }
-
-  public buildComment(comment: MyComment): MyComment {
-    comment.transitId = this.transitId;
-    comment.userId = this.userId;
-    return comment;
+  public addComment() {
+    let params = new HttpParams();
+    params = params.set('transitId', this.transitId.toString());
+    params = params.set('userId', this.userId.toString());
+    this.commentService.addComment(params, this.transitComment)
+      .subscribe(comment => console.log(comment));
   }
 
   // public getByTransitAndDirection(direction: String){
