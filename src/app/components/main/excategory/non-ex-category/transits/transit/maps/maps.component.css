@@ -8,7 +8,7 @@ agm-map {
 
 }
 #wrapper{
-  position: absolute;
+  position: relative;
   top: 16%;
   left: 50%;
   width: 1200px;

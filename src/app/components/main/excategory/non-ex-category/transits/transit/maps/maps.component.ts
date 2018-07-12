@@ -184,7 +184,7 @@ export class MapsComponent implements OnInit {
       firstCtrl: ['', Validators.required]
     });
     this.route.params.forEach(param => {
-      this.transitId = param['id'];
+      this.transitId = param['id-transit'];
     });
     this.initPoints();
     this.getMyPosition();
@@ -362,4 +362,4 @@ export class MarkerModel {
   order: number;
   icon: string;
   animation: string;
-}
+}``
