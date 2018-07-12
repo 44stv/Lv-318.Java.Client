@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {StopService} from '../../../../../../services/stop.service';
 import {Observable} from 'rxjs';
@@ -6,15 +6,14 @@ import {MatDialog} from '@angular/material';
 import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
 import {AuthService} from '../../../../../../services/auth/auth.service';
 import {Stop} from '../../../../../../models/stop.model';
+import {BreadcrumbService} from 'ng5-breadcrumb';
 import {environment} from '../../../../../../../environments/environment';
 import {Transit} from '../../../../../../models/transit.model';
 
 @Component({
   selector: 'app-stops-grid',
   templateUrl: './stops-grid.component.html',
-  styleUrls: ['./stops-grid.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
-
+  styleUrls: ['./stops-grid.component.css']
 })
 export class StopsGridComponent implements OnInit {
 
@@ -22,7 +21,7 @@ export class StopsGridComponent implements OnInit {
   private sub: any;
   transit: Transit;
   @Input() idTransit: number;
-  @Input() transitName: String;
+  @Input() transitName: string;
   stopsList: Observable<Stop[]>;
   stopArray: Stop[] = [];
   forwardStops: Stop[] = [];
@@ -36,14 +35,17 @@ export class StopsGridComponent implements OnInit {
   constructor(private stopService: StopService,
               private authService: AuthService,
               private route: ActivatedRoute,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private breadcrumbService: BreadcrumbService) {
+    this.breadcrumbService.hideRouteRegex('/main/.+/[A-Za-z]+/[0-9]+/[0-9]+/[0-9]+');
+    // this.breadcrumbService.addFriendlyNameForRouteRegex('/main/.+/[A-Za-z]+/[0-9]+/[0-9]+', this.transitName);
   }
 
 
   ngOnInit() {
     this.sub = this.route.params.forEach(params => {
       this.idTransit = params['id-transit'];
-      this.categoryId = params['categoryId'];
+      this.categoryId = params['id'];
       this.transitName = params['name'];
       this.iconURL = params['iconUrl'];
     });
