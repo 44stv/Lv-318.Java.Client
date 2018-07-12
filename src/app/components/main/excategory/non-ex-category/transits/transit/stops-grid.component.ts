@@ -55,39 +55,39 @@ export class StopsGridComponent implements OnInit {
       this.forwardStops = this.stopArray.filter(stop => stop.direction === 'FORWARD');
       this.backwardStops = this.stopArray.filter(stop => stop.direction === 'BACKWARD');
     });
-    console.log(this.transit);
-
 
   }
 
-  public selectStop(stop: Stop) {
-    if (!this.selectedStops.length) {
-      this.selectedStops.push(Object.assign({}, stop));
+  public selectStop(stop) {
+    // if (!(this.selectedStops.length > 0)) {
+    //   this.selectedStops.push(Object.assign({}, stop));
+    //
+    // } else {
+    //   this.selectedStops.forEach(
+    //     (value) => {
+    //       if (value !== stop) {
+    //         this.selectedStops.push(Object.assign({}, stop));
+    //       } else {
+    //         console.log(this.selectedStops.indexOf(value));
+    //         this.selectedStops.splice(this.selectedStops.indexOf(value), 1);
+    //       }
+    //     }
+    //   );
+    // }
+    const toSave = Object.assign({}, stop);
+    console.log(this.selectedStops.indexOf(toSave));
+    if (!this.selectedStops.includes(toSave, 0)) {
 
+      this.selectedStops.push(toSave);
+      // this.selectedStops.concat(stop);
     } else {
-      this.selectedStops.forEach(
-        (value) => {
-          if (value.id !== stop.id) {
-            this.selectedStops.push(Object.assign({}, stop));
-          } else {
-            console.log(this.selectedStops.indexOf(value));
-            this.selectedStops.splice(this.selectedStops.indexOf(value), 1);
-          }
-        }
-      );
+      this.selectedStops.splice(this.selectedStops.indexOf(toSave), 1);
     }
 
 
-    // if (!this.selectedStops.includes(stop, 0)) {
-    //   this.selectedStops.push(Object.assign({}, stop));
-    // }
-    // if (this.selectedStops.includes(stop, 0)) {
-    //   this.selectedStops.splice(this.selectedStops.indexOf(stop), 1);
-    // }
-    console.log(this.selectedStops);
-    // console.log(this.selectedStops.indexOf(stop));
-    // console.log(stop);
+    console.log(toSave);
     // console.log(Object.assign({}, stop));
+    console.log(this.selectedStops);
 
   }
 
