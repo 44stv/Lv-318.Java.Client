@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {StopService} from '../../../../../../services/stop.service';
 import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material';
-
-import {Stop} from '../../../../../../models/stop.model';
-import {StopService} from '../../../../../../services/stop.service';
 import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
+import {AuthService} from '../../../../../../services/auth/auth.service';
+import {Stop} from '../../../../../../models/stop.model';
+import {BreadcrumbService} from 'ng5-breadcrumb';
 
 @Component({
   selector: 'app-stops-grid',
@@ -16,29 +17,40 @@ export class StopsGridComponent implements OnInit {
 
   checkedItems: boolean[];
   private sub: any;
-  @Input() public idTransit: number;
-  @Input() transitName: String;
+  @Input() idTransit: number;
+  @Input() transitName: string;
   stopsList: Observable<Stop[]>;
   stopArray: Stop[] = [];
+  forwardStops: Stop[] = [];
+  backwardStops: Stop[] = [];
   public selectedStops: Stop[] = [];
   categoryId: number;
 
   constructor(private stopService: StopService,
+              private authService: AuthService,
               private route: ActivatedRoute,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private breadcrumbService: BreadcrumbService) {
+    this.breadcrumbService.hideRouteRegex('/main/.+/[A-Za-z]+/[0-9]+/[0-9]+/[0-9]+');
+    // this.breadcrumbService.addFriendlyNameForRouteRegex('/main/.+/[A-Za-z]+/[0-9]+/[0-9]+', this.transitName);
   }
 
 
   ngOnInit() {
     this.sub = this.route.params.forEach(params => {
-      this.idTransit = params['id'];
-      this.categoryId = params['categoryId'];
+      this.idTransit = params['id-transit'];
+      this.categoryId = params['id'];
       this.transitName = params['name'];
     });
     this.stopsList = this.stopService.getStopsByTransitId(this.idTransit);
-    this.stopsList.subscribe(stopArray =>
-      this.stopArray = stopArray);
-    this.checkedItems = new Array(this.stopArray.length);
+    this.stopsList.subscribe(stopArray => {
+      this.stopArray = stopArray;
+      this.checkedItems = new Array(this.stopArray.length);
+      this.forwardStops = this.stopArray.filter(stop => stop.direction === 'FORWARD');
+      this.backwardStops = this.stopArray.filter(stop => stop.direction === 'BACKWARD');
+    });
+    console.log(this.authService.decodedToken.auth);
+
 
   }
 
@@ -56,7 +68,7 @@ export class StopsGridComponent implements OnInit {
 
   public openModal() {
     this.dialog.open(AddFeedbackComponent, {
-      width: '60%', 
+      width: '60%',
       data: {
         number: this.idTransit, categoryId: this.categoryId,
         transitName: this.transitName
@@ -65,3 +77,4 @@ export class StopsGridComponent implements OnInit {
   }
 
 }
+

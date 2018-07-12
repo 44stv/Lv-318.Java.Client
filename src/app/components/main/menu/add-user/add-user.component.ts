@@ -10,6 +10,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 
 import {UserService} from '../../../../services/user.service';
+import {BreadcrumbService} from 'ng5-breadcrumb';
 
 export class InfoResponse {
   response: string;
@@ -48,9 +49,12 @@ export class AddUserComponent implements OnInit {
 
   private _isSent = false;
 
-  constructor(public  matDialogRef: MatDialogRef<AddUserComponent>,
-              private router: Router, private snackBar: MatSnackBar,
-              private fb: FormBuilder, public userService: UserService) {
+  constructor(private router: Router,
+              private snackBar: MatSnackBar,
+              private fb: FormBuilder,
+              public userService: UserService,
+              private breadcrumbService: BreadcrumbService) {
+    this.breadcrumbService.hideRoute('/main/user');
 
   }
   emailControl: FormControl = new FormControl('', [

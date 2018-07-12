@@ -7,6 +7,7 @@ import { Login } from '../models/login.model';
 import { environment } from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {UpdatePassword} from '../models/update-password.model';
+import {UpdateRoleModel} from '../models/update-role.model';
 
 
 const httpOptions = {
@@ -49,4 +50,9 @@ export class UserService {
     return this.http.post(this.userUrl + '/profile/update/password', updatePassword);
 
   }
+
+  public updateRole(updateRoleModel: UpdateRoleModel) {
+    return this.http.put<User>(`${this.userUrl}/update-role`, updateRoleModel );
+  }
+
 }

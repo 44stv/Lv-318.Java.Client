@@ -18,6 +18,7 @@ import {NonExCategoryService} from '../../../../../services/non-ex-category.serv
 export class TransitsComponent implements OnInit, AfterViewInit {
 
   categoryId: number;
+  topName: string;
   cityName: string;
   averageRateArray: Map<number, number> = new Map<number, number>();
 
@@ -33,7 +34,8 @@ export class TransitsComponent implements OnInit, AfterViewInit {
   constructor(private transitService: TransitService,
               private route: ActivatedRoute,
               private diagramService: DiagramService,
-              private breadcrumbService: BreadcrumbService) {
+              private breadcrumbService: BreadcrumbService,
+              private nonExCatServ: NonExCategoryService) {
     this.breadcrumbService.hideRoute('/main/Public%20Transport');
   }
 
@@ -43,6 +45,10 @@ export class TransitsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.getTransits();
+    this.route.params.forEach(params => {
+      this.topName = params['top'];
+      this.cityName = params['city'];
+    });
   }
 
   getTransits(): void {
@@ -50,6 +56,10 @@ export class TransitsComponent implements OnInit, AfterViewInit {
       if (params['id'] !== undefined) {
         this.categoryId = params['id'];
         this.getAllByCategoryId(this.categoryId, this.paginator.pageIndex, this.paginator.pageSize);
+        this.nonExCatServ.getNameByCategoryId(this.categoryId)
+          .subscribe(data => {
+            this.breadcrumbService.addFriendlyNameForRouteRegex('/main/Public%20Transport/Lviv/[0-9]+', data[0].name);
+          });
       }
       if (params['id'] === undefined) {
         this.cityName = params['city'];
