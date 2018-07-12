@@ -10,7 +10,7 @@ import {DiagramService} from '../../../../../../../services/diagram.service';
 })
 export class BusyStopsDiagramComponent implements OnInit {
   @Input() id: number;
-  @Input() stopList: Stop[];
+  @Input() stopList: Stop[] = [];
 
   data;
   public visible = false;
