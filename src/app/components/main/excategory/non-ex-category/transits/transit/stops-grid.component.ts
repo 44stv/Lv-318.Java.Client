@@ -44,12 +44,20 @@ export class StopsGridComponent implements OnInit {
         this.breadcrumbService.addFriendlyNameForRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
           '/' + params['city'] + '/' + params['id'], data[0].name);
       });
+
       this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20'));
+
       this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
         '/' + params['city'] + '/' + params['id'] + '/' + params['id-transit'] + '/' + params['name'] +
         '/' + (<string>params['iconUrl']).replace('/', '%2F'));
+
       this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
         '/' + params['city'] + '/' + params['id'] + '/' + params['id-transit']);
+
+      if (params['id'] === 'undefined') {
+        this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
+            '/' + params['city'] + '/' + params['id']);
+      }
     });
   }
 
