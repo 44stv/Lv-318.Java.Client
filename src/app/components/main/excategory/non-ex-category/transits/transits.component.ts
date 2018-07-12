@@ -18,6 +18,7 @@ import {NonExCategoryService} from '../../../../../services/non-ex-category.serv
 export class TransitsComponent implements OnInit, AfterViewInit {
 
   categoryId: number;
+  topName: string;
   cityName: string;
   averageRateArray: Map<number, number> = new Map<number, number>();
 
@@ -44,6 +45,10 @@ export class TransitsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.getTransits();
+    this.route.params.forEach(params => {
+      this.topName = params['top'];
+      this.cityName = params['city'];
+    });
   }
 
   getTransits(): void {

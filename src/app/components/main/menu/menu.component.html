@@ -16,8 +16,11 @@
 
 
   <div class="NewUser">
-    <a [routerLink]="['/main/user/add']">
+    <a [routerLink]="['/main/user/add']" *ngIf="!hasToken()">
       <button mdc-button [secondary]="true" type="submit" (click)="openModal()">{{'User' | translate}}</button>
+    </a>
+    <a [routerLink]="['/main/admin']" *ngIf="getRole() === role.Admin">
+    <button mdc-button [secondary]="true" type="submit">{{'Admin' | translate}}</button>
     </a>
   </div>
 

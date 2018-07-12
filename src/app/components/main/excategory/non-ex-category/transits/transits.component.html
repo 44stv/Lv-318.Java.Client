@@ -42,29 +42,9 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let transit;"
-             [routerLink]="['/show-transit-scheme', transit.categoryId,
+             [routerLink]="['/main/',topName , cityName, categoryId,
              transit.id, transit.name]"></mat-row>
   </mat-table>
 
 </div>
-<!--<div class="AddTransit">-->
-<!--<h2 class="mat-h2">Add transit</h2>-->
-<!--<form class="Test" (ngSubmit)="onSubmit()" #myForm="ngForm">-->
-<!--<table class="Test" cellspacing="0">-->
-<!--<tr>-->
-<!--<td>-->
-<!--<mat-form-field class="Name">-->
-<!--<input matInput placeholder="Name" id="name" [(ngModel)]="transit.name" name="name">-->
-<!--</mat-form-field>-->
-<!--</td>-->
-<!--<td>-->
-<!--<mat-form-field class="Category">-->
-<!--<input matInput placeholder="Category id" type="number" [(ngModel)]="transit.categoryId" name="category.id">-->
-<!--</mat-form-field>-->
-<!--</td>-->
-<!--</tr>-->
-<!--</table>-->
-<!--<button mat-stroked-button type="submit">Submit</button>-->
-<!--</form>-->
-<!--</div>-->
 

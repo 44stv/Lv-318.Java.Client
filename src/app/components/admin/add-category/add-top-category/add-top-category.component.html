@@ -1,0 +1,16 @@
+<div class="addfeedbackcriteria">
+
+  <h4 mat-dialog-title>Type in category name</h4>
+  <mat-form-field appearance="outline">
+    <mat-label>Category name</mat-label>
+    <input matInput placeholder="Category" [(ngModel)]="categoryModel.name" id="name" name="name ">
+  </mat-form-field>
+  <div class="button">
+    <div class="stroked-button-left">
+      <button mat-stroked-button (click)="close()">Close</button>
+    </div>
+    <div class="stroked-button-right">
+      <button mat-stroked-button (click)="saveCategory()"> Save</button>
+    </div>
+  </div>
+</div>
