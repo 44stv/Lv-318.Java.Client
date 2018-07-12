@@ -61,7 +61,7 @@ table {
   //@include mdc-drawer-ink-color(#fff);
 }
 .mdc-drawer--temporary .mdc-drawer__content{
-background: linear-gradient(180deg,#40c8d6 0,rgba(249, 246, 246, 0.7));
+background: linear-gradient(180deg,#43659c 0,rgba(249, 246, 246, 0.7));
 }
 
 .demo-content__drawer {
@@ -121,7 +121,7 @@ breadcrumb {
   font-size: 20px;
   font-weight: bold;
   font-family: Tahoma;
-  color: #000000;
+  color: white;
 
 }
 
@@ -133,9 +133,5 @@ breadcrumb {
   font-size: 18px;
   font-weight: normal;
   font-family: Tahoma;
-  color: black;
+  color: white;
 }
-
-
-
-
