@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material';
 import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
 import {AuthService} from '../../../../../../services/auth/auth.service';
 import {Stop} from '../../../../../../models/stop.model';
+import {BreadcrumbService} from 'ng5-breadcrumb';
 
 @Component({
   selector: 'app-stops-grid',
@@ -17,7 +18,7 @@ export class StopsGridComponent implements OnInit {
   checkedItems: boolean[];
   private sub: any;
   @Input() idTransit: number;
-  @Input() transitName: String;
+  @Input() transitName: string;
   stopsList: Observable<Stop[]>;
   stopArray: Stop[] = [];
   forwardStops: Stop[] = [];
@@ -28,7 +29,10 @@ export class StopsGridComponent implements OnInit {
   constructor(private stopService: StopService,
               private authService: AuthService,
               private route: ActivatedRoute,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private breadcrumbService: BreadcrumbService) {
+    this.breadcrumbService.hideRouteRegex('/main/.+/[A-Za-z]+/[0-9]+/[0-9]+/[0-9]+');
+    // this.breadcrumbService.addFriendlyNameForRouteRegex('/main/.+/[A-Za-z]+/[0-9]+/[0-9]+', this.transitName);
   }
 
 
@@ -64,7 +68,7 @@ export class StopsGridComponent implements OnInit {
 
   public openModal() {
     this.dialog.open(AddFeedbackComponent, {
-      width: '60%', 
+      width: '60%',
       data: {
         number: this.idTransit, categoryId: this.categoryId,
         transitName: this.transitName

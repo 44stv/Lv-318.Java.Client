@@ -49,8 +49,7 @@ export class AddUserComponent implements OnInit {
 
   private _isSent = false;
 
-  constructor(public  matDialogRef: MatDialogRef<AddUserComponent>,
-              private router: Router,
+  constructor(private router: Router,
               private snackBar: MatSnackBar,
               private fb: FormBuilder,
               public userService: UserService,

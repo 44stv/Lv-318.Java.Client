@@ -3,9 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {MainComponent} from './components/main/main.component';
 import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/feedback-criteria.component';
-import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
 import {GlobalSearchComponent} from './components/main/menu/global-search/global-search.component';
-import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
 import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
 import {TransitsComponent} from './components/main/excategory/non-ex-category/transits/transits.component';
 import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
@@ -33,8 +31,6 @@ const routes: Routes = [
       {
         path: 'user',
         children: [
-          {path: 'add', component: AddUserComponent},
-          {path: 'login', component: UserLoginComponent},
           {path: 'profile', component: UserProfileComponent},
           {path: 'activate/:uuid', component: RegistarationConfirmationComponent},
           {path: 'forgetpass/:uuid', component: ForgetPasswordConfirmationComponent},
@@ -62,22 +58,12 @@ const routes: Routes = [
           {path: 'add-feedback-criteria', component: AddFeedbackCriteriaComponent},
           {path: ':id', component: OneFeedbackCriteriaComponent}
         ]
-      },
-      {
-        path: ':top/:city',
-        children: [
-          {path: '', component: NonExCategoryComponent},
-          {
-            path: ':id',
-            children: [
-              {path: '', component: TransitsComponent},
-              {path: ':id-transit/:name', component: StopsGridComponent},
-            ]
-          },
-        ]
       }
     ]
   },
+  {path: 'main/:top/:city', component: NonExCategoryComponent},
+  {path: 'main/:top/:city/:id', component: TransitsComponent},
+  {path: 'main/:top/:city/:id/:id-transit/:name', component: StopsGridComponent},
   {path: 'search/?search=/:value', component: GlobalSearchComponent},
   {
     path: 'feedback',

@@ -27,8 +27,6 @@ export class MenuComponent implements OnInit, OnChanges {
               private globalSearchComponent: GlobalSearchService,
               private location: Location,
               private dialog: MatDialog ) {
-
-
   }
 
   ngOnInit() {
