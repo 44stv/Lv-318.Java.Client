@@ -17,13 +17,12 @@ export class AppComponent {
 
   @ViewChild('sidenav') public sideNav: MatSidenav;
 
-  constructor(private translate: TranslateService, private breadcrumbService: BreadcrumbService, 
+  constructor(private translate: TranslateService, private breadcrumbService: BreadcrumbService,
     private location: Location,
     public dialog: MatDialog) {
 
     translate.setDefaultLang('ua');
     this.breadcrumbService.addFriendlyNameForRoute('/main', 'Home');
-    this.breadcrumbService.hideRoute('/main/user');
   }
 
   switchLanguage(language: string) {
@@ -37,9 +36,9 @@ export class AppComponent {
     return this.location.path().indexOf('/show-transit-scheme/') > -1;
   }
 
-  openChooseTransitModal(){
+  openChooseTransitModal() {
     this.dialog.open(ChooseTransitComponent, {
-      width: '60%', height:'50%'});
+      width: '60%', height: '50%'});
 
   }
 }
