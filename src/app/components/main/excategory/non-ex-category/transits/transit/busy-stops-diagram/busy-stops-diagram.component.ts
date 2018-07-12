@@ -23,4 +23,10 @@ export class BusyStopsDiagramComponent implements OnInit {
       .subscribe(res => this.data = res);
     this.visible = true;
   }
+
+  onClick(): void {
+    this.diagramService.getHeatMapData(this.id, this.stopList)
+      .subscribe(res => this.data = res);
+    this.visible = true;
+  }
 }
