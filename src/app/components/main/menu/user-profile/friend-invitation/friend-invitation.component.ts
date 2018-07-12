@@ -56,7 +56,7 @@ export class FriendInvitationComponent implements OnInit {
       this._isSent = true;
     }, (error) => {
       if (error instanceof HttpErrorResponse) {
-        this.snackBar.open(error.error.response, null, {
+        this.snackBar.open(error.error.message, null, {
           duration: 5000
         });
       }
