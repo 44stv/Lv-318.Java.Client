@@ -21,7 +21,7 @@ export class CommentsComponent implements OnInit {
   failedMessage = 'Empty comment';
   loginMessage = 'Please, log in';
   action = 'Hide';
-  sortMode = 'DESC';
+  sortMode = 'ASC';
 
   comments: MyComment[];
 
@@ -32,25 +32,25 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit() {
     this.getTopLevelComments();
+    console.log(this.authService.getUserId());
   }
 
   getTopLevelComments() {
     this.commentService.getTopComments(this.id).subscribe(comments => {
       this.comments = comments;
-      console.log(comments);
     });
   }
 
   // TODO: get user id form authService
-  addTopLevelComment(userId: number) {
+  addTopLevelComment() {
     if (this.authService.hasToken()) {
-      console.log(userId);
       const newComment = new MyComment();
       if (this.addCommentText) {
         newComment.commentText = this.addCommentText;
         let params = new HttpParams();
         params = params.set('transitId', this.id.toString());
-        params = params.set('userId', userId.toString());
+        // params = params.set('userId', this.authService.getUserId().toString());
+        params = params.set('userId', '3');
         this.commentService.addComment(params, newComment)
           .subscribe(comment => {
             console.log(comment);
