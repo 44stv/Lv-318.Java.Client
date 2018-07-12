@@ -136,7 +136,7 @@ import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/soc
 import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
 import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
 import {UpdatePasswordComponent} from './components/main/menu/user-profile/update-password/update-password.component';
-
+import { NgCircleProgressModule } from "ng-circle-progress";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -310,6 +310,7 @@ export function getAuthServiceConfigs() {
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
     NgxChartsModule,
     Ng5BreadcrumbModule.forRoot(),
+    NgCircleProgressModule.forRoot(),
   ],
   providers: [
     {
