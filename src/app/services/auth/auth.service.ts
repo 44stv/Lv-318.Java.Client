@@ -16,7 +16,7 @@ const helper = new JwtHelperService();
 export class AuthService {
 
   private accessToken = localStorage.getItem('accesToken');
-  public decodedToken = this.decodeToken();
+  private decodedToken = this.decodeToken();
   private serviceUrl = environment.serverURL;
 
   constructor(public http: HttpClient) {
@@ -54,6 +54,16 @@ export class AuthService {
       return false;
     }
     return helper.isTokenExpired(this.accessToken);
+  }
+
+  public getUserId(): number {
+    let id: number;
+    if (this.hasToken()) {
+      id = this.decodedToken.id;
+    } else {
+      id = null;
+    }
+    return id;
   }
 
   public getRole(): Role {
