@@ -1,23 +1,23 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import * as moment from 'moment/moment';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 import {
-  SimpleAnswer,
+  CapacityHoursFeedback,
+  CapacityRouteFeedback,
   Feedback,
   Questioner,
   RatingAnswer,
-  CapacityRouteFeedback,
-  CapacityHoursFeedback,
+  SimpleAnswer,
   Time
 } from '../../../../../../../models/feedback.model';
-import {FeedbackService} from '../../../../../../../services/feedback.service';
-import {StopService} from '../../../../../../../services/stop.service';
-import {FeedbackCriteriaService} from '../../../../../../../services/feedback-criteria.service';
-import {FeedbackCriteria} from '../../../../../../../models/feedback-criteria.model';
-import {Question} from '../../../../../../../models/question.model';
-import {Stop} from '../../../../../../../models/stop.model';
+import { FeedbackService } from '../../../../../../../services/feedback.service';
+import { StopService } from '../../../../../../../services/stop.service';
+import { FeedbackCriteriaService } from '../../../../../../../services/feedback-criteria.service';
+import { FeedbackCriteria } from '../../../../../../../models/feedback-criteria.model';
+import { Question } from '../../../../../../../models/question.model';
+import { Stop } from '../../../../../../../models/stop.model';
 
 
 @Component({
@@ -63,8 +63,11 @@ export class AddFeedbackComponent implements OnInit {
           feedbackCriterias.forEach(criteria => {
             const questioner: Questioner = this.buildQuestioner(criteria, criteria.questions);
             questioner.questions.sort((a: Question, b: Question) => {
-              if (a.name > b.name) { return 1; }
-              else if (a.name < b.name) { return -1; }
+              if (a.name > b.name) {
+                return 1;
+              } else if (a.name < b.name) {
+                return -1;
+              }
               return 0;
             });
             survey.push(questioner);
@@ -120,7 +123,7 @@ export class AddFeedbackComponent implements OnInit {
       alert('You dont make any answers');
     }
     this.dialogRef.close();
-   }
+  }
 
 
   public toFeedbackList(survey: Questioner[]): Feedback[] {
@@ -205,10 +208,15 @@ export class AddFeedbackComponent implements OnInit {
 
     if (times.length > 1) {
       times.sort((time1: Time, time2: Time) => {
-        if (time1.hour > time2.hour) { return 1; }
-        else if (time1.hour < time2.hour) { return -1; }
-        else if (time1.minute > time2.minute) { return 1; }
-        else if (time1.minute > time2.minute) { return -1; }
+        if (time1.hour > time2.hour) {
+          return 1;
+        } else if (time1.hour < time2.hour) {
+          return -1;
+        } else if (time1.minute > time2.minute) {
+          return 1;
+        } else if (time1.minute > time2.minute) {
+          return -1;
+        }
         return 0;
       });
 

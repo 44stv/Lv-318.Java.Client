@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { MyComment } from "../../../../../../../../models/comment.model";
+import { Component, Input, OnInit } from '@angular/core';
+import { MyComment } from '../../../../../../../../models/comment.model';
 
 @Component({
   selector: 'app-top-level-comments',
@@ -10,7 +10,8 @@ export class TopLevelCommentsComponent implements OnInit {
 
   @Input() comments: MyComment[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
