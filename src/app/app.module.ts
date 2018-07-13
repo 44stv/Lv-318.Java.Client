@@ -4,17 +4,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import 'hammerjs';
-import {AppComponent} from './app.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthService} from './services/auth/auth.service';
-import {SocialService} from './services/auth/social.service';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {AppRoutingModule} from 'src/app/app-routing.module';
-import {HttpModule} from '@angular/http';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {Ng5BreadcrumbModule} from 'ng5-breadcrumb';
-import {MomentModule} from 'angular2-moment/moment.module';
-import {AppMaterialModule} from './material.module';
+import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './services/auth/auth.service';
+import { SocialService } from './services/auth/social.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { HttpModule } from '@angular/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Ng5BreadcrumbModule } from 'ng5-breadcrumb';
+import { MomentModule } from 'angular2-moment/moment.module';
+import { AppMaterialModule } from './material.module';
 import {
   AuthServiceConfig,
   FacebookLoginProvider,
@@ -253,6 +253,7 @@ export function getAuthServiceConfigs() {
   ],
   imports: [
     NgxMaterialTimepickerModule.forRoot(),
+    MatButtonToggleModule,
     StarRatingModule.forRoot(),
     MomentModule,
     MatProgressBarModule,

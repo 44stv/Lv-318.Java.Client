@@ -1,14 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {StopService} from '../../../../../../services/stop.service';
+import {TransitService} from '../../../../../../services/transit.service';
 import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material';
 import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
 import {AuthService} from '../../../../../../services/auth/auth.service';
 import {Stop} from '../../../../../../models/stop.model';
 import {BreadcrumbService} from 'ng5-breadcrumb';
-import {environment} from '../../../../../../../environments/environment';
 import {Transit} from '../../../../../../models/transit.model';
+import {environment} from '../../../../../../../environments/environment';
 import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class StopsGridComponent implements OnInit {
 
   checkedItems: boolean[];
   private sub: any;
-  transit: Transit;
+  private transit: Transit = new Transit();
   @Input() idTransit: number;
   @Input() transitName: string;
   stopsList: Observable<Stop[]>;
@@ -38,7 +39,8 @@ export class StopsGridComponent implements OnInit {
               private route: ActivatedRoute,
               public dialog: MatDialog,
               private breadcrumbService: BreadcrumbService,
-              private nonExCatServ: NonExCategoryService) {
+              private nonExCatServ: NonExCategoryService,
+              private transitService: TransitService) {
     this.route.params.subscribe(params => {
       this.nonExCatServ.getNameByCategoryId(params['id']).subscribe(data => {
         this.breadcrumbService.addFriendlyNameForRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
@@ -63,6 +65,7 @@ export class StopsGridComponent implements OnInit {
 
 
   ngOnInit() {
+
     this.sub = this.route.params.forEach(params => {
       this.idTransit = params['id-transit'];
       this.categoryId = params['id'];
@@ -134,6 +137,14 @@ export class StopsGridComponent implements OnInit {
         transitName: this.transitName
       }
     });
+  }
+
+  public buildTransit(id: number): Transit {
+    let transit: Transit = new Transit();
+    this.transitService.getTransitById(id).subscribe(data => {
+      transit = data;
+    });
+    return transit;
   }
 
 }
