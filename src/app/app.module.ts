@@ -137,6 +137,8 @@ import {UserProfileComponent} from './components/main/menu/user-profile/user-pro
 import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
 import { TopLevelCommentsComponent } from "./components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/top-level-comments.component";
 import {UpdatePasswordComponent} from './components/main/menu/user-profile/update-password/update-password.component';
+import { NgCircleProgressModule } from "ng-circle-progress";
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -311,6 +313,7 @@ export function getAuthServiceConfigs() {
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
     NgxChartsModule,
     Ng5BreadcrumbModule.forRoot(),
+    NgCircleProgressModule.forRoot(),
   ],
   providers: [
     {
