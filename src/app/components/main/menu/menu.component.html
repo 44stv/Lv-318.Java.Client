@@ -19,9 +19,6 @@
     <a *ngIf="!hasToken()">
       <button mdc-button [secondary]="true" type="submit" (click)="openModal()">{{'User' | translate}}</button>
     </a>
-    <a [routerLink]="['/main/admin']" *ngIf="getRole() === role.Admin">
-    <button mdc-button [secondary]="true" type="submit">{{'Admin' | translate}}</button>
-    </a>
   </div>
 
   <div class="LoginUser">
@@ -34,11 +31,13 @@
   </div>
 
       <div class="userProfile" style="margin-left: 15px">
-        <a [routerLink]="['/main/user/profile']">
+        <a [routerLink]="['/main/user/profile']" *ngIf="hasToken()">
           <button mdc-button [secondary]="true" type="submit">MyProfile</button>
         </a>
+        <!--<a [routerLink]="['/main/admin']" *ngIf="getRole() === role.Admin">
+          <button mdc-button [secondary]="true" type="submit">{{'Admin' | translate}}</button>
+        </a>-->
       </div>
-
     </mdc-toolbar-section>
     <div class="Search">
       <app-search-field></app-search-field>

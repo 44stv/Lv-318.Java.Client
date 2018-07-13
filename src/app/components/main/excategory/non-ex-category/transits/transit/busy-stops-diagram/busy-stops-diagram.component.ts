@@ -10,7 +10,7 @@ import {DiagramService} from '../../../../../../../services/diagram.service';
 })
 export class BusyStopsDiagramComponent implements OnInit {
   @Input() id: number;
-  @Input() stopList: Stop[];
+  @Input() stopList: Stop[] = [];
 
   data;
   public visible = false;
@@ -19,7 +19,13 @@ export class BusyStopsDiagramComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.diagramService.getHeatMapData(this.id)
+    this.diagramService.getHeatMapData(this.id, this.stopList)
+      .subscribe(res => this.data = res);
+    this.visible = true;
+  }
+
+  onClick(): void {
+    this.diagramService.getHeatMapData(this.id, this.stopList)
       .subscribe(res => this.data = res);
     this.visible = true;
   }

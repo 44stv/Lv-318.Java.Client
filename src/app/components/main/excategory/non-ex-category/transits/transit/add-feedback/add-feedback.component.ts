@@ -2,7 +2,7 @@ import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import * as moment from 'moment/moment';
 import {Observable} from 'rxjs';
-import { MatSnackBar } from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import {HttpParams} from '@angular/common/http';
 
 import {
@@ -22,8 +22,7 @@ import {Question} from '../../../../../../../models/question.model';
 import {Stop} from '../../../../../../../models/stop.model';
 import {MyComment} from '../../../../../../../models/comment.model';
 import {CommentService} from '../../../../../../../services/comment.service';
-import { AuthService } from '../../../../../../../services/auth/auth.service';
-
+import {AuthService} from '../../../../../../../services/auth/auth.service';
 
 
 @Component({
@@ -43,7 +42,7 @@ export class AddFeedbackComponent implements OnInit {
   private categoryId: number = this.data.categoryId;
   private userId = 1;
   private checkBoxAnswers: String[] = ['YES', 'NO', 'MAYBE'];
-  private quantityLoadAnswers: String[] = ['SIT', 'STAY', 'HARD_LOAD', 'LOSER']; 
+  private quantityLoadAnswers: String[] = ['SIT', 'STAY', 'HARD_LOAD', 'LOSER'];
   successMessage = 'Feedback and Comment posted';
   failedMessage = 'Empty feedback';
   loginMessage = 'Please, log in';
@@ -56,7 +55,7 @@ export class AddFeedbackComponent implements OnInit {
               private stopService: StopService,
               private commentService: CommentService,
               public snackBar: MatSnackBar,
-            public auth: AuthService) {
+              public auth: AuthService) {
 
     this.survey = this.buildSurveyByCriteriaType(['RATING']);
     this.qualitySurvey = this.buildSurveyByCriteriaType(['SIMPLE', 'QUALITY'])
@@ -235,11 +234,14 @@ export class AddFeedbackComponent implements OnInit {
       times.sort((time1: Time, time2: Time) => {
         if (time1.hour > time2.hour) {
           return 1;
-        } else if (time1.hour < time2.hour) {
+        }
+        else if (time1.hour < time2.hour) {
           return -1;
-        } else if (time1.minute > time2.minute) {
+        }
+        else if (time1.minute > time2.minute) {
           return 1;
-        } else if (time1.minute > time2.minute) {
+        }
+        else if (time1.minute > time2.minute) {
           return -1;
         }
         return 0;
@@ -273,11 +275,13 @@ export class AddFeedbackComponent implements OnInit {
     this.commentService.addComment(params, this.transitComment)
       .subscribe(comment => console.log(comment));
   }
-  openSnackBar(message: string) {
+
+  public openSnackBar(message: string) {
     this.snackBar.open(message, this.action, {
       duration: 2000,
     });
   }
+
   // public getByTransitAndDirection(direction: String){
   //   this.stops =this.stopService.getStopsByTransitIdAndDirection(this.transitId,direction);
   // }

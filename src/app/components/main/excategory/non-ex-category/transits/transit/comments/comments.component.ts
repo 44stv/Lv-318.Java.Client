@@ -16,10 +16,12 @@ import { AuthService } from '../../../../../../../services/auth/auth.service';
 export class CommentsComponent implements OnInit {
 
   @Input() id: number;
-  commentText: string;
+  addCommentText: string;
   successMessage = 'Comment posted';
   failedMessage = 'Empty comment';
+  loginMessage = 'Please, log in';
   action = 'Hide';
+  sortMode = 'ASC';
 
   comments: MyComment[];
 
@@ -30,26 +32,35 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit() {
     this.getTopLevelComments();
+    console.log(this.authService.getUserId());
   }
 
   getTopLevelComments() {
-    this.commentService.getTopComments(this.id).subscribe(comments => this.comments = comments);
+    this.commentService.getTopComments(this.id).subscribe(comments => {
+      this.comments = comments;
+    });
   }
 
-  addTopLevelComment(userId: number) {
-    // if (this.authService)
-    console.log(userId);
-    const newComment = new MyComment();
-    if (this.commentText) {
-      newComment.commentText = this.commentText;
-      let params = new HttpParams();
-      params = params.set('transitId', this.id.toString());
-      params = params.set('userId', userId.toString());
-      this.commentService.addComment(params, newComment)
-        .subscribe(comment => console.log(comment));
-      this.openSnackBar(this.successMessage);
+  // TODO: get user id form authService
+  addTopLevelComment() {
+    if (this.authService.hasToken()) {
+      const newComment = new MyComment();
+      if (this.addCommentText) {
+        newComment.commentText = this.addCommentText;
+        let params = new HttpParams();
+        params = params.set('transitId', this.id.toString());
+        params = params.set('userId', this.authService.getUserId().toString());
+        this.commentService.addComment(params, newComment)
+          .subscribe(comment => {
+            console.log(comment);
+            this.getTopLevelComments();
+          });
+        this.openSnackBar(this.successMessage);
+      } else {
+        this.openSnackBar(this.failedMessage);
+      }
     } else {
-      this.openSnackBar(this.failedMessage);
+      this.openSnackBar(this.loginMessage);
     }
   }
 
@@ -57,6 +68,15 @@ export class CommentsComponent implements OnInit {
     this.snackBar.open(message, this.action, {
       duration: 2000,
     });
+  }
+
+  sortComments(): void {
+    if (this.sortMode === 'DESC') {
+      this.comments.sort((a, b) => a.postDate.localeCompare(b.postDate));
+    }
+    if (this.sortMode === 'ASC') {
+      this.comments.sort((a, b) => b.postDate.localeCompare(a.postDate));
+    }
   }
 }
 

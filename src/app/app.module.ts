@@ -71,7 +71,6 @@ import {ExcategoryService} from './services/excategory.service';
 
 import {MainComponent} from './components/main/main.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
-import {MessageComponent} from './components/message/message.component';
 import {UserService} from './services/user.service';
 import {StopService} from './services/stop.service';
 import {AdminGuardService} from './services/guard/admin-guard.service';
@@ -105,7 +104,9 @@ import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteri
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
 import {MyRateComponent} from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
-import {CommentComponent} from './components/main/excategory/non-ex-category/transits/transit/comments/comment/comment.component';
+import {
+  CommentComponent
+} from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/comment/comment.component';
 import {CommentsComponent} from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
 import {CommentService} from './services/comment.service';
 import {
@@ -132,9 +133,14 @@ import {
   ForgetPasswordConfirmationComponent
 } from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
 import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
-import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
+import {SocialSingInComponent} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
 import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
 import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
+import {
+  TopLevelCommentsComponent
+} from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/top-level-comments.component';
+import {UpdatePasswordComponent} from './components/main/menu/user-profile/update-password/update-password.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -175,8 +181,8 @@ export function getAuthServiceConfigs() {
     AddUserComponent,
     ForgetPasswordComponent,
     UserProfileComponent,
+    UpdatePasswordComponent,
     FriendInvitationComponent,
-    MessageComponent,
     StopsGridComponent,
     AddQuestionComponent,
     RaitingDiagramComponent,
@@ -198,9 +204,10 @@ export function getAuthServiceConfigs() {
     RegistarationConfirmationComponent,
     CommentsComponent,
     CommentComponent,
+    TopLevelCommentsComponent,
     LocationPickerComponent,
     LocationPickerComponent,
-    SocialSingIn,
+    SocialSingInComponent,
     AdminComponent,
     ForbiddenComponent,
     UpdateRoleComponent,
@@ -309,6 +316,7 @@ export function getAuthServiceConfigs() {
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
     NgxChartsModule,
     Ng5BreadcrumbModule.forRoot(),
+    NgCircleProgressModule.forRoot(),
   ],
   providers: [
     {
@@ -344,7 +352,8 @@ export function getAuthServiceConfigs() {
     UserLoginComponent,
     ForgetPasswordComponent,
     ChooseTransitComponent,
-    FriendInvitationComponent]
+    FriendInvitationComponent,
+    UpdatePasswordComponent]
 
 })
 export class AppModule {

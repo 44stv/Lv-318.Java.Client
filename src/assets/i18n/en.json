@@ -56,5 +56,6 @@
   "ErrorText2": "If you wish you can return on the",
   "ErrorText3": "main page",
   "CategoryConfiguration": "Category configuration",
-  "Categories": "Categories"
+  "Categories": "Categories",
+  "reload": "Reload chart"
 }

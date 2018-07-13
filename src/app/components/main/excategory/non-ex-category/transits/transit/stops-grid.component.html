@@ -30,10 +30,11 @@
     </mat-tab-group>
   </div>
 
+  <app-maps></app-maps>
   <app-raiting-diagram [id]="idTransit"></app-raiting-diagram>
   <app-average-rate [id]="idTransit"></app-average-rate>
   <app-my-rate [id]="idTransit" [userId]="1" *ngIf="this.authService.hasToken()"></app-my-rate>
-  <app-busy-stops-diagram [id]="idTransit"></app-busy-stops-diagram>
+  <app-busy-stops-diagram [id]="idTransit" [stopList]="selectedStops"></app-busy-stops-diagram>
   <app-busy-hours-diagram [id]="idTransit"></app-busy-hours-diagram>
   <app-comments [id]="idTransit"></app-comments>
 </div>

@@ -14,23 +14,22 @@
   <mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="categoryIcon">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Category</mat-header-cell>
-      <mat-cell *matCellDef="let transit"><img height="32" width="32"
-                                               src="{{ categoryIconURL }}{{ transit.categoryIconURL }}"></mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
+      <mat-cell *matCellDef="let transit"> <img height="32" width="32" src="{{ categoryIconURL }}{{ transit.categoryIconURL }}"></mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
-      <mat-cell *matCellDef="let transit"> {{ transit.name }}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let transit"> {{ transit.name }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="routeName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Route</mat-header-cell>
-      <mat-cell *matCellDef="let transit"> {{ transit.routeName }}</mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Route </mat-header-cell>
+      <mat-cell *matCellDef="let transit"> {{ transit.routeName }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="averageRate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Average rate</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Average rate </mat-header-cell>
       <mat-cell *matCellDef="let transit">
         <star-rating
           [starType]="'svg'"
@@ -43,8 +42,8 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let transit;"
-             [routerLink]="['/show-transit-scheme/',categoryId,
-             transit.id, transit.name]"></mat-row>
+             [routerLink]="['/show-transit-scheme/main/', topName, cityName , categoryId,
+             transit.id, transit.name, transit.categoryIconURL]"></mat-row>
   </mat-table>
 
 </div>
