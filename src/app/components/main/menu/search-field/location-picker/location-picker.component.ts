@@ -2,8 +2,6 @@ import {Component, OnInit, Output} from '@angular/core';
 import {LocationService} from '../../../../../services/location.service';
 import {Geotag} from '../../../../../models/geotag.model';
 import {GlobalSearchService} from '../../../../../services/global-search.service';
-import {select} from 'd3-selection';
-import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-location-picker',
