@@ -151,14 +151,5 @@ export class StopsGridComponent implements OnInit {
       }
     });
   }
-
-  public buildTransit(id: number): Transit {
-    let transit: Transit = new Transit();
-    this.transitService.getTransitById(id).subscribe(data => {
-      transit = data;
-    });
-    return transit;
-  }
-
 }
 
