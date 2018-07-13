@@ -1,16 +1,35 @@
 <div class="comment">
 
   <div class="commentInformation">
-    <div class="row">
-      <!--{{ comment.userId }}-->
-      Firstname Lastname
-      {{ postCommentDate }}
+    <div class="row userAndPostedTime">
+      <span style="font-size: large"> {{ userInfo.firstName }} {{ userInfo.lastName }} </span>
+      <span style="font-size: small">Posted {{ postCommentDate }}</span>
       <div *ngIf="modified">
         Changed {{ modifiedCommentDate }}
       </div>
     </div>
-    <div class="row commentText">
-      <h4> {{ comment.commentText }} </h4>
+    <span class="commentText"> {{ comment.commentText }} </span>
+
+    <a class="row reply" (click)="toggleReply()">
+      Answer
+    </a>
+    <div id="{{ comment.id }}" class="replyElement">
+      <div class="replyArea">
+        <mat-form-field>
+          <textarea matInput
+                    placeholder="Enter your reply"
+                    maxlength="256"
+                    [(ngModel)]="replyCommentText"
+                    [required]="true"></textarea>
+        </mat-form-field>
+      </div>
+      <button class="replyButton"
+              mdc-button
+              [secondary]="true"
+              [raised]="true"
+              type="submit" (click)="addChildComment()"> Reply
+      </button>
+
     </div>
 
     <div class="underline"></div>

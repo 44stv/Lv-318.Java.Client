@@ -26,7 +26,7 @@ export class CommentsComponent implements OnInit {
   comments: MyComment[];
 
   constructor(private commentService: CommentService,
-              public snackBar: MatSnackBar,
+              private snackBar: MatSnackBar,
               private authService: AuthService) {
   }
 
