@@ -1,7 +1,7 @@
-import {Component, OnInit, Output} from '@angular/core';
-import {LocationService} from '../../../../../services/location.service';
-import {Geotag} from '../../../../../models/geotag.model';
-import {GlobalSearchService} from '../../../../../services/global-search.service';
+import { Component, OnInit, Output } from '@angular/core';
+import { LocationService } from '../../../../../services/location.service';
+import { Geotag } from '../../../../../models/geotag.model';
+import { GlobalSearchService } from '../../../../../services/global-search.service';
 
 @Component({
   selector: 'app-location-picker',

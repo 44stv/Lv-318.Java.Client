@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {environment} from '../../../../environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
-import {ExcategoryModel} from '../../../models/excategory.model';
-import {ExcategoryService} from '../../../services/excategory.service';
+import { ExcategoryModel } from '../../../models/excategory.model';
+import { ExcategoryService } from '../../../services/excategory.service';
 
 @Component({
   selector: 'app-excategory',

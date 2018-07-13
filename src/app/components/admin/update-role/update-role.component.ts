@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import {UpdateRoleModel} from '../../../models/update-role.model';
-import {getAllRoles} from '../../../services/auth/roles';
-import {UserService} from '../../../services/user.service';
+import { UpdateRoleModel } from '../../../models/update-role.model';
+import { getAllRoles } from '../../../services/auth/roles';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-update-role',
@@ -11,11 +11,11 @@ import {UserService} from '../../../services/user.service';
 })
 export class UpdateRoleComponent implements OnInit {
 
-updateRoleModel = new UpdateRoleModel();
+  updateRoleModel = new UpdateRoleModel();
   roles: string[];
   isReadOnly = true;
 
-  constructor( private location: Location, private userService: UserService) {
+  constructor(private location: Location, private userService: UserService) {
   }
 
   ngOnInit() {
@@ -25,7 +25,7 @@ updateRoleModel = new UpdateRoleModel();
 
   updateRole(): void {
     this.userService.updateRole(this.updateRoleModel)
-        .subscribe(() => this.gotBack());
+      .subscribe(() => this.gotBack());
   }
 
 

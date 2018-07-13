@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import {environment} from '../../../../../../environments/environment';
+import { environment } from '../../../../../../environments/environment';
 
-import {Transit} from '../../../../../models/transit.model';
-import {TransitService} from '../../../../../services/transit.service';
-import {DiagramService} from '../../../../../services/diagram.service';
-import {BreadcrumbService} from 'ng5-breadcrumb';
-import {NonExCategoryService} from '../../../../../services/non-ex-category.service';
+import { Transit } from '../../../../../models/transit.model';
+import { TransitService } from '../../../../../services/transit.service';
+import { DiagramService } from '../../../../../services/diagram.service';
+import { BreadcrumbService } from 'ng5-breadcrumb';
+import { NonExCategoryService } from '../../../../../services/non-ex-category.service';
 
 
 @Component({
@@ -32,10 +32,10 @@ export class TransitsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private transitService: TransitService,
-              private route: ActivatedRoute,
-              private diagramService: DiagramService,
-              private breadcrumbService: BreadcrumbService,
-              private nonExCatServ: NonExCategoryService) {
+    private route: ActivatedRoute,
+    private diagramService: DiagramService,
+    private breadcrumbService: BreadcrumbService,
+    private nonExCatServ: NonExCategoryService) {
     this.route.params.subscribe(params => {
       this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20'));
     });
@@ -61,7 +61,7 @@ export class TransitsComponent implements OnInit, AfterViewInit {
         this.nonExCatServ.getNameByCategoryId(this.categoryId)
           .subscribe(data => {
             this.breadcrumbService.addFriendlyNameForRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
-              '/' + params['city'] + '/' + params['id'] , data[0].name);
+              '/' + params['city'] + '/' + params['id'], data[0].name);
           });
       }
       if (params['id'] === undefined) {
@@ -100,7 +100,7 @@ export class TransitsComponent implements OnInit, AfterViewInit {
 
   getAllRate(array: Transit[]) {
     for (const transit of array) {
-        this.getTransitAverageRate(transit.id);
+      this.getTransitAverageRate(transit.id);
     }
   }
 

@@ -14,7 +14,7 @@ import { Question } from '../../../../models/question.model';
 export class FeedbackCriteriaComponent implements OnInit {
 
   feedbackCriterias: FeedbackCriteria[];
-  displayedColumns = ['type', 'questions', 'weight', 'questionType'];
+  displayedColumns = ['type', 'questions', 'weight', 'questionType', 'priority'];
   dataSource = new MatTableDataSource<FeedbackCriteria>();
   data: FeedbackCriteria[];
 
@@ -45,6 +45,8 @@ export class FeedbackCriteriaComponent implements OnInit {
           || this.containsIgnoringCase(question.weight, searchTerm), false)
         || criteria.questions.reduce((accumulatedResult, question) => accumulatedResult
           || this.containsIgnoringCase(question.type, searchTerm), false)
+          || criteria.questions.reduce((accumulatedResult, question) => accumulatedResult
+          || this.containsIgnoringCase(question.priority, searchTerm), false)
       );
     } else {
       this.dataSource.data = this.data;

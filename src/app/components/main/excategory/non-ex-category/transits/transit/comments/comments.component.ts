@@ -4,7 +4,7 @@ import { MyComment } from '../../../../../../../models/comment.model';
 import 'rxjs/add/observable/of';
 import { HttpParams } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
-import { AuthService } from '../../../../../../../services/auth/auth.service';
+import { CustomAuthService } from '../../../../../../../services/auth/custom-auth.service';
 
 
 @Component({
@@ -27,7 +27,7 @@ export class CommentsComponent implements OnInit {
 
   constructor(private commentService: CommentService,
               public snackBar: MatSnackBar,
-              private authService: AuthService) {
+              private authService: CustomAuthService) {
   }
 
   ngOnInit() {

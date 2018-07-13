@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import {AppComponent} from '../../../app.component';
 import {GlobalSearchService} from '../../../services/global-search.service';
-import {AuthService} from '../../../services/auth/auth.service';
+import {CustomAuthService} from '../../../services/auth/custom-auth.service';
 import {Role} from '../../../services/auth/roles';
 
 import {MatDialog} from '@angular/material';
@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit, OnChanges {
   constructor(public app: AppComponent,
 
               private router: Router,
-              private authService: AuthService,
+              private authService: CustomAuthService,
               private globalSearchComponent: GlobalSearchService,
               private location: Location,
               private dialog: MatDialog ) {

@@ -1,16 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {StopService} from '../../../../../../services/stop.service';
-import {TransitService} from '../../../../../../services/transit.service';
-import {Observable} from 'rxjs';
-import {MatDialog} from '@angular/material';
-import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
-import {AuthService} from '../../../../../../services/auth/auth.service';
-import {Stop} from '../../../../../../models/stop.model';
-import {BreadcrumbService} from 'ng5-breadcrumb';
-import {Transit} from '../../../../../../models/transit.model';
-import {environment} from '../../../../../../../environments/environment';
-import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { StopService } from '../../../../../../services/stop.service';
+import { TransitService } from '../../../../../../services/transit.service';
+import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
+import { CustomAuthService } from '../../../../../../services/auth/custom-auth.service';
+import { Stop } from '../../../../../../models/stop.model';
+import { BreadcrumbService } from 'ng5-breadcrumb';
+import { Transit } from '../../../../../../models/transit.model';
+import { environment } from '../../../../../../../environments/environment';
+import { NonExCategoryService } from '../../../../../../services/non-ex-category.service';
 
 @Component({
   selector: 'app-stops-grid',
@@ -35,12 +35,12 @@ export class StopsGridComponent implements OnInit {
 
 
   constructor(private stopService: StopService,
-              private authService: AuthService,
-              private route: ActivatedRoute,
-              public dialog: MatDialog,
-              private breadcrumbService: BreadcrumbService,
-              private nonExCatServ: NonExCategoryService,
-              private transitService: TransitService) {
+    private authService: CustomAuthService,
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    private breadcrumbService: BreadcrumbService,
+    private nonExCatServ: NonExCategoryService,
+    private transitService: TransitService) {
     this.route.params.subscribe(params => {
       this.nonExCatServ.getNameByCategoryId(params['id']).subscribe(data => {
         this.breadcrumbService.addFriendlyNameForRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
@@ -58,7 +58,7 @@ export class StopsGridComponent implements OnInit {
 
       if (params['id'] === 'undefined') {
         this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
-            '/' + params['city'] + '/' + params['id']);
+          '/' + params['city'] + '/' + params['id']);
       }
     });
   }
