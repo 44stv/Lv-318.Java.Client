@@ -28,7 +28,9 @@ export class NonExCategoryComponent implements OnInit {
   constructor(private service: NonExCategoryService,
               private route: ActivatedRoute,
               private breadcrumbService: BreadcrumbService) {
-    this.breadcrumbService.hideRoute('/main/Public%20Transport');
+    this.route.params.subscribe(params => {
+      this.breadcrumbService.hideRoute('/main/' + encodeURI(params['top']));
+    });
   }
 
   ngOnInit() {

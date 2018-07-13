@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterModule} from '@angular/router';
 import {StopService} from '../../../../../../services/stop.service';
 import {TransitService} from '../../../../../../services/transit.service';
 import {Observable} from 'rxjs';
@@ -11,6 +11,7 @@ import {BreadcrumbService} from 'ng5-breadcrumb';
 import {Transit} from '../../../../../../models/transit.model';
 import {environment} from '../../../../../../../environments/environment';
 import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-stops-grid',
@@ -21,7 +22,6 @@ export class StopsGridComponent implements OnInit {
 
   checkedItems: boolean[];
   private sub: any;
-  private transit: Transit = new Transit();
   @Input() idTransit: number;
   @Input() transitName: string;
   stopsList: Observable<Stop[]>;
@@ -40,39 +40,85 @@ export class StopsGridComponent implements OnInit {
               public dialog: MatDialog,
               private breadcrumbService: BreadcrumbService,
               private nonExCatServ: NonExCategoryService,
-              private transitService: TransitService) {
+              private transitService: TransitService,
+              private location: Location) {
     this.route.params.subscribe(params => {
-      this.nonExCatServ.getNameByCategoryId(params['id']).subscribe(data => {
-        this.breadcrumbService.addFriendlyNameForRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
-          '/' + params['city'] + '/' + params['id'], data[0].name);
-      });
+      const paramTransitName = encodeURI(params['name']);
+      const paramIdTransit = params['id-transit'];
+      const paramTopCategoryName = encodeURI(params['top']);
+      const paramID = params['id'];
+      const paramCity = encodeURI(params['city']);
+      const paramIconURL = (<string>params['iconUrl']).replace('/', '%2F');
 
-      this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20'));
+      // Hide Public%20Transport
+      this.breadcrumbService.hideRoute('/main/' + paramTopCategoryName);
 
-      this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
-        '/' + params['city'] + '/' + params['id'] + '/' + params['id-transit'] + '/' + params['name'] +
-        '/' + (<string>params['iconUrl']).replace('/', '%2F'));
+      // Hide transit
+      this.breadcrumbService.hideRoute('/main/' + paramTopCategoryName + '/' + paramCity + '/' + paramID + '/transit');
 
-      this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
-        '/' + params['city'] + '/' + params['id'] + '/' + params['id-transit']);
+      // Add friendly name for category id
+      this.nonExCatServ
+        .getNameByCategoryId(paramID)
+        .subscribe(data => {
+          this.breadcrumbService
+            .addFriendlyNameForRoute('/main/' + paramTopCategoryName + '/' + paramCity + '/' + paramID, data[0].name);
+        });
 
-      if (params['id'] === 'undefined') {
-        this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
-            '/' + params['city'] + '/' + params['id']);
-      }
+      // Hide transit id
+      this.breadcrumbService.hideRoute('/main/' + paramTopCategoryName +
+        '/' + paramCity + '/' + paramID + '/transit/' + paramIdTransit);
+
+      // Hide IconURL
+      this.breadcrumbService.hideRoute('/main/' + paramTopCategoryName +
+        '/' + paramCity + '/' + paramID + '/transit/' + paramIdTransit + '/' + paramTransitName +
+        '/' + paramIconURL);
+
+      // Add friendly name for transit name
+      this.breadcrumbService.addFriendlyNameForRoute('/main/' + paramTopCategoryName + '/' + paramCity +
+        '/' + paramID + '/transit/' + paramIdTransit + '/' + paramTransitName, params['name']);
     });
   }
 
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      const transitName = encodeURI(params['name']);
+      const idTransit = params['id-transit'];
+      const topCategoryName = encodeURI(params['top']);
+      const id = params['id'];
+      const city = encodeURI(params['city']);
+      const iconURL = (<string>params['iconUrl']).replace('/', '%2F');
 
+      let newUrl = '';
+
+      if (id === 'undefined') {
+        this.transitService.getTransitById(idTransit)
+          .subscribe(data => {
+
+            const id1 = data.categoryId;
+
+            // Add friendly name for category id
+            this.nonExCatServ
+              .getNameByCategoryId(id1)
+              .subscribe(item => {
+                this.breadcrumbService
+                  .addFriendlyNameForRoute('/main/' + topCategoryName + '/' + city + '/' + id, item[0].name);
+              });
+
+            newUrl = '/main/' + topCategoryName +
+              '/' + city + '/' + id1 + '/transit/' + idTransit + '/' + transitName +
+              '/' + iconURL;
+
+            this.location.go(newUrl);
+          });
+      }
+    });
     this.sub = this.route.params.forEach(params => {
       this.idTransit = params['id-transit'];
       this.categoryId = params['id'];
       this.transitName = params['name'];
       this.iconURL = params['iconUrl'];
     });
-    // this.categoryId = this.transit.categoryId;
     this.stopsList = this.stopService.getStopsByTransitId(this.idTransit);
     this.stopsList.subscribe(stopArray => {
       this.stopArray = stopArray;
@@ -80,39 +126,6 @@ export class StopsGridComponent implements OnInit {
       this.forwardStops = this.stopArray.filter(stop => stop.direction === 'FORWARD');
       this.backwardStops = this.stopArray.filter(stop => stop.direction === 'BACKWARD');
     });
-
-  }
-
-  public selectStop(stop) {
-    // if (!(this.selectedStops.length > 0)) {
-    //   this.selectedStops.push(Object.assign({}, stop));
-    //
-    // } else {
-    //   this.selectedStops.forEach(
-    //     (value) => {
-    //       if (value !== stop) {
-    //         this.selectedStops.push(Object.assign({}, stop));
-    //       } else {
-    //         console.log(this.selectedStops.indexOf(value));
-    //         this.selectedStops.splice(this.selectedStops.indexOf(value), 1);
-    //       }
-    //     }
-    //   );
-    // }
-    const toSave = Object.assign({}, stop);
-    console.log(this.selectedStops.indexOf(toSave));
-    if (!this.selectedStops.includes(toSave, 0)) {
-
-      this.selectedStops.push(toSave);
-      // this.selectedStops.concat(stop);
-    } else {
-      this.selectedStops.splice(this.selectedStops.indexOf(toSave), 1);
-    }
-
-
-    console.log(toSave);
-    // console.log(Object.assign({}, stop));
-    console.log(this.selectedStops);
 
   }
 
