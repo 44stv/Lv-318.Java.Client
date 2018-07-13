@@ -12,28 +12,22 @@
     </div>
 
     <div class="row">
-      <div class="col-xs-4">
         <button class="postButton"
                 mdc-button
                 [secondary]="true"
                 [raised]="true"
-                type="submit" (click)="addTopLevelComment(4)">Post comment
+                type="submit" (click)="addTopLevelComment()">Post comment
         </button>
-      </div>
 
-      <div class="col-xs-4 sortComments">
-        <mat-form-field>
+        <mat-form-field class="sortComments">
           <mat-select placeholder="Select sort type"
                       [(value)]="sortMode"
                       (selectionChange)="sortComments()">
-            <mat-option value="DESC">Date desc</mat-option>
-            <mat-option value="ASC">Date asc</mat-option>
+            <mat-option value="ASC">Newer first</mat-option>
+            <mat-option value="DESC">Older first</mat-option>
           </mat-select>
         </mat-form-field>
-      </div>
-
     </div>
-
   </div>
 
   <div class="underline"></div>
