@@ -71,7 +71,6 @@ import {ExcategoryService} from './services/excategory.service';
 
 import {MainComponent} from './components/main/main.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
-import {MessageComponent} from './components/message/message.component';
 import {UserService} from './services/user.service';
 import {StopService} from './services/stop.service';
 import {AdminGuardService} from './services/guard/admin-guard.service';
@@ -105,7 +104,9 @@ import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteri
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
 import {MyRateComponent} from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
-import {CommentComponent} from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/comment/comment.component';
+import {
+  CommentComponent
+} from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/comment/comment.component';
 import {CommentsComponent} from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
 import {CommentService} from './services/comment.service';
 import {
@@ -135,7 +136,9 @@ import {LocationPickerComponent} from './components/main/menu/search-field/locat
 import {SocialSingIn} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
 import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
 import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
-import { TopLevelCommentsComponent } from "./components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/top-level-comments.component";
+import {
+  TopLevelCommentsComponent
+} from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/top-level-comments.component';
 import {UpdatePasswordComponent} from './components/main/menu/user-profile/update-password/update-password.component';
 import { NgCircleProgressModule } from "ng-circle-progress";
 
@@ -180,7 +183,6 @@ export function getAuthServiceConfigs() {
     UserProfileComponent,
     UpdatePasswordComponent,
     FriendInvitationComponent,
-    MessageComponent,
     StopsGridComponent,
     AddQuestionComponent,
     RaitingDiagramComponent,
