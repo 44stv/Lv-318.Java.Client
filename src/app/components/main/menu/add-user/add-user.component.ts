@@ -2,7 +2,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 
 import { User } from '../../../../models/user.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material';
 
@@ -10,12 +10,24 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 
 import {UserService} from '../../../../services/user.service';
+import {BreadcrumbService} from 'ng5-breadcrumb';
 
 export class InfoResponse {
   response: string;
 }
 
+export class PasswordValidation {
 
+  static MatchPassword(AC: AbstractControl) {
+    const password = AC.get('password').value;
+    const passwordConfirmation = AC.get('passwordConfirmation').value;
+    if (password !== passwordConfirmation) {
+      AC.get('passwordConfirmation').setErrors({MatchPassword: true});
+    } else {
+      return null;
+    }
+  }
+}
 
 @Component({
   selector: 'app-add-user',
@@ -30,15 +42,19 @@ export class AddUserComponent implements OnInit {
   user: User;
 
   hide: boolean = true;
+  hideConfirm: boolean = true;
 
 
   userForm: FormGroup;
 
   private _isSent = false;
 
-  constructor(public  matDialogRef: MatDialogRef<AddUserComponent>,
-              private router: Router, private snackBar: MatSnackBar,
-              private fb: FormBuilder, public userService: UserService) {
+  constructor(private router: Router,
+              private snackBar: MatSnackBar,
+              private fb: FormBuilder,
+              public userService: UserService,
+              private breadcrumbService: BreadcrumbService) {
+    this.breadcrumbService.hideRoute('/main/user');
 
   }
   emailControl: FormControl = new FormControl('', [
@@ -58,6 +74,11 @@ export class AddUserComponent implements OnInit {
     Validators.minLength(6),
     Validators.maxLength(16),
   ]);
+  passwordConfirmationControl: FormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(16),
+  ]);
 
   createForm() {
     this.userForm = this.fb.group({
@@ -65,6 +86,9 @@ export class AddUserComponent implements OnInit {
       lastName: this.lastnameControl,
       email: this.emailControl,
       password: this.passwordControl,
+      passwordConfirmation: this. passwordConfirmationControl
+    }, {
+      validator: PasswordValidation.MatchPassword
     });
   }
 

@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ExcategoryModel} from '../models/excategory.model';
 import {environment} from '../../environments/environment';
+import {Category} from '../models/category.model';
 
 
 @Injectable({
@@ -23,4 +24,11 @@ export class ExcategoryService {
     return this.http.get<ExcategoryModel[]>(this.serviceUrl + '?firstNestedCategoryName=' + nextLevel);
   }
 
+  save(category: Category): Observable<Category> {
+    return this.http.post<Category>(this.serviceUrl, category);
+  }
+
+  public getCategoryByName(cityName: String) {
+    return this.http.get<Category[]>(this.serviceUrl + '?name=' + cityName);
+  }
 }

@@ -19,21 +19,12 @@ export class NonExCategoryComponent implements OnInit {
   public list: Observable<ExcategoryModel[]>;
   serverURL = environment.serverURL + '/category/img?link=';
 
-  displayedColumns = ['id', 'name', 'nextLevelCategory_name'];
-
   top: String;
   city: String;
   private sub: any;
 
   @ViewChild(TransitsComponent)
   private transitChild: TransitsComponent;
-
-  discreteInputEventValue: number;
-  discreteChangeEventValue: number;
-
-  discreteMin: number = 0;
-  discreteMax: number = 100;
-
 
   constructor(private service: NonExCategoryService,
               private route: ActivatedRoute,
@@ -46,7 +37,6 @@ export class NonExCategoryComponent implements OnInit {
       this.city = params['city'];
       this.top = params['top'];
       this.list = this.service.getByNames(this.city, this.top);
-      console.log(this.city);
     });
   }
 }

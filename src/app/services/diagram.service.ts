@@ -20,6 +20,6 @@ export class DiagramService {
   }
 
   getHeatMapData(transitId) {
-    return this.http.get(environment.serverURL + '/feedback/heat-map/' + transitId);
+    return this.http.get(environment.serverURL + '/feedback/heat-map/' + transitId +'?stop-list');
   }
 }

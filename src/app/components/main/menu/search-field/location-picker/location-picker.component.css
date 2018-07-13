@@ -1,5 +1,6 @@
 div {
+  position: relative;
   margin-left: 15px;
-  margin-bottom: 45px;
+  top: 0px;
   display: inline-block;
 }

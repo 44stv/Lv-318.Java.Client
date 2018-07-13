@@ -2,6 +2,8 @@ import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import * as moment from 'moment/moment';
 import {Observable} from 'rxjs';
+import { MatSnackBar } from '@angular/material';
+import {HttpParams} from '@angular/common/http';
 
 import {
   SimpleAnswer,
@@ -20,7 +22,8 @@ import {Question} from '../../../../../../../models/question.model';
 import {Stop} from '../../../../../../../models/stop.model';
 import {MyComment} from '../../../../../../../models/comment.model';
 import {CommentService} from '../../../../../../../services/comment.service';
-import {HttpParams} from '@angular/common/http';
+import { AuthService } from '../../../../../../../services/auth/auth.service';
+
 
 
 @Component({
@@ -35,19 +38,25 @@ export class AddFeedbackComponent implements OnInit {
   @Input() capacity = 0;
   @Input() transitId: number = this.data.number;
   @Input() transitName: String = this.data.transitName;
+  @Input() private transitComment: MyComment = new MyComment();
   private stops: Observable<Stop[]>;
   private categoryId: number = this.data.categoryId;
   private userId = 1;
   private checkBoxAnswers: String[] = ['YES', 'NO', 'MAYBE'];
-  private quantityLoadAnswers: String[] = ['SIT', 'STAY', 'HARD_LOAD', 'LOSER'];
-  @Input() private transitComment: MyComment = new MyComment();
+  private quantityLoadAnswers: String[] = ['SIT', 'STAY', 'HARD_LOAD', 'LOSER']; 
+  successMessage = 'Feedback and Comment posted';
+  failedMessage = 'Empty feedback';
+  loginMessage = 'Please, log in';
+  action = 'Hide';
   // private directions: String[] = ['FORWARD', 'BACKWARD'];
   // private direction: String;
 
   constructor(private dialogRef: MatDialogRef<AddFeedbackComponent>, @ Inject(MAT_DIALOG_DATA) public data: any,
               private feedbackService: FeedbackService, private criteriaService: FeedbackCriteriaService,
               private stopService: StopService,
-              private commentService: CommentService) {
+              private commentService: CommentService,
+              public snackBar: MatSnackBar,
+            public auth: AuthService) {
 
     this.survey = this.buildSurveyByCriteriaType(['RATING']);
     this.qualitySurvey = this.buildSurveyByCriteriaType(['SIMPLE', 'QUALITY'])
@@ -69,13 +78,15 @@ export class AddFeedbackComponent implements OnInit {
     const capFeedbacks: Feedback[] = this.toFeedbackList(this.capacitySurvey);
     const quantityFeedbacks: Feedback[] = this.toFeedbackList(this.qualitySurvey);
     console.log(feedbacks.concat(capFeedbacks, quantityFeedbacks));
-    if (this.transitComment.commentText) {
+    // if (this.transitComment.commentText) {
+    //   this.addComment();
+    // }
+    if (feedbacks.concat(capFeedbacks, quantityFeedbacks).length > 0 || this.transitComment.commentText) {
+      this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks)).subscribe();
       this.addComment();
-    }
-    if (feedbacks.concat(capFeedbacks, quantityFeedbacks).length > 0) {
-      this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks)).subscribe(data => {
-        alert('Feedback created successfully.');
-      });
+      this.openSnackBar(this.successMessage);
+    } else {
+      this.openSnackBar(this.failedMessage);
     }
     this.dialogRef.close();
   }
@@ -136,7 +147,7 @@ export class AddFeedbackComponent implements OnInit {
     survey.forEach(questioner => {
       const feedback: Feedback = new Feedback();
       feedback.transitId = this.transitId;
-      feedback.userId = this.userId;
+      feedback.userId = this.auth.getUserId();
       feedback.criteriaId = questioner.criteriaId;
       feedback.type = questioner.type;
       feedback.answer = this.answerFormatter(questioner);
@@ -262,7 +273,11 @@ export class AddFeedbackComponent implements OnInit {
     this.commentService.addComment(params, this.transitComment)
       .subscribe(comment => console.log(comment));
   }
-
+  openSnackBar(message: string) {
+    this.snackBar.open(message, this.action, {
+      duration: 2000,
+    });
+  }
   // public getByTransitAndDirection(direction: String){
   //   this.stops =this.stopService.getStopsByTransitIdAndDirection(this.transitId,direction);
   // }

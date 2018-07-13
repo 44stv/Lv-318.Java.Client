@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-
+  clientUrl: 'http://localhost:4200/',
   serverURL: 'http://localhost:8080',
   // serverURL: 'https://uatransport.tk',
 
@@ -12,13 +12,6 @@ export const environment = {
   accessTokenHeader: 'Authorization',
   refreshTokenHeader: 'Refresh-token',
 
-  auth: {
-    clientID: 'fMvXBLfJoy8yuoUoTGnTa8kI-3gEePfQ',
-    domain: 'uatransport.eu.auth0.com',
-    audience: 'http://localhost:4200',
-    redirect: 'http://localhost:4200/callback',
-    scope: 'openid profile email'
-  }
 };
 
 /*

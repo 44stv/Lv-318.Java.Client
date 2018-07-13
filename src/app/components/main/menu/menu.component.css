@@ -48,6 +48,11 @@ a:active {
   margin-left: auto;
 }
 
+.adminButton {
+  position: relative;
+  margin-left: 20px;
+}
+
 .NewUser {
   position: relative;
   margin-left: 20px;
@@ -77,8 +82,7 @@ a:active {
   font-family: sans-serif;
   color: darkgray;
   font-weight: bold;
-  /*padding-bottom: 15px;*/
-  display: inline-block;
+  margin-bottom: 25px;
 }
 
 

@@ -2,9 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { User } from '../models/user.model';
+import { Friend } from '../models/friend.model';
 import { Login } from '../models/login.model';
 import { environment } from '../../environments/environment';
 import {Observable} from 'rxjs';
+import {UpdateRoleModel} from '../models/update-role.model';
 
 
 const httpOptions = {
@@ -26,6 +28,9 @@ export class UserService {
   public createUser(user: User): Observable<any> {
     return this.http.post(this.userUrl + '/signup', user);
   }
+  public sendInvitation(friend: Friend): Observable<any> {
+    return this.http.post(this.userUrl + '/invite', friend);
+  }
 
   public logIn(login) {
     return this.http.post<User>(this.userUrl + '/', login);
@@ -39,4 +44,9 @@ export class UserService {
   changePassword(uuid: string): Observable<any> {
     return this.http.post(this.userUrl + '/update/password', uuid);
   }
+
+  public updateRole(updateRoleModel: UpdateRoleModel) {
+    return this.http.put<User>(`${this.userUrl}/update-role`, updateRoleModel );
+  }
+
 }

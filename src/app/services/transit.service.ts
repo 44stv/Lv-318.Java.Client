@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Transit } from '../models/transit.model';
-import { environment } from '../../environments/environment';
-import { Paginator } from '../models/paginator.model';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Transit} from '../models/transit.model';
+import {environment} from '../../environments/environment';
+import {Paginator} from '../models/paginator.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +37,9 @@ export class TransitService {
 
   public countByCategoryId(id: number): Observable<number> {
     return this.http.get<number>(`${this.serviceUrl}?count=${id}`);
+  }
+
+  getTransitRateById(transitId: number) {
+    return this.http.get(`${environment.serverURL}/feedback/rating/${transitId}`);
   }
 }
