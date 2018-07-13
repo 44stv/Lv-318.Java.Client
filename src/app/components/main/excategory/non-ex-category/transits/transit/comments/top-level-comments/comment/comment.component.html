@@ -5,11 +5,11 @@
       <!--{{ comment.userId }}-->
       Firstname Lastname
       {{ postCommentDate }}
-      <div class="modified" *ngIf="modified">
+      <div *ngIf="modified">
         Changed {{ modifiedCommentDate }}
       </div>
     </div>
-    <div class="row">
+    <div class="row commentText">
       <h4> {{ comment.commentText }} </h4>
     </div>
 
