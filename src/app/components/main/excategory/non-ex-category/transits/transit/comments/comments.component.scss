@@ -1,8 +1,10 @@
 .allComments {
+  position: relative;
+  top: 50px;
   width: 60%;
   border: 1px solid #ccc!important;
   border-radius: 10px;
-  margin: auto auto 20px;
+  margin: 20px auto;
 }
 
 .oneComment {
