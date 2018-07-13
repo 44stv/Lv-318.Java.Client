@@ -1,0 +1,37 @@
+
+<div class="NewUserForm">
+  <div class="title">Invitation form </div>
+  <form [formGroup]="friendForm" (ngSubmit)="sendInvitation()" *ngIf="!_isSent">
+    <div class="form-group">
+      <mat-form-field class="mat-form-f">
+        <input matInput placeholder="Friend's firstname" formControlName="friendName" required>
+        <mat-error *ngIf="firstnameControl.hasError('maxlength') && !emailControl.hasError('required')">
+          String is too long
+        </mat-error>
+        <mat-error *ngIf="firstnameControl.hasError('required')">
+          Firstname is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field class="mat-form-f">
+        <input matInput placeholder="Enter friend's email" formControlName="friendEmail" [formControl]="email" required>
+        <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <button mat-button class="button">Send</button>
+    </div>
+  </form>
+  <div class="form-group" *ngIf="_isSent">
+    <div class="col-12 text-center">
+      <h4 style="color:black"><strong>Invitation sent successfully</strong></h4>
+      <h5 style="color:black">Thank You for sharing information</h5>
+    </div>
+  </div>
+</div>

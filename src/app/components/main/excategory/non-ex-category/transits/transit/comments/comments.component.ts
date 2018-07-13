@@ -1,11 +1,10 @@
-import { Component, Injectable, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommentService } from '../../../../../../../services/comment.service';
 import { MyComment } from '../../../../../../../models/comment.model';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { MatTreeNestedDataSource } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { HttpParams } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material';
+import { AuthService } from '../../../../../../../services/auth/auth.service';
 
 
 @Component({
@@ -17,18 +16,68 @@ import 'rxjs/add/observable/of';
 export class CommentsComponent implements OnInit {
 
   @Input() id: number;
+  addCommentText: string;
+  successMessage = 'Comment posted';
+  failedMessage = 'Empty comment';
+  loginMessage = 'Please, log in';
+  action = 'Hide';
+  sortMode = 'ASC';
 
   comments: MyComment[];
 
-  constructor(private commentService: CommentService) {}
+  constructor(private commentService: CommentService,
+              public snackBar: MatSnackBar,
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
-    this.getTopLevelComments(this.id);
+    this.getTopLevelComments();
+    console.log(this.authService.getUserId());
   }
 
-  getTopLevelComments(transitId: number) {
-    this.commentService.getTopComments(transitId).subscribe(comments => this.comments = comments);
+  getTopLevelComments() {
+    this.commentService.getTopComments(this.id).subscribe(comments => {
+      this.comments = comments;
+    });
   }
 
+  // TODO: get user id form authService
+  addTopLevelComment() {
+    if (this.authService.hasToken()) {
+      const newComment = new MyComment();
+      if (this.addCommentText) {
+        newComment.commentText = this.addCommentText;
+        let params = new HttpParams();
+        params = params.set('transitId', this.id.toString());
+        // params = params.set('userId', this.authService.getUserId().toString());
+        params = params.set('userId', '3');
+        this.commentService.addComment(params, newComment)
+          .subscribe(comment => {
+            console.log(comment);
+            this.getTopLevelComments();
+          });
+        this.openSnackBar(this.successMessage);
+      } else {
+        this.openSnackBar(this.failedMessage);
+      }
+    } else {
+      this.openSnackBar(this.loginMessage);
+    }
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, this.action, {
+      duration: 2000,
+    });
+  }
+
+  sortComments(): void {
+    if (this.sortMode === 'DESC') {
+      this.comments.sort((a, b) => a.postDate.localeCompare(b.postDate));
+    }
+    if (this.sortMode === 'ASC') {
+      this.comments.sort((a, b) => b.postDate.localeCompare(a.postDate));
+    }
+  }
 }
 

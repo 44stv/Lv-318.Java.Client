@@ -28,36 +28,23 @@
       <mat-cell *matCellDef="let transit"> {{ transit.routeName }} </mat-cell>
     </ng-container>
 
-    <!--<ng-container matColumnDef="averageRate">-->
-      <!--<mat-header-cell *matHeaderCellDef mat-sort-header> Average rate </mat-header-cell>-->
-      <!--<mat-cell *matCellDef="let transit">{{ getTransitAverageRate(transit.id) }}</mat-cell>-->
-    <!--</ng-container>-->
+    <ng-container matColumnDef="averageRate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Average rate </mat-header-cell>
+      <mat-cell *matCellDef="let transit">
+        <star-rating
+          [starType]="'svg'"
+          [rating]="averageRateArray.get(transit.id) / 2"
+          [showHalfStars]="true"
+          [readOnly]="true"
+        ></star-rating>
+      </mat-cell>
+    </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let transit;"
-             [routerLink]="['/main/top', cityName, categoryId,
-             transit.id, transit.name]"></mat-row>
+             [routerLink]="['/main/',topName , cityName, categoryId,
+             transit.id, transit.name, transit.categoryIconURL]"></mat-row>
   </mat-table>
 
 </div>
-<!--<div class="AddTransit">-->
-<!--<h2 class="mat-h2">Add transit</h2>-->
-<!--<form class="Test" (ngSubmit)="onSubmit()" #myForm="ngForm">-->
-<!--<table class="Test" cellspacing="0">-->
-<!--<tr>-->
-<!--<td>-->
-<!--<mat-form-field class="Name">-->
-<!--<input matInput placeholder="Name" id="name" [(ngModel)]="transit.name" name="name">-->
-<!--</mat-form-field>-->
-<!--</td>-->
-<!--<td>-->
-<!--<mat-form-field class="Category">-->
-<!--<input matInput placeholder="Category id" type="number" [(ngModel)]="transit.categoryId" name="category.id">-->
-<!--</mat-form-field>-->
-<!--</td>-->
-<!--</tr>-->
-<!--</table>-->
-<!--<button mat-stroked-button type="submit">Submit</button>-->
-<!--</form>-->
-<!--</div>-->
 

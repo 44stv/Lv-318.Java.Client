@@ -8,10 +8,10 @@ agm-map {
 
 }
 #wrapper{
-  position: absolute;
-  top: 15%;
+  position: relative;
+  top: 16%;
   left: 50%;
-  width: 1000px;
+  width: 1200px;
   transform: translateX(-50%);
 }
 button{
@@ -28,4 +28,18 @@ button{
   font-weight: 400;
   text-decoration: none solid rgb(68, 68, 68);
   font-style: italic;
+}
+mat-vertical-stepper{
+
+}
+mat-accordion{
+  position: absolute;
+  z-index: 1000;
+}
+mat-panel-title{
+  color: #43659c;
+  font-weight: 600;
+}
+mat-expansion-panel{
+  width: 300px;
 }

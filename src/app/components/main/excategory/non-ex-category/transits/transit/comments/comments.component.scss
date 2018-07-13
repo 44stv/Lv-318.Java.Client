@@ -1,11 +1,39 @@
 .allComments {
-  width: 100%;
-  //margin-right: 20px;
+  width: 60%;
   border: 1px solid #ccc!important;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin: auto auto 20px;
 }
 
 .oneComment {
   width: 100%;
+}
+
+.leaveComment {
+  width: 100%;
+}
+
+.addComment {
+  margin-left: 35px;
+  margin-right: 35px;
+  margin-top: 25px;
+}
+
+.postButton {
+  margin-top: 2px;
+  margin-left: 15px;
+}
+
+.row {
+  position: relative;
+}
+
+.sortComments {
+  position: absolute;
+  right: 15px;
+}
+
+.underline {
+  border-bottom: 1px solid #ccc!important;
+  margin-top: 20px;
 }

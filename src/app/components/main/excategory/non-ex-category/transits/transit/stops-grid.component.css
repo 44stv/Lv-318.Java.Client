@@ -1,10 +1,5 @@
-
 .demo-grid-list {
   width: auto;
-  /*margin-left: 20px;*/
-  /*margin-right: 20px;*/
-  margin: 20px;
-  width: 1200px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
@@ -28,6 +23,8 @@ p {
 .tile {
   text-align: center;
   font-size: 14px;
+  width:85px;
+  display: inline-block;
 }
 
 .tab-group {

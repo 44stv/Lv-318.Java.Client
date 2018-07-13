@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
@@ -12,6 +12,18 @@ import {HttpErrorResponse} from '@angular/common/http';
 export class InfoResponse {
   response: string;
 }
+export class PasswordValidation {
+
+  static MatchPassword(AC: AbstractControl) {
+    const password = AC.get('password').value;
+    const passwordConfirmation = AC.get('passwordConfirmation').value;
+    if (password !== passwordConfirmation) {
+      AC.get('passwordConfirmation').setErrors({MatchPassword: true});
+    } else {
+      return null;
+    }
+  }
+}
 
 @Component({
     selector: 'app-forget-password',
@@ -19,11 +31,13 @@ export class InfoResponse {
     styleUrls: ['./forget-password.component.css']
 })
 export class ForgetPasswordComponent implements OnInit {
+
+  hide: boolean = true;
+  hideConfirm: boolean = true;
   set isSent(value: boolean) {
     this._isSent = value;
   }
     private _isSent: boolean = false;
-    hide: boolean = true;
     forgetPasswordForm: FormGroup;
     login: Login;
 
@@ -36,6 +50,11 @@ export class ForgetPasswordComponent implements OnInit {
         Validators.minLength(6),
         Validators.maxLength(16),
     ]);
+  passwordConfirmationControl: FormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(16),
+  ]);
 
     constructor(public  matDialogRef: MatDialogRef<ForgetPasswordComponent>,
                 private formBuilder: FormBuilder,
@@ -48,6 +67,9 @@ export class ForgetPasswordComponent implements OnInit {
         this.forgetPasswordForm = this.formBuilder.group({
             email: this.emailControl,
             password: this.passwordControl,
+          passwordConfirmation: this. passwordConfirmationControl
+        }, {
+          validator: PasswordValidation.MatchPassword
         });
     }
 

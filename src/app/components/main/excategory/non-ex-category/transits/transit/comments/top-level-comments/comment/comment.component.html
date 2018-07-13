@@ -4,15 +4,13 @@
     <div class="row">
       <!--{{ comment.userId }}-->
       Firstname Lastname
-      <!--<button (click)="addTopLevelComment(1, 4, testComment)"></button>-->
-      <div class="modified">
-        <div *ngIf="modified">
-          {{ comment.modifiedDate }}
-        </div>
+      {{ postCommentDate }}
+      <div *ngIf="modified">
+        Changed {{ modifiedCommentDate }}
       </div>
     </div>
-    <div class="row">
-      <p> {{ comment.commentText }} </p>
+    <div class="row commentText">
+      <h4> {{ comment.commentText }} </h4>
     </div>
 
     <div class="underline"></div>

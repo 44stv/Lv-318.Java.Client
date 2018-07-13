@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
@@ -9,17 +9,13 @@ import {TokenModel} from './token/token-model';
 import {determineRole, Role} from './roles';
 
 const helper = new JwtHelperService();
-import { HttpHeaders } from '@angular/common/http';
-import { Login } from '../../models/login.model';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+
 @Injectable()
 export class AuthService {
 
   private accessToken = localStorage.getItem('accesToken');
-  public decodedToken = this.decodeToken();
+  private decodedToken = this.decodeToken();
   private serviceUrl = environment.serverURL;
 
   constructor(public http: HttpClient) {
@@ -57,6 +53,16 @@ export class AuthService {
       return false;
     }
     return helper.isTokenExpired(this.accessToken);
+  }
+
+  public getUserId(): number {
+    let id: number;
+    if (this.hasToken()) {
+      id = this.decodedToken.id;
+    } else {
+      id = null;
+    }
+    return id;
   }
 
   public getRole(): Role {

@@ -1,16 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {BreadcrumbService} from 'ng5-breadcrumb';
+
 
 import {Login} from '../../../../models/login.model';
 import {AuthService} from '../../../../services/auth/auth.service';
 import {TokenModel} from '../../../../services/auth/token/token-model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {MatDialogRef} from '@angular/material/dialog';
 
 import {HttpErrorResponse} from '@angular/common/http';
 import {ForgetPasswordComponent} from './forget-password/forget-password.component';
+
 
 @Component({
   selector: 'app-user-login',
@@ -19,13 +20,13 @@ import {ForgetPasswordComponent} from './forget-password/forget-password.compone
 })
 export class UserLoginComponent implements OnInit {
 
-  login: Login;
+  login: Login ;
   loginForm: FormGroup;
+  hide: boolean = true;
 
   constructor(public  matDialogRef: MatDialogRef<UserLoginComponent>,
               private snackBar: MatSnackBar,
-              private fb: FormBuilder,
-              private router: Router,
+              private fb: FormBuilder, private router: Router,
               private authService: AuthService,
               private dialog: MatDialog) {
   }
@@ -41,8 +42,14 @@ export class UserLoginComponent implements OnInit {
     Validators.maxLength(16),
   ]);
 
+  passwordConfirmationControl: FormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6),
+    Validators.maxLength(16),
+  ]);
+
   logIn() {
-    this.login = this.loginForm.value;
+   /* this.login = this.loginForm.value;
     this.authService.signIn(this.login)
       .subscribe((token: TokenModel) => {
         this.authService.setToken(token);
@@ -52,19 +59,37 @@ export class UserLoginComponent implements OnInit {
         });
         this.router.navigate(['main']);
       }, (error) => {
-        if (error instanceof HttpErrorResponse) {
-          if (error.error.description === 'User is disabled') {
-            this.snackBar.open('Your account is not activated. Please confirm the registration', null, {
-              duration: 5000
-            });
-          } else {
-            this.snackBar.open(error.error.response, null, {
-              duration: 5000
-            });
-          }
+      if (error instanceof HttpErrorResponse) {
+          this.snackBar.open(error.error.message, null, {
+            duration: 5000
+          });
         }
-      });
-  }
+      });*/
+
+      this.login = this.loginForm.value;
+      this.authService.signIn(this.login)
+        .subscribe((token: TokenModel) => {
+          this.authService.setToken(token);
+          this.snackBar.open('User loged successfully', null, {
+            duration: 4000
+          });
+          this.router.navigate(['main']);
+        }, (error) => {
+          if (error instanceof HttpErrorResponse) {
+            if (error.error.description === 'User is disabled') {
+              this.snackBar.open('Your account is not activated. Please confirm the registration', null, {
+                duration: 5000
+              });
+            } else {
+              this.snackBar.open(error.error.message, null, {
+                duration: 5000
+              });
+            }
+          }
+        });
+    }
+
+
 
   createForm() {
     this.loginForm = this.fb.group({
@@ -76,9 +101,7 @@ export class UserLoginComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
   }
-
   openForgetPassword() {
-
     this.dialog.open(ForgetPasswordComponent);
     this.matDialogRef.close();
   }

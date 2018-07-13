@@ -4,13 +4,11 @@
 
 export const environment = {
   production: false,
-
+  clientUrl: 'http://localhost:4200/',
   serverURL: 'https://localhost:8443',
   // serverURL: 'https://uatransport.tk',
 
 
-  clientUrl: 'http://localhost:4200/',
- // serverURL: 'http://ec2-18-184-79-174.eu-central-1.compute.amazonaws.com',
   accessTokenHeader: 'Authorization',
   refreshTokenHeader: 'Refresh-token',
 

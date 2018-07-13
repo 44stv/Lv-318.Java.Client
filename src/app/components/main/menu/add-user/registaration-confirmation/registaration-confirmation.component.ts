@@ -33,6 +33,7 @@ export class RegistarationConfirmationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this._isChanging = false;
     const pathUUID = this.route.snapshot.paramMap.get('uuid');
       this.userService.activateUser(pathUUID).subscribe((info: InfoResponse) => {
         this.snackBar.open(info.response, null, {
@@ -46,7 +47,7 @@ export class RegistarationConfirmationComponent implements OnInit {
            this.snackBar.open('Account activation Error! Try again', null, {
              duration: 5000
            });
-           this.router.navigate(['/']);
+           /*this.router.navigate(['/']);*/
          }
       });
   }
