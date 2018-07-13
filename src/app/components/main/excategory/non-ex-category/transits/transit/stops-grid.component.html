@@ -5,16 +5,25 @@
   <div class="tab-group">
     <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
       <mat-tab label="{{'Forward' | translate }}">
-        <mat-grid-list *ngIf="forwardStops.length" [cols]="10" rowHeight="70px">
-          <mat-grid-tile
-            *ngFor="let i=index; let tile of forwardStops" class="tile">
-            <label [for]="tile.id" class = "tile-content">
-              <div>{{tile.street}}</div>
-              <input type="checkbox" [(ngModel)]="checkedItems[i]" [id]="tile.id" (change)='selectStops()'>
-              <img src="../../../assets/img/list.png">
+        <!--<mat-grid-list *ngIf="forwardStops.length" [cols]="10" rowHeight="70px">-->
+          <!--<mat-grid-tile-->
+            <!--*ngFor="let i=index; let tile of forwardStops" class="tile">-->
+            <!--<label [for]="tile.id" class = "tile-content">-->
+              <!--<div>{{tile.street}}</div>-->
+              <!--<input type="checkbox" [(ngModel)]="checkedItems[i]" [id]="tile.id" (change)='selectStops()'>-->
+              <!--<img src="../../../assets/img/list.png">-->
+            <!--</label>-->
+          <!--</mat-grid-tile>-->
+        <!--</mat-grid-list>-->
+        <div *ngIf="forwardStops.length">
+          <div *ngFor="let i=index; let tile of forwardStops" class="tile">
+            <label [for]="tile.id" class = "tile-content" >
+              <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
+            <!--<img height="32" width="32" src="{{ categoryIconURL }}{{ iconURL }}" id = "tile.id" (click)="selectStop(tile)">-->
+              <div class="icon-background" [style.background-image]="backgroundImg"></div>
             </label>
-          </mat-grid-tile>
-        </mat-grid-list>
+          </div>
+        </div>
       </mat-tab>
       <mat-tab label="{{'Backward' | translate }}">
         <mat-grid-list *ngIf="backwardStops.length" [cols]="12" rowHeight="70px">
