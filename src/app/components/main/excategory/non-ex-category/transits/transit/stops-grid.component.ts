@@ -83,23 +83,21 @@ export class StopsGridComponent implements OnInit {
     this.trustedUrl = this.sanitizer.bypassSecurityTrustStyle('url(' + this.categoryIconURL + this.iconURL + ')');
   }
 
-  public selectStop(stop) {
-    const toSave = Object.assign({}, stop);
-    console.log(this.selectedStops.indexOf(toSave));
-    if (!this.selectedStops.includes(toSave, 0)) {
-
-      this.selectedStops.push(toSave);
-      // this.selectedStops.concat(stop);
+  public selectStop(stop: Stop) {
+    if (!this.selectedStops.find(x => x.id === stop.id)) {
+      this.selectedStops.push(Object.assign({}, stop));
     } else {
-      this.selectedStops.splice(this.selectedStops.indexOf(toSave), 1);
+      this.selectedStops.splice(this.selectedStops.findIndex(x => x.id === stop.id), 1);
     }
-
     console.log(this.selectedStops);
-
   }
 
-  public isSelected(): boolean{
-    return true;
+  public isSelected(stop: Stop): boolean {
+    if (this.selectedStops.find(x => x.id === stop.id)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public selectStops() {

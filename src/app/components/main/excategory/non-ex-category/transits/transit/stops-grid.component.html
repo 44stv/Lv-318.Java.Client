@@ -5,23 +5,12 @@
   <div class="tab-group">
     <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
       <mat-tab label="{{'Forward' | translate }}">
-        <!--<mat-grid-list *ngIf="forwardStops.length" [cols]="10" rowHeight="70px">-->
-          <!--<mat-grid-tile-->
-            <!--*ngFor="let i=index; let tile of forwardStops" class="tile">-->
-            <!--<label [for]="tile.id" class = "tile-content">-->
-              <!--<div>{{tile.street}}</div>-->
-              <!--<input type="checkbox" [(ngModel)]="checkedItems[i]" [id]="tile.id" (change)='selectStops()'>-->
-              <!--<img src="../../../assets/img/list.png">-->
-            <!--</label>-->
-          <!--</mat-grid-tile>-->
-        <!--</mat-grid-list>-->
         <div *ngIf="forwardStops.length">
-          <div *ngFor="let i=index; let tile of forwardStops" class="tile">
-            <div ><label [for]="tile.id" class = "tile-content" >
+          <div *ngFor="let i=index; let tile of forwardStops" class="tile" (click)="selectStop(tile)">
+            <label [for]="tile.id" class = "tile-content" >
               <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
-            <img height="32" width="32" src="{{ categoryIconURL }}{{ iconURL }}" [ngClass] = "{'image-opacity': isSelected()}" id = "tile.id" (click)="selectStop(tile)">
-              <!--<div class="icon-background" [ngStyle]="{'background': trustedUrl}"></div>-->
-            </label></div>
+               <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}" [ngClass] = "{'image-opacity': isSelected(tile)}" id = "tile.id" >
+            </label>
           </div>
         </div>
       </mat-tab>
