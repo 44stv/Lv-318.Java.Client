@@ -1,5 +1,6 @@
 .demo-grid-list {
   width: auto;
+  padding-left: 2px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
@@ -36,4 +37,8 @@ p {
   font-size: 12px;
   align-items: flex-end;
 }
+.image-opacity {
+  opacity: 0.3;
+}
+
 

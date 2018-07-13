@@ -10,6 +10,7 @@ import {BreadcrumbService} from 'ng5-breadcrumb';
 import {environment} from '../../../../../../../environments/environment';
 import {Transit} from '../../../../../../models/transit.model';
 import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
+import {DomSanitizer, SafeStyle, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-stops-grid',
@@ -31,6 +32,7 @@ export class StopsGridComponent implements OnInit {
   categoryId: number;
   categoryIconURL = `${environment.serverURL}/category/img?link=`;
   iconURL: string;
+  trustedUrl: SafeStyle;
 
 
   constructor(private stopService: StopService,
@@ -38,7 +40,8 @@ export class StopsGridComponent implements OnInit {
               private route: ActivatedRoute,
               public dialog: MatDialog,
               private breadcrumbService: BreadcrumbService,
-              private nonExCatServ: NonExCategoryService) {
+              private nonExCatServ: NonExCategoryService,
+              private sanitizer: DomSanitizer) {
     this.route.params.subscribe(params => {
       this.nonExCatServ.getNameByCategoryId(params['id']).subscribe(data => {
         this.breadcrumbService.addFriendlyNameForRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
@@ -56,9 +59,10 @@ export class StopsGridComponent implements OnInit {
 
       if (params['id'] === 'undefined') {
         this.breadcrumbService.hideRoute('/main/' + (<string>params['top']).replace(' ', '%20') +
-            '/' + params['city'] + '/' + params['id']);
+          '/' + params['city'] + '/' + params['id']);
       }
     });
+
   }
 
 
@@ -69,7 +73,6 @@ export class StopsGridComponent implements OnInit {
       this.transitName = params['name'];
       this.iconURL = params['iconUrl'];
     });
-    // this.categoryId = this.transit.categoryId;
     this.stopsList = this.stopService.getStopsByTransitId(this.idTransit);
     this.stopsList.subscribe(stopArray => {
       this.stopArray = stopArray;
@@ -77,25 +80,10 @@ export class StopsGridComponent implements OnInit {
       this.forwardStops = this.stopArray.filter(stop => stop.direction === 'FORWARD');
       this.backwardStops = this.stopArray.filter(stop => stop.direction === 'BACKWARD');
     });
-
+    this.trustedUrl = this.sanitizer.bypassSecurityTrustStyle('url(' + this.categoryIconURL + this.iconURL + ')');
   }
 
   public selectStop(stop) {
-    // if (!(this.selectedStops.length > 0)) {
-    //   this.selectedStops.push(Object.assign({}, stop));
-    //
-    // } else {
-    //   this.selectedStops.forEach(
-    //     (value) => {
-    //       if (value !== stop) {
-    //         this.selectedStops.push(Object.assign({}, stop));
-    //       } else {
-    //         console.log(this.selectedStops.indexOf(value));
-    //         this.selectedStops.splice(this.selectedStops.indexOf(value), 1);
-    //       }
-    //     }
-    //   );
-    // }
     const toSave = Object.assign({}, stop);
     console.log(this.selectedStops.indexOf(toSave));
     if (!this.selectedStops.includes(toSave, 0)) {
@@ -106,11 +94,12 @@ export class StopsGridComponent implements OnInit {
       this.selectedStops.splice(this.selectedStops.indexOf(toSave), 1);
     }
 
-
-    console.log(toSave);
-    // console.log(Object.assign({}, stop));
     console.log(this.selectedStops);
 
+  }
+
+  public isSelected(): boolean{
+    return true;
   }
 
   public selectStops() {

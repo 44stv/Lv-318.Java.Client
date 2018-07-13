@@ -17,11 +17,11 @@
         <!--</mat-grid-list>-->
         <div *ngIf="forwardStops.length">
           <div *ngFor="let i=index; let tile of forwardStops" class="tile">
-            <label [for]="tile.id" class = "tile-content" >
+            <div ><label [for]="tile.id" class = "tile-content" >
               <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
-            <!--<img height="32" width="32" src="{{ categoryIconURL }}{{ iconURL }}" id = "tile.id" (click)="selectStop(tile)">-->
-              <div class="icon-background" [style.background-image]="backgroundImg"></div>
-            </label>
+            <img height="32" width="32" src="{{ categoryIconURL }}{{ iconURL }}" [ngClass] = "{'image-opacity': isSelected()}" id = "tile.id" (click)="selectStop(tile)">
+              <!--<div class="icon-background" [ngStyle]="{'background': trustedUrl}"></div>-->
+            </label></div>
           </div>
         </div>
       </mat-tab>
