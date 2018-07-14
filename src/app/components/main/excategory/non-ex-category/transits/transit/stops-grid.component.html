@@ -5,29 +5,27 @@
   <div class="stops-scheme">
     <div *ngIf="directionForward">
       <h3>{{'Forward' | translate }}</h3>
-        <div *ngIf="forwardStops.length">
-          <div *ngFor="let i=index; let tile of forwardStops" class="tile" (click)="selectStop(tile)">
-            <label [for]="tile.id" class="tile-content">
-              <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
-              <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
-                   [ngClass]="{'image-opacity': isSelected(tile)}">
-            </label>
-            <img height="22" width="85px" src="../../../../../../../assets/img/road-icon.png"
-                 [ngClass]="{'image-opacity': isSelected(tile)}">
-          </div>
-        </div>
-    </div >
-    <div *ngIf="!directionForward">
-      <h3>{{'Backward' | translate }}</h3>
-        <div *ngFor="let i=index; let tile of backwardStops" class="tile" (click)="selectStop(tile)">
+      <div *ngIf="forwardStops.length">
+        <div *ngFor="let i=index; let tile of forwardStops" class="tile" (click)="selectStop(tile); busyStopsDiagram.onClick()">
           <label [for]="tile.id" class="tile-content">
             <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
             <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
                  [ngClass]="{'image-opacity': isSelected(tile)}">
           </label>
-          <img height="22" width="85px" src="../../../../../../../assets/img/road-icon.png"
-               [ngClass]="{'image-opacity': isSelected(tile)}">
+          <img height="22" width="85px" src="../../../../../../../assets/img/road-icon.png">
         </div>
+      </div>
+    </div>
+    <div *ngIf="!directionForward">
+      <h3>{{'Backward' | translate }}</h3>
+      <div *ngFor="let i=index; let tile of backwardStops" class="tile" (click)="selectStop(tile); busyStopsDiagram.onClick()">
+        <label [for]="tile.id" class="tile-content">
+          <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
+          <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
+               [ngClass]="{'image-opacity': isSelected(tile)}">
+        </label>
+        <img height="22" width="85px" src="../../../../../../../assets/img/road-icon.png">
+      </div>
     </div>
   </div>
 

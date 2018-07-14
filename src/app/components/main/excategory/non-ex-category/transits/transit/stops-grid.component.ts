@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, RouterModule} from '@angular/router';
 import {StopService} from '../../../../../../services/stop.service';
 import {TransitService} from '../../../../../../services/transit.service';
@@ -12,6 +12,7 @@ import {Transit} from '../../../../../../models/transit.model';
 import {environment} from '../../../../../../../environments/environment';
 import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
 import {Location} from '@angular/common';
+import {BusyStopsDiagramComponent} from './busy-stops-diagram/busy-stops-diagram.component';
 
 @Component({
   selector: 'app-stops-grid',
@@ -24,6 +25,7 @@ export class StopsGridComponent implements OnInit {
   private sub: any;
   @Input() idTransit: number;
   @Input() transitName: string;
+  @ViewChild(BusyStopsDiagramComponent) busyStopsDiagram: BusyStopsDiagramComponent;
   stopsList: Observable<Stop[]>;
   stopArray: Stop[] = [];
   forwardStops: Stop[] = [];
@@ -161,7 +163,7 @@ export class StopsGridComponent implements OnInit {
 
   changeDirection(event) {
     if (event === 'backward') {
-    this.directionForward = false;
+      this.directionForward = false;
     } else if (event === 'forward') {
       this.directionForward = true;
     }
