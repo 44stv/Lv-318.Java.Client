@@ -34,9 +34,6 @@
         <a [routerLink]="['/main/user/profile']" *ngIf="hasToken()">
           <button mdc-button [secondary]="true" type="submit">MyProfile</button>
         </a>
-        <!--<a [routerLink]="['/main/admin']" *ngIf="getRole() === role.Admin">
-          <button mdc-button [secondary]="true" type="submit">{{'Admin' | translate}}</button>
-        </a>-->
       </div>
     </mdc-toolbar-section>
     <div class="Search">
