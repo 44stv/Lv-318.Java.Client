@@ -1,18 +1,17 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, RouterModule} from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {StopService} from '../../../../../../services/stop.service';
 import {TransitService} from '../../../../../../services/transit.service';
 import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material';
 import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
-import {AuthService} from '../../../../../../services/auth/auth.service';
 import {Stop} from '../../../../../../models/stop.model';
 import {BreadcrumbService} from 'ng5-breadcrumb';
-import {Transit} from '../../../../../../models/transit.model';
 import {environment} from '../../../../../../../environments/environment';
 import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
-import {Location} from '@angular/common';
-import {BusyStopsDiagramComponent} from './busy-stops-diagram/busy-stops-diagram.component';
+import { Location } from '@angular/common';
+import {CustomAuthService} from '../../../../../../services/auth/custom-auth.service';
+
 
 @Component({
   selector: 'app-stops-grid',
@@ -38,7 +37,7 @@ export class StopsGridComponent implements OnInit {
 
 
   constructor(private stopService: StopService,
-              private authService: AuthService,
+              private authService: CustomAuthService,
               private route: ActivatedRoute,
               public dialog: MatDialog,
               private breadcrumbService: BreadcrumbService,

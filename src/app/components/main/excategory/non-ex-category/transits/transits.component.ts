@@ -3,11 +3,11 @@ import {ActivatedRoute} from '@angular/router';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {environment} from '../../../../../../environments/environment';
 
-import {Transit} from '../../../../../models/transit.model';
-import {TransitService} from '../../../../../services/transit.service';
-import {DiagramService} from '../../../../../services/diagram.service';
-import {BreadcrumbService} from 'ng5-breadcrumb';
-import {NonExCategoryService} from '../../../../../services/non-ex-category.service';
+import { Transit } from '../../../../../models/transit.model';
+import { TransitService } from '../../../../../services/transit.service';
+import { DiagramService } from '../../../../../services/diagram.service';
+import { BreadcrumbService } from 'ng5-breadcrumb';
+import { NonExCategoryService } from '../../../../../services/non-ex-category.service';
 
 
 @Component({

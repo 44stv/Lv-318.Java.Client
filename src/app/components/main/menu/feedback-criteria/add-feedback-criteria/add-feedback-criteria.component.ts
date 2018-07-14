@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material';
-import {FeedbackCriteria} from '../../../../../models/feedback-criteria.model';
-import {Question} from '../../../../../models/question.model';
-import {FeedbackCriteriaService} from '../../../../../services/feedback-criteria.service';
-import {AddQuestionComponent} from '../add-question/add-question.component';
+import { FeedbackCriteria } from '../../../../../models/feedback-criteria.model';
+import { Question } from '../../../../../models/question.model';
+import { FeedbackCriteriaService } from '../../../../../services/feedback-criteria.service';
+import { AddQuestionComponent } from '../add-question/add-question.component';
 
 @Component({
   selector: 'app-add-feedback-criteria',

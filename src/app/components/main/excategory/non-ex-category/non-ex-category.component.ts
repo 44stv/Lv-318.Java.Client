@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
-import {BreadcrumbService} from 'ng5-breadcrumb';
-import {environment} from '../../../../../environments/environment';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { BreadcrumbService } from 'ng5-breadcrumb';
+import { environment } from '../../../../../environments/environment';
 
-import {ExcategoryModel} from '../../../../models/excategory.model';
-import {TransitsComponent} from './transits/transits.component';
-import {NonExCategoryService} from '../../../../services/non-ex-category.service';
+import { ExcategoryModel } from '../../../../models/excategory.model';
+import { TransitsComponent } from './transits/transits.component';
+import { NonExCategoryService } from '../../../../services/non-ex-category.service';
 
 @Component({
   selector: 'app-non-ex-category',

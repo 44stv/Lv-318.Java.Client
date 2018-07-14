@@ -43,6 +43,16 @@
         </div>
       </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="priority">
+      <mat-header-cell *matHeaderCellDef> Priority of Question </mat-header-cell>
+      <mat-cell *matCellDef="let feedbackCriteria" a routerLink="./{{feedbackCriteria.id}}">
+        <div>
+          <mat-list role="list" *ngFor="let questions of feedbackCriteria.questions ">
+            {{questions.priority}}
+          </mat-list>
+        </div>
+      </mat-cell>
+    </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </table>
