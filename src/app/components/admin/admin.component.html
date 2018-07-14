@@ -1,3 +1,45 @@
+<div class="menu-wrapper">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header >
+        <mat-panel-title>
+          <div class="title">
+            <div class="icon">
+            </div>
+            <div class="text">
+              <h4 class="mb-4">{{'UsersConf' | translate}}</h4>
+            </div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mdc-list>
+        <mdc-list-item >
+          <a [routerLink]="['/main/admin/update-role']">
+            <div class="title">
+              <div class="icon">
+              </div>
+              <div class="text">
+                Update user role
+              </div>
+            </div>
+          </a>
+        </mdc-list-item>
+        <mdc-list-item >
+          <a [routerLink]="['/main/admin/update-role']">
+            <div class="title">
+              <div class="icon">
+              </div>
+              <div class="text">
+                Show all users
+              </div>
+            </div>
+          </a>
+        </mdc-list-item>
+      </mdc-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
 <div class="container">
   <div class="container text-center">
     <div class="row" >
@@ -40,5 +82,4 @@
     </div>
 
   </div>
-  <app-update-role></app-update-role>
 </div>
