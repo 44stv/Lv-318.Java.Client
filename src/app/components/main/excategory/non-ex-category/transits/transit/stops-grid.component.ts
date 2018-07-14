@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {StopService} from '../../../../../../services/stop.service';
 import {TransitService} from '../../../../../../services/transit.service';
@@ -9,8 +9,9 @@ import {Stop} from '../../../../../../models/stop.model';
 import {BreadcrumbService} from 'ng5-breadcrumb';
 import {environment} from '../../../../../../../environments/environment';
 import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
 import {CustomAuthService} from '../../../../../../services/auth/custom-auth.service';
+import {BusyStopsDiagramComponent} from './busy-stops-diagram/busy-stops-diagram.component';
 
 
 @Component({
@@ -146,18 +147,6 @@ export class StopsGridComponent implements OnInit {
     } else {
       return false;
     }
-  }
-
-  public selectStops() {
-    for (let i = 0; i < this.checkedItems.length; i++) {
-      if (this.checkedItems[i] === true && !this.selectedStops.includes(this.stopArray[i], 0)) {
-        this.selectedStops.push(this.stopArray[i]);
-      }
-      if (this.checkedItems[i] === false && this.selectedStops.includes(this.stopArray[i], 0)) {
-        this.selectedStops.splice(this.selectedStops.indexOf(this.stopArray[i]), 1);
-      }
-    }
-    console.log(this.selectedStops);
   }
 
   changeDirection(event) {
