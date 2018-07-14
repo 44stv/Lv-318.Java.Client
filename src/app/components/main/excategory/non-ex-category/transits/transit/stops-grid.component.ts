@@ -11,7 +11,7 @@ import {BreadcrumbService} from 'ng5-breadcrumb';
 import {Transit} from '../../../../../../models/transit.model';
 import {environment} from '../../../../../../../environments/environment';
 import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-stops-grid',
@@ -32,6 +32,7 @@ export class StopsGridComponent implements OnInit {
   categoryId: number;
   categoryIconURL = `${environment.serverURL}/category/img?link=`;
   iconURL: string;
+  directionForward: boolean = true;
 
 
   constructor(private stopService: StopService,
@@ -156,7 +157,14 @@ export class StopsGridComponent implements OnInit {
       }
     }
     console.log(this.selectedStops);
+  }
 
+  changeDirection(event) {
+    if (event === 'backward') {
+    this.directionForward = false;
+    } else if (event === 'forward') {
+      this.directionForward = true;
+    }
   }
 
   public openModal() {

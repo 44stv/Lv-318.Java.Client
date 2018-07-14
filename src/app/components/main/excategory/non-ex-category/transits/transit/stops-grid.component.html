@@ -1,32 +1,36 @@
 <div class="demo-grid-list">
   <app-back-to-previous-page-btn></app-back-to-previous-page-btn>
   <p style="text-align: center">{{"Route" | translate}}<span> {{transitName}}</span></p>
-  <div class="tab-group">
-    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
-      <mat-tab label="{{'Forward' | translate }}">
+  <app-maps (toggleDirection)="changeDirection($event)"></app-maps>
+  <div class="stops-scheme">
+    <div *ngIf="directionForward">
+      <h3>{{'Forward' | translate }}</h3>
         <div *ngIf="forwardStops.length">
           <div *ngFor="let i=index; let tile of forwardStops" class="tile" (click)="selectStop(tile)">
             <label [for]="tile.id" class="tile-content">
               <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
               <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
-                   [ngClass]="{'image-opacity': isSelected(tile)}" id="tile.id">
+                   [ngClass]="{'image-opacity': isSelected(tile)}">
             </label>
+            <img height="22" width="85px" src="../../../../../../../assets/img/road-icon.png"
+                 [ngClass]="{'image-opacity': isSelected(tile)}">
           </div>
         </div>
-      </mat-tab>
-      <mat-tab label="{{'Backward' | translate }}">
-        <div *ngFor="let i=index; let tile of forwardStops" class="tile" (click)="selectStop(tile)">
+    </div >
+    <div *ngIf="!directionForward">
+      <h3>{{'Backward' | translate }}</h3>
+        <div *ngFor="let i=index; let tile of backwardStops" class="tile" (click)="selectStop(tile)">
           <label [for]="tile.id" class="tile-content">
             <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
             <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
-                 [ngClass]="{'image-opacity': isSelected(tile)}" id="tile.id">
+                 [ngClass]="{'image-opacity': isSelected(tile)}">
           </label>
+          <img height="22" width="85px" src="../../../../../../../assets/img/road-icon.png"
+               [ngClass]="{'image-opacity': isSelected(tile)}">
         </div>
-      </mat-tab>
-    </mat-tab-group>
+    </div>
   </div>
 
-  <app-maps></app-maps>
   <app-raiting-diagram [id]="idTransit"></app-raiting-diagram>
   <app-average-rate [id]="idTransit"></app-average-rate>
   <app-my-rate [id]="idTransit" [userId]="1" *ngIf="this.authService.hasToken()"></app-my-rate>

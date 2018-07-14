@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../../../../environments/environment';
@@ -176,6 +176,9 @@ export class MapsComponent implements OnInit {
     },
   };
 
+  @Output()
+  toggleDirection = new EventEmitter<string>();
+
   constructor(private route: ActivatedRoute, private service: MapsService, private _formBuilder: FormBuilder) {
   }
 
@@ -219,6 +222,7 @@ export class MapsComponent implements OnInit {
     this.initPoints();
     this.clearStopFirst();
     this.clearStopSecond();
+    this.toggleDirection.emit(routeDirection);
   }
 
   initMarkers() {
