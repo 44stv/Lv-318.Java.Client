@@ -1,17 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterModule} from '@angular/router';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {StopService} from '../../../../../../services/stop.service';
 import {TransitService} from '../../../../../../services/transit.service';
 import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material';
 import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
-import {AuthService} from '../../../../../../services/auth/auth.service';
 import {Stop} from '../../../../../../models/stop.model';
 import {BreadcrumbService} from 'ng5-breadcrumb';
-import {Transit} from '../../../../../../models/transit.model';
 import {environment} from '../../../../../../../environments/environment';
 import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
+import {CustomAuthService} from '../../../../../../services/auth/custom-auth.service';
+import {BusyStopsDiagramComponent} from './busy-stops-diagram/busy-stops-diagram.component';
 
 
 @Component({
@@ -25,6 +25,7 @@ export class StopsGridComponent implements OnInit {
   private sub: any;
   @Input() idTransit: number;
   @Input() transitName: string;
+  @ViewChild(BusyStopsDiagramComponent) busyStopsDiagram: BusyStopsDiagramComponent;
   stopsList: Observable<Stop[]>;
   stopArray: Stop[] = [];
   forwardStops: Stop[] = [];
@@ -33,6 +34,7 @@ export class StopsGridComponent implements OnInit {
   categoryId: number;
   categoryIconURL = `${environment.serverURL}/category/img?link=`;
   iconURL: string;
+  directionForward: boolean = true;
 
 
   constructor(private stopService: StopService,
@@ -130,17 +132,29 @@ export class StopsGridComponent implements OnInit {
 
   }
 
-  public selectStops() {
-    for (let i = 0; i < this.checkedItems.length; i++) {
-      if (this.checkedItems[i] === true && !this.selectedStops.includes(this.stopArray[i], 0)) {
-        this.selectedStops.push(this.stopArray[i]);
-      }
-      if (this.checkedItems[i] === false && this.selectedStops.includes(this.stopArray[i], 0)) {
-        this.selectedStops.splice(this.selectedStops.indexOf(this.stopArray[i]), 1);
-      }
+  public selectStop(stop: Stop) {
+    if (!this.selectedStops.find(x => x.id === stop.id)) {
+      this.selectedStops.push(Object.assign({}, stop));
+    } else {
+      this.selectedStops.splice(this.selectedStops.findIndex(x => x.id === stop.id), 1);
     }
     console.log(this.selectedStops);
+  }
 
+  public isSelected(stop: Stop): boolean {
+    if (this.selectedStops.find(x => x.id === stop.id)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  changeDirection(event) {
+    if (event === 'backward') {
+      this.directionForward = false;
+    } else if (event === 'forward') {
+      this.directionForward = true;
+    }
   }
 
   public openModal() {

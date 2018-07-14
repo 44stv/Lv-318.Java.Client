@@ -8,31 +8,35 @@
         <a [routerLink]="['/main']" [ngStyle]="{'color' : 'white'}">Transport</a>
       </div>
 
-    <div class="criteriaButton">
-      <a [routerLink]="['/main/feedback-criteria']">
-        <button mdc-button [secondary]="true" type="submit">{{ 'Feedback'| translate}}</button>
-      </a>
-    </div>
+      <div class="criteriaButton">
+        <a [routerLink]="['/main/feedback-criteria']">
+          <button mdc-button [secondary]="true" type="submit">{{ 'Feedback'| translate}}</button>
+        </a>
+      </div>
 
 
-  <div class="NewUser">
-    <a *ngIf="!hasToken()">
-      <button mdc-button [secondary]="true" type="submit" (click)="openModal()">{{'User' | translate}}</button>
-    </a>
-  </div>
+      <div class="NewUser">
+        <a *ngIf="!hasToken()">
+          <button mdc-button [secondary]="true" type="submit" (click)="openModal()">{{'Sign Up' | translate}}</button>
+        </a>
+      </div>
 
-  <div class="LoginUser">
-    <a *ngIf="!hasToken()">
-      <button mdc-button [secondary]="true" type="submit" (click)="openLogInModal()">{{'Log In'| translate}}</button>
-    </a>
-    <a (click)="logOut()" *ngIf="hasToken()">
-      <button mdc-button [secondary]="true" type="submit">{{'Log Out'| translate}}</button>
-    </a>
-  </div>
+      <div class="LoginUser">
+        <a *ngIf="!hasToken()">
+          <button mdc-button [secondary]="true" type="submit" (click)="openLogInModal()">{{'Log In'| translate}}
+          </button>
+        </a>
+        <a (click)="logOut()" *ngIf="hasToken()">
+          <button mdc-button [secondary]="true" type="submit">{{'Log Out'| translate}}</button>
+        </a>
+      </div>
 
       <div class="userProfile" style="margin-left: 15px">
-        <a [routerLink]="['/main/user/profile']" *ngIf="hasToken()">
+        <a [routerLink]="['/main/user/profile']" *ngIf="hasToken() && getRole() === role.User">
           <button mdc-button [secondary]="true" type="submit">MyProfile</button>
+        </a>
+        <a [routerLink]="['/main/admin']" *ngIf="hasToken() && getRole() === role.Admin">
+          <button mdc-button [secondary]="true" type="submit">{{'Admin' | translate}}</button>
         </a>
       </div>
     </mdc-toolbar-section>
