@@ -4,7 +4,7 @@
     <div class="row userAndPostedTime">
       <span style="font-size: large"> {{ userInfo.firstName }} {{ userInfo.lastName }} </span>
       <span style="font-size: small">Posted {{ postCommentDate }}</span>
-      <div *ngIf="modified">
+      <div *ngIf="modified" matTooltip="modifiedCommentDate">
         Changed {{ modifiedCommentDate }}
       </div>
     </div>
@@ -23,12 +23,21 @@
                     [required]="true"></textarea>
         </mat-form-field>
       </div>
-      <button class="replyButton"
-              mdc-button
-              [secondary]="true"
-              [raised]="true"
-              type="submit" (click)="addChildComment()"> Reply
-      </button>
+      <div class="picsAndReply">
+        <button class="addPicsButton"
+                mdc-button
+                [secondary]="true"
+                [raised]="true"
+                type="submit"> Add pics
+        </button>
+        <button class="replyButton"
+                mdc-button
+                [secondary]="true"
+                [raised]="true"
+                type="submit" (click)="addChildComment()"> Reply
+        </button>
+      </div>
+
 
     </div>
 

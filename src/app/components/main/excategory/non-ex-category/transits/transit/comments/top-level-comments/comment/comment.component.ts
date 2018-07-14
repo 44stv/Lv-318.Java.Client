@@ -49,6 +49,7 @@ export class CommentComponent implements OnInit {
     console.log('get children comments' + this.comment.id);
     this.commentService.getChildrenComments(this.comment.id)
       .subscribe(childComments => {
+        console.log(childComments);
         this.childComments = childComments;
       });
   }
@@ -67,6 +68,7 @@ export class CommentComponent implements OnInit {
             console.log(comment);
             this.getChildrenComments();
           });
+        this.toggleReply();
         this.openSnackBar(this.successMessage);
       } else {
         this.openSnackBar(this.failedMessage);
