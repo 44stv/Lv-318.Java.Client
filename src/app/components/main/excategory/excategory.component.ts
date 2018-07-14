@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {environment} from '../../../../environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
-import {ExcategoryModel} from '../../../models/excategory.model';
-import {ExcategoryService} from '../../../services/excategory.service';
+import { ExcategoryModel } from '../../../models/excategory.model';
+import { ExcategoryService } from '../../../services/excategory.service';
 
 @Component({
   selector: 'app-excategory',
@@ -14,8 +14,6 @@ export class ExcategoryComponent implements OnInit {
   public list: Observable<ExcategoryModel[]> = this.service.getTopCategories();
   public cities: Observable<ExcategoryModel[]>;
   public serverURL = environment.serverURL + '/category/img?link=';
-
-  panelOpenState = false;
 
   constructor(public service: ExcategoryService) {
   }

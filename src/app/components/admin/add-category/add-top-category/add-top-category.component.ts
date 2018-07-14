@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Location} from '@angular/common';
-import {Category} from '../../../../models/category.model';
-import {ExcategoryService} from '../../../../services/excategory.service';
-import {MatSnackBar} from '@angular/material';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Category } from '../../../../models/category.model';
+import { ExcategoryService } from '../../../../services/excategory.service';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,9 +16,9 @@ export class AddTopCategoryComponent implements OnInit {
   categoryModel = new Category();
 
   constructor(private location: Location,
-              private excatServ: ExcategoryService,
-              private snackBar: MatSnackBar,
-              private router: Router) {
+    private excatServ: ExcategoryService,
+    private snackBar: MatSnackBar,
+    private router: Router) {
 
   }
 

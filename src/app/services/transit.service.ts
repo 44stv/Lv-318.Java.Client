@@ -24,7 +24,7 @@ export class TransitService {
   }
 
   getTransitById(id: number): Observable<Transit> {
-    return this.http.get<Transit>(`${this.serviceUrl}/${id}`);
+    return this.http.get<Transit>(`${this.serviceUrl}${id}`);
   }
 
   getTransitsByCategoryId(id: number, page: number, size: number): Observable<Paginator> {

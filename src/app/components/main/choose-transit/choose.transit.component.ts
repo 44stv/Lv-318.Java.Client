@@ -2,7 +2,6 @@ import {Component, Input, OnInit, ViewChild, OnChanges, AfterViewInit} from '@an
 import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs';
 import {MatDialogRef} from '@angular/material';
-
 import {AddFeedbackComponent} from '../excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {TransitService} from '../../../services/transit.service';
 import {Transit} from '../../../models/transit.model';

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { CustomAuthService } from '../auth/custom-auth.service';
 import { Role } from '../auth/roles';
 
 @Injectable()
 export class AdminGuardService {
 
-  constructor(private authService: AuthService,
+  constructor(private authService: CustomAuthService,
               private router: Router) {
   }
 

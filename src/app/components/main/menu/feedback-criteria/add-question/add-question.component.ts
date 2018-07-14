@@ -24,13 +24,13 @@ export class AddQuestionComponent implements OnInit {
     this.getAllEnumTypesOfQuestion();
   }
 
-  close(name: string, weight: number, type: string) {
+  close(name: string, weight: number, type: string, priority: number) {
     this.dialogRef.close();
   }
 
-  add(name: string, weight: number, type: string) {
+  add(name: string, weight: number, type: string, priority: number) {
     if (!(name == null)) {
-      this.dialogRef.close({ name, weight, type } as Question);
+      this.dialogRef.close({ name, weight, type, priority } as Question);
     }
   }
   getAllEnumTypesOfQuestion(): void {

@@ -1,5 +1,6 @@
 .demo-grid-list {
   width: auto;
+  padding-left: 2px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
@@ -9,25 +10,15 @@ p {
   margin: 16px;
 }
 
-.mat-grid-tile-class {
-  background: rgba(0, 0, 0, 0.32);
-  text-align: center;
-  font-size: 14px;
-  max-width: 40px;
-}
-
-.example-selected-value {
-  margin: 15px 0;
-}
-
 .tile {
   text-align: center;
   font-size: 14px;
   width:85px;
   display: inline-block;
+  padding-bottom: 0px;
 }
 
-.tab-group {
+.stops-scheme {
   align-content: center;
 }
 
@@ -36,4 +27,12 @@ p {
   font-size: 12px;
   align-items: flex-end;
 }
+.image-opacity {
+  opacity: 0.4;
+}
+
+.tile-content:hover {
+  opacity: 0.7;
+}
+
 
