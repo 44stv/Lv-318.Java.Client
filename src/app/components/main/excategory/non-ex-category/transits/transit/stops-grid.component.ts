@@ -13,6 +13,7 @@ import {environment} from '../../../../../../../environments/environment';
 import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
 import { Location } from '@angular/common';
 
+
 @Component({
   selector: 'app-stops-grid',
   templateUrl: './stops-grid.component.html',
@@ -35,7 +36,7 @@ export class StopsGridComponent implements OnInit {
 
 
   constructor(private stopService: StopService,
-              private authService: AuthService,
+              private authService: CustomAuthService,
               private route: ActivatedRoute,
               public dialog: MatDialog,
               private breadcrumbService: BreadcrumbService,

@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {DiagramService} from '../../../../../../../services/diagram.service';
-import {environment} from '../../../../../../../../environments/environment';
-import { AuthService } from '../../../../../../../services/auth/auth.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { DiagramService } from '../../../../../../../services/diagram.service';
+import { environment } from '../../../../../../../../environments/environment';
+import { CustomAuthService } from '../../../../../../../services/auth/custom-auth.service';
 
 @Component({
   selector: 'app-my-rate',
@@ -17,7 +17,7 @@ export class MyRateComponent implements OnInit {
   showError = false;
 
   constructor(private diagramService: DiagramService,
-              private authService: AuthService) {
+    private authService: CustomAuthService) {
   }
 
   ngOnInit() {

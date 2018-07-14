@@ -1,9 +1,9 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import * as moment from 'moment/moment';
-import {Observable} from 'rxjs';
-import {MatSnackBar} from '@angular/material';
-import {HttpParams} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
+import { HttpParams } from '@angular/common/http';
 
 import {
   SimpleAnswer,
@@ -14,15 +14,15 @@ import {
   CapacityHoursFeedback,
   Time
 } from '../../../../../../../models/feedback.model';
-import {FeedbackService} from '../../../../../../../services/feedback.service';
-import {StopService} from '../../../../../../../services/stop.service';
-import {FeedbackCriteriaService} from '../../../../../../../services/feedback-criteria.service';
-import {FeedbackCriteria} from '../../../../../../../models/feedback-criteria.model';
-import {Question} from '../../../../../../../models/question.model';
-import {Stop} from '../../../../../../../models/stop.model';
-import {MyComment} from '../../../../../../../models/comment.model';
-import {CommentService} from '../../../../../../../services/comment.service';
-import {AuthService} from '../../../../../../../services/auth/auth.service';
+import { FeedbackService } from '../../../../../../../services/feedback.service';
+import { StopService } from '../../../../../../../services/stop.service';
+import { FeedbackCriteriaService } from '../../../../../../../services/feedback-criteria.service';
+import { FeedbackCriteria } from '../../../../../../../models/feedback-criteria.model';
+import { Question } from '../../../../../../../models/question.model';
+import { Stop } from '../../../../../../../models/stop.model';
+import { MyComment } from '../../../../../../../models/comment.model';
+import { CommentService } from '../../../../../../../services/comment.service';
+import { CustomAuthService } from '../../../../../../../services/auth/custom-auth.service';
 
 
 @Component({
@@ -50,12 +50,12 @@ export class AddFeedbackComponent implements OnInit {
   // private directions: String[] = ['FORWARD', 'BACKWARD'];
   // private direction: String;
 
-  constructor(private dialogRef: MatDialogRef<AddFeedbackComponent>, @ Inject(MAT_DIALOG_DATA) public data: any,
-              private feedbackService: FeedbackService, private criteriaService: FeedbackCriteriaService,
-              private stopService: StopService,
-              private commentService: CommentService,
-              public snackBar: MatSnackBar,
-              public auth: AuthService) {
+  constructor(private dialogRef: MatDialogRef<AddFeedbackComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+    private feedbackService: FeedbackService, private criteriaService: FeedbackCriteriaService,
+    private stopService: StopService,
+    private commentService: CommentService,
+    public snackBar: MatSnackBar,
+    public auth: CustomAuthService) {
 
     this.survey = this.buildSurveyByCriteriaType(['RATING']);
     this.qualitySurvey = this.buildSurveyByCriteriaType(['SIMPLE', 'QUALITY'])
@@ -90,7 +90,7 @@ export class AddFeedbackComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public buildSurveyByCriteriaType(types: String []): Questioner[] {
+  public buildSurveyByCriteriaType(types: String[]): Questioner[] {
     const survey: Questioner[] = [];
     types.forEach(type => {
       this.criteriaService.getAllFeedbackCriteriaByTypeAndCategoryId(this.categoryId, type)
@@ -121,19 +121,19 @@ export class AddFeedbackComponent implements OnInit {
 
   public buildAnswerModel(questioner: Questioner, criteria: FeedbackCriteria) {
     switch (questioner.type) {
-      case 'RATING' :
+      case 'RATING':
         questioner.answer = new Array<number>(criteria.questions.length);
         break;
-      case 'SIMPLE' :
+      case 'SIMPLE':
         questioner.answer = new SimpleAnswer();
         break;
-      case 'QUALITY' :
+      case 'QUALITY':
         questioner.answer = new SimpleAnswer();
         break;
-      case 'ROUTE_CAPACITY' :
+      case 'ROUTE_CAPACITY':
         questioner.answer = new Array<Stop>(questioner.routeQuestions.length);
         break;
-      case 'HOURS_CAPACITY' :
+      case 'HOURS_CAPACITY':
         questioner.answer = new Array<String>(questioner.timeQuestions.length);
         break;
     }
@@ -159,15 +159,15 @@ export class AddFeedbackComponent implements OnInit {
 
   public answerFormatter(questioner: Questioner): string {
     switch (questioner.type) {
-      case 'RATING' :
+      case 'RATING':
         return this.buildRatingAnswer(questioner);
-      case 'SIMPLE' :
+      case 'SIMPLE':
         return this.buildSimpleAnswer(questioner);
-      case 'QUALITY' :
+      case 'QUALITY':
         return this.buildSimpleAnswer(questioner);
-      case 'ROUTE_CAPACITY' :
+      case 'ROUTE_CAPACITY':
         return this.buildCapacityRouteAnswer(questioner);
-      case 'HOURS_CAPACITY' :
+      case 'HOURS_CAPACITY':
         return this.buildCapacityHoursAnswer(questioner);
     }
   }
@@ -229,7 +229,7 @@ export class AddFeedbackComponent implements OnInit {
       }
     }
 
-// TODO:new sorting
+    // TODO:new sorting
     if (times.length > 1) {
       times.sort((time1: Time, time2: Time) => {
         if (time1.hour > time2.hour) {

@@ -4,7 +4,6 @@ import {AddUserComponent} from '../add-user/add-user.component';
 import {MatDialog} from '@angular/material';
 import {Router} from '@angular/router';
 import {UserLoginComponent} from '../user-login/user-login.component';
-import {TokenStorage} from '../../../../services/auth/token/token-storage';
 import {Location} from '@angular/common';
 import {GlobalSearchService} from '../../../../services/global-search.service';
 import {FriendInvitationComponent} from './friend-invitation/friend-invitation.component';

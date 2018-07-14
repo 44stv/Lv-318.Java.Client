@@ -1,12 +1,13 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import 'hammerjs';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './services/auth/auth.service';
+import { CustomAuthService } from './services/auth/custom-auth.service';
+import { MapUkraineComponent } from './components/main/map-ukraine/map-ukraine.component';
 import { SocialService } from './services/auth/social.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -15,18 +16,19 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Ng5BreadcrumbModule } from 'ng5-breadcrumb';
 import { MomentModule } from 'angular2-moment/moment.module';
 import { AppMaterialModule } from './material.module';
+import { NguiMapModule } from '@ngui/map';
 import {
   AuthServiceConfig,
   FacebookLoginProvider,
   GoogleLoginProvider,
   SocialLoginModule
 } from 'angular-6-social-login';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import {MatDialogModule} from '@angular/material/dialog';
-import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
-import {StarRatingModule} from 'angular-star-rating';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {MdcIconButtonModule} from '@angular-mdc/web';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { StarRatingModule } from 'angular-star-rating';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MdcIconButtonModule } from '@angular-mdc/web';
 
 
 import {
@@ -67,48 +69,48 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-import {ExcategoryService} from './services/excategory.service';
+import { ExcategoryService } from './services/excategory.service';
 
-import {MainComponent} from './components/main/main.component';
-import {SlideshowModule} from 'ng-simple-slideshow';
-import {UserService} from './services/user.service';
-import {StopService} from './services/stop.service';
-import {AdminGuardService} from './services/guard/admin-guard.service';
-import {AuthGuardService} from './services/guard/auth-guard.service';
-import {ClientGuardService} from './services/guard/client-guard.service';
-import {DiagramService} from './services/diagram.service';
-import {GlobalSearchService} from './services/global-search.service';
-import {AdminComponent} from './components/admin/admin.component';
+import { MainComponent } from './components/main/main.component';
+import { SlideshowModule } from 'ng-simple-slideshow';
+import { UserService } from './services/user.service';
+import { StopService } from './services/stop.service';
+import { AdminGuardService } from './services/guard/admin-guard.service';
+import { AuthGuardService } from './services/guard/auth-guard.service';
+import { ClientGuardService } from './services/guard/client-guard.service';
+import { DiagramService } from './services/diagram.service';
+import { GlobalSearchService } from './services/global-search.service';
+import { AdminComponent } from './components/admin/admin.component';
 
-import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
-import {TransitService} from './services/transit.service';
-import {FeedbackService} from './services/feedback.service';
-import {FeedbackCriteriaService} from './services/feedback-criteria.service';
-import {AgmCoreModule} from '@agm/core';
-import {AgmDirectionModule} from 'agm-direction';
-import {ExcategoryComponent} from './components/main/excategory/excategory.component';
-import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
-import {MenuComponent} from './components/main/menu/menu.component';
-import {SearchFieldComponent} from './components/main/menu/search-field/search-field.component';
-import {BackToPreviousPageBtnComponent} from './components/main/back-button/back-to-previous-page-btn.component';
-import {AddUserComponent} from './components/main/menu/add-user/add-user.component';
-import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
-import {AddQuestionComponent} from './components/main/menu/feedback-criteria/add-question/add-question.component';
-import {AverageRateComponent} from './components/main/excategory/non-ex-category/transits/transit/average-rate/average-rate.component';
-import {OneFeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
-import {AddFeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
-import {GlobalSearchComponent} from './components/main/menu/global-search/global-search.component';
-import {TransitsComponent} from './components/main/excategory/non-ex-category/transits/transits.component';
-import {MapsComponent} from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
-import {FeedbackCriteriaComponent} from './components/main/menu/feedback-criteria/feedback-criteria.component';
-import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
-import {UserLoginComponent} from './components/main/menu/user-login/user-login.component';
-import {MyRateComponent} from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
+import { ChooseTransitComponent } from './components/main/choose-transit/choose.transit.component';
+import { TransitService } from './services/transit.service';
+import { FeedbackService } from './services/feedback.service';
+import { FeedbackCriteriaService } from './services/feedback-criteria.service';
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
+import { ExcategoryComponent } from './components/main/excategory/excategory.component';
+import { NonExCategoryComponent } from './components/main/excategory/non-ex-category/non-ex-category.component';
+import { MenuComponent } from './components/main/menu/menu.component';
+import { SearchFieldComponent } from './components/main/menu/search-field/search-field.component';
+import { BackToPreviousPageBtnComponent } from './components/main/back-button/back-to-previous-page-btn.component';
+import { AddUserComponent } from './components/main/menu/add-user/add-user.component';
+import { StopsGridComponent } from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
+import { AddQuestionComponent } from './components/main/menu/feedback-criteria/add-question/add-question.component';
+import { AverageRateComponent } from './components/main/excategory/non-ex-category/transits/transit/average-rate/average-rate.component';
+import { OneFeedbackCriteriaComponent } from './components/main/menu/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
+import { AddFeedbackCriteriaComponent } from './components/main/menu/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
+import { GlobalSearchComponent } from './components/main/menu/global-search/global-search.component';
+import { TransitsComponent } from './components/main/excategory/non-ex-category/transits/transits.component';
+import { MapsComponent } from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
+import { FeedbackCriteriaComponent } from './components/main/menu/feedback-criteria/feedback-criteria.component';
+import { AddFeedbackComponent } from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
+import { UserLoginComponent } from './components/main/menu/user-login/user-login.component';
+import { MyRateComponent } from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
 import {
   CommentComponent
 } from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/comment/comment.component';
-import {CommentsComponent} from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
-import {CommentService} from './services/comment.service';
+import { CommentsComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/comments.component';
+import { CommentService } from './services/comment.service';
 import {
   RaitingDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/raiting-diagram/raiting-diagram.component';
@@ -118,28 +120,28 @@ import {
 import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
-import {InterceptorService} from './services/auth/interceptors/interceptor.service';
-import {ForbiddenComponent} from './components/main/errors/forbidden/forbidden.component';
-import {UpdateRoleComponent} from './components/admin/update-role/update-role.component';
-import {AddCategoryComponent} from './components/admin/add-category/add-category.component';
-import {AddTopCategoryComponent} from './components/admin/add-category/add-top-category/add-top-category.component';
+import { InterceptorService } from './services/auth/interceptors/interceptor.service';
+import { ForbiddenComponent } from './components/main/errors/forbidden/forbidden.component';
+import { UpdateRoleComponent } from './components/admin/update-role/update-role.component';
+import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
+import { AddTopCategoryComponent } from './components/admin/add-category/add-top-category/add-top-category.component';
 
 
 import {
   RegistarationConfirmationComponent
 } from './components/main/menu/add-user/registaration-confirmation/registaration-confirmation.component';
-import {ForgetPasswordComponent} from './components/main/menu/user-login/forget-password/forget-password.component';
+import { ForgetPasswordComponent } from './components/main/menu/user-login/forget-password/forget-password.component';
 import {
   ForgetPasswordConfirmationComponent
 } from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
-import {LocationPickerComponent} from './components/main/menu/search-field/location-picker/location-picker.component';
-import {SocialSingInComponent} from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
-import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
-import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
+import { LocationPickerComponent } from './components/main/menu/search-field/location-picker/location-picker.component';
+import { SocialSingInComponent } from './components/main/menu/user-login/social-sing-in/social-sing-in.component';
+import { UserProfileComponent } from './components/main/menu/user-profile/user-profile.component';
+import { FriendInvitationComponent } from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
 import {
   TopLevelCommentsComponent
 } from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/top-level-comments.component';
-import {UpdatePasswordComponent} from './components/main/menu/user-profile/update-password/update-password.component';
+import { UpdatePasswordComponent } from './components/main/menu/user-profile/update-password/update-password.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
 
@@ -180,6 +182,7 @@ export function getAuthServiceConfigs() {
     FeedbackCriteriaComponent,
     AddUserComponent,
     ForgetPasswordComponent,
+    MapUkraineComponent,
     UserProfileComponent,
     UpdatePasswordComponent,
     FriendInvitationComponent,
@@ -313,10 +316,11 @@ export function getAuthServiceConfigs() {
         deps: [HttpClient]
       }
     }),
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g'}),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g' }),
     NgxChartsModule,
     Ng5BreadcrumbModule.forRoot(),
     NgCircleProgressModule.forRoot(),
+    NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyB5LStf6_Uo0i89bPRxdYXJkjQrl4yn3NM' })
   ],
   providers: [
     {
@@ -329,7 +333,7 @@ export function getAuthServiceConfigs() {
     AuthGuardService,
     ExcategoryService,
     UserService,
-    AuthService,
+    CustomAuthService,
     StopService,
     TransitService,
     ExcategoryService,
