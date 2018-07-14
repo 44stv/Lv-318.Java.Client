@@ -7,24 +7,22 @@
       <mat-tab label="{{'Forward' | translate }}">
         <div *ngIf="forwardStops.length">
           <div *ngFor="let i=index; let tile of forwardStops" class="tile" (click)="selectStop(tile)">
-            <label [for]="tile.id" class = "tile-content" >
+            <label [for]="tile.id" class="tile-content">
               <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
-               <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}" [ngClass] = "{'image-opacity': isSelected(tile)}" id = "tile.id" >
+              <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
+                   [ngClass]="{'image-opacity': isSelected(tile)}" id="tile.id">
             </label>
           </div>
         </div>
       </mat-tab>
       <mat-tab label="{{'Backward' | translate }}">
-        <mat-grid-list *ngIf="backwardStops.length" [cols]="12" rowHeight="70px">
-          <mat-grid-tile
-            *ngFor="let i=index; let tile of backwardStops" class="tile">
-            <label [for]="tile.id" class = "tile-content">
-              <div>{{tile.street}}</div>
-              <input type="checkbox" [(ngModel)]="checkedItems[i]" [id]="tile.id" (change)='selectStops()'>
-              <img src="../../../assets/img/list.png">
-            </label>
-          </mat-grid-tile>
-        </mat-grid-list>
+        <div *ngFor="let i=index; let tile of forwardStops" class="tile" (click)="selectStop(tile)">
+          <label [for]="tile.id" class="tile-content">
+            <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
+            <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
+                 [ngClass]="{'image-opacity': isSelected(tile)}" id="tile.id">
+          </label>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>
@@ -38,8 +36,8 @@
   <app-comments [id]="idTransit"></app-comments>
 </div>
 <app-back-to-previous-page-btn></app-back-to-previous-page-btn>
-<div >
-<button  class="add" mdc-fab position='bottom-right' (click)="openModal()">
+<div>
+  <button class="add" mdc-fab position='bottom-right' (click)="openModal()">
     <mdc-icon>edit</mdc-icon>
   </button>
 </div>
