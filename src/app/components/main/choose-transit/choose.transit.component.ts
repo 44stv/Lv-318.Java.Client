@@ -19,7 +19,7 @@ import {NumberValueAccessor} from '@angular/forms/src/directives';
   styleUrls: ['./choose.transit.component.css']
 })
 export class ChooseTransitComponent implements OnInit {
-  private cities: Observable<ExcategoryModel[]>;
+  private cities: ExcategoryModel[] = [];
   private cityFromLocation: ExcategoryModel = new ExcategoryModel();
   private typeOfTransportlist: Observable<ExcategoryModel[]>;
   private transitlist: Transit[] = [];
@@ -32,18 +32,21 @@ export class ChooseTransitComponent implements OnInit {
               public service: ExcategoryService,
               private nonExCategoryservice: NonExCategoryService,
               private globalSearchService: GlobalSearchService) {
+
+    this.cities = this.getCities();
+    this.cityFromLocation = this.getCityByGeolocation();
+
   }
 
 
   ngOnInit() {
-    this.cities = this.service.getCategoriesByNextLevel(this.topCategory);
-    this.getCityByGeolocation();
-
+    console.log(this.cities);
+    console.log(this.globalSearchService.getCurentLocation());
     console.log(this.cityFromLocation);
   }
 
-  getTypeOfTransport(cityName: String) {
-    this.typeOfTransportlist = this.nonExCategoryservice.getByNames(cityName, this.topCategory);
+  getTypeOfTransport() {
+    this.typeOfTransportlist = this.nonExCategoryservice.getByNames(this.cityFromLocation.name, this.topCategory);
   }
 
   getAllTransitsByCategoryId(typeOfTransportId: number) {
@@ -66,17 +69,34 @@ export class ChooseTransitComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public getCityByGeolocation() {
-    this.cities.subscribe(cities => {
-      cities.forEach(city => {
-          if (city.name === this.globalSearchService.getCurentLocation()) {
-            this.cityFromLocation.id = city.id;
-            this.cityFromLocation.name = city.name;
-            this.cityFromLocation.nextLevelCategory = city.nextLevelCategory;
-          }
-        }
-      )
-    })
+  public getCityByGeolocation(): ExcategoryModel {
+    const cityFromLocation: ExcategoryModel = new ExcategoryModel();
+    this.service.getCategoryByName(this.globalSearchService.getCurentLocation()).subscribe(data => {
+        cityFromLocation.id = data[0].id;
+      cityFromLocation.name = data[0].name;
+      cityFromLocation.nextLevelCategory = data[0].nextLevelCategory;
+      }
+    );
+    //
+    // this.cities.forEach(city => {
+    //     if (city.name === this.globalSearchService.getCurentLocation()) {
+    //       cityFromLocation = city;
+    // }
+    //   }
+    // );
+    return cityFromLocation;
+  }
+
+  public getCities(): ExcategoryModel[] {
+    const cities: ExcategoryModel[] = [];
+    this.service.getCategoriesByNextLevel(this.topCategory).subscribe(data => {
+      data.forEach(city => cities.push(city));
+    });
+    return cities;
+  }
+
+  public compareCity(c1: ExcategoryModel, c2: ExcategoryModel): boolean {
+    return (c1 && c2) ? c1.name === c2.name : c1 === c2;
   }
 
 

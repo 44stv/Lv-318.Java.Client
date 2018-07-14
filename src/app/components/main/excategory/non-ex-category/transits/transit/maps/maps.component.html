@@ -32,7 +32,7 @@
             <div class="stop-list" *ngFor="let s of stopList">
               {{s.name}}
             </div>
-            <button mat-button matStepperNext>Make Feedback</button>
+            <button mat-button matStepperNext (click)="openModal()">{{'Make Feedback' | translate}}</button>
             <button mat-button matStepperPrevious>{{'Back' | translate}}</button>
             <button mat-button (click)="stepper.reset(); clearStopSecond(); clearStopFirst()">Reset</button>
           </div>

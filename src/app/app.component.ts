@@ -33,7 +33,7 @@ export class AppComponent {
     this.sideNav.toggle();
   }
   isFeedbackActivated(): boolean {
-    return this.location.path().indexOf('/show-transit-scheme/') > -1;
+    return this.location.path().indexOf('/transit/') > -1;
   }
 
   openChooseTransitModal() {

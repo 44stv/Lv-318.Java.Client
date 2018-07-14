@@ -99,6 +99,7 @@ export class StopsGridComponent implements OnInit {
           .subscribe(data => {
 
             const id1 = data.categoryId;
+            this.categoryId = data.categoryId;
 
             // Add friendly name for category id
             this.nonExCatServ

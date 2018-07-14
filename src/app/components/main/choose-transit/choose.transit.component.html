@@ -7,55 +7,64 @@
           <ng-template matStepLabel>{{ 'City' | translate}}</ng-template>
 
           <mat-form-field>
-            <!-- placeholder="{{'Choose City' | translate}}" -->
-            <mat-select [(value)]="cityFromLocation" [(ngModel)]="cityFromLocation" name="cityFromLocation">
-              <mat-option *ngFor="let city of cities | async" [value]="cityFromLocation">
-                {{city.name | translate}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
 
-          <div>
-            <button mat-button matStepperNext (click)="getTypeOfTransport(cityFromLocation.name)">{{'Next' |
-              translate}}
-            </button>
-          </div>
-        </form>
-      </mat-step>
-      <mat-step [stepControl]="secondFormGroup" (click)="getTypeOfTransport(cityFromLocation.name)">
-        <form>
-          <ng-template matStepLabel>{{ 'TypeTransport' | translate}}</ng-template>
-          <mat-form-field (click)="getTypeOfTransport(city.name)">
-            <mat-select placeholder="{{'Choose Transport' | translate}}" [(ngModel)]="transport" name="transport">
-              <mat-option *ngFor="let transport of typeOfTransportlist | async" [value]="transport">
-                {{transport.name | translate }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>{{'Back' | translate}}</button>
-            <button mat-button matStepperNext (click)="getAllTransitsByCategoryId(transport.id)">{{'Next' |
-              translate}}
-            </button>
-          </div>
-        </form>
-      </mat-step>
-      <mat-step (click)="getAllTransitsByCategoryId(transport.id)">
-        <ng-template matStepLabel>{{ 'NumberTransit' | translate}}</ng-template>
-        <mat-form-field (click)="getAllTransitsByCategoryId(transport.id)">
-          <mat-select placeholder="{{'Choose NumberTransit' | translate}}" [(ngModel)]="transit" name="transit">
-            <mat-option *ngFor="let transit of transitlist" [value]="transit">
-              {{transit.name | translate }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>{{'Back' | translate}}</button>
-          <button mat-raised-button color="primary" (click)="openAddFeedbackModal()">{{ 'Feedback' | translate}}
-          </button>
-        </div>
-      </mat-step>
-    </mat-horizontal-stepper>
-  </mat-card-content>
+            <mat-select [compareWith]="compareCity"
+                        [(value)]="cityFromLocation"
+                        [(ngModel)]="cityFromLocation"
+                        placeholder="{{'Choose City' | translate}}"
+                        [ngModelOptions]="{standalone: true}">
 
-</form>
+                           <mat-option *ngFor="let city of cities" [value]="city">
+                             {{city.name | translate}}
+                           </mat-option>
+                         </mat-select>
+                       </mat-form-field>
+
+                       <div>
+                         <button mat-button matStepperNext (click)="getTypeOfTransport()">{{'Next' |
+                           translate}}
+                         </button>
+                       </div>
+                     </form>
+                   </mat-step>
+                   <mat-step [stepControl]="secondFormGroup" (click)="getTypeOfTransport()">
+                     <form>
+                       <ng-template matStepLabel>{{ 'TypeTransport' | translate}}</ng-template>
+                       <mat-form-field (click)="getTypeOfTransport()">
+                         <mat-select placeholder="{{'Choose Transport' | translate}}"
+                                     [(ngModel)]="transport"
+                                     name="transport">
+                           <mat-option *ngFor="let transport of typeOfTransportlist | async" [value]="transport">
+                             {{transport.name | translate }}
+                           </mat-option>
+                         </mat-select>
+                       </mat-form-field>
+                       <div>
+                         <button mat-button matStepperPrevious>{{'Back' | translate}}</button>
+                         <button mat-button matStepperNext (click)="getAllTransitsByCategoryId(transport.id)">{{'Next' |
+                           translate}}
+                         </button>
+                       </div>
+                     </form>
+                   </mat-step>
+                   <mat-step (click)="getAllTransitsByCategoryId(transport.id)">
+                     <ng-template matStepLabel>{{ 'NumberTransit' | translate}}</ng-template>
+                     <mat-form-field (click)="getAllTransitsByCategoryId(transport.id)">
+                       <mat-select placeholder="{{'Choose NumberTransit' | translate}}"
+                                   [(ngModel)]="transit"
+                                   name="transit">
+                         <mat-option *ngFor="let transit of transitlist" [value]="transit">
+                           {{transit.name | translate }}
+                         </mat-option>
+                       </mat-select>
+                     </mat-form-field>
+                     <div>
+                       <button mat-button matStepperPrevious>{{'Back' | translate}}</button>
+                       <button mat-raised-button color="primary" (click)="openAddFeedbackModal()">{{ 'Feedback' | translate}}
+                       </button>
+                     </div>
+                   </mat-step>
+                 </mat-horizontal-stepper>
+               </mat-card-content>
+
+             </form>

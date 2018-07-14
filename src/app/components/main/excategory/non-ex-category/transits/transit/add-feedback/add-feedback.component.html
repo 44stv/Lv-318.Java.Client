@@ -10,14 +10,25 @@
             <mat-list *ngIf="questioner.type == 'RATING'">
           <p *ngFor="let question of questioner.questions;let i =index">
             <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
-            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10"
-                        [(ngModel)]="questioner.answer[i]" [ngModelOptions]="{standalone: true}"></mat-slider>
+            <mat-slider thumbLabel
+                        [displayWith]="formatLabel"
+                        tickInterval="1"
+                        min="1"
+                        max="10"
+                        [(ngModel)]="questioner.answer[i]"
+                        [ngModelOptions]="{standalone: true}">
+
+            </mat-slider>
           </p>
         </mat-list>
         </p>
         </mat-list>
         <mat-form-field appearance="outline" class="comment">
-          <textarea matInput #message maxlength="256" placeholder="Comment" [(ngModel)]="transitComment.commentText" [ngModelOptions]="{standalone: true}"></textarea>
+          <textarea matInput #message
+                    maxlength="256"
+                    placeholder="Comment"
+                    [(ngModel)]="transitComment.commentText"
+                    [ngModelOptions]="{standalone: true}"></textarea>
           <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
         </mat-form-field>
 
@@ -30,21 +41,25 @@
             <mat-list *ngIf="questioner.type == 'SIMPLE'">
           <p *ngFor="let question of questioner.questions">
             <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
-            <mat-radio-group class="radio" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
+            <mat-radio-group class="radio"
+                             [(ngModel)]="questioner.answer"
+                             [ngModelOptions]="{standalone: true}">
               <mat-radio-button class="example-radio-button" *ngFor="let answer of checkBoxAnswers" [value]="answer">
                 {{ answer | lowercase | translate }}
               </mat-radio-button>
             </mat-radio-group>
-           </p>
-           </mat-list>
-
+          </p>
+        </mat-list>
 
 
         <mat-list *ngIf="questioner.type == 'QUANTITY_LOAD'">
           <p *ngFor="let question of questioner.questions">
             <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
-            <mat-radio-group class="radio" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
-              <mat-radio-button class="example-radio-button" *ngFor="let answer of quantityLoadAnswers" [value]="answer">
+            <mat-radio-group class="radio"
+                             [(ngModel)]="questioner.answer"
+                             [ngModelOptions]="{standalone: true}">
+              <mat-radio-button class="example-radio-button" *ngFor="let answer of quantityLoadAnswers"
+                                [value]="answer">
                 {{ answer | lowercase | translate }}
               </mat-radio-button>
             </mat-radio-group>
@@ -71,7 +86,9 @@
                 <mat-list *ngIf="question.type == 'TIME'">
                   <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
                   <mat-form-field class="Time">
-                    <input matInput [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" [(ngModel)]="questioner.answer[i]"
+                    <input matInput [owlDateTimeTrigger]="dt4"
+                           [owlDateTime]="dt4"
+                           [(ngModel)]="questioner.answer[i]"
                            [ngModelOptions]="{standalone: true}">
                     <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
                   </mat-form-field>
@@ -86,25 +103,57 @@
               {{ 'Routes' | translate}}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <!-- <mat-hint align="center"><strong>Вкажіть напрям</strong></mat-hint>
-          <mat-radio-group class="radio"  [(ngModel)]="direction" [ngModelOptions]="{standalone: true}">
-              <mat-radio-button class="example-radio-button" *ngFor="let direction of directions" [value]="direction">
-                  {{ direction | lowercase | translate }}
-              </mat-radio-button>
-          </mat-radio-group> -->
+          <!--[(value)]="direction"-->
+          <p *ngIf="feedbackFromMaps == false">
+          <mat-hint align="center"><strong>Вкажіть напрям</strong></mat-hint>
+          <mat-radio-group class="radio"
+
+                           [(ngModel)]="direction"
+                           [ngModelOptions]="{standalone: true}">
+            <mat-radio-button class="example-radio-button"
+                              *ngFor="let direction of directions"
+                              [value]="direction">
+              {{ direction | lowercase | translate }}
+            </mat-radio-button>
+          </mat-radio-group>
+          </p>
 
           <p *ngFor="let questioner of capacitySurvey">
             <mat-list>
-          <p *ngFor="let question of questioner.routeQuestions;let i =index">
+          <p *ngFor="let question of questioner.routeQuestions;let i = index ">
             <mat-list *ngIf="question.type == 'STOP'">
-              <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
-              <mat-form-field class="stopSelect">
-                <mat-select [(ngModel)]="questioner.answer[i]" name="stop">
-                  <mat-option *ngFor="let stop of stops | async" [value]="stop">
-                    {{stop.street | translate}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+
+              <mat-list *ngIf="direction == 'FORWARD'">
+                <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
+                <mat-form-field class="stopSelect">
+                  <mat-select [compareWith]="compareStop"
+                              [(value)]="questioner.answer[i]"
+                              [(ngModel)]="questioner.answer[i]"
+                              [ngModelOptions]="{standalone: true}">
+
+                    <mat-option *ngFor="let stop of forwardStops " [value]="stop">
+                      {{stop.street | translate}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-list>
+
+              <mat-list *ngIf="direction == 'BACKWARD'">
+                <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
+                <mat-form-field class="stopSelect">
+
+                  <mat-select [compareWith]="compareStop"
+                              [(value)]="questioner.answer[i]"
+                              [(ngModel)]="questioner.answer[i]"
+                              [ngModelOptions]="{standalone: true}">
+
+                    <mat-option *ngFor="let stop of backwardStops " [value]="stop">
+                      {{stop.street | translate}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </mat-list>
             </mat-list>
           </p>
           </mat-list >
@@ -119,7 +168,10 @@
           </mat-expansion-panel-header>
           <mat-hint align="center"><strong>Оцініть завантаження у відсотках</strong></mat-hint>
           <mat-form-field appearance="outline" class="capacity">
-            <input matInput min="0" max="100" placeholder="Capacity" [(ngModel)]="capacity"
+            <input matInput min="0"
+                   max="100"
+                   placeholder="Capacity"
+                   [(ngModel)]="capacity"
                    [ngModelOptions]="{standalone: true}">
           </mat-form-field>
           <mat-icon mat-font-set="regular-font">%</mat-icon>
