@@ -8,9 +8,6 @@ export class ExcategoryModel {
   iconURL: string;
   countOfTransits: number;
 
-  constructor(fields: Object) {
-    Object.assign(this, fields);
-  }
 }
 
 export namespace Convert {

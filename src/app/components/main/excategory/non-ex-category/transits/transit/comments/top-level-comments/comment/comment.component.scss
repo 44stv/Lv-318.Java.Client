@@ -1,20 +1,52 @@
 .comment {
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-bottom: 20px;
+  margin: 20px;
 }
 
 .childComments {
   margin-left: 20px;
 }
 
-.row {
+.commentText {
   width: 100%;
   margin-left: 0;
+  font-size: large;
 }
 
-.commentInformation {
+.userAndPostedTime {
+  width: 100%;
+  margin-left: 0;
+  display: inline-block;
+}
 
+.replyElement {
+  border: 1px solid #ccc!important;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  display: none;
+}
+
+.reply {
+  margin-left: 10px;
+}
+
+.replyArea {
+  width: 98.5%;
+  margin: 10px;
+}
+
+.replyButton {
+  margin-left: 80%;
+  margin-bottom: 10px;
+}
+
+.mat-form-field {
+  width: inherit;
+}
+
+.postedDate {
+  text-indent: 10px;
 }
 
 .commentText {

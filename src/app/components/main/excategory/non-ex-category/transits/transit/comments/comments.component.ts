@@ -26,7 +26,7 @@ export class CommentsComponent implements OnInit {
   comments: MyComment[];
 
   constructor(private commentService: CommentService,
-              public snackBar: MatSnackBar,
+              private snackBar: MatSnackBar,
               private authService: AuthService) {
   }
 
@@ -49,8 +49,7 @@ export class CommentsComponent implements OnInit {
         newComment.commentText = this.addCommentText;
         let params = new HttpParams();
         params = params.set('transitId', this.id.toString());
-        // params = params.set('userId', this.authService.getUserId().toString());
-        params = params.set('userId', '3');
+        params = params.set('userId', this.authService.getUserId().toString());
         this.commentService.addComment(params, newComment)
           .subscribe(comment => {
             console.log(comment);

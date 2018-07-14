@@ -1,13 +1,14 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import {User} from '../models/user.model';
-import {Friend} from '../models/friend.model';
-import {Login} from '../models/login.model';
-import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs';
-import {UpdatePassword} from '../models/update-password.model';
-import {UpdateRoleModel} from '../models/update-role.model';
+import { User } from '../models/user.model';
+import { Friend } from '../models/friend.model';
+import { Login } from '../models/login.model';
+import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { UpdatePassword } from '../models/update-password.model';
+import { UpdateRoleModel } from '../models/update-role.model';
+import { UserInfo } from '../models/userInfo.model';
 
 
 const httpOptions = {
@@ -21,6 +22,9 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  public getUserInfo(id: number): Observable<UserInfo> {
+    return this.http.get<UserInfo>(`${this.userUrl}/info/${id}`);
+  }
 
   public deleteUser(user) {
     return this.http.delete(this.userUrl, user);
