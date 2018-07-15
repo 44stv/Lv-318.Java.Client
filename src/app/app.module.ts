@@ -324,7 +324,7 @@ export function getAuthServiceConfigs() {
     NgxChartsModule,
     Ng5BreadcrumbModule.forRoot(),
     NgCircleProgressModule.forRoot(),
-    NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyB5LStf6_Uo0i89bPRxdYXJkjQrl4yn3NM' })
+    NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g' })
   ],
   providers: [
     {
