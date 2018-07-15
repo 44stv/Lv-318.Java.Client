@@ -2,24 +2,27 @@
   <mat-toolbar color="primary">{{ 'TransitInfo' | translate}}</mat-toolbar>
   <mat-card-content>
     <mat-horizontal-stepper [linear]="false" #stepper>
-      <mat-step [stepControl]="firstFormGroup">
+      <mat-step [stepControl]="firstFormGroup" class="firstFormGroup">
         <form>
           <ng-template matStepLabel>{{ 'City' | translate}}</ng-template>
 
           <mat-form-field>
-            <mat-select placeholder="{{'Choose City' | translate}}" [(ngModel)]="city" name="city">
-              <mat-option *ngFor="let city of cities | async" [value]="city">
+            <!-- placeholder="{{'Choose City' | translate}}" -->
+            <mat-select [(value)]="cityFromLocation" [(ngModel)]="cityFromLocation" name="cityFromLocation">
+              <mat-option *ngFor="let city of cities | async" [value]="cityFromLocation">
                 {{city.name | translate}}
               </mat-option>
             </mat-select>
           </mat-form-field>
 
           <div>
-            <button mat-button matStepperNext (click)="getTypeOfTransport(city.name)">{{'Next' | translate}}</button>
+            <button mat-button matStepperNext (click)="getTypeOfTransport(cityFromLocation.name)">{{'Next' |
+              translate}}
+            </button>
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="secondFormGroup" (click)="getTypeOfTransport(city.name)">
+      <mat-step [stepControl]="secondFormGroup" (click)="getTypeOfTransport(cityFromLocation.name)">
         <form>
           <ng-template matStepLabel>{{ 'TypeTransport' | translate}}</ng-template>
           <mat-form-field (click)="getTypeOfTransport(city.name)">

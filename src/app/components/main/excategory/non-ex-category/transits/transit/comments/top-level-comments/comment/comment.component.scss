@@ -1,0 +1,70 @@
+.comment {
+  margin: 20px;
+}
+
+.childComments {
+  margin-left: 20px;
+}
+
+.commentText {
+  width: 100%;
+  margin-left: 0;
+  font-size: large;
+}
+
+.userAndPostedTime {
+  width: 100%;
+  margin-left: 0;
+  display: inline-block;
+}
+
+.replyElement {
+  border: 1px solid #ccc!important;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  display: none;
+}
+
+.reply {
+  margin-left: 10px;
+}
+
+.replyArea {
+  width: 98.5%;
+  margin: 10px;
+}
+
+
+.picsAndReply {
+  margin-bottom: 15px;
+  margin-left: 20px;
+  //display: inline;
+}
+
+.replyButton {
+  //margin-left: 80%;
+}
+
+.addPicsButton {
+
+}
+
+.mat-form-field {
+  width: inherit;
+}
+
+.postedDate {
+  text-indent: 10px;
+}
+
+.commentText {
+  margin-top: 10px;
+}
+
+.underline {
+  border-bottom: 1px solid #ccc!important;
+  width: inherit;
+  margin-right: 20px;
+}

@@ -1,9 +1,10 @@
 .allComments {
+  position: relative;
+  top: 50px;
   width: 60%;
-  margin: auto;
   border: 1px solid #ccc!important;
   border-radius: 10px;
-  //margin-bottom: 10px;
+  margin: 20px auto;
 }
 
 .oneComment {
@@ -21,7 +22,17 @@
 }
 
 .postButton {
-  //margin-top: 10px;
+  margin-top: 2px;
+  margin-left: 15px;
+}
+
+.row {
+  position: relative;
+}
+
+.sortComments {
+  position: absolute;
+  right: 15px;
 }
 
 .underline {

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Transit } from '../models/transit.model';
-import { environment } from '../../environments/environment';
-import { Paginator } from '../models/paginator.model';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Transit} from '../models/transit.model';
+import {environment} from '../../environments/environment';
+import {Paginator} from '../models/paginator.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class TransitService {
   }
 
   getTransitById(id: number): Observable<Transit> {
-    return this.http.get<Transit>(`${this.serviceUrl}/${id}`);
+    return this.http.get<Transit>(`${this.serviceUrl}${id}`);
   }
 
   getTransitsByCategoryId(id: number, page: number, size: number): Observable<Paginator> {

@@ -28,4 +28,7 @@ export class ExcategoryService {
     return this.http.post<Category>(this.serviceUrl, category);
   }
 
+  public getCategoryByName(cityName: String) {
+    return this.http.get<Category[]>(this.serviceUrl + '?name=' + cityName);
+  }
 }

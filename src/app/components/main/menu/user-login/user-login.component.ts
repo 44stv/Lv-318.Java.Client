@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-
-
 import {Login} from '../../../../models/login.model';
-import {AuthService} from '../../../../services/auth/auth.service';
+import {CustomAuthService} from '../../../../services/auth/custom-auth.service';
 import {TokenModel} from '../../../../services/auth/token/token-model';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatSnackBar} from '@angular/material';
@@ -27,7 +25,7 @@ export class UserLoginComponent implements OnInit {
   constructor(public  matDialogRef: MatDialogRef<UserLoginComponent>,
               private snackBar: MatSnackBar,
               private fb: FormBuilder, private router: Router,
-              private authService: AuthService,
+              private authService: CustomAuthService,
               private dialog: MatDialog) {
   }
 

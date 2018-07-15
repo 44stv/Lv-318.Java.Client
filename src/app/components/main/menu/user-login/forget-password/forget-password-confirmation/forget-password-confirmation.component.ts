@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import {UserService} from '../../../../../../services/user.service';
-import {MatDialogRef} from '@angular/material/dialog';
-import {HttpErrorResponse} from '@angular/common/http';
+import { UserService } from '../../../../../../services/user.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 
@@ -34,19 +34,19 @@ export class ForgetPasswordConfirmationComponent implements OnInit {
 
   ngOnInit() {
     const pathUUID = this.route.snapshot.paramMap.get('uuid');
-      this.userService.changePassword(pathUUID).subscribe((response: InfoResponse) => {
-        this.snackBar.open('Password changed', null, {
-          duration: 6000
+    this.userService.changePassword(pathUUID).subscribe((response: InfoResponse) => {
+      this.snackBar.open('Password changed', null, {
+        duration: 6000
+      });
+      this._isChanging = true;
+      //  this.router.navigate(['/']);
+    }, (error) => {
+      if (error instanceof HttpErrorResponse) {
+        this.snackBar.open(error.error.response, null, {
+          duration: 5000
         });
-          this._isChanging = true;
-        //  this.router.navigate(['/']);
-      }, (error) => {
-  if (error instanceof HttpErrorResponse) {
-  this.snackBar.open(error.error.response, null, {
-  duration: 5000
-});
-}
-});
-}
+      }
+    });
+  }
 
 }

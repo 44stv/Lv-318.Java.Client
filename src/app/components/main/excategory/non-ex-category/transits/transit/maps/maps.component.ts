@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../../../../../environments/environment';
@@ -133,9 +133,9 @@ export class MapsComponent implements OnInit {
   public lngStatic: Number = 24.028803095222;
   public firstStopMarker: MarkerModel = new MarkerModel();
   public secondStopMarker: MarkerModel = new MarkerModel();
-  public icon = "../../../../../../../../assets/img/stop.png";
-  public iconSelectedA = "../../../../../../../../assets/img/a.png";
-  public iconSelectedB = "../../../../../../../../assets/img/b.png";
+  public icon = '../../../../../../../../assets/img/stop.png';
+  public iconSelectedA = '../../../../../../../../assets/img/a.png';
+  public iconSelectedB = '../../../../../../../../assets/img/b.png';
   public direction = undefined;
   public directionSecond = undefined;
   public travelMode = 'DRIVING';
@@ -176,6 +176,9 @@ export class MapsComponent implements OnInit {
     },
   };
 
+  @Output()
+  toggleDirection = new EventEmitter<string>();
+
   constructor(private route: ActivatedRoute, private service: MapsService, private _formBuilder: FormBuilder) {
   }
 
@@ -190,12 +193,12 @@ export class MapsComponent implements OnInit {
     this.getMyPosition();
   }
 
-  getMyPosition(){
+  getMyPosition() {
     if (window.navigator && window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(
         position => {
           this.geolocationPosition = position,
-            console.log(position)
+            console.log(position);
         },
         error => {
           switch (error.code) {
@@ -211,7 +214,7 @@ export class MapsComponent implements OnInit {
           }
         }
       );
-    };
+    }
   }
 
   setDirectionAndRefresh(routeDirection) {
@@ -219,6 +222,7 @@ export class MapsComponent implements OnInit {
     this.initPoints();
     this.clearStopFirst();
     this.clearStopSecond();
+    this.toggleDirection.emit(routeDirection);
   }
 
   initMarkers() {
@@ -317,18 +321,15 @@ export class MapsComponent implements OnInit {
       this.firstStopMarker = marker;
       this.markers[index].icon = this.iconSelectedA;
       this.markers[index].animation = 'BOUNCE';
-    }
-    else if (this.firstStopMarker.order === index) {
+    } else if (this.firstStopMarker.order === index) {
       this.markers[index].icon = this.icon;
       this.markers[index].animation = null;
       this.firstStopMarker = new MarkerModel();
-    }
-    else if (this.secondStopMarker.order === index) {
+    } else if (this.secondStopMarker.order === index) {
       this.markers[index].icon = this.icon;
       this.markers[index].animation = null;
       this.secondStopMarker = new MarkerModel();
-    }
-    else if (marker.order > this.firstStopMarker.order) {
+    } else if (marker.order > this.firstStopMarker.order) {
       this.secondStopMarker = marker;
       this.markers[index].icon = this.iconSelectedB;
       this.markers[index].animation = 'BOUNCE';
@@ -362,4 +363,4 @@ export class MarkerModel {
   order: number;
   icon: string;
   animation: string;
-}``
+}
