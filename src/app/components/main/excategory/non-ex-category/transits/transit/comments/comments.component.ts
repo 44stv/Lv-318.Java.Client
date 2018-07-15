@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommentService } from '../../../../../../../services/comment.service';
 import { MyComment } from '../../../../../../../models/comment.model';
 import 'rxjs/add/observable/of';
-import { HttpParams } from '@angular/common/http';
+import { HttpEventType, HttpParams, HttpResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import { CustomAuthService } from '../../../../../../../services/auth/custom-auth.service';
 
@@ -22,6 +22,9 @@ export class CommentsComponent implements OnInit {
   loginMessage = 'Please, log in';
   action = 'Hide';
   sortMode = 'ASC';
+
+  selectedFiles: FileList;
+  progress: { percentage: number } = {percentage: 0};
 
   comments: MyComment[];
 
@@ -54,6 +57,7 @@ export class CommentsComponent implements OnInit {
           .subscribe(comment => {
             console.log(comment);
             this.getTopLevelComments();
+            this.uploadPics(comment);
           });
         this.openSnackBar(this.successMessage);
       } else {
@@ -77,6 +81,31 @@ export class CommentsComponent implements OnInit {
     if (this.sortMode === 'ASC') {
       this.comments.sort((a, b) => b.postDate.localeCompare(a.postDate));
     }
+  }
+
+  openChooseDialog(event) {
+    const file = event.target.files.item(0);
+
+    if (file.type.match('image.*')) {
+      this.selectedFiles = event.target.files;
+    } else {
+      alert('invalid format!');
+    }
+
+    console.log(this.selectedFiles);
+  }
+
+  uploadPics(comment: MyComment) {
+    console.log('uploading');
+
+    const subDir = `subDir=transitId${comment.transitId}/commentId${comment.id}`;
+
+    for (let i = 0; i < this.selectedFiles.length; i++) {
+      console.log('state ' + i + ', ' + this.selectedFiles.item(i).name);
+      this.commentService.uploadFile(this.selectedFiles.item(i), subDir).subscribe(res => console.log(res));
+    }
+
+    this.selectedFiles = undefined;
   }
 }
 

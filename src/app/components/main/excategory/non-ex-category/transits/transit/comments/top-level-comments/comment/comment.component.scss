@@ -1,5 +1,7 @@
 .comment {
-  margin: 20px;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .childComments {
@@ -7,8 +9,8 @@
 }
 
 .commentText {
-  width: 100%;
-  margin-left: 0;
+  width: 99%;
+  margin-left: 5px;
   font-size: large;
 }
 
@@ -28,12 +30,16 @@
 }
 
 .reply {
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .replyArea {
   width: 98.5%;
-  margin: 10px;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 
@@ -44,11 +50,7 @@
 }
 
 .replyButton {
-  //margin-left: 80%;
-}
-
-.addPicsButton {
-
+  margin-left: 5px;
 }
 
 .mat-form-field {
@@ -57,14 +59,4 @@
 
 .postedDate {
   text-indent: 10px;
-}
-
-.commentText {
-  margin-top: 10px;
-}
-
-.underline {
-  border-bottom: 1px solid #ccc!important;
-  width: inherit;
-  margin-right: 20px;
 }

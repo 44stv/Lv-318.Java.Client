@@ -12,21 +12,30 @@
     </div>
 
     <div class="row">
-        <button class="postButton"
-                mdc-button
-                [secondary]="true"
-                [raised]="true"
-                type="submit" (click)="addTopLevelComment()">Post comment
-        </button>
 
-        <mat-form-field class="sortComments">
-          <mat-select placeholder="Select sort type"
-                      [(value)]="sortMode"
-                      (selectionChange)="sortComments()">
-            <mat-option value="ASC">Newer first</mat-option>
-            <mat-option value="DESC">Older first</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div style="width: 80px" class="col-md-1" (click)="choosePics.click()">
+        <input #choosePics
+               style="display:none"
+               type="file"
+               (change)="openChooseDialog($event)"
+               multiple="multiple">
+        <mdc-icon [fontSize]="36">add_a_photo_alternate</mdc-icon>
+      </div>
+      <button class="postButton"
+              mdc-button
+              [secondary]="true"
+              [raised]="true"
+              type="submit" (click)="addTopLevelComment()">Post comment
+      </button>
+
+      <mat-form-field class="sortComments">
+        <mat-select placeholder="Select sort type"
+                    [(value)]="sortMode"
+                    (selectionChange)="sortComments()">
+          <mat-option value="ASC">Newer first</mat-option>
+          <mat-option value="DESC">Older first</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
 

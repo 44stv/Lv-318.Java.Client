@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MyComment } from '../../../../../../../../../models/comment.model';
 import { CommentService } from '../../../../../../../../../services/comment.service';
-import { HttpParams } from '@angular/common/http';
+import { HttpEventType, HttpParams, HttpResponse } from '@angular/common/http';
 import { UserInfo } from '../../../../../../../../../models/userInfo.model';
 import { UserService } from '../../../../../../../../../services/user.service';
 import { MatSnackBar } from '@angular/material';
@@ -20,6 +20,10 @@ export class CommentComponent implements OnInit {
   postCommentDate: string;
   modifiedCommentDate: string;
 
+  currentFileUpload: File;
+  selectedFiles: FileList;
+  progress: { percentage: number } = {percentage: 0};
+
   successMessage = 'Reply posted';
   failedMessage = 'Empty comment';
   loginMessage = 'Please, log in';
@@ -37,7 +41,7 @@ export class CommentComponent implements OnInit {
   ngOnInit() {
     this.modified = this.comment.modifiedDate != null;
     this.postCommentDate = this.calculateTimeDiffBetweenNowAndDate(new Date(this.comment.postDate));
-    this.modifiedCommentDate = this.comment.modifiedDate;
+    this.modifiedCommentDate = new Date(this.comment.modifiedDate).toString();
 
     if (this.comment.parent) {
       this.getChildrenComments();
@@ -46,10 +50,8 @@ export class CommentComponent implements OnInit {
   }
 
   getChildrenComments() {
-    console.log('get children comments' + this.comment.id);
     this.commentService.getChildrenComments(this.comment.id)
       .subscribe(childComments => {
-        console.log(childComments);
         this.childComments = childComments;
       });
   }
@@ -65,8 +67,8 @@ export class CommentComponent implements OnInit {
         params = params.set('parentId', this.comment.id.toString());
         this.commentService.addComment(params, replyComment)
           .subscribe(comment => {
-            console.log(comment);
             this.getChildrenComments();
+            this.uploadPics(comment);
           });
         this.toggleReply();
         this.openSnackBar(this.successMessage);
@@ -116,5 +118,31 @@ export class CommentComponent implements OnInit {
       replyElement.style.display = 'block';
     }
   }
+
+  openChooseDialog(event) {
+    const file = event.target.files.item(0);
+
+    if (file.type.match('image.*')) {
+      this.selectedFiles = event.target.files;
+    } else {
+      alert('invalid format!');
+    }
+
+    console.log(this.selectedFiles);
+  }
+
+  uploadPics(comment: MyComment) {
+    console.log('uploading');
+
+    const subDir = `subDir=transitId${comment.transitId}/commentId${comment.id}`;
+
+    for (let i = 0; i < this.selectedFiles.length; i++) {
+      console.log('state ' + i + ', ' + this.selectedFiles.item(i).name);
+      this.commentService.uploadFile(this.selectedFiles.item(i), subDir).subscribe(res => console.log(res));
+    }
+
+    this.selectedFiles = undefined;
+  }
+
 
 }
