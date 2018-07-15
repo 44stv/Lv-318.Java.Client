@@ -84,38 +84,6 @@ export class StopsGridComponent implements OnInit {
 
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const transitName = encodeURI(params['name']);
-      const idTransit = params['id-transit'];
-      const topCategoryName = encodeURI(params['top']);
-      const id = params['id'];
-      const city = encodeURI(params['city']);
-      const iconURL = (<string>params['iconUrl']).replace('/', '%2F');
-
-      let newUrl = '';
-
-      if (id === 'undefined') {
-        this.transitService.getTransitById(idTransit)
-          .subscribe(data => {
-
-            const id1 = data.categoryId;
-
-            // Add friendly name for category id
-            this.nonExCatServ
-              .getNameByCategoryId(id1)
-              .subscribe(item => {
-                this.breadcrumbService
-                  .addFriendlyNameForRoute('/main/' + topCategoryName + '/' + city + '/' + id, item[0].name);
-              });
-
-            newUrl = '/main/' + topCategoryName +
-              '/' + city + '/' + id1 + '/transit/' + idTransit + '/' + transitName +
-              '/' + iconURL;
-
-            this.location.go(newUrl);
-          });
-      }
-    });
     this.sub = this.route.params.forEach(params => {
       this.idTransit = params['id-transit'];
       this.categoryId = params['id'];
