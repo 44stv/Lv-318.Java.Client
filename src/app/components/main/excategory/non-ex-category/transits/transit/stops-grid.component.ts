@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {StopService} from '../../../../../../services/stop.service';
-import {TransitService} from '../../../../../../services/transit.service';
 import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material';
 import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
@@ -9,7 +8,6 @@ import {Stop} from '../../../../../../models/stop.model';
 import {BreadcrumbService} from 'ng5-breadcrumb';
 import {environment} from '../../../../../../../environments/environment';
 import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
-import {Location} from '@angular/common';
 import {CustomAuthService} from '../../../../../../services/auth/custom-auth.service';
 import {BusyStopsDiagramComponent} from './busy-stops-diagram/busy-stops-diagram.component';
 
@@ -42,9 +40,7 @@ export class StopsGridComponent implements OnInit {
               private route: ActivatedRoute,
               public dialog: MatDialog,
               private breadcrumbService: BreadcrumbService,
-              private nonExCatServ: NonExCategoryService,
-              private transitService: TransitService,
-              private location: Location) {
+              private nonExCatServ: NonExCategoryService) {
     this.route.params.subscribe(params => {
       const paramTransitName = encodeURI(params['name']);
       const paramIdTransit = params['id-transit'];
