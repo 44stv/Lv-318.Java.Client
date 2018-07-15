@@ -6,6 +6,8 @@ import { UserInfo } from '../../../../../../../../../models/userInfo.model';
 import { UserService } from '../../../../../../../../../services/user.service';
 import { MatSnackBar } from '@angular/material';
 import {CustomAuthService} from '../../../../../../../../../services/auth/custom-auth.service';
+import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
+import { INgxGalleryImage } from 'ngx-gallery/ngx-gallery-image.model';
 
 @Component({
   selector: 'app-comment',
@@ -19,10 +21,12 @@ export class CommentComponent implements OnInit {
   replyCommentText: string;
   postCommentDate: string;
   modifiedCommentDate: string;
+  images: string[];
 
-  currentFileUpload: File;
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: NgxGalleryImage[];
+
   selectedFiles: FileList;
-  progress: { percentage: number } = {percentage: 0};
 
   successMessage = 'Reply posted';
   failedMessage = 'Empty comment';
@@ -42,11 +46,16 @@ export class CommentComponent implements OnInit {
     this.modified = this.comment.modifiedDate != null;
     this.postCommentDate = this.calculateTimeDiffBetweenNowAndDate(new Date(this.comment.postDate));
     this.modifiedCommentDate = new Date(this.comment.modifiedDate).toString();
+    if (this.comment.images !== null) {
+      this.images = JSON.parse(this.comment.images);
+    }
 
     if (this.comment.parent) {
       this.getChildrenComments();
     }
     this.getUserInfo();
+
+    this.initializeGallery();
   }
 
   getChildrenComments() {
@@ -67,8 +76,11 @@ export class CommentComponent implements OnInit {
         params = params.set('parentId', this.comment.id.toString());
         this.commentService.addComment(params, replyComment)
           .subscribe(comment => {
+
+            if (this.selectedFiles !== undefined) {
+              this.uploadPics(comment);
+            }
             this.getChildrenComments();
-            this.uploadPics(comment);
           });
         this.toggleReply();
         this.openSnackBar(this.successMessage);
@@ -119,6 +131,36 @@ export class CommentComponent implements OnInit {
     }
   }
 
+  initializeGallery() {
+    this.galleryOptions = [
+      {
+        image: false,
+        height: '200px',
+        width: '100%',
+        thumbnailsColumns: 4,
+        imageAnimation: NgxGalleryAnimation.Slide
+      }
+    ];
+
+    if (this.images !== undefined) {
+      for (let i = 0; i < this.images.length; i++) {
+        if (i === 0) {
+          this.galleryImages = [{
+            small: this.images[i],
+            medium: this.images[i],
+            big: this.images[i]
+          }];
+        } else {
+          this.galleryImages.push({
+            small: this.images[i],
+            medium: this.images[i],
+            big: this.images[i]
+          });
+        }
+      }
+    }
+  }
+
   openChooseDialog(event) {
     const file = event.target.files.item(0);
 
@@ -132,17 +174,18 @@ export class CommentComponent implements OnInit {
   }
 
   uploadPics(comment: MyComment) {
-    console.log('uploading');
-
+    const uploadedImageURLs: string[] = [];
     const subDir = `subDir=transitId${comment.transitId}/commentId${comment.id}`;
 
     for (let i = 0; i < this.selectedFiles.length; i++) {
       console.log('state ' + i + ', ' + this.selectedFiles.item(i).name);
-      this.commentService.uploadFile(this.selectedFiles.item(i), subDir).subscribe(res => console.log(res));
+      this.commentService.uploadFile(this.selectedFiles.item(i), subDir).subscribe(res => {
+        uploadedImageURLs.push(res);
+
+        if (uploadedImageURLs.length === this.selectedFiles.length) {
+          this.commentService.addImagesToComment(comment.id, JSON.stringify(uploadedImageURLs)).subscribe(res1 => console.log(res1));
+        }
+      });
     }
-
-    this.selectedFiles = undefined;
   }
-
-
 }

@@ -1,3 +1,8 @@
+@import "~@angular-mdc/theme/material";
+
+$mdc-theme-primary: #43659c; // change primary color example
+$mdc-theme-secondary:#ffffff; // change secondary color example
+
 .allComments {
   position: relative;
   top: 50px;

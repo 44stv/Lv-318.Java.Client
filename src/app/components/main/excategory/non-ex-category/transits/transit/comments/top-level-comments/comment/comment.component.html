@@ -6,10 +6,11 @@
       <span style="font-size: small">Posted {{ postCommentDate }}</span>
       <span style="margin-left: 3px" *ngIf="modified" title="{{ modifiedCommentDate }}">
         <mdc-icon [fontSize]="18">edit</mdc-icon>
-        <!--Changed {{ modifiedCommentDate }}-->
       </span>
     </div>
-    <div class="commentText"> {{ comment.commentText }} </div>
+    <div class="commentText"> {{ comment.commentText }}</div>
+
+    <ngx-gallery *ngIf="comment.images !== null" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
 
     <div class="reply" (click)="toggleReply()">
       <mdc-icon>reply</mdc-icon>
@@ -31,11 +32,11 @@
                  type="file"
                  (change)="openChooseDialog($event)"
                  multiple="multiple">
-          <mdc-icon style="width: 36px"  [fontSize]="36">add_a_photo_alternate</mdc-icon>
+          <mdc-icon style="width: 36px" [fontSize]="36">add_a_photo_alternate</mdc-icon>
         </div>
         <button class="replyButton"
                 mdc-button
-                [secondary]="true"
+                [secondary]="false"
                 [raised]="true"
                 type="submit" (click)="addChildComment()"> Reply
         </button>

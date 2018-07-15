@@ -44,7 +44,6 @@ export class CommentsComponent implements OnInit {
     });
   }
 
-  // TODO: get user id form authService
   addTopLevelComment() {
     if (this.authService.hasToken()) {
       const newComment = new MyComment();
@@ -57,8 +56,11 @@ export class CommentsComponent implements OnInit {
           .subscribe(comment => {
             console.log(comment);
             this.getTopLevelComments();
-            this.uploadPics(comment);
+            if (this.selectedFiles !== undefined) {
+              this.uploadPics(comment);
+            }
           });
+        this.addCommentText = undefined;
         this.openSnackBar(this.successMessage);
       } else {
         this.openSnackBar(this.failedMessage);
@@ -96,16 +98,22 @@ export class CommentsComponent implements OnInit {
   }
 
   uploadPics(comment: MyComment) {
-    console.log('uploading');
-
+    const uploadedImageURLs: string[] = [];
     const subDir = `subDir=transitId${comment.transitId}/commentId${comment.id}`;
+
+    console.log(this.selectedFiles);
 
     for (let i = 0; i < this.selectedFiles.length; i++) {
       console.log('state ' + i + ', ' + this.selectedFiles.item(i).name);
-      this.commentService.uploadFile(this.selectedFiles.item(i), subDir).subscribe(res => console.log(res));
+      this.commentService.uploadFile(this.selectedFiles.item(i), subDir).subscribe(res => {
+        uploadedImageURLs.push(res);
+
+        if (uploadedImageURLs.length === this.selectedFiles.length) {
+          this.commentService.addImagesToComment(comment.id, JSON.stringify(uploadedImageURLs)).subscribe(res1 => console.log(res1));
+        }
+      });
     }
 
-    this.selectedFiles = undefined;
   }
 }
 

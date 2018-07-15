@@ -143,6 +143,7 @@ import {
 } from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/top-level-comments.component';
 import { UpdatePasswordComponent } from './components/main/menu/user-profile/update-password/update-password.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -261,6 +262,7 @@ export function getAuthServiceConfigs() {
     NgxMaterialTimepickerModule.forRoot(),
     MatButtonToggleModule,
     StarRatingModule.forRoot(),
+    NgxGalleryModule,
     MomentModule,
     MatProgressBarModule,
     MatAutocompleteModule,

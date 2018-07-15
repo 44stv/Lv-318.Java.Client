@@ -31,6 +31,10 @@ export class CommentService {
     return this.http.post<MyComment>(this.serviceUrl, newComment, { params: params });
   }
 
+  addImagesToComment(id: number, imageURLs: string): Observable<MyComment> {
+    return this.http.put<MyComment>(`${this.serviceUrl}?commentId=${id}`, imageURLs);
+  }
+
   uploadFile(file: File, subDir: string) {
     const formData: FormData = new FormData();
     formData.append('file', file);
@@ -39,8 +43,4 @@ export class CommentService {
     return this.http.post(fullURL, formData, {responseType: 'text'});
   }
 
-  // getImages
-  // getFiles(): Observable<any> {
-  //   return this.http.get('/getlistfiles');
-  // }
 }
