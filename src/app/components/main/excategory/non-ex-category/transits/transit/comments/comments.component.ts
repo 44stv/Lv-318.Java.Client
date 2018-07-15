@@ -55,7 +55,6 @@ export class CommentsComponent implements OnInit {
         this.commentService.addComment(params, newComment)
           .subscribe(comment => {
             console.log(comment);
-            this.getTopLevelComments();
             if (this.selectedFiles !== undefined) {
               this.uploadPics(comment);
             }
@@ -109,7 +108,10 @@ export class CommentsComponent implements OnInit {
         uploadedImageURLs.push(res);
 
         if (uploadedImageURLs.length === this.selectedFiles.length) {
-          this.commentService.addImagesToComment(comment.id, JSON.stringify(uploadedImageURLs)).subscribe(res1 => console.log(res1));
+          this.commentService.addImagesToComment(comment.id, JSON.stringify(uploadedImageURLs)).subscribe(res1 => {
+            console.log(res1);
+            this.getTopLevelComments();
+          });
         }
       });
     }
