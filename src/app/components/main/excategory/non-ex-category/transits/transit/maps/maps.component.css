@@ -15,10 +15,10 @@ agm-map {
   transform: translateX(-50%);
 }
 button{
-  border: darkgrey solid 1px;
-  border-radius: 4px;
-  margin: 8px 2px;
-}
+   border: darkgrey solid 1px;
+   border-radius: 4px;
+   margin: 8px 2px;
+ }
 .stop-list{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;

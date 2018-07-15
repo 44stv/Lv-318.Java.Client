@@ -70,7 +70,6 @@ import {
 import {ExcategoryService} from './services/excategory.service';
 
 import {MainComponent} from './components/main/main.component';
-import {SlideshowModule} from 'ng-simple-slideshow';
 import {MessageComponent} from './components/message/message.component';
 import {UserService} from './services/user.service';
 import {StopService} from './services/stop.service';
@@ -137,6 +136,7 @@ import {UserProfileComponent} from './components/main/menu/user-profile/user-pro
 import {FriendInvitationComponent} from './components/main/menu/user-profile/friend-invitation/friend-invitation.component';
 import {UpdatePasswordComponent} from './components/main/menu/user-profile/update-password/update-password.component';
 import { NgCircleProgressModule } from "ng-circle-progress";
+import { NewsComponent, ReadNewsComponent } from './components/main/news/news.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -207,7 +207,9 @@ export function getAuthServiceConfigs() {
     ForbiddenComponent,
     UpdateRoleComponent,
     AddCategoryComponent,
-    AddTopCategoryComponent
+    AddTopCategoryComponent,
+    NewsComponent,
+    ReadNewsComponent
   ],
   exports: [
     MatAutocompleteModule,
@@ -278,7 +280,6 @@ export function getAuthServiceConfigs() {
     MatInputModule,
     MatButtonModule,
     MatToolbarModule,
-    SlideshowModule,
     HttpClientModule,
     MatOptionModule,
     MatSelectModule,
@@ -347,7 +348,9 @@ export function getAuthServiceConfigs() {
     ForgetPasswordComponent,
     ChooseTransitComponent,
     FriendInvitationComponent,
-    UpdatePasswordComponent]
+    UpdatePasswordComponent,
+    ReadNewsComponent
+  ]
 
 })
 export class AppModule {
