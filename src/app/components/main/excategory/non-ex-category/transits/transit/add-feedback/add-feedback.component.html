@@ -49,22 +49,66 @@
               </mat-radio-button>
             </mat-radio-group>
           </p>
+
         </mat-list>
-
-
-        <mat-list *ngIf="questioner.type == 'QUANTITY_LOAD'">
+        <mat-list *ngIf="questioner.type == 'QUALITY'">
           <p *ngFor="let question of questioner.questions">
             <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
-            <mat-radio-group class="radio"
-                             [(ngModel)]="questioner.answer"
-                             [ngModelOptions]="{standalone: true}">
-              <mat-radio-button class="example-radio-button" *ngFor="let answer of quantityLoadAnswers"
-                                [value]="answer">
-                {{ answer | lowercase | translate }}
-              </mat-radio-button>
-            </mat-radio-group>
-          </p>
+            <mat-list *ngIf="question.type == 'QUANTITY_LOAD'">
+              <mat-radio-group class="tile" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button class="tile-content" [value]="'SIT'">
+                  <img class="capacity-image" src="../../../../../../../../assets/img/sit.ico">
+          <p class="capacity-legend">{{ 'Sit' | translate }}</p>
+          </mat-radio-button>
+
+          <mat-radio-button class="tile-content" [value]="'STAY'">
+            <img class="capacity-image" src="../../../../../../../../assets/img/stay.ico">
+            <p class="capacity-legend">{{ 'Stay' | translate }}</p>
+          </mat-radio-button>
+
+          <mat-radio-button class="tile-content" [value]="'CROWDING'">
+            <img class="capacity-image" src="../../../../../../../../assets/img/CrowdingNew.ico">
+            <p class="capacity-legend">{{ 'Crowding' | translate }}</p>
+          </mat-radio-button>
+
+          <mat-radio-button class="tile-content" [value]="'MISS'">
+            <img class="capacity-image" src="../../../../../../../../assets/img/miss.ico">
+            <p class="capacity-legend"> {{ 'Miss' | translate }}</p>
+          </mat-radio-button>
+          </mat-radio-group>
         </mat-list>
+
+        <mat-list *ngIf="question.type == 'CONFLICT'">
+          <mat-radio-group class="tile" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
+            <mat-radio-button class="tile-content" [value]="'WITHOUT_CHANGE'">
+              <img class="capacity-image" src="../../../../../../../../assets/img/cash.ico">
+              <p class="capacity-legend">{{'Did not get change' | translate}}</p>
+            </mat-radio-button>
+            <mat-radio-button class="tile-content" [value]="'UNPAID_TRAVEL'">
+              <img class="capacity-image" src="../../../../../../../../assets/img/rabbit.ico">
+              <p class="capacity-legend">{{'Unpaid travel' | translate}}</p>
+            </mat-radio-button>
+            <mat-radio-button class="tile-content" [value]="'THEFT'">
+              <img class="capacity-image" src="../../../../../../../../assets/img/criminal.ico">
+              <p class="capacity-legend">{{'Theft' | translate}}</p>
+            </mat-radio-button>
+            <mat-radio-button class="tile-content" [value]="'GRANDMA_QUARREL'">
+              <img class="capacity-image" src="../../../../../../../../assets/img/grandma.ico">
+              <p class="capacity-legend">{{'Quarrel with elderly' | translate}}</p>
+            </mat-radio-button>
+            <mat-radio-button class="tile-content" [value]="'WINDOW_QUARREL'">
+              <img class="capacity-image" src="../../../../../../../../assets/img/window.ico">
+              <p class="capacity-legend">{{'Quarrel through window' | translate}}</p>
+            </mat-radio-button>
+            <mat-radio-button class="tile-content" [value]="'DRUNK'">
+              <img class="capacity-image" src="../../../../../../../../assets/img/drunk.ico">
+              <p class="capacity-legend"> {{'Drunk passengers' | translate}}</p>
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-list>
+        </p>
+        </mat-list>
+
         </p>
         </mat-list>
       </mat-card-content>
@@ -103,19 +147,18 @@
               {{ 'Routes' | translate}}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <!--[(value)]="direction"-->
-          <p *ngIf="feedbackFromMaps == false">
-          <mat-hint align="center"><strong>Вкажіть напрям</strong></mat-hint>
-          <mat-radio-group class="radio"
 
-                           [(ngModel)]="direction"
-                           [ngModelOptions]="{standalone: true}">
-            <mat-radio-button class="example-radio-button"
-                              *ngFor="let direction of directions"
-                              [value]="direction">
-              {{ direction | lowercase | translate }}
-            </mat-radio-button>
-          </mat-radio-group>
+          <p *ngIf="feedbackFromMaps == false">
+            <mat-hint align="center"><strong>Вкажіть напрям</strong></mat-hint>
+            <mat-radio-group class="radio"
+                             [(ngModel)]="direction"
+                             [ngModelOptions]="{standalone: true}">
+              <mat-radio-button class="example-radio-button"
+                                *ngFor="let direction of directions"
+                                [value]="direction">
+                {{ direction | lowercase | translate }}
+              </mat-radio-button>
+            </mat-radio-group>
           </p>
 
           <p *ngFor="let questioner of capacitySurvey">
@@ -178,17 +221,14 @@
 
         </mat-expansion-panel>
 
-
         </mat-accordion>
 
         </mat-list >
       </mat-card-content>
     </mat-tab>
   </mat-tab-group>
-  <!-- <mat-card-actions> -->
   <mat-card-footer>
     <button mat-raised-button color="primary" (click)="saveAllFeedback()">{{ 'Save' | translate}}</button>
     <button mat-raised-button (click)="close()">{{ 'Close' | translate}}</button>
   </mat-card-footer>
-  <!-- </mat-card-actions> -->
 </form>

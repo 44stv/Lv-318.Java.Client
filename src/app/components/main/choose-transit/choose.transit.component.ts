@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild, OnChanges, AfterViewInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs';
 import {MatDialogRef} from '@angular/material';
@@ -6,11 +6,9 @@ import {AddFeedbackComponent} from '../excategory/non-ex-category/transits/trans
 import {TransitService} from '../../../services/transit.service';
 import {Transit} from '../../../models/transit.model';
 import {ExcategoryModel} from '../../../models/excategory.model';
-import {Category} from '../../../models/category.model';
 import {ExcategoryService} from '../../../services/excategory.service';
 import {NonExCategoryService} from '../../../services/non-ex-category.service';
 import {GlobalSearchService} from '../../../services/global-search.service';
-import {NumberValueAccessor} from '@angular/forms/src/directives';
 
 
 @Component({
@@ -70,20 +68,13 @@ export class ChooseTransitComponent implements OnInit {
   }
 
   public getCityByGeolocation(): ExcategoryModel {
-    const cityFromLocation: ExcategoryModel = new ExcategoryModel();
+    let cityFromLocation: ExcategoryModel = new ExcategoryModel();
     this.service.getCategoryByName(this.globalSearchService.getCurentLocation()).subscribe(data => {
         cityFromLocation.id = data[0].id;
-      cityFromLocation.name = data[0].name;
-      cityFromLocation.nextLevelCategory = data[0].nextLevelCategory;
+        cityFromLocation.name = data[0].name;
+        cityFromLocation.nextLevelCategory = data[0].nextLevelCategory;
       }
     );
-    //
-    // this.cities.forEach(city => {
-    //     if (city.name === this.globalSearchService.getCurentLocation()) {
-    //       cityFromLocation = city;
-    // }
-    //   }
-    // );
     return cityFromLocation;
   }
 

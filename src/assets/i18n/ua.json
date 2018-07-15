@@ -59,5 +59,16 @@
   "ErrorText3": "головну сторінку",
   "CategoryConfiguration": "Конфігурація категорій",
   "Categories": "Категорії",
-  "reload": "Оновити графік"
+  "reload": "Оновити графік",
+  "Miss":"Не влізли",
+  "Crowding":"Багато народу",
+  "Stay" : "Стояли",
+  "Sit": "Сиділи",
+  "Feedback by route":"Вибрати зупинки для відгуку",
+  "Drunk passengers":"Нетверезий пасажир",
+  "Quarrel through window":"Сварка через вікно",
+  "Quarrel with elderly":"Сварка з бабцею",
+  "Theft":"Крадіжка",
+  "Unpaid travel":"Безквитковий проїзд",
+  "Did not get change":"Не отримали решти"
 }

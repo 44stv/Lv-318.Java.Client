@@ -20,7 +20,6 @@ import {Question} from '../../../../../../../models/question.model';
 import {Stop} from '../../../../../../../models/stop.model';
 import {MyComment} from '../../../../../../../models/comment.model';
 import {CommentService} from '../../../../../../../services/comment.service';
-import {TransitService} from '../../../../../../../services/transit.service';
 import {CustomAuthService} from '../../../../../../../services/auth/custom-auth.service';
 
 
@@ -38,15 +37,14 @@ export class AddFeedbackComponent implements OnInit {
   @Input() direction: String;
   @Input() transitId: number = this.data.number;
   @Input() transitName: String = this.data.transitName;
-  @Input() feedbackFromMaps: boolean = (this.data.fromMaps) ? this.data.fromMaps : false ;
+  @Input() feedbackFromMaps: boolean = (this.data.fromMaps) ? this.data.fromMaps : false;
+  @Input() imageAnswer: String = '';
   private categoryId: number = this.data.categoryId;
   private forwardStops: Stop [] = [];
   private backwardStops: Stop [] = [];
   private checkBoxAnswers: String[] = ['YES', 'NO', 'MAYBE'];
-  private quantityLoadAnswers: String[] = ['SIT', 'STAY', 'HARD_LOAD', 'LOSER'];
   successMessage = 'Feedback and Comment posted';
   failedMessage = 'Empty feedback';
-  loginMessage = 'Please, log in';
   action = 'Hide';
   private directions: String[] = ['FORWARD', 'BACKWARD'];
 
@@ -56,13 +54,11 @@ export class AddFeedbackComponent implements OnInit {
               private stopService: StopService,
               private commentService: CommentService,
               public snackBar: MatSnackBar,
-              public auth: CustomAuthService,
-              private transitService: TransitService) {
-    // this.transit = this.buildTransit(this.data.number);
+              public auth: CustomAuthService) {
+
     this.survey = this.buildSurveyByCriteriaType(['RATING']);
     this.qualitySurvey = this.buildSurveyByCriteriaType(['SIMPLE', 'QUALITY']);
     this.capacitySurvey = this.buildSurveyByCriteriaType(['ROUTE_CAPACITY', 'HOURS_CAPACITY']);
-    this.stops = this.getTransitStops();
     this.forwardStops = this.getByTransitAndDirection('FORWARD');
     this.backwardStops = this.getByTransitAndDirection('BACKWARD');
     this.direction = this.getDirection();
@@ -72,6 +68,7 @@ export class AddFeedbackComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.qualitySurvey);
   }
 
   public close() {
@@ -82,17 +79,23 @@ export class AddFeedbackComponent implements OnInit {
     const feedbacks: Feedback[] = this.toFeedbackList(this.survey);
     const capFeedbacks: Feedback[] = this.toFeedbackList(this.capacitySurvey);
     const quantityFeedbacks: Feedback[] = this.toFeedbackList(this.qualitySurvey);
-    console.log(feedbacks.concat(capFeedbacks, quantityFeedbacks));
-    if (feedbacks.concat(capFeedbacks, quantityFeedbacks).length > 0 || this.transitComment.commentText) {
-      this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks)).subscribe();
-      if (this.transitComment.commentText) {
-        this.addComment();
-      }
+    if (feedbacks.concat(capFeedbacks, quantityFeedbacks).length > 0 && this.transitComment.commentText) {
+      this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks, quantityFeedbacks)).subscribe();
+      this.addComment();
       this.openSnackBar(this.successMessage);
+      this.dialogRef.close();
+    } else if (this.transitComment.commentText) {
+      this.addComment();
+      this.openSnackBar('Comment posted');
+      this.dialogRef.close();
+    } else if (feedbacks.concat(capFeedbacks, quantityFeedbacks).length > 0) {
+      this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks, quantityFeedbacks)).subscribe();
+      this.openSnackBar('Feedback posted');
+      this.dialogRef.close();
     } else {
       this.openSnackBar(this.failedMessage);
+      this.dialogRef.close();
     }
-    this.dialogRef.close();
   }
 
   public buildSurveyByCriteriaType(types: String []): Questioner[] {
@@ -310,18 +313,6 @@ export class AddFeedbackComponent implements OnInit {
     return stops;
   }
 
-  // public buildTransit(id: number): Transit {
-  //   const transit: Transit = new Transit();
-  //   this.transitService.getTransitById(id).subscribe(data => {
-  //     transit.id = data.id;
-  //     transit.name = data.name;
-  //     transit.categoryId = data.categoryId;
-  //     transit.routeName = data.routeName;
-  //     transit.categoryIconURL = data.categoryIconURL;
-  //   });
-  //   return transit;
-  // }
-
   public getByTransitAndDirection(direction: String) {
     const stops: Stop[] = [];
     this.stopService.getStopsByTransitIdAndDirection(this.transitId, direction).subscribe(data => {
@@ -339,5 +330,6 @@ export class AddFeedbackComponent implements OnInit {
     }
     return direction;
   }
+
 }
 

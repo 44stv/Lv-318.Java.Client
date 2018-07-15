@@ -59,5 +59,16 @@
   "ErrorText3": "main page",
   "CategoryConfiguration": "Category configuration",
   "Categories": "Categories",
-  "reload": "Reload chart"
+  "reload": "Reload chart",
+  "Miss":"Miss",
+  "Crowding":"Crowding",
+  "Stay" : "Stay",
+  "Sit": "Sit",
+  "Feedback by route":"Feedback by route",
+  "Drunk passengers":"Drunk passengers",
+  "Quarrel through window":"Quarrel through window",
+  "Quarrel with elderly":"Quarrel with elderly",
+  "Theft":"Theft",
+  "Unpaid travel":"Unpaid travel",
+  "Did not get change":"Didn't get change"
 }

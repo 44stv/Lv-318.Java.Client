@@ -19,8 +19,10 @@
     <mdc-drawer-content>
       <app-excategory></app-excategory>
       <div class="language">
-        <a class="lang" (click)="switchLanguage('ua')"><img height="20" width="20" src="../assets/img/ukraine.png" style=""> Українська</a>
-        <a class="lang" (click)="switchLanguage('en')"><img height="20" width="20" src="../assets/img/united-kingdom.png"> English</a>
+        <a class="lang" (click)="switchLanguage('ua')"><img height="20" width="20" src="../assets/img/ukraine.png">
+          Українська</a>
+        <a class="lang" (click)="switchLanguage('en')"><img height="20" width="20"
+                                                            src="../assets/img/united-kingdom.png"> English</a>
       </div>
     </mdc-drawer-content>
   </mdc-drawer>
@@ -31,8 +33,10 @@
   </div>
 </div>
 
-   <div class="add-Feedback" *ngIf="!isFeedbackActivated()">
-    <button class="add" mdc-fab position='bottom-right' (click)="openChooseTransitModal()">
-        <mdc-icon>edit</mdc-icon>
-      </button>
-  </div>
+<div class="add-Feedback" *ngIf="!isFeedbackActivated()">
+  <!--<div *ngIf="this.authService.hasToken()">-->
+  <button class="add" mdc-fab position='bottom-right' (click)="openChooseTransitModal()">
+    <mdc-icon>edit</mdc-icon>
+  </button>
+  <!--</div>-->
+</div>
