@@ -17,8 +17,8 @@
   "Forward": "Прямий напрямок",
   "Backward": "Зворотній напрямок",
   "Capacity": "Оцініть завантаженість",
- "Rating": "Рейтинг",
-  "Quantity" : "Якість",
+  "Rating": "Рейтинг",
+  "Quantity": "Якість",
   "yes": "Так",
   "no": "Ні",
   "forward": "Прямий",
@@ -57,5 +57,7 @@
   "ErrorText3": "головну сторінку",
   "CategoryConfiguration": "Конфігурація категорій",
   "Categories": "Категорії",
-  "reload": "Оновити графік"
+  "firstName": "Ім'я",
+  "lastName": "Прізвище",
+  "role": "Роль"
 }

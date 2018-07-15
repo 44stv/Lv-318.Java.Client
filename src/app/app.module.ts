@@ -143,6 +143,7 @@ import {
 } from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/top-level-comments.component';
 import { UpdatePasswordComponent } from './components/main/menu/user-profile/update-password/update-password.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { UsersConfComponent } from './components/admin/users-conf/users-conf.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -218,7 +219,8 @@ export function getAuthServiceConfigs() {
     ForbiddenComponent,
     UpdateRoleComponent,
     AddCategoryComponent,
-    AddTopCategoryComponent
+    AddTopCategoryComponent,
+    UsersConfComponent
   ],
   exports: [
     MatAutocompleteModule,

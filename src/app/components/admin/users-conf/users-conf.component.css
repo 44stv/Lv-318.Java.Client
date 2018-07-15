@@ -1,0 +1,30 @@
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-elevation-z8 {
+  width: 87%;
+  margin: 50px auto;
+}
+
+.mat-form-field {
+  padding-top: 5px;
+  padding-left: 20px;
+}
+
+.mat-column-categoryIcon {
+  flex: 0 0 15%;
+}
+
+.mat-column-name {
+  flex: 0 0 15%;
+}
+
+.mat-column-routeName {
+  flex: 0 0 50%;
+}
+
+.mat-column-averageRate {
+  flex: 0 0 20%;
+}

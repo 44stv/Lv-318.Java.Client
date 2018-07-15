@@ -20,6 +20,7 @@ import {AdminGuardService} from './services/guard/admin-guard.service';
 import {ForbiddenComponent} from './components/main/errors/forbidden/forbidden.component';
 import {UpdateRoleComponent} from './components/admin/update-role/update-role.component';
 import {AddCategoryComponent} from './components/admin/add-category/add-category.component';
+import {UsersConfComponent} from './components/admin/users-conf/users-conf.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
           {path: '', component: AdminComponent},
           {path: 'update-role', component: UpdateRoleComponent},
           {path: 'add-category', component: AddCategoryComponent},
+          {path: 'all-users', component: UsersConfComponent}
         ]
       },
       {
