@@ -76,7 +76,6 @@ import { SlideshowModule } from 'ng-simple-slideshow';
 import { UserService } from './services/user.service';
 import { StopService } from './services/stop.service';
 import { AdminGuardService } from './services/guard/admin-guard.service';
-import { AuthGuardService } from './services/guard/auth-guard.service';
 import { ClientGuardService } from './services/guard/client-guard.service';
 import { DiagramService } from './services/diagram.service';
 import { GlobalSearchService } from './services/global-search.service';
@@ -341,7 +340,6 @@ export function getAuthServiceConfigs() {
     },
     AdminGuardService,
     ClientGuardService,
-    AuthGuardService,
     ExcategoryService,
     UserService,
     CustomAuthService,

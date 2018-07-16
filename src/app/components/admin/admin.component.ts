@@ -6,6 +6,7 @@ import {ExcategoryModel} from '../../models/excategory.model';
 import {MatDialog} from '@angular/material';
 import {UpdateRoleComponent} from './update-role/update-role.component';
 import {AddCategoryComponent} from './add-category/add-category.component';
+import {AddFeedbackCriteriaComponent} from './feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
 
 @Component({
   selector: 'app-admin',
@@ -39,6 +40,14 @@ export class AdminComponent implements OnInit {
     this.dialog.open(AddCategoryComponent, {
       width: '700px'
     });
+  }
+
+  addCriteria() {
+    {
+      this.dialog.open(AddFeedbackCriteriaComponent, {
+        width: '700px'
+      });
+    }
   }
 
 }

@@ -61,7 +61,7 @@
           </a>
         </mdc-list-item>
         <mdc-list-item>
-          <a [routerLink]="['/main/admin/feedback-criteria/add-feedback-criteria']">
+          <a (click) = "addCriteria()">
             <div class="title">
               <div class="text">
                 {{'Add fedback criteria' | translate}}
