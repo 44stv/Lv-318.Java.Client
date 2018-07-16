@@ -1,14 +1,14 @@
 <div class="addCategory">
-  <h3 mat-dialog-title>Select level of the category</h3>
+  <h3 mat-dialog-title>{{'Select level of the category' | translate}}</h3>
   <mat-form-field appearance="standard">
-    <mat-select *ngIf="levels" placeholder="Level" [(ngModel)]="catLevel">
+    <mat-select *ngIf="levels" placeholder="{{'Level of the category' | translate}}" [(ngModel)]="catLevel">
       <mat-option *ngFor="let level of levels" [value]="level">
         {{ level }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <div class="button stroked-button-right">
-    <button class="mat-stroked-button" (click)="close()">Back</button>
+    <button class="mat-stroked-button" (click)="close()">{{'Back' | translate}}</button>
   </div>
   <div *ngIf="catLevel === 'Global'">
     <br>
@@ -22,4 +22,4 @@
     <br>
     <app-add-nonextendable-category></app-add-nonextendable-category>
   </div>
-</div>>
+</div>

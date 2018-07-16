@@ -1,32 +1,32 @@
 <div class="add-category">
 
-  <h4 mat-dialog-title>Type in category name</h4>
+  <h4 mat-dialog-title>{{'Select top category' | translate}}</h4>
   <mat-form-field appearance="standard">
-    <mat-select *ngIf="topCategories" placeholder="Category" [(ngModel)]="selectedCategory"
+    <mat-select *ngIf="topCategories" placeholder="{{'Category' | translate}}" [(ngModel)]="selectedCategory"
                 (selectionChange)="getCities(selectedCategory)">
       <mat-option *ngFor="let top of topCategories" [value]="top">
         {{ top.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <h4 mat-dialog-title>Select city name</h4>
-  <mat-form-field appearance="standard">
-    <mat-select *ngIf="selectedCategory" placeholder="City" [(ngModel)]="selectedCity">
+  <h4 mat-dialog-title  *ngIf="selectedCategory">{{'Select city' | translate}}</h4>
+  <mat-form-field appearance="standard"  *ngIf="selectedCategory">
+    <mat-select placeholder="{{'City' | translate}}" [(ngModel)]="selectedCity">
       <mat-option *ngFor="let city of cities" [value]="city">
         {{ city.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Category name</mat-label>
-    <input matInput placeholder="City" [(ngModel)]="typeTransportName" id="name" name="name ">
+  <mat-form-field appearance="outline" *ngIf="selectedCity">
+    <mat-label>{{'Type in non-ex category name' | translate}}</mat-label>
+    <input matInput placeholder="{{'Type in non-ex category name' | translate}}" [(ngModel)]="typeTransportName" id="name" name="name ">
   </mat-form-field>
-  <div class="button">
+  <div class="button" *ngIf="selectedCity">
     <div class="stroked-button-left">
-      <button mat-stroked-button (click)="close()">Close</button>
+      <button mat-stroked-button (click)="close()">{{'Close' | translate}}</button>
     </div>
     <div class="stroked-button-right">
-      <button mat-stroked-button (click)="saveCategory()">Save</button>
+      <button mat-stroked-button (click)="saveCategory()">{{'Save' | translate}}</button>
     </div>
   </div>
 </div>

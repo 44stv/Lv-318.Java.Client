@@ -14,22 +14,22 @@
   <mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="firstname">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{firstName | translate}} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'firstName' | translate}} </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.firstName }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="lastname">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{lastName | translate}} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'lastName' | translate}} </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.lastName }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> e-mail </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> E-Mail </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="role">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{role | translate}} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'role' | translate}} </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.role }} </mat-cell>
     </ng-container>
 

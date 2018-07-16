@@ -1,19 +1,19 @@
 <div class="update-role">
 
-  <h4 mat-dialog-title>Type in user e-mail</h4>
+  <h4 mat-dialog-title>{{'Type in user e-mail' | translate}}</h4>
   <mat-form-field appearance="outline">
     <mat-label>E-mail</mat-label>
     <input matInput placeholder="email" [(ngModel)]="updateRoleModel.email" id="email" name="email ">
   </mat-form-field>
   <mat-form-field appearance="standard">
-    <mat-select placeholder="Role" [(ngModel)]="updateRoleModel.role" name="role">
+    <mat-select placeholder="{{'role' | translate}}" [(ngModel)]="updateRoleModel.role" name="role">
       <mat-option *ngFor="let role of roles" [value]="role">
         {{ role }}
       </mat-option>
     </mat-select>
   </mat-form-field>
  <div class="button">
-    <div class = "stroked-button-left" ><button mat-stroked-button (click)="close()">Close</button></div>
-   <div class = "stroked-button-right"><button mat-stroked-button (click) = "updateRole()" > Update </button></div>
+    <div class = "stroked-button-left" ><button mat-stroked-button (click)="close()">{{'Close' | translate}}</button></div>
+   <div class = "stroked-button-right"><button mat-stroked-button (click) = "updateRole()" >{{'Save' | translate}}</button></div>
 </div>
 </div>

@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {ExcategoryModel} from '../../models/excategory.model';
 import {MatDialog} from '@angular/material';
 import {UpdateRoleComponent} from './update-role/update-role.component';
+import {AddCategoryComponent} from './add-category/add-category.component';
 
 @Component({
   selector: 'app-admin',
@@ -30,7 +31,13 @@ export class AdminComponent implements OnInit {
 
   updateRole() {
     this.dialog.open(UpdateRoleComponent, {
-      width: '400px'
+      width: '600px'
+    });
+  }
+
+  addCategory() {
+    this.dialog.open(AddCategoryComponent, {
+      width: '700px'
     });
   }
 

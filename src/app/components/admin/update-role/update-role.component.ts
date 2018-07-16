@@ -45,6 +45,10 @@ export class UpdateRoleComponent implements OnInit {
     if (!(role == null && email == null)) {
       this.updateRoleModel.email = email;
       this.updateRoleModel.role = role;
+    } else {
+      this.snackBar.open('Please type in correct values', null, {
+        duration: 4000
+      });
     }
   }
 

@@ -64,5 +64,16 @@
   "Show all users": "Показати всіх користувачів",
   "Show all": "Показати всі",
   "Add fedback criteria": "Додати критерій відгуку",
-  "Add category": "Додати категорію"
+  "Add category": "Додати категорію",
+  "Select level of the category": "Виберіть рівень категорії",
+  "Type in category name": "Введіть ім'я категорії",
+  "Category name": "Ім'я категорії",
+  "Select top category": "Виберіть топ категорію",
+  "Select city": "Виберіть місто",
+  "City": "Місто",
+  "Level of the category": "Рівень категорії",
+  "Type in non-ex category name": "Введіть ім'я категорії (тип транспорту)",
+  "Category": "Категорія",
+  "Type in user e-mail": "Введіть e-mail користувача",
+  "Select role for": "Оберіть роль для"
 }

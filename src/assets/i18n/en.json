@@ -64,5 +64,16 @@
   "Show all users": "Show all usersб",
   "Show all": "Show all",
   "Add fedback criteria": "Add fedback criteria",
-  "Add category": "Add category"
+  "Add category": "Add category",
+  "Select level of the category": "Select level of the category",
+  "Type in category name": "Type in category name",
+  "Category name": "Category name",
+  "Select top category": "Select top category",
+  "Select city": "Select city",
+  "City": "City",
+  "Level of the category": "Category level",
+  "Type in non-ex category name": "Type in category name (type of transport)",
+  "Category": "Category",
+  "Type in user e-mail": "Type in user e-mail",
+  "Select role for": "Select role for"
 }
