@@ -7,5 +7,6 @@ export class MyComment {
   transitId:       number;
   parentCommentId: string;
   parent:          boolean;
+  level:           number;
   images:          string;
 }
