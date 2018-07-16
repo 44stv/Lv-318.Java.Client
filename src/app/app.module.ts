@@ -121,6 +121,7 @@ import {
   BusyHoursDiagramComponent
 } from './components/main/excategory/non-ex-category/transits/transit/busy-hours-diagram/busy-hours-diagram.component';
 import { InterceptorService } from './services/auth/interceptors/interceptor.service';
+import { RequestInterceptor } from './services/auth/interceptors/error-interceptor.service';
 import { ForbiddenComponent } from './components/main/errors/forbidden/forbidden.component';
 import { UpdateRoleComponent } from './components/admin/update-role/update-role.component';
 import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
@@ -329,6 +330,10 @@ export function getAuthServiceConfigs() {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
+      multi: true
+    }, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
       multi: true
     },
     AdminGuardService,
