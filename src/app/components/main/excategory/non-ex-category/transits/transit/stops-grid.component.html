@@ -34,7 +34,21 @@
   <app-my-rate [id]="idTransit" [userId]="1" *ngIf="this.authService.hasToken()"></app-my-rate>
   <app-busy-stops-diagram [id]="idTransit" [stopList]="selectedStops"></app-busy-stops-diagram>
   <app-busy-hours-diagram [id]="idTransit"></app-busy-hours-diagram>
-  <app-comments [id]="idTransit"></app-comments>
+
+  <mat-expansion-panel style="width: 70%; top: 50px; position: relative; margin: 20px auto 0">
+    <mat-expansion-panel-header style="background-color: #43659c">
+      <mat-panel-title>
+        <font color="white"> Open comments </font>
+      </mat-panel-title>
+      <mat-panel-description>
+
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      <app-comments [id]="idTransit"></app-comments>
+    </ng-template>
+  </mat-expansion-panel>
+
 </div>
 <app-back-to-previous-page-btn></app-back-to-previous-page-btn>
 <div>

@@ -26,20 +26,21 @@
         </mat-form-field>
       </div>
       <div class="picsAndReply">
-        <div style="width: 80px" class="col-1" (click)="choosePics.click()">
+        <div class="picsButton" (click)="choosePics.click()">
           <input #choosePics
                  style="display:none"
                  type="file"
                  (change)="openChooseDialog($event)"
                  multiple="multiple">
-          <mdc-icon style="width: 36px" [fontSize]="36">add_a_photo_alternate</mdc-icon>
+          <mat-icon style="font-size: 36px; padding-top: 7px;" [inline]="true">add_a_photo</mat-icon>
         </div>
-        <button class="replyButton"
-                mdc-button
-                [secondary]="false"
-                [raised]="true"
-                type="submit" (click)="addChildComment()"> Reply
-        </button>
+        <div class="replyButton">
+          <button mdc-button
+                  [secondary]="false"
+                  [raised]="true"
+                  type="submit" (click)="addChildComment()"> Reply
+          </button>
+        </div>
       </div>
     </div>
 
