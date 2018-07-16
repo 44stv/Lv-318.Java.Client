@@ -97,8 +97,12 @@ import { AddUserComponent } from './components/main/menu/add-user/add-user.compo
 import { StopsGridComponent } from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
 import { AddQuestionComponent } from './components/main/menu/feedback-criteria/add-question/add-question.component';
 import { AverageRateComponent } from './components/main/excategory/non-ex-category/transits/transit/average-rate/average-rate.component';
-import { OneFeedbackCriteriaComponent } from './components/main/menu/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
-import { AddFeedbackCriteriaComponent } from './components/main/menu/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
+import {
+  OneFeedbackCriteriaComponent
+} from './components/main/menu/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
+import {
+  AddFeedbackCriteriaComponent
+} from './components/main/menu/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
 import { GlobalSearchComponent } from './components/main/menu/global-search/global-search.component';
 import { TransitsComponent } from './components/main/excategory/non-ex-category/transits/transits.component';
 import { MapsComponent } from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
@@ -144,6 +148,7 @@ import {
 import { UpdatePasswordComponent } from './components/main/menu/user-profile/update-password/update-password.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { NewsComponent, ReadNewsComponent } from './components/main/news/news.component';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -263,6 +268,7 @@ export function getAuthServiceConfigs() {
     NgxMaterialTimepickerModule.forRoot(),
     MatButtonToggleModule,
     StarRatingModule.forRoot(),
+    NgxGalleryModule,
     MomentModule,
     MatProgressBarModule,
     MatAutocompleteModule,
