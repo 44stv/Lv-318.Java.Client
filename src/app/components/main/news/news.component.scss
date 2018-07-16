@@ -1,0 +1,170 @@
+.news-wrapper{
+display: flex;
+}
+.news-list{
+display: inline-block;
+position: relative;
+top: 0;
+left: 66%;
+  width: 20%;
+  height: 500px;
+}
+.news{
+display: flex;
+width: 300px;
+height: 100px;
+box-shadow: 0px 0px 5px 1px rgba(181,181,181,1);
+  border-radius: 7px;
+  margin-top: 10px;
+}
+.picture{
+margin: 5px;
+position: relative;
+top: 0;
+left: 0;
+width: 100px;
+height: 100px;
+}
+.text{
+position: relative;
+top: 0;
+left: 0;
+width: 190px;
+height: 100px;
+}
+.title{
+margin-left: 5px;
+margin-top: 10px;
+position: relative;
+top: 0;
+width: 180px;
+height: 20px;
+font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: black;
+  font-size: 14px;
+}
+.content{
+margin-left: 5px;
+    position: relative;
+    top: 0px;
+    font-family: Roboto, sans-serif;
+      font-weight: 400;
+      color: gery;
+      font-size: 10px;
+ height: 40px;
+}
+.news-button{
+height: 20px;
+   margin-left: 5px;
+   position: relative;
+   top: 0px;
+   font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: blue;
+   font-size: 12px;
+}
+
+.news-carousel{
+position: relative;
+top: 0;
+left: -15%;
+height: 400px;
+}
+
+.buttons{
+width: 300px;
+text-align: center;
+font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: black;
+  font-size: 12px;
+
+}
+
+button{
+     font-size: 12px;
+     border: darkgrey solid 1px;
+     border-radius: 4px;
+     margin: 8px 2px;
+     line-height: 1.5;
+}
+.news-image{
+  position: relative;
+
+}
+.news-text{
+    position: absolute;
+    top: 75%;
+    left: 10%;
+    font-family: Roboto, sans-serif;
+      font-weight: 500;
+      color: white;
+       font-size: 20px;
+}
+.right-button{
+ position: absolute;
+    top: 45%;
+    left: 10%;
+}
+.left-button{
+position: absolute;
+    top: 45%;
+    right: 10%;
+}
+
+
+
+
+@mixin white-gradient {
+	background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+}
+
+$animationSpeed: 40s;
+
+@keyframes scroll {
+	0% { transform: translateX(0); }
+	100% { transform: translateX(calc(-250px * 7))}
+}
+
+.slider {
+	background: white;
+	box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
+	height: 100px;
+	margin: auto;
+	overflow:hidden;
+	position: relative;
+	width: 960px;
+
+	&::before,
+	&::after {
+		@include white-gradient;
+		content: "";
+		height: 100px;
+		position: absolute;
+		width: 200px;
+		z-index: 2;
+	}
+
+	&::after {
+		right: 0;
+		top: 0;
+		transform: rotateZ(180deg);
+	}
+
+	&::before {
+		left: 0;
+		top: 0;
+	}
+
+	.slide-track {
+		animation: scroll $animationSpeed linear infinite;
+		display: flex;
+		width: calc(250px * 14);
+	}
+
+	.slide {
+		height: 100px;
+		width: 250px;
+	}
+}
