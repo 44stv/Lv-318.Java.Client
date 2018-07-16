@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Category} from '../../../../models/category.model';
 import {ExcategoryService} from '../../../../services/excategory.service';
@@ -7,16 +7,18 @@ import {ExcategoryModel} from '../../../../models/excategory.model';
 import {Location} from '@angular/common';
 
 @Component({
-  selector: 'app-add-unextendable-category',
-  templateUrl: './add-unextendable-category.component.html',
-  styleUrls: ['./add-unextendable-category.component.css']
+  selector: 'app-add-nonextendable-category',
+  templateUrl: './add-nonextendable-category.component.html',
+  styleUrls: ['./add-nonextendable-category.component.css']
 })
-export class AddUnextendableCategoryComponent implements OnInit {
+export class AddNonextendableCategoryComponent implements OnInit {
 
   categoryModel = new ExcategoryModel();
   topCategories: Category[] = [];
   selectedCategory: ExcategoryModel;
-  cityName: string;
+  selectedCity: ExcategoryModel;
+  cities: ExcategoryModel[];
+  typeTransportName: string;
 
   constructor(private location: Location,
               private excatServ: ExcategoryService,
@@ -29,11 +31,10 @@ export class AddUnextendableCategoryComponent implements OnInit {
     this.excatServ.getTopCategories().subscribe(
       result => this.topCategories = result
     );
-    console.log(this.categoryModel);
   }
 
   saveCategory(): void {
-    this.add(this.cityName, this.selectedCategory);
+    this.add(this.typeTransportName, this.selectedCity, this.selectedCategory);
     this.excatServ.save(this.categoryModel).subscribe(() => {
       this.snackBar.open('City added sucsessfully.', null, {
         duration: 2000
@@ -47,10 +48,17 @@ export class AddUnextendableCategoryComponent implements OnInit {
     });
   }
 
-  add(city: string, top: ExcategoryModel) {
-    if (!(top == null && city == null)) {
-      this.categoryModel.name = city;
-      this.categoryModel.nextLevelCategory = top;
+  getCities(selectedCategory: ExcategoryModel) {
+    this.excatServ.getCategoriesByNextLevel(selectedCategory.name).subscribe(
+      result => this.cities = result
+  );
+  }
+
+  add(type: string, city: ExcategoryModel, top: ExcategoryModel) {
+    if (!(top == null && city == null && type == null)) {
+      this.categoryModel.name = type;
+      this.selectedCity.nextLevelCategory = top;
+      this.categoryModel.nextLevelCategory = this.selectedCity;
     }
   }
 
