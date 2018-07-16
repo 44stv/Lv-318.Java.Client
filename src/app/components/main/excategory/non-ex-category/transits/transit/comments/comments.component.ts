@@ -24,7 +24,6 @@ export class CommentsComponent implements OnInit {
   sortMode = 'ASC';
 
   selectedFiles: FileList;
-  progress: { percentage: number } = {percentage: 0};
 
   comments: MyComment[];
 
