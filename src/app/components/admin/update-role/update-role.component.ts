@@ -5,7 +5,6 @@ import {getAllRoles} from '../../../services/auth/roles';
 import {UserService} from '../../../services/user.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material';
-import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-update-role',
@@ -16,7 +15,6 @@ export class UpdateRoleComponent implements OnInit {
 
   updateRoleModel = new UpdateRoleModel();
   roles: string[];
-  isReadOnly = true;
 
   constructor(private location: Location,
               private userService: UserService,
@@ -26,16 +24,15 @@ export class UpdateRoleComponent implements OnInit {
 
   ngOnInit() {
     this.roles = getAllRoles();
-    console.log(this.roles);
   }
 
   updateRole(): void {
     this.userService.updateRole(this.updateRoleModel)
       .subscribe(() => {
-        this.snackBar.open('User updated successfully', null, {
-          duration: 4000
-        });
-      }, (error) => {
+          this.snackBar.open('User updated successfully', null, {
+            duration: 4000
+          });
+        }, (error) => {
           this.snackBar.open(error.error.message, null, {
             duration: 5000
           });

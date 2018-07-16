@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
@@ -31,6 +31,7 @@ export class CustomAuthService {
   }
 
   public setToken(token: TokenModel): void {
+    console.log('inside setToken');
     localStorage.setItem('accesToken', token.accessToken);
   }
 

@@ -144,6 +144,7 @@ import {
 import { UpdatePasswordComponent } from './components/main/menu/user-profile/update-password/update-password.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { UsersConfComponent } from './components/admin/users-conf/users-conf.component';
+import { UpdateFormComponent } from './components/admin/update-role/update-form/update-form.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -220,7 +221,8 @@ export function getAuthServiceConfigs() {
     UpdateRoleComponent,
     AddCategoryComponent,
     AddTopCategoryComponent,
-    UsersConfComponent
+    UsersConfComponent,
+    UpdateFormComponent
   ],
   exports: [
     MatAutocompleteModule,
@@ -362,7 +364,10 @@ export function getAuthServiceConfigs() {
     ForgetPasswordComponent,
     ChooseTransitComponent,
     FriendInvitationComponent,
-    UpdatePasswordComponent]
+    UpdatePasswordComponent,
+    UsersConfComponent,
+    UpdateFormComponent
+  ]
 
 })
 export class AppModule {

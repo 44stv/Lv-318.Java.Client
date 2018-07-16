@@ -29,7 +29,9 @@ export class AdminComponent implements OnInit {
   }
 
   updateRole() {
-    this.dialog.open(UpdateRoleComponent);
+    this.dialog.open(UpdateRoleComponent, {
+      width: '400px'
+    });
   }
 
 }

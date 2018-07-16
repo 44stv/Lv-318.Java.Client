@@ -31,14 +31,11 @@
     <ng-container matColumnDef="role">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{role | translate}} </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.role }} </mat-cell>
-      <button mat-icon-button color="primary" focusable="false" (click)="user.startEdit()">
-        <i class="fa fa-pencil mat-icon"></i>
-      </button>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let user;"
-             [routerLink]="['/main/admin/all-users']"></mat-row>
+             (click) = "openModal(user)"></mat-row>
   </mat-table>
 
 </div>
