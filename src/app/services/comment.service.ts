@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpEvent, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MyComment } from '../models/comment.model';
 
@@ -28,7 +28,7 @@ export class CommentService {
   }
 
   addComment(params: HttpParams, newComment: MyComment): Observable<MyComment> {
-    return this.http.post<MyComment>(this.serviceUrl, newComment, { params: params });
+    return this.http.post<MyComment>(this.serviceUrl, newComment, {params: params});
   }
 
   addImagesToComment(id: number, imageURLs: string): Observable<MyComment> {

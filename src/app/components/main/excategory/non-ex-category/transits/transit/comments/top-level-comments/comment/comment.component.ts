@@ -1,13 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MyComment } from '../../../../../../../../../models/comment.model';
 import { CommentService } from '../../../../../../../../../services/comment.service';
-import { HttpEventType, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { UserInfo } from '../../../../../../../../../models/userInfo.model';
 import { UserService } from '../../../../../../../../../services/user.service';
 import { MatSnackBar } from '@angular/material';
-import {CustomAuthService} from '../../../../../../../../../services/auth/custom-auth.service';
+import { CustomAuthService } from '../../../../../../../../../services/auth/custom-auth.service';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
-import { INgxGalleryImage } from 'ngx-gallery/ngx-gallery-image.model';
 
 @Component({
   selector: 'app-comment',
