@@ -1,0 +1,59 @@
+<div class="news-wrapper" *ngIf="data">
+  <div class="news-list">
+    <div class="news" *ngFor="let news of data.content">
+      <div class="picture">
+        <img src="{{news.imageUrl}}" height="80" width="100">
+      </div>
+      <div class="text">
+        <div class="title">{{news.title}}</div>
+        <div class="content">{{news.content}}</div>
+        <div class="news-button"><button mat-button (click)="openNews()">More</button></div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button mat-button (click)="previousNews()">PREVIOUS</button>
+      {{page + 1}} / {{data.totalPages}}
+      <button mat-button (click)="nextNews()">NEXT</button>
+    </div>
+  </div>
+  <div *ngIf="mainNews">
+  <div class="news-carousel">
+    <div class="news-image">
+      <img src="{{mainNews[index].imageUrl}}" width="700px" height="400px">
+      <div class="news-text">{{mainNews[index].title}}</div>
+    </div>
+    <button class="right-button" mat-button (click)="right()">RIGHT</button>
+    <button class="left-button" mat-button (click)="left()">LEFT</button>
+  </div>
+  </div>
+  <!---->
+
+</div>
+<div class="slider">
+  <div class="slide-track">
+    <div class="slide">
+      <a>last comment or feedback</a></div>
+    <div class="slide">
+      <a>last comment or feedback</a></div>
+    <div class="slide">
+      <a>last comment or feedback</a></div>
+    <div class="slide">
+      <a>last comment or feedback</a></div>
+    <div class="slide">
+      <a>last comment or feedback</a></div>
+    <div class="slide">
+      <a>last comment or feedback</a></div>
+    <div class="slide">
+      <a>last comment or feedback</a></div>
+    <div class="slide">
+      <a>last comment or feedback</a></div>
+    <div class="slide">
+      <a>last comment or feedback</a></div>
+    <div class="slide">
+      <a>last comment or feedback</a></div>
+  </div>
+</div>
+
+
+

@@ -10,6 +10,7 @@ import { MyComment } from '../models/comment.model';
 export class CommentService {
 
   private serviceUrl = `${environment.serverURL}/comment`;
+  private imageUrl = `${environment.imageServerURL}/image`;
 
   constructor(private http: HttpClient) {
   }
@@ -27,6 +28,19 @@ export class CommentService {
   }
 
   addComment(params: HttpParams, newComment: MyComment): Observable<MyComment> {
-    return this.http.post<MyComment>(this.serviceUrl, newComment, { params: params });
+    return this.http.post<MyComment>(this.serviceUrl, newComment, {params: params});
   }
+
+  addImagesToComment(id: number, imageURLs: string): Observable<MyComment> {
+    return this.http.put<MyComment>(`${this.serviceUrl}?commentId=${id}`, imageURLs);
+  }
+
+  uploadFile(file: File, subDir: string) {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    const fullURL = `${this.imageUrl}?${subDir}`;
+
+    return this.http.post(fullURL, formData, {responseType: 'text'});
+  }
+
 }

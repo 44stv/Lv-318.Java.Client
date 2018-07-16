@@ -4,15 +4,17 @@
     <div class="row userAndPostedTime">
       <span style="font-size: large"> {{ userInfo.firstName }} {{ userInfo.lastName }} </span>
       <span style="font-size: small">Posted {{ postCommentDate }}</span>
-      <div *ngIf="modified">
-        Changed {{ modifiedCommentDate }}
-      </div>
+      <span style="margin-left: 3px" *ngIf="modified" title="{{ modifiedCommentDate }}">
+        <mdc-icon [fontSize]="18">edit</mdc-icon>
+      </span>
     </div>
-    <span class="commentText"> {{ comment.commentText }} </span>
+    <div class="commentText"> {{ comment.commentText }}</div>
 
-    <a class="row reply" (click)="toggleReply()">
-      Answer
-    </a>
+    <ngx-gallery *ngIf="comment.images !== null" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+
+    <div class="reply" (click)="toggleReply()">
+      <mdc-icon>reply</mdc-icon>
+    </div>
     <div id="{{ comment.id }}" class="replyElement">
       <div class="replyArea">
         <mat-form-field>
@@ -23,16 +25,25 @@
                     [required]="true"></textarea>
         </mat-form-field>
       </div>
-      <button class="replyButton"
-              mdc-button
-              [secondary]="true"
-              [raised]="true"
-              type="submit" (click)="addChildComment()"> Reply
-      </button>
-
+      <div class="picsAndReply">
+        <div style="width: 80px" class="col-1" (click)="choosePics.click()">
+          <input #choosePics
+                 style="display:none"
+                 type="file"
+                 (change)="openChooseDialog($event)"
+                 multiple="multiple">
+          <mdc-icon style="width: 36px" [fontSize]="36">add_a_photo_alternate</mdc-icon>
+        </div>
+        <button class="replyButton"
+                mdc-button
+                [secondary]="false"
+                [raised]="true"
+                type="submit" (click)="addChildComment()"> Reply
+        </button>
+      </div>
     </div>
 
-    <div class="underline"></div>
+    <mat-divider style="margin-right: 10px"></mat-divider>
 
   </div>
 
