@@ -9,11 +9,16 @@
     </mat-select>
   </mat-form-field>
   <div class="button stroked-button-right">
-    <button class="mat-stroked-button" (click)="close()">Close</button>
+    <button class="mat-stroked-button" (click)="close()">Back</button>
   </div>
 
   <div *ngIf="catLevel === 'Global'">
     <br>
     <app-add-top-category></app-add-top-category>
+  </div>
+
+  <div *ngIf="catLevel === 'City'">
+    <br>
+    <app-add-city></app-add-city>
   </div>
 </div>>

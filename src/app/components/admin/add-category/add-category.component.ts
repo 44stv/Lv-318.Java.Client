@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class AddCategoryComponent implements OnInit {
 
-  catLevel: any;
+  catLevel: string = '';
   levels: string[] = getAllCategoryLevel();
 
   constructor(private exCategotyService: ExcategoryService,
