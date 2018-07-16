@@ -1,0 +1,25 @@
+.add-category {
+  font-size: 14px;
+  width: 100%;
+  /*margin: 150px 400px;*/
+}
+
+.mat-form-field {
+  width: 60%;
+
+}
+
+.questionadd .mat-list {
+  width: 60%;
+}
+
+.stroked-button-left {
+  padding-top: 2%;
+  display: inline-block;
+}
+
+.stroked-button-right {
+  margin: 2% 40% 0 0;
+  float: right;
+  display: inline-block;
+}
