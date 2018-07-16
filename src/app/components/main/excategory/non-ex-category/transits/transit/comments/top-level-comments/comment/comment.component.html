@@ -3,7 +3,7 @@
   <div class="commentInformation">
     <div class="row userAndPostedTime">
       <span style="font-size: large"> {{ userInfo.firstName }} {{ userInfo.lastName }} </span>
-      <span style="font-size: small">Posted {{ postCommentDate }}</span>
+      <span style="font-size: small">{{ postCommentDate }}</span>
       <span style="margin-left: 3px" *ngIf="modified" title="{{ modifiedCommentDate }}">
         <mdc-icon [fontSize]="18">edit</mdc-icon>
       </span>
