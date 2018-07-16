@@ -23,7 +23,7 @@ export class AdminGuardService {
 
   checkRights(): boolean {
     console.log('inside AdminGuard');
-    if ((this.authService.getRole() === Role.Admin) && this.authService.isExpired()) {
+    if ((this.authService.getRole() === Role.Admin) && !this.authService.isExpired()) {
       return true;
     } else {
       this.dialog.open(ForbiddenComponent);

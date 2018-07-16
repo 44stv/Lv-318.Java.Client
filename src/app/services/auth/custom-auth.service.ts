@@ -15,9 +15,9 @@ const helper = new JwtHelperService();
 @Injectable()
 export class CustomAuthService {
 
-  private accessToken = localStorage.getItem('accesToken');
-  private decodedToken = this.decodeToken();
-  private serviceUrl = environment.serverURL;
+  accessToken = window.localStorage.getItem('accesToken');
+  decodedToken = this.decodeToken();
+  serviceUrl = environment.serverURL;
 
   constructor(public http: HttpClient) {
   }
@@ -33,10 +33,13 @@ export class CustomAuthService {
   public setToken(token: TokenModel): void {
     console.log('inside setToken');
     localStorage.setItem('accesToken', token.accessToken);
+    this.accessToken = token.accessToken;
+    this.decodedToken = this.decodeToken();
+
   }
 
   public getToken(): string {
-    return localStorage.getItem('accesToken');
+    return this.accessToken;
   }
 
   public logOut(): void {

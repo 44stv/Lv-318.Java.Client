@@ -75,5 +75,6 @@
   "Type in non-ex category name": "Введіть ім'я категорії (тип транспорту)",
   "Category": "Категорія",
   "Type in user e-mail": "Введіть e-mail користувача",
-  "Select role for": "Оберіть роль для"
+  "Select role for": "Оберіть роль для",
+  "MyProfile": "Мій кабінет"
 }
