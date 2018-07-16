@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div>
+<div class = "userTransit">
   <mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="categoryIcon">
@@ -24,18 +24,6 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Route </mat-header-cell>
       <mat-cell *matCellDef="let transit"> {{ transit.routeName }} </mat-cell>
     </ng-container>
-
-    <!--<ng-container matColumnDef="averageRate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Average rate </mat-header-cell>
-      <mat-cell *matCellDef="let transit">
-        <star-rating
-          [starType]="'svg'"
-          [rating]="averageRateArray.get(transit.id) / 2"
-          [showHalfStars]="true"
-          [readOnly]="true"
-        ></star-rating>
-      </mat-cell>
-    </ng-container>-->
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let transit;"

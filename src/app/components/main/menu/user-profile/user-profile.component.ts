@@ -61,25 +61,8 @@ export class UserProfileComponent implements OnInit {
     this.transitService.getAllUserTransits(1)
       .subscribe(transits => {
         this.dataSource.data = transits;
-        /*this.getAllRate(this.dataSource.data);*/
       });
 
   }
-
-  getAllRate(array: Transit[]) {
-    for (const transit of array) {
-      this.getTransitAverageRate(transit.id);
-    }
-  }
-
-  getTransitAverageRate(transitId: number): number {
-    let rate;
-    this.transitService.getTransitRateById(transitId).subscribe(res => {
-      rate = Number((<number>res).toPrecision(3));
-      this.averageRateArray.set(transitId, rate);
-    });
-    return rate;
-  }
-
 
 }
