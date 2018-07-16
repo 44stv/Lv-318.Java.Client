@@ -43,6 +43,7 @@ export class CommentComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('component updated');
     this.modified = this.comment.modifiedDate != null;
     this.postCommentDate = this.calculateTimeDiffBetweenNowAndDate(new Date(this.comment.postDate));
     this.modifiedCommentDate = new Date(this.comment.modifiedDate).toString();
@@ -61,6 +62,7 @@ export class CommentComponent implements OnInit {
   getChildrenComments() {
     this.commentService.getChildrenComments(this.comment.id)
       .subscribe(childComments => {
+        console.log('getChildrenComments');
         this.childComments = childComments;
       });
   }
@@ -76,7 +78,6 @@ export class CommentComponent implements OnInit {
         params = params.set('parentId', this.comment.id.toString());
         this.commentService.addComment(params, replyComment)
           .subscribe(comment => {
-
             if (this.selectedFiles !== undefined) {
               this.uploadPics(comment);
             }
@@ -183,7 +184,10 @@ export class CommentComponent implements OnInit {
         uploadedImageURLs.push(res);
 
         if (uploadedImageURLs.length === this.selectedFiles.length) {
-          this.commentService.addImagesToComment(comment.id, JSON.stringify(uploadedImageURLs)).subscribe(res1 => console.log(res1));
+          this.commentService.addImagesToComment(comment.id, JSON.stringify(uploadedImageURLs)).subscribe(res1 => {
+            console.log(res1);
+            this.getChildrenComments();
+          });
         }
       });
     }
