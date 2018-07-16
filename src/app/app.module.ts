@@ -97,8 +97,12 @@ import { AddUserComponent } from './components/main/menu/add-user/add-user.compo
 import { StopsGridComponent } from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
 import { AddQuestionComponent } from './components/main/menu/feedback-criteria/add-question/add-question.component';
 import { AverageRateComponent } from './components/main/excategory/non-ex-category/transits/transit/average-rate/average-rate.component';
-import { OneFeedbackCriteriaComponent } from './components/main/menu/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
-import { AddFeedbackCriteriaComponent } from './components/main/menu/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
+import {
+  OneFeedbackCriteriaComponent
+} from './components/main/menu/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
+import {
+  AddFeedbackCriteriaComponent
+} from './components/main/menu/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
 import { GlobalSearchComponent } from './components/main/menu/global-search/global-search.component';
 import { TransitsComponent } from './components/main/excategory/non-ex-category/transits/transits.component';
 import { MapsComponent } from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
