@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommentService } from '../../../../../../../services/comment.service';
 import { MyComment } from '../../../../../../../models/comment.model';
 import 'rxjs/add/observable/of';
-import { HttpEventType, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import { CustomAuthService } from '../../../../../../../services/auth/custom-auth.service';
 
@@ -58,6 +58,7 @@ export class CommentsComponent implements OnInit {
             if (this.selectedFiles !== undefined) {
               this.uploadPics(comment);
             }
+            this.getTopLevelComments();
           });
         this.addCommentText = undefined;
         this.openSnackBar(this.successMessage);
