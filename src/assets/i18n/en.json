@@ -59,5 +59,10 @@
   "Categories": "Categories",
   "firstName": "First Name",
   "lastName": "Last Name",
-  "role": "Role"
+  "role": "Role",
+  "Edit user role": "Update user role",
+  "Show all users": "Show all usersб",
+  "Show all": "Show all",
+  "Add fedback criteria": "Add fedback criteria",
+  "Add category": "Add category"
 }

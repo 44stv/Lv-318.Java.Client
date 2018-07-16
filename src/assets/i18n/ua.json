@@ -59,5 +59,10 @@
   "Categories": "Категорії",
   "firstName": "Ім'я",
   "lastName": "Прізвище",
-  "role": "Роль"
+  "role": "Роль",
+  "Edit user role": "Редагувати роль користувача",
+  "Show all users": "Показати всіх користувачів",
+  "Show all": "Показати всі",
+  "Add fedback criteria": "Додати критерій відгуку",
+  "Add category": "Додати категорію"
 }
