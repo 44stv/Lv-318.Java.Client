@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { UpdateRoleModel } from '../../../models/update-role.model';
-import { getAllRoles } from '../../../services/auth/roles';
-import { UserService } from '../../../services/user.service';
+import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
+import {UpdateRoleModel} from '../../../models/update-role.model';
+import {getAllRoles} from '../../../services/auth/roles';
+import {UserService} from '../../../services/user.service';
+import {MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-update-role',
@@ -15,7 +18,10 @@ export class UpdateRoleComponent implements OnInit {
   roles: string[];
   isReadOnly = true;
 
-  constructor(private location: Location, private userService: UserService) {
+  constructor(private location: Location,
+              private userService: UserService,
+              private  matDialogRef: MatDialogRef<UpdateRoleComponent>,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -25,13 +31,18 @@ export class UpdateRoleComponent implements OnInit {
 
   updateRole(): void {
     this.userService.updateRole(this.updateRoleModel)
-      .subscribe(() => this.gotBack());
+      .subscribe(() => {
+        this.snackBar.open('User updated successfully', null, {
+          duration: 4000
+        });
+      }, (error) => {
+          this.snackBar.open(error.error.message, null, {
+            duration: 5000
+          });
+        }
+      );
   }
 
-
-  gotBack(): void {
-    this.location.back();
-  }
 
   add(role: string, email: string) {
     if (!(role == null && email == null)) {
@@ -41,6 +52,6 @@ export class UpdateRoleComponent implements OnInit {
   }
 
   close() {
-    this.gotBack();
+    this.matDialogRef.close();
   }
 }

@@ -31,7 +31,7 @@
     <ng-container matColumnDef="role">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{role | translate}} </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.role }} </mat-cell>
-      <button *ngIf="!user.editing" mat-icon-button color="primary" focusable="false" (click)="user.startEdit()">
+      <button mat-icon-button color="primary" focusable="false" (click)="user.startEdit()">
         <i class="fa fa-pencil mat-icon"></i>
       </button>
     </ng-container>

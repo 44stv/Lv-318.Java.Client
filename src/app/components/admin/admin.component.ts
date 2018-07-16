@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ExcategoryService} from '../../services/excategory.service';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {ExcategoryModel} from '../../models/excategory.model';
+import {MatDialog} from '@angular/material';
+import {UpdateRoleComponent} from './update-role/update-role.component';
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +16,8 @@ export class AdminComponent implements OnInit {
   public cities: Observable<ExcategoryModel[]>;
   public serverURL = environment.serverURL + '/category/img?link=';
 
-  constructor(public service: ExcategoryService) {
+  constructor(public service: ExcategoryService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -23,6 +26,10 @@ export class AdminComponent implements OnInit {
 
   getCities(nextLevel: String) {
     this.cities = this.service.getCategoriesByNextLevel(nextLevel);
+  }
+
+  updateRole() {
+    this.dialog.open(UpdateRoleComponent);
   }
 
 }

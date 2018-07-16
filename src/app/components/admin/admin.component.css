@@ -1,14 +1,10 @@
-.container{
-  margin-bottom: auto;
-  width: 800px
-}
-
 .mat-elevation-z8 {
   height: inherit;
 }
 .menu-wrapper{
   margin-top: 10px;
   margin-bottom: 10px;
+  width: 400px;
 }
 
 .top-categories {

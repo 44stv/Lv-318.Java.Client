@@ -71,7 +71,7 @@ export class UserLoginComponent implements OnInit {
           this.snackBar.open('User loged successfully', null, {
             duration: 4000
           });
-          this.router.navigate(['main']);
+          this.router.navigate(['/main']);
         }, (error) => {
           if (error instanceof HttpErrorResponse) {
             if (error.error.description === 'User is disabled') {
