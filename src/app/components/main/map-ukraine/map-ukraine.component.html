@@ -1,12 +1,12 @@
 <div class="map-ukraine">
-<ngui-map 
-  zoom="5" 
-  center="49.4871968, 31.2718321" 
+<ngui-map
+  zoom="5"
+  center="49.4871968, 31.2718321"
   (mapReady$)="onMapReady($event)"
   (mapClick)="onMapClick($event)"
   (idle)="onIdle($event)"
   mapTypeId="roadmap">
-    <marker *ngFor="let pos of positions" 
+    <marker *ngFor="let pos of positions"
       [position]="pos"
       (initialized$)="onMarkerInit($event)"></marker>
       loadMapShapes($event);
