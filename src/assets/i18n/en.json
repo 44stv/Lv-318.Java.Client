@@ -57,5 +57,8 @@
   "ErrorText3": "main page",
   "CategoryConfiguration": "Category configuration",
   "Categories": "Categories",
-  "reload": "Reload chart"
+  "reload": "Reload chart",
+  "MyProfile": "MyProfile",
+  "Invite friend": "Invite friend",
+  "Change password": "Change password"
 }

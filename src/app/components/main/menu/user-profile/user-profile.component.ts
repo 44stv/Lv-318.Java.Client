@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
   categoryId: number;
   topName: string;
   cityName: string;
-  averageRateArray: Map<number, number> = new Map<number, number>();
+
 
   categoryIconURL = `${environment.serverURL}/category/img?link=`;
 
@@ -32,7 +32,7 @@ export class UserProfileComponent implements OnInit {
 
   dataSource: MatTableDataSource<Transit> = new MatTableDataSource();
 
-
+  userId = this.authService.getUserId();
 
 
   constructor(private transitService: TransitService,
@@ -58,7 +58,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getAllUserTransits(): void {
-    this.transitService.getAllUserTransits(1)
+    this.transitService.getAllUserTransits(this.userId)
       .subscribe(transits => {
         this.dataSource.data = transits;
       });

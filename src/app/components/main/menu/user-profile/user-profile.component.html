@@ -1,9 +1,7 @@
 <div class="userProfile">
   <div class="NewUser">
-      <button mdc-button class="button" [secondary]="true" type="submit" (click)="openModal()">Invite friend</button>
-  </div>
-  <div class="NewUser">
-    <button mdc-button class="button" [secondary]="true" type="submit" (click)="openUpdatePassModal()">Change password</button>
+    <button mdc-button class="button" [secondary]="true" type="submit" (click)="openModal()">{{'Invite friend' | translate }}</button>
+    <button mdc-button class="button" [secondary]="true" type="submit" (click)="openUpdatePassModal()">{{ 'Change password' | translate}}</button>
   </div>
 </div>
 
@@ -31,3 +29,4 @@
              transit.id, transit.name, transit.categoryIconURL]"></mat-row>
   </mat-table>
 </div>
+

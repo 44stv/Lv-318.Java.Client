@@ -57,5 +57,8 @@
   "ErrorText3": "головну сторінку",
   "CategoryConfiguration": "Конфігурація категорій",
   "Categories": "Категорії",
-  "reload": "Оновити графік"
+  "reload": "Оновити графік",
+  "MyProfile": "Мій кабінет",
+  "Invite friend": "Запросити друга",
+  "Change password": "Змінити пароль"
 }
