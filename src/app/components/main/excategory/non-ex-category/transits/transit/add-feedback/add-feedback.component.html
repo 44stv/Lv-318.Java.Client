@@ -34,10 +34,12 @@
 
       </mat-card-content>
     </mat-tab>
-    <mat-tab label="{{ 'Quantity' | translate}}" style="height: 500px">
+    <mat-tab label="{{ 'Quantity' | translate}}">
       <mat-card-content>
         <mat-list>
           <p *ngFor="let questioner of qualitySurvey">
+
+
             <mat-list *ngIf="questioner.type == 'SIMPLE'">
           <p *ngFor="let question of questioner.questions">
             <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
@@ -49,66 +51,85 @@
               </mat-radio-button>
             </mat-radio-group>
           </p>
-
         </mat-list>
-        <mat-list *ngIf="questioner.type == 'QUALITY'">
+
+        <mat-list *ngIf="questioner.type == 'QUANTITY_LOAD'">
           <p *ngFor="let question of questioner.questions">
             <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
-            <mat-list *ngIf="question.type == 'QUANTITY_LOAD'">
+            <mat-list>
               <mat-radio-group class="tile" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
                 <mat-radio-button class="tile-content" [value]="'SIT'">
                   <img class="capacity-image" src="../../../../../../../../assets/img/sit.ico">
           <p class="capacity-legend">{{ 'Sit' | translate }}</p>
           </mat-radio-button>
-
           <mat-radio-button class="tile-content" [value]="'STAY'">
             <img class="capacity-image" src="../../../../../../../../assets/img/stay.ico">
             <p class="capacity-legend">{{ 'Stay' | translate }}</p>
           </mat-radio-button>
-
           <mat-radio-button class="tile-content" [value]="'CROWDING'">
             <img class="capacity-image" src="../../../../../../../../assets/img/CrowdingNew.ico">
             <p class="capacity-legend">{{ 'Crowding' | translate }}</p>
           </mat-radio-button>
-
           <mat-radio-button class="tile-content" [value]="'MISS'">
             <img class="capacity-image" src="../../../../../../../../assets/img/miss.ico">
             <p class="capacity-legend"> {{ 'Miss' | translate }}</p>
           </mat-radio-button>
           </mat-radio-group>
         </mat-list>
-
-        <mat-list *ngIf="question.type == 'CONFLICT'">
-          <mat-radio-group class="tile" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
-            <mat-radio-button class="tile-content" [value]="'WITHOUT_CHANGE'">
-              <img class="capacity-image" src="../../../../../../../../assets/img/cash.ico">
-              <p class="capacity-legend">{{'Did not get change' | translate}}</p>
-            </mat-radio-button>
-            <mat-radio-button class="tile-content" [value]="'UNPAID_TRAVEL'">
-              <img class="capacity-image" src="../../../../../../../../assets/img/rabbit.ico">
-              <p class="capacity-legend">{{'Unpaid travel' | translate}}</p>
-            </mat-radio-button>
-            <mat-radio-button class="tile-content" [value]="'THEFT'">
-              <img class="capacity-image" src="../../../../../../../../assets/img/criminal.ico">
-              <p class="capacity-legend">{{'Theft' | translate}}</p>
-            </mat-radio-button>
-            <mat-radio-button class="tile-content" [value]="'GRANDMA_QUARREL'">
-              <img class="capacity-image" src="../../../../../../../../assets/img/grandma.ico">
-              <p class="capacity-legend">{{'Quarrel with elderly' | translate}}</p>
-            </mat-radio-button>
-            <mat-radio-button class="tile-content" [value]="'WINDOW_QUARREL'">
-              <img class="capacity-image" src="../../../../../../../../assets/img/window.ico">
-              <p class="capacity-legend">{{'Quarrel through window' | translate}}</p>
-            </mat-radio-button>
-            <mat-radio-button class="tile-content" [value]="'DRUNK'">
-              <img class="capacity-image" src="../../../../../../../../assets/img/drunk.ico">
-              <p class="capacity-legend"> {{'Drunk passengers' | translate}}</p>
-            </mat-radio-button>
-          </mat-radio-group>
-        </mat-list>
         </p>
         </mat-list>
 
+
+        <mat-list *ngIf="questioner.type == 'CONFLICT'">
+          <p *ngFor="let question of questioner.questions">
+            <mat-accordion>
+              <mat-expansion-panel class="Hours">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <mat-hint align="center"><strong>Конфлікти</strong></mat-hint>
+                  </mat-panel-title>
+
+                </mat-expansion-panel-header>
+                <mat-hint align="center"><strong>Чи траплялись конфлікти?</strong></mat-hint>
+                <mat-radio-group class="radio" [(ngModel)]="haveConflicts" [ngModelOptions]="{standalone: true}">
+                  <mat-radio-button [value]="true">{{'yes' | translate}}</mat-radio-button>
+                  <mat-radio-button [value]="false">{{'no' | translate}}</mat-radio-button>
+                </mat-radio-group>
+
+          <p *ngIf="haveConflicts == true">
+            <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
+            <mat-list>
+              <mat-checkbox class="conflict-content" (click)="isSelectedConflict('WITHOUT_CHANGE')">
+                <img class="conflict-image" src="../../../../../../../../assets/img/cash.ico">
+          <p class="capacity-legend">{{'Did not get change' | translate}}</p>
+          </mat-checkbox>
+          <mat-checkbox class="conflict-content" (click)="isSelectedConflict('UNPAID_TRAVEL')">
+            <img class="conflict-image" src="../../../../../../../../assets/img/rabbit.ico">
+            <p class="capacity-legend">{{'Unpaid travel' | translate}}</p>
+          </mat-checkbox>
+          <mat-checkbox class="conflict-content" (click)="isSelectedConflict('THEFT')">
+            <img class="conflict-image" src="../../../../../../../../assets/img/criminal.ico">
+            <p class="capacity-legend">{{'Theft' | translate}}</p>
+          </mat-checkbox>
+          <mat-checkbox class="conflict-content" (click)="isSelectedConflict('GRANDMA_QUARREL')">
+            <img class="conflict-image" src="../../../../../../../../assets/img/grandma.ico">
+            <p class="capacity-legend">{{'Quarrel with elderly' | translate}}</p>
+          </mat-checkbox>
+          <mat-checkbox class="conflict-content" (click)="isSelectedConflict('WINDOW_QUARREL')">
+            <img class="conflict-image" src="../../../../../../../../assets/img/window.ico">
+            <p class="capacity-legend">{{'Quarrel through window' | translate}}</p>
+          </mat-checkbox>
+          <mat-checkbox class="conflict-content" (click)="isSelectedConflict('DRUNK')">
+            <img class="conflict-image" src="../../../../../../../../assets/img/drunk_man.ico">
+            <p class="capacity-legend"> {{'Drunk passengers' | translate}}</p>
+          </mat-checkbox>
+        </mat-list>
+        </p>
+
+        </mat-expansion-panel>
+        </mat-accordion>
+        </p>
+        </mat-list>
         </p>
         </mat-list>
       </mat-card-content>

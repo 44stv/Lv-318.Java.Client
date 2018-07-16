@@ -39,7 +39,10 @@ export class AddFeedbackComponent implements OnInit {
   @Input() transitName: String = this.data.transitName;
   @Input() feedbackFromMaps: boolean = (this.data.fromMaps) ? this.data.fromMaps : false;
   @Input() imageAnswer: String = '';
+  @Input() haveConflicts: boolean;
+  @Input() conflicts: String[] = [];
   private categoryId: number = this.data.categoryId;
+
   private forwardStops: Stop [] = [];
   private backwardStops: Stop [] = [];
   private checkBoxAnswers: String[] = ['YES', 'NO', 'MAYBE'];
@@ -57,7 +60,7 @@ export class AddFeedbackComponent implements OnInit {
               public auth: CustomAuthService) {
 
     this.survey = this.buildSurveyByCriteriaType(['RATING']);
-    this.qualitySurvey = this.buildSurveyByCriteriaType(['SIMPLE', 'QUALITY']);
+    this.qualitySurvey = this.buildSurveyByCriteriaType(['SIMPLE', 'QUANTITY_LOAD', 'CONFLICT']);
     this.capacitySurvey = this.buildSurveyByCriteriaType(['ROUTE_CAPACITY', 'HOURS_CAPACITY']);
     this.forwardStops = this.getByTransitAndDirection('FORWARD');
     this.backwardStops = this.getByTransitAndDirection('BACKWARD');
@@ -68,7 +71,6 @@ export class AddFeedbackComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.qualitySurvey);
   }
 
   public close() {
@@ -109,6 +111,7 @@ export class AddFeedbackComponent implements OnInit {
               return b.priority - a.priority;
             });
             survey.push(questioner);
+            survey.sort(this.sortQuestioner);
           });
         });
     });
@@ -135,7 +138,7 @@ export class AddFeedbackComponent implements OnInit {
       case 'SIMPLE' :
         questioner.answer = new SimpleAnswer();
         break;
-      case 'QUALITY' :
+      case 'QUANTITY_LOAD' :
         questioner.answer = new SimpleAnswer();
         break;
       case 'ROUTE_CAPACITY' :
@@ -145,10 +148,12 @@ export class AddFeedbackComponent implements OnInit {
       case 'HOURS_CAPACITY' :
         questioner.answer = new Array<String>(questioner.timeQuestions.length);
         break;
+      case 'CONFLICT' :
+        questioner.answer = new SimpleAnswer();
+        break;
     }
 
   }
-
 
   public toFeedbackList(survey: Questioner[]): Feedback[] {
     const feedbacks: Feedback[] = [];
@@ -172,12 +177,14 @@ export class AddFeedbackComponent implements OnInit {
         return this.buildRatingAnswer(questioner);
       case 'SIMPLE' :
         return this.buildSimpleAnswer(questioner);
-      case 'QUALITY' :
+      case 'QUANTITY_LOAD' :
         return this.buildSimpleAnswer(questioner);
       case 'ROUTE_CAPACITY' :
         return this.buildCapacityRouteAnswer(questioner);
       case 'HOURS_CAPACITY' :
         return this.buildCapacityHoursAnswer(questioner);
+      case 'CONFLICT' :
+        return this.buildConflictFeedbackAnswer();
     }
   }
 
@@ -190,6 +197,16 @@ export class AddFeedbackComponent implements OnInit {
     }
   }
 
+  public buildConflictFeedbackAnswer(): string {
+    let conflicts: String[] = [];
+    if (this.conflicts && this.conflicts.length > 0) {
+      return JSON.stringify(this.conflicts);
+    } else if (this.haveConflicts === false) {
+      conflicts.push('NO_CONFLICT');
+      return JSON.stringify(conflicts);
+    }
+    return '';
+  }
 
   public buildRatingAnswer(questioner: Questioner): string {
     const rates: RatingAnswer[] = [];
@@ -237,8 +254,6 @@ export class AddFeedbackComponent implements OnInit {
         times.push(time);
       }
     }
-
-// TODO:new sorting
     if (times.length > 1) {
       times.sort((time1: Time, time2: Time) => {
         if (time1.hour > time2.hour) {
@@ -331,5 +346,12 @@ export class AddFeedbackComponent implements OnInit {
     return direction;
   }
 
+  public isSelectedConflict(conflict: String) {
+    this.conflicts.push(conflict);
+  }
+
+  public sortQuestioner(questioner1: Questioner, questioner2: Questioner): number {
+    return questioner1.getPriority() - questioner2.getPriority();
+  }
 }
 

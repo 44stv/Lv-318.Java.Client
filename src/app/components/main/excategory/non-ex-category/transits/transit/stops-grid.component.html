@@ -40,8 +40,8 @@
 </div>
 <app-back-to-previous-page-btn></app-back-to-previous-page-btn>
 
-<div>
-  <!--<div *ngIf="this.authService.hasToken()">-->
+<!-- <div> -->
+<div *ngIf="this.authService.hasToken()">
   <button class="add" mdc-fab position='bottom-right' (click)="openModal()">
     <mdc-icon>edit</mdc-icon>
   </button>

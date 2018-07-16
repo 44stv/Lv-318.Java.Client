@@ -54,7 +54,6 @@
   font-size: 12px;
   align-items: flex-end;
   width: 20%;
-  /* height: 60%; */
 }
 
 .image-opacity {
@@ -78,4 +77,21 @@
 .capacity-legend {
   font-weight: 700;
   text-align: center;
+}
+
+.conflict-image {
+  width: 30%;
+  height: 50%;
+  padding-top: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+}
+
+.conflict-content {
+  margin: 5px;
+  font-size: 10px;
+  align-items: flex-end;
+  width: 10px;
 }
