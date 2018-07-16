@@ -4,9 +4,10 @@
   <app-maps (toggleDirection)="changeDirection($event)"></app-maps>
   <div class="stops-scheme">
     <div *ngIf="directionForward">
-      <h3>{{'Forward' | translate }}</h3>
+      <h4 align="center">{{forwardStops[0].street}} - {{forwardStops[forwardStops.length-1].street}}</h4>
       <div *ngIf="forwardStops.length">
-        <div *ngFor="let i=index; let tile of forwardStops" class="tile" (click)="selectStop(tile); busyStopsDiagram.onClick()">
+        <div *ngFor="let i=index; let tile of forwardStops" class="tile"
+             (click)="selectStop(tile); busyStopsDiagram.onClick()">
           <label [for]="tile.id" class="tile-content">
             <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
             <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
@@ -17,8 +18,9 @@
       </div>
     </div>
     <div *ngIf="!directionForward">
-      <h3>{{'Backward' | translate }}</h3>
-      <div *ngFor="let i=index; let tile of backwardStops" class="tile" (click)="selectStop(tile); busyStopsDiagram.onClick()">
+      <h4 align="center">{{backwardStops[0].street}} - {{backwardStops[backwardStops.length-1].street}}</h4>
+      <div *ngFor="let i=index; let tile of backwardStops" class="tile"
+           (click)="selectStop(tile); busyStopsDiagram.onClick()">
         <label [for]="tile.id" class="tile-content">
           <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
           <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
