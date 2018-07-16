@@ -45,6 +45,7 @@ export class CommentComponent implements OnInit {
     this.modified = this.comment.modifiedDate != null;
     this.postCommentDate = this.calculateTimeDiffBetweenNowAndDate(new Date(this.comment.postDate));
     this.modifiedCommentDate = new Date(this.comment.modifiedDate).toString();
+
     if (this.comment.images !== null) {
       this.images = JSON.parse(this.comment.images);
     }

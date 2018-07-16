@@ -12,7 +12,7 @@
 
     <ngx-gallery *ngIf="comment.images !== null" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
 
-    <div class="reply" (click)="toggleReply()">
+    <div class="reply" (click)="toggleReply()" *ngIf="comment.level < 5">
       <mdc-icon>reply</mdc-icon>
     </div>
     <div id="{{ comment.id }}" class="replyElement">
