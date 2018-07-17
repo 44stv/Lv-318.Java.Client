@@ -100,6 +100,8 @@ export class CommentComponent implements OnInit {
 
   calculateTimeDiffBetweenNowAndDate(end: Date): string {
     const nowTimeInSec = Date.now();
+    end.setHours(end.getHours() + 3);
+
     const postCommentDateInSec = end.getTime();
     const timeDiffInMs = (nowTimeInSec - postCommentDateInSec);
     const timeDiffInMin = timeDiffInMs / 1000 / 60;
