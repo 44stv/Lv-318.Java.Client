@@ -1,6 +1,6 @@
 <div class="add-category">
 
-  <h4 mat-dialog-title>Type in category name</h4>
+  <h4 mat-dialog-title>{{'Type in category name' | translate}}</h4>
   <mat-form-field appearance="standard">
     <mat-select *ngIf= "topCategories" placeholder="Category" [(ngModel)]="selectedCategory">
       <mat-option *ngFor="let top of topCategories" [value]="top">
@@ -9,8 +9,8 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="outline">
-    <mat-label>City name</mat-label>
-    <input matInput placeholder="City" [(ngModel)]="cityName" id="name" name="name ">
+    <mat-label>{{'City' | translate}}</mat-label>
+    <input matInput placeholder="{{'City' | translate}}" [(ngModel)]="cityName" id="name" name="name ">
   </mat-form-field>
   <div class="button">
     <div class="stroked-button-left">
