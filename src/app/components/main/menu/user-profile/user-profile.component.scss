@@ -1,8 +1,21 @@
 .userProfile{
   width: 70%;
+  height: 70%;
   margin: auto;
 }
+.NewUserForm{
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+.userTransit{
+  width: 70%;
+  height: 70%;
+  margin-top: auto;
+}
 .button{
-  padding: 4px;
+  background-color: #43659c;
+  color: white;
   float: right;
+  margin-right: 10px;
 }

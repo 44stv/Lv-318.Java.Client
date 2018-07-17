@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Question } from '../../../../../models/question.model';
-import { FeedbackCriteriaService } from '../../../../../services/feedback-criteria.service';
+import { Question } from '../../../../models/question.model';
+import { FeedbackCriteriaService } from '../../../../services/feedback-criteria.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
 

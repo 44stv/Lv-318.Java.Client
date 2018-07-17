@@ -1,44 +1,102 @@
-<div class="container">
-  <div class="container text-center">
-    <div class="row" >
-      <div class="col-12">
-        <hr>
-        <h4 class="mb-4">{{'UsersConf' | translate}}</h4>
-        <div class="row">
-        </div>
-        <button mat-raised-button [routerLink]="['/main/admin/update-role']"
-                color="primary" class="mb-4" style="width:100%;">{{'Users' | translate}}
-        </button>
+<div class="menu-wrapper">
+  <mat-accordion>
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="title">
+            <div class="icon">
+            </div>
+            <div class="text">
+              <h4 class="mb-4">{{'UsersConf' | translate}}</h4>
+            </div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mdc-list>
+        <mdc-list-item>
+          <a [routerLink]="['/main/admin/all-users']">
+            <div class="title">
+              <div class="text">
+                {{'Show all users' | translate}}
+              </div>
+            </div>
+          </a>
+        </mdc-list-item>
+        <mdc-list-item>
+          <a (click)="updateRole()">
+            <div class="title">
+              <div class="icon">
+              </div>
+              <div class="text">
+                {{'Edit user role'| translate}}
+              </div>
+            </div>
+          </a>
+        </mdc-list-item>
+      </mdc-list>
+    </mat-expansion-panel>
 
-      </div>
-    </div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="title">
+            <div class="icon">
+            </div>
+            <div class="text">
+              <h4 class="mb-4">{{'CriteriaConf' | translate}}</h4>
+            </div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mdc-list>
+        <mdc-list-item>
+          <a [routerLink]="['/main/admin/feedback-criteria']">
+            <div class="title">
+              <div class="icon">
+              </div>
+              <div class="text">
+                {{'Show all' | translate}}
+              </div>
+            </div>
+          </a>
+        </mdc-list-item>
+        <mdc-list-item>
+          <a (click) = "addCriteria()">
+            <div class="title">
+              <div class="text">
+                {{'Add fedback criteria' | translate}}
+              </div>
+            </div>
+          </a>
+        </mdc-list-item>
+      </mdc-list>
+    </mat-expansion-panel>
 
-    <div class="row">
-      <div class="col-12">
-        <hr>
-        <h4 class="mb-4">{{'CriteriaConf' | translate}}</h4>
-        <div class="row">
-        </div>
-        <button mat-raised-button [routerLink]="['/main/feedback-criteria']"
-                color="primary" class="mb-4" style="width:100%;">{{'FeedbackCriteria' | translate}}
-        </button>
-
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12">
-        <hr>
-        <h4 class="mb-4">{{'CategoryConfiguration' | translate}}</h4>
-        <div class="row">
-        </div>
-        <button mat-raised-button [routerLink]="['/main/admin/add-category']"
-                color="primary" class="mb-4" style="width:100%;">{{'Categories' | translate}}
-        </button>
-
-      </div>
-    </div>
-
-  </div>
-  <app-update-role></app-update-role>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="title">
+            <div class="icon">
+            </div>
+            <div class="text">
+              <h4 class="mb-4">{{'CategoryConfiguration' | translate}}</h4>
+            </div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mdc-list>
+        <mdc-list-item>
+          <a (click)="addCategory()">
+            <div class="title">
+              <div class="icon">
+              </div>
+              <div class="text">
+                {{'Add category' | translate}}
+              </div>
+            </div>
+          </a>
+        </mdc-list-item>
+      </mdc-list>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

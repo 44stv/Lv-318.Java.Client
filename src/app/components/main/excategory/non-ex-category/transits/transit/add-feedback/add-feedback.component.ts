@@ -62,10 +62,9 @@ export class AddFeedbackComponent implements OnInit {
     this.survey = this.buildSurveyByCriteriaType(['RATING']);
     this.qualitySurvey = this.buildSurveyByCriteriaType(['SIMPLE', 'QUANTITY_LOAD', 'CONFLICT']);
     this.capacitySurvey = this.buildSurveyByCriteriaType(['ROUTE_CAPACITY', 'HOURS_CAPACITY']);
+    this.direction = this.getDirection();
     this.forwardStops = this.getByTransitAndDirection('FORWARD');
     this.backwardStops = this.getByTransitAndDirection('BACKWARD');
-    this.direction = this.getDirection();
-    this.getStopsAnswerModel();
 
 
   }
