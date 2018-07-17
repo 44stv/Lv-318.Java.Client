@@ -75,7 +75,7 @@ export class UserLoginComponent implements OnInit {
             }
           }
         }
-      });
+      );
   }
 
 
