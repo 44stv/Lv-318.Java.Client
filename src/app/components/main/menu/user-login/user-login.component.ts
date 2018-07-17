@@ -7,8 +7,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {MatDialogRef} from '@angular/material/dialog';
 
-import { HttpErrorResponse } from '@angular/common/http';
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ForgetPasswordComponent} from './forget-password/forget-password.component';
 
 
 @Component({
@@ -57,24 +57,25 @@ export class UserLoginComponent implements OnInit {
     this.login = this.loginForm.value;
     this.authService.signIn(this.login)
       .subscribe((token: TokenModel) => {
-        this.authService.setToken(token);
-        this.snackBar.open('User loged successfully', null, {
-          duration: 3000
-        });
-        setTimeout(() => this.matDialogRef.close(), 3000);
-      }, (error) => {
-        if (error instanceof HttpErrorResponse) {
-          if (error.error.description === 'User is disabled') {
-            this.snackBar.open('Your account is not activated. Please confirm the registration', null, {
-              duration: 3000
-            });
-          } else {
-            this.snackBar.open(error.error.message, null, {
-              duration: 3000
-            });
+          this.authService.setToken(token);
+          this.snackBar.open('User loged successfully', null, {
+            duration: 3000
+          });
+          setTimeout(() => this.matDialogRef.close(), 3000);
+        }, (error) => {
+          if (error instanceof HttpErrorResponse) {
+            if (error.error.description === 'User is disabled') {
+              this.snackBar.open('Your account is not activated. Please confirm the registration', null, {
+                duration: 3000
+              });
+            } else {
+              this.snackBar.open(error.error.message, null, {
+                duration: 3000
+              });
+            }
           }
         }
-      });
+      );
   }
 
 

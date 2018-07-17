@@ -39,17 +39,23 @@ export class AddNonextendableCategoryComponent implements OnInit {
 
   saveCategory(): void {
     this.add(this.typeTransportName, this.selectedCity, this.selectedCategory);
-    this.excatServ.save(this.categoryModel).subscribe(() => {
-      this.snackBar.open('City added sucsessfully.', null, {
-        duration: 2000
-      });
-      this.matDialogRef.close();
-    }, error => {
-      this.snackBar.open('Provider  with the such name is already exists in database .'
-        , null, {
+    if (this.categoryModel.name !== undefined) {
+      this.excatServ.save(this.categoryModel).subscribe(() => {
+        this.snackBar.open('City added sucsessfully.', null, {
           duration: 2000
         });
-    });
+        this.matDialogRef.close();
+      }, error => {
+        this.snackBar.open('Provider  with the such name is already exists in database .'
+          , null, {
+            duration: 2000
+          });
+      });
+    } else {
+      this.snackBar.open('The category should not be empty', null, {
+        duration: 2000
+      });
+    }
   }
 
   getCities(selectedCategory: ExcategoryModel) {
