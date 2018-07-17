@@ -57,5 +57,6 @@
   "ErrorText3": "головну сторінку",
   "CategoryConfiguration": "Конфігурація категорій",
   "Categories": "Категорії",
-  "reload": "Оновити графік"
+  "reload": "Оновити графік",
+  "postComment": "Залишити коментар"
 }

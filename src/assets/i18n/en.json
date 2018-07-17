@@ -57,5 +57,6 @@
   "ErrorText3": "main page",
   "CategoryConfiguration": "Category configuration",
   "Categories": "Categories",
-  "reload": "Reload chart"
+  "reload": "Reload chart",
+  "postComment": "PostComment"
 }
