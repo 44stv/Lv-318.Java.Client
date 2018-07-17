@@ -1,15 +1,15 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {StopService} from '../../../../../../services/stop.service';
-import {Observable} from 'rxjs';
-import {MatDialog} from '@angular/material';
-import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
-import {Stop} from '../../../../../../models/stop.model';
-import {BreadcrumbService} from 'ng5-breadcrumb';
-import {environment} from '../../../../../../../environments/environment';
-import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
-import {CustomAuthService} from '../../../../../../services/auth/custom-auth.service';
-import {BusyStopsDiagramComponent} from './busy-stops-diagram/busy-stops-diagram.component';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { StopService } from '../../../../../../services/stop.service';
+import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
+import { Stop } from '../../../../../../models/stop.model';
+import { BreadcrumbService } from 'ng5-breadcrumb';
+import { environment } from '../../../../../../../environments/environment';
+import { NonExCategoryService } from '../../../../../../services/non-ex-category.service';
+import { CustomAuthService } from '../../../../../../services/auth/custom-auth.service';
+import { BusyStopsDiagramComponent } from './busy-stops-diagram/busy-stops-diagram.component';
 
 
 @Component({

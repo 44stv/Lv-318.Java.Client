@@ -51,11 +51,11 @@ $mdc-theme-secondary:#ffffff; // change secondary color example
 .picsAndReply {
   margin-bottom: 15px;
   margin-left: 20px;
-  //display: inline;
+  display: flex;
 }
 
 .replyButton {
-  margin-left: 5px;
+  margin-left: 20px;
 }
 
 .mat-form-field {

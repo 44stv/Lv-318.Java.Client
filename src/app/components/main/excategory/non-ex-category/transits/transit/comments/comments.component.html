@@ -6,20 +6,20 @@
       <mat-form-field appearance="outline" class="leaveComment">
         <textarea matInput maxlength="256"
                   placeholder="Leave comment"
-                  [(ngModel)]="addCommentText"
+                  [(ngModel)]="addCommentText" [rows]="7"
                   [required]="true"></textarea>
       </mat-form-field>
     </div>
 
-    <div class="row">
+    <div style="display: flex" class="row">
 
-      <div style="width: 80px" class="col-md-1" (click)="choosePics.click()">
+      <div class="picsButton" (click)="choosePics.click()">
         <input #choosePics
                style="display:none"
                type="file"
                (change)="openChooseDialog($event)"
                multiple="multiple">
-        <mdc-icon [fontSize]="36">add_a_photo_alternate</mdc-icon>
+        <mat-icon style="font-size: 36px; padding-top: 7px;" [inline]="true">add_a_photo</mat-icon>
       </div>
       <button class="postButton"
               mdc-button
