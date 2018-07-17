@@ -8,13 +8,15 @@ export class Questioner {
   answer: any;
   timeQuestions: Question[];
   routeQuestions: Question[];
+
+  getPriority(): number {
+    let priority = 0;
+    for (let i = 0; i < this.questions.length; i++) {
+      priority = priority + this.questions[i].priority;
+    }
+    return priority;
+  }
 }
-// export class CapacityQuestioner{
-//   criteriaId: number;
-//   type: String;
-//   questions: Question[];
-//   answer: any;
-// }
 
 export class Feedback {
   userId: number;

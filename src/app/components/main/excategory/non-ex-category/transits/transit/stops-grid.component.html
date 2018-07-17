@@ -7,7 +7,7 @@
     <mat-expansion-panel style="margin-bottom: 0">
       <mat-expansion-panel-header style="background-color: #43659c">
         <mat-panel-title>
-          <font color="white"> Open stops scheme with charts </font>
+          <font color="white">{{ 'Open stops scheme with charts'  | translate}}</font>
         </mat-panel-title>
         <mat-panel-description>
         </mat-panel-description>
@@ -52,7 +52,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header style="background-color: #43659c">
         <mat-panel-title>
-          <font color="white"> Open comments </font>
+          <font color="white"> {{ 'Open comments'  | translate}} </font>
         </mat-panel-title>
         <mat-panel-description>
         </mat-panel-description>
@@ -64,7 +64,9 @@
   </mat-accordion>
 </div>
 <app-back-to-previous-page-btn></app-back-to-previous-page-btn>
-<div>
+
+<!-- <div> -->
+<div *ngIf="this.authService.hasToken()">
   <button class="add" mdc-fab position='bottom-right' (click)="openModal()">
     <mdc-icon>edit</mdc-icon>
   </button>

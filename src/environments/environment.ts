@@ -9,7 +9,6 @@ export const environment = {
   serverURL: 'http://localhost:8443',
   // serverURL: 'https://uatransport.tk',
 
-
   accessTokenHeader: 'Authorization',
   refreshTokenHeader: 'Refresh-token',
 

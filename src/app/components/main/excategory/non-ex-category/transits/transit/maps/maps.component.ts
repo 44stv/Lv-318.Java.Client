@@ -1,9 +1,11 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../../../../../../../../environments/environment';
-import { MapsService } from '../../../../../../../services/maps.service';
-import { Location, WaypointModel } from '../../../../../../../models/waypoint.model';
+import {ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {environment} from '../../../../../../../../environments/environment';
+import {MapsService} from '../../../../../../../services/maps.service';
+import {Location, WaypointModel} from '../../../../../../../models/waypoint.model';
+import {AddFeedbackComponent} from '../add-feedback/add-feedback.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-maps',
@@ -128,6 +130,8 @@ export class MapsComponent implements OnInit {
     }
   ];
   public transitId: string;
+  public transitName: string;
+  public categoryId: number;
   public routeDirection = 'forward';
   public latStatic: Number = 49.84012222290039;
   public lngStatic: Number = 24.028803095222;
@@ -179,7 +183,10 @@ export class MapsComponent implements OnInit {
   @Output()
   toggleDirection = new EventEmitter<string>();
 
-  constructor(private route: ActivatedRoute, private service: MapsService, private _formBuilder: FormBuilder) {
+  constructor(private route: ActivatedRoute,
+              private service: MapsService,
+              private _formBuilder: FormBuilder,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -188,6 +195,8 @@ export class MapsComponent implements OnInit {
     });
     this.route.params.forEach(param => {
       this.transitId = param['id-transit'];
+      this.categoryId = param['id'];
+      this.transitName = param['name'];
     });
     this.initPoints();
     this.getMyPosition();
@@ -229,6 +238,7 @@ export class MapsComponent implements OnInit {
     this.markers = new Array(this.points.length);
     for (let i = 0; i < this.points.length; i++) {
       const marker: MarkerModel = new MarkerModel();
+      marker.id = this.points[i].id;
       marker.name = this.points[i].street;
       marker.lat = this.points[i].lat;
       marker.lng = this.points[i].lng;
@@ -353,9 +363,24 @@ export class MapsComponent implements OnInit {
     this.secondStopMarker = new MarkerModel();
   }
 
+  public openModal() {
+    this.dialog.open(AddFeedbackComponent, {
+      width: '60%',
+      data: {
+        number: this.transitId, categoryId: this.categoryId,
+        transitName: this.transitName,
+        fromStopId: this.firstStopMarker.id,
+        toStopId: this.secondStopMarker.id,
+        direction: this.routeDirection,
+        fromMaps: true
+      }
+    });
+  }
+
 }
 
 export class MarkerModel {
+  id: number;
   name: string;
   lat: number;
   lng: number;
