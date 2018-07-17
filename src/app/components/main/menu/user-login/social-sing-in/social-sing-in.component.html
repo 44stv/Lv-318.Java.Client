@@ -1,11 +1,10 @@
-<h1>
-  Sign in
-</h1>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<!-- <button (click)="socialSignIn('facebook')" *ngIf="!login">Sign in with Facebook</button> -->
-<!-- <button (click)="socialSignIn('google')" *ngIf="!login">Sign in with Google</button>  -->
-<a mat-raised-button (click)="socialSignIn('facebook')" *ngIf="!login">Sign in with Facebook</a>
-<a mat-raised-button (click)="socialSignIn('google')" *ngIf="!login">Sign in with Google</a>
-<a mat-raised-button (click)="socialSignOut" *ngIf="login">Sign out</a>
-<!-- <div class="g-signin2" data-onsuccess="socialSignIn('google')"></div> -->
-<!-- <button (click)="socialSignOut" *ngIf="login">Sign out</button>  -->
+<div class="social">
+  <a (click)="socialSignIn('facebook')">
+    <img src="assets/img/social-facebook-button-blue-icon.png" alt="" style="width:45px; height:45px;">
+  </a>
+
+
+  <a (click)="socialSignIn('google')">
+    <img src="assets/img/Google-Plus-icon.png" alt="" style="width:50px; height:50px;">
+  </a>
+</div>

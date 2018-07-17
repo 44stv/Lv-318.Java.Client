@@ -6,7 +6,7 @@ import { Stop } from '../models/stop.model';
 import { environment } from '../../environments/environment';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable({
@@ -15,14 +15,17 @@ const httpOptions = {
 export class GlobalSearchService {
   private globalSearchUrl = environment.serverURL + '/search';
   private curentLocation: string;
+  public isLocationChange: boolean;
 
   constructor(private http: HttpClient) {
   }
 
   getResults(searchValue: string): Observable<Transit[]> {
-    const globalSearchUrl = `${this.globalSearchUrl}/?search=${searchValue}`;
-    return this.http.get<Transit[]>(globalSearchUrl);
+    const transitSearchUrl = `${this.globalSearchUrl}/?search=${searchValue}&city=${this.curentLocation}`;
+    console.log(transitSearchUrl);
+    return this.http.get<Transit[]>(transitSearchUrl);
   }
+
   getStopsResult(searchValue: string): Observable<Stop[]> {
     const stopSearchUlr = `${this.globalSearchUrl}/?searchStop=${searchValue}`;
     return this.http.get<Stop[]>(stopSearchUlr);
@@ -34,5 +37,13 @@ export class GlobalSearchService {
 
   getCurentLocation(): string {
     return this.curentLocation;
+  }
+
+  getIsLocationChange(): boolean {
+    return this.isLocationChange;
+  }
+
+  setIsLocationChange(value: boolean) {
+    this.isLocationChange = value;
   }
 }

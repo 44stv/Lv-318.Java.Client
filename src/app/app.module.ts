@@ -30,7 +30,6 @@ import { StarRatingModule } from 'angular-star-rating';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MdcIconButtonModule } from '@angular-mdc/web';
 
-
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -168,7 +167,6 @@ export function getAuthServiceConfigs() {
   );
   return config;
 }
-
 
 @NgModule({
   declarations: [

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { User } from '../../models/user.model';
-import { environment } from '../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {User} from '../../models/user.model';
+import {environment} from '../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -11,15 +11,23 @@ const httpOptions = {
 @Injectable({providedIn: 'root'})
 export class SocialService {
 
-  private socialUrl = environment.serverURL + '/user/social';
+  private socialUrl = environment.serverURL + '/user';
 
   constructor(private http: HttpClient) {
   }
 
-  signInWithSocial(user: User): Observable<any> {
+  signInWithSocialGoogle(user: User): Observable<any> {
     console.log('service');
     console.log('servie' + user.email);
-    return this.http.post<User>(this.socialUrl, user);
+    const googleUrl = `${this.socialUrl}/social`;
+    return this.http.post<User>(googleUrl, user);
+  }
+
+  signInWithSocialFacebook(user: User): Observable<any> {
+    console.log('service');
+    console.log('servie' + user.email);
+    const FacebookUrl = `${this.socialUrl}/socialFacebook`;
+    return this.http.post<User>(FacebookUrl, user);
   }
 
 }

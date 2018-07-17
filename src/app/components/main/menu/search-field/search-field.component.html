@@ -1,14 +1,15 @@
 <form class="example-form">
   <mat-form-field appearance="outline" (keyup.enter)="onEnter($event.target.value)">
-    <input type="text" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="useFilter(myControl.value)">
+    <input aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (keyup)="useFilter(myControl.value)">
     <mat-icon matSuffix>search</mat-icon>
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let transit of filteredOptions | async" [value]="transit.name">
-        <!-- (click)="myEvent(transit.name)"> -->
+      <mat-option *ngFor="let transit of filteredOptions | async" [value]="transit.name"
+      (click)="myEvent(transit)">
+        <img src="{{ categoryIconURL }}{{ transit.category.iconURL }}" style="width:20px; height:20px;">
         {{transit.name}}
       </mat-option>
-      <mat-option *ngFor="let stop of filteredOptionsStops | async" [value]="stop.street" a routerLink="search/?search=/{{stop.street}}">
-        {{stop.street}}
+      <mat-option *ngFor="let stop of filteredStreets | async" [value]="stop" a routerLink="search/{{stop}}">
+      {{stop}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

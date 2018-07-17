@@ -1,4 +1,10 @@
-.map-ukraine{
-  width: 50%;;
-  height: 65%;
-}
+ agm-map{
+   margin: 10% 30% 0 0;
+     height: 400px;
+     width: 800px;
+  }
+ .mapUkraine{
+   margin-top: 20px;
+   margin-left: 60px;
+ }
+ 

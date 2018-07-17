@@ -4,7 +4,7 @@ import { CommentService } from '../../../../../../../../../services/comment.serv
 import { HttpParams } from '@angular/common/http';
 import { UserInfo } from '../../../../../../../../../models/userInfo.model';
 import { UserService } from '../../../../../../../../../services/user.service';
-import { AuthService } from '../../../../../../../../../services/auth/auth.service';
+import { CustomAuthService } from '../../../../../../../../../services/auth/custom-auth.service';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -31,7 +31,7 @@ export class CommentComponent implements OnInit {
   constructor(private commentService: CommentService,
               private userService: UserService,
               private snackBar: MatSnackBar,
-              private authService: AuthService) {
+              private authService: CustomAuthService) {
   }
 
   ngOnInit() {
