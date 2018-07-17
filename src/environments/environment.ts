@@ -11,7 +11,6 @@ export const environment = {
 
   accessTokenHeader: 'Authorization',
   refreshTokenHeader: 'Refresh-token',
-
 };
 
 /*
