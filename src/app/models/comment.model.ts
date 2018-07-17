@@ -1,7 +1,7 @@
 export class MyComment {
   id:              number;
   commentText:     string;
-  postDate:        string;
+  createdDate:     string;
   modifiedDate:    string;
   userId:          number;
   transitId:       number;

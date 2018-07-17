@@ -48,6 +48,9 @@ export class CommentsComponent implements OnInit {
       const newComment = new MyComment();
       if (this.addCommentText) {
         newComment.commentText = this.addCommentText;
+        const date = new Date(Date.now());
+        date.setMinutes(date.getMinutes() - new Date(Date.now()).getTimezoneOffset());
+        newComment.createdDate = date.toJSON();
         let params = new HttpParams();
         params = params.set('transitId', this.id.toString());
         params = params.set('userId', this.authService.getUserId().toString());
@@ -77,10 +80,10 @@ export class CommentsComponent implements OnInit {
 
   sortComments(): void {
     if (this.sortMode === 'DESC') {
-      this.comments.sort((a, b) => a.postDate.localeCompare(b.postDate));
+      this.comments.sort((a, b) => a.createdDate.localeCompare(b.createdDate));
     }
     if (this.sortMode === 'ASC') {
-      this.comments.sort((a, b) => b.postDate.localeCompare(a.postDate));
+      this.comments.sort((a, b) => b.createdDate.localeCompare(a.createdDate));
     }
   }
 
