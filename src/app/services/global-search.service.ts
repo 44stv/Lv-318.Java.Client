@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class GlobalSearchService {
   private globalSearchUrl = environment.serverURL + '/search';
-  private curentLocation: string;
+  private curentLocation: string = 'Lviv';
   public isLocationChange: boolean;
 
   constructor(private http: HttpClient) {

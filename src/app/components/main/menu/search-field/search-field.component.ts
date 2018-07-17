@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { delay, map, startWith } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { GlobalSearchService } from '../../../../services/global-search.service';
 import { StopService } from '../../../../services/stop.service';
 import { Transit } from '../../../../models/transit.model';
@@ -11,8 +11,6 @@ import { NonExCategoryService } from '../../../../services/non-ex-category.servi
 import { Category } from '../../../../models/category.model';
 import { TransitService } from '../../../../services/transit.service';
 import { environment } from '../../../../../environments/environment';
-import { ExcategoryService } from '../../../../services/excategory.service';
-import { StopsGridComponent } from '../../excategory/non-ex-category/transits/transit/stops-grid.component';
 
 @Component({
   selector: 'app-search-field',
@@ -40,7 +38,7 @@ export class SearchFieldComponent implements OnInit, OnChanges {
               private router: Router,
               private transitService: TransitService,
               private nonExService: NonExCategoryService
-              ) {
+  ) {
   }
 
   ngOnInit() {
@@ -91,7 +89,6 @@ export class SearchFieldComponent implements OnInit, OnChanges {
   }
 
 
-
   myEvent(choosenValue: Transit) {
     this.transitService.getTransitById(choosenValue.id).subscribe(
       tmp => {
@@ -99,14 +96,13 @@ export class SearchFieldComponent implements OnInit, OnChanges {
         this.nonExService.getNameByCategoryId(this.choosenTransit.categoryId).subscribe(
           category => {
             this.choosenCategory = category;
-            this.router.navigate(['/main/Public Transport/' + '/' +
-            this.choosenCategory[0].nextLevelCategory.id + '/' + this.choosenCategory[0].id + '/' +
-            this.choosenTransit.id + '/' + this.choosenTransit.name + '/' + this.choosenTransit.categoryIconURL]);
+            this.router.navigate(['/main/Public Transport/' +
+            this.choosenCategory[0].nextLevelCategory.name + '/' + this.choosenCategory[0].id + '/transit/' +
+            this.choosenTransit.id + '/' + this.choosenTransit.name + '/' + this.choosenTransit.categoryIconURL.replace('/', '%2F')]);
           });
       }
     );
     // {path: 'main/:top/:city/:id/transit/:id-transit/:name/:iconUrl', component: StopsGridComponent},
   }
-
 }
 // 'show-transit-scheme/main/:top/:city/:id/:id-transit/:name/:iconUrl', component: StopsGridComponent},
