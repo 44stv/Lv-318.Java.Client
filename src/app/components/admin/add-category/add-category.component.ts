@@ -25,8 +25,6 @@ export class AddCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.levels = getAllCategoryLevel();
-    console.log(this.levels);
-
   }
 
   close() {
