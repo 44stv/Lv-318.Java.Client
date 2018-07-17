@@ -26,14 +26,13 @@ export class UserProfileComponent implements OnInit {
   cityName: string;
 
 
+
   categoryIconURL = `${environment.serverURL}/category/img?link=`;
 
   displayedColumns = ['categoryIcon', 'name', 'routeName'];
 
   dataSource: MatTableDataSource<Transit> = new MatTableDataSource();
-
-  /*userId = this.authService.getUserId();*/
-
+  private userId: number;
 
   constructor(private transitService: TransitService,
               private route: ActivatedRoute,
@@ -46,6 +45,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userId = this.authService.getUserId();
     this.getAllUserTransits();
   }
 
@@ -58,7 +58,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getAllUserTransits(): void {
-    this.transitService.getAllUserTransits(1)
+    this.transitService.getAllUserTransits(this.userId)
       .subscribe(transits => {
         this.dataSource.data = transits;
       });
