@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
-import {UserInfoModel} from '../../../models/user-info.model';
+import {UserInfo} from '../../../models/userInfo.model';
 import {DiagramService} from '../../../services/diagram.service';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../../services/user.service';
@@ -14,7 +14,7 @@ import {UpdateFormComponent} from '../update-role/update-form/update-form.compon
 export class UsersConfComponent implements OnInit {
 
   displayedColumns = ['firstname', 'lastname', 'email', 'role'];
-  dataSource: MatTableDataSource<UserInfoModel> = new MatTableDataSource();
+  dataSource: MatTableDataSource<UserInfo> = new MatTableDataSource();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -23,7 +23,6 @@ export class UsersConfComponent implements OnInit {
               private route: ActivatedRoute,
               private diagramService: DiagramService,
               private dialog: MatDialog,
-              private snackBar: MatSnackBar
   ) {
   }
 
@@ -47,7 +46,7 @@ export class UsersConfComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openModal(user: UserInfoModel) {
+  openModal(user: UserInfo) {
     this.dialog.open(UpdateFormComponent, {
       width: '400px',
       data: {
