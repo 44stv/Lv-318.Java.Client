@@ -70,7 +70,6 @@ export class CommentComponent implements OnInit {
       if (this.replyCommentText) {
         const replyComment = new MyComment();
         replyComment.commentText = this.replyCommentText;
-        replyComment.postDate = new Date(Date.now()).toString();
         let params = new HttpParams();
         params = params.set('transitId', this.comment.transitId.toString());
         params = params.set('userId', this.authService.getUserId().toString());
@@ -101,7 +100,7 @@ export class CommentComponent implements OnInit {
 
   calculateTimeDiffBetweenNowAndDate(end: Date): string {
     const nowTimeInSec = Date.now();
-    // end.setHours(end.getHours() + 3);
+    end.setHours(end.getHours() + 3);
 
     const postCommentDateInSec = end.getTime();
     const timeDiffInMs = (nowTimeInSec - postCommentDateInSec);
