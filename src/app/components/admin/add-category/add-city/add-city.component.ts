@@ -32,30 +32,35 @@ export class AddCityComponent implements OnInit {
   ngOnInit() {
     this.excatServ.getTopCategories().subscribe(
       result => this.topCategories = result
-  );
+    );
     console.log(this.categoryModel);
   }
 
   saveCategory(): void {
-    this.add(this.cityName, this.selectedCategory);
-    this.excatServ.save(this.categoryModel).subscribe(() => {
-      this.snackBar.open('City added sucsessfully.', null, {
-        duration: 2000
-      });
-      this.matDialogRef.close();
-    }, error => {
-      this.snackBar.open('Provider  with the such name is already exists in database .'
-        , null, {
+    console.log(this.cityName);
+    if (this.cityName !== undefined && this.selectedCategory !== undefined) {
+      this.add(this.cityName, this.selectedCategory);
+      this.excatServ.save(this.categoryModel).subscribe(() => {
+        this.snackBar.open('City added sucsessfully.', null, {
           duration: 2000
         });
-    });
+        this.matDialogRef.close();
+      }, error => {
+        this.snackBar.open('Provider  with the such name is already exists in database .'
+          , null, {
+            duration: 2000
+          });
+      });
+    } else {
+      this.snackBar.open('City name should not be empty', null, {
+        duration: 2000
+      });
+    }
   }
 
   add(city: string, top: ExcategoryModel) {
-    if (!(top == null && city == null)) {
-      this.categoryModel.name = city;
-      this.categoryModel.nextLevelCategory = top;
-    }
+    this.categoryModel.name = city;
+    this.categoryModel.nextLevelCategory = top;
   }
 
   close() {

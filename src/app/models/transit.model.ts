@@ -1,9 +1,12 @@
+import {Stop} from './stop.model';
+
 export class Transit {
   id: number;
   name: string;
   categoryId: number;
   routeName: string;
   categoryIconURL: string;
+  stops: Stop [];
 }
 
 // Converts JSON strings to/from your types

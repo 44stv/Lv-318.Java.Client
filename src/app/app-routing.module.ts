@@ -67,7 +67,7 @@ const routes: Routes = [
   {path: 'main/:top/:city', component: NonExCategoryComponent},
   {path: 'main/:top/:city/:id', component: TransitsComponent},
   {path: 'main/:top/:city/:id/transit/:id-transit/:name/:iconUrl', component: StopsGridComponent},
-  {path: 'search/?search=/:value', component: GlobalSearchComponent},
+  {path: 'search/:value', component: GlobalSearchComponent},
   {
     path: 'feedback',
     component: AddFeedbackComponent,

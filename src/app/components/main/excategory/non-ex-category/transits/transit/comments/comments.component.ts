@@ -48,6 +48,7 @@ export class CommentsComponent implements OnInit {
       const newComment = new MyComment();
       if (this.addCommentText) {
         newComment.commentText = this.addCommentText;
+        newComment.postDate = new Date(Date.now()).toString();
         let params = new HttpParams();
         params = params.set('transitId', this.id.toString());
         params = params.set('userId', this.authService.getUserId().toString());

@@ -7,9 +7,10 @@ export class User {
   password: string;
   passwordConfirmation: string;
   provider: string;
+  tokenId: string;
 
 
-  constructor(values: Object = {}) {
-    Object.assign(this, values);
-  }
+  // constructor(values: Object = {}) {
+  //   Object.assign(this, values);
+  // }
 }

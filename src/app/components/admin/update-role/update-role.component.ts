@@ -27,29 +27,29 @@ export class UpdateRoleComponent implements OnInit {
   }
 
   updateRole(): void {
-    this.userService.updateRole(this.updateRoleModel)
-      .subscribe(() => {
-          this.snackBar.open('User updated successfully', null, {
-            duration: 4000
-          });
-        }, (error) => {
-          this.snackBar.open(error.error.message, null, {
-            duration: 5000
-          });
-        }
-      );
-  }
-
-
-  add(role: string, email: string) {
-    if (!(role == null && email == null)) {
-      this.updateRoleModel.email = email;
-      this.updateRoleModel.role = role;
+    if (this.updateRoleModel.email !== undefined && this.updateRoleModel.role !== undefined) {
+      this.userService.updateRole(this.updateRoleModel)
+        .subscribe(() => {
+            this.snackBar.open('User updated successfully', null, {
+              duration: 4000
+            });
+          }, (error) => {
+            this.snackBar.open(error.error.message, null, {
+              duration: 5000
+            });
+          }
+        );
     } else {
       this.snackBar.open('Please type in correct values', null, {
         duration: 4000
       });
     }
+  }
+
+
+  add(role: string, email: string) {
+    this.updateRoleModel.email = email;
+    this.updateRoleModel.role = role;
   }
 
   close() {

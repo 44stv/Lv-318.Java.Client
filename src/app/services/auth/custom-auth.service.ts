@@ -8,6 +8,7 @@ import {User} from '../../models/user.model';
 import {TokenModel} from './token/token-model';
 import {determineRole, Role} from './roles';
 import {Login} from '../../models/login.model';
+import {AuthService} from 'angular-6-social-login';
 
 const helper = new JwtHelperService();
 
@@ -19,7 +20,8 @@ export class CustomAuthService {
   decodedToken = this.decodeToken();
   serviceUrl = environment.serverURL;
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,
+              private socialAuthService: AuthService) {
   }
 
   signIn(loginData: Login): Observable<any> {
@@ -47,6 +49,7 @@ export class CustomAuthService {
     localStorage.clear();
     this.decodedToken = null;
     this.accessToken = null;
+    this.socialAuthService.signOut();
   }
 
   public hasToken(): boolean {

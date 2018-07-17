@@ -20,7 +20,7 @@ export class LocationPickerComponent implements OnInit {
       this.locationService
         .getCurrentLocation(position.coords.latitude, position.coords.longitude)
         .subscribe(data => {
-          this.currentlocation = data.name.substring(1);
+          this.currentlocation = data.name;
           this.globalSearchService.setCurentLocation(this.currentlocation);
           console.log('Current location OnInit: ' + this.currentlocation);
         });
@@ -32,5 +32,6 @@ export class LocationPickerComponent implements OnInit {
   onSelectionChange(event: { index: any, value: any }) {
     this.currentlocation = event.value;
     this.globalSearchService.setCurentLocation(this.currentlocation);
+    this.globalSearchService.setIsLocationChange(true);
   }
 }

@@ -1,5 +1,5 @@
 .demo-grid-list {
-  width: 90%;
+  width: 100%;
   padding-left: 2px;
   margin-left: auto;
   margin-right: auto;
@@ -13,13 +13,13 @@ p {
 .tile {
   text-align: center;
   font-size: 14px;
-  width: 85px;
+  width: 100px;
   display: inline-block;
   padding-bottom: 0px;
 }
 
 .stops-scheme {
-  align-content: center;
+  align: center;
 }
 
 .tile-content {
