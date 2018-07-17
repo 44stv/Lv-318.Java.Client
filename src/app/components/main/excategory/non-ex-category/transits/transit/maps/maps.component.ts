@@ -304,7 +304,7 @@ export class MapsComponent implements OnInit {
         this.points = points;
         console.log(points);
         this.initMarkers();
-        if (this.points.length < 25) {
+        if (this.points.length < 26) {
           this.initSingleWaypoints();
           this.initSingleDirection();
         } else {
@@ -346,10 +346,14 @@ export class MapsComponent implements OnInit {
   }
 
   clearStopFirst() {
+    this.markers[this.firstStopMarker.order].icon = this.icon;
+    this.markers[this.firstStopMarker.order].animation = null;
     this.firstStopMarker = new MarkerModel();
   }
 
   clearStopSecond() {
+    this.markers[this.secondStopMarker.order].icon = this.icon;
+    this.markers[this.secondStopMarker.order].animation = null;
     this.secondStopMarker = new MarkerModel();
   }
 

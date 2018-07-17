@@ -1,6 +1,30 @@
-<p>
-  {{data.title}}<br/>
-  {{data.content}}<br/>
-  {{data.text}}<br/>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-</p>
+<div [ngStyle]="{
+        'width': '100%',
+        'position': 'relative',
+        'height':'200px'
+         }">
+  <div [ngStyle]="{
+  'font-weight': '500',
+       'font-size' : '20px',
+       'margin':'20px',
+       'width':'400px'}">{{data.title}}</div>
+  <div [ngStyle]="{
+  'font-weight': '500',
+       'font-size' : '16px',
+       'margin':'20px',
+       'width':'400px'}">{{data.content}}</div>
+  <div [ngStyle]="{
+        'position': 'absolute',
+        'height': '80px',
+        'width': '140px',
+        'top' : '-10px',
+        'right' : '10px',
+          'margin':'20px'}">
+    <img src="{{data.imageUrl}}" height="120px" width="180px">
+  </div>
+</div>
+{{data.text}}<br/>
+{{data.date}}<br/>
+<br/>
+<button mat-button (click)="onNoClick()">Back</button>
+
