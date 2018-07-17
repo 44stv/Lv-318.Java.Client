@@ -5,7 +5,7 @@ import {environment} from '../../../../../../../../environments/environment';
 import {MapsService} from '../../../../../../../services/maps.service';
 import {Location, WaypointModel} from '../../../../../../../models/waypoint.model';
 import {AddFeedbackComponent} from '../add-feedback/add-feedback.component';
-import {MatDialog} from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-maps',
@@ -186,7 +186,8 @@ export class MapsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private service: MapsService,
               private _formBuilder: FormBuilder,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -200,6 +201,12 @@ export class MapsComponent implements OnInit {
     });
     this.initPoints();
     this.getMyPosition();
+  }
+
+  openSnackBar() {
+    this.snackBar.open('Wrong stop order', 'Hide', {
+      duration: 2000,
+    });
   }
 
   getMyPosition() {
@@ -348,7 +355,7 @@ export class MapsComponent implements OnInit {
         this.stopList[j] = this.markers[i];
       }
     } else {
-      alert('Wrong stop order.');
+      this.openSnackBar();
     }
     if (this.firstStopMarker.order === undefined || this.secondStopMarker.order === undefined) {
       this.stopList = new Array();
