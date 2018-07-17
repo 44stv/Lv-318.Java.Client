@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material';
 
-import {FeedbackCriteria} from '../../../../../models/feedback-criteria.model';
-import {FeedbackCriteriaService} from '../../../../../services/feedback-criteria.service';
+import {FeedbackCriteria} from '../../../../models/feedback-criteria.model';
+import {FeedbackCriteriaService} from '../../../../services/feedback-criteria.service';
 import {AddQuestionComponent} from '../add-question/add-question.component';
 
 @Component({

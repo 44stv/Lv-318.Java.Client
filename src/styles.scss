@@ -1,5 +1,10 @@
 //You can add global styles to this file, and also import other style files
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
+  transform: none !important;
+}
+
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 $mdc-theme-primary: #43659c; // change primary color example

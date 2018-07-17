@@ -1,9 +1,8 @@
 ///<reference path="../../../../../../node_modules/rxjs/internal/Observable.d.ts"/>
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { User } from '../../../../models/user.model';
+import {User} from '../../../../models/user.model';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material';
 
 import {HttpErrorResponse} from '@angular/common/http';
@@ -11,6 +10,8 @@ import {Router} from '@angular/router';
 
 import {UserService} from '../../../../services/user.service';
 import {BreadcrumbService} from 'ng5-breadcrumb';
+import {FriendInvitationComponent} from '../user-profile/friend-invitation/friend-invitation.component';
+import {MatDialogRef} from '@angular/material/dialog';
 
 export class InfoResponse {
   response: string;
@@ -31,14 +32,15 @@ export class PasswordValidation {
 
 @Component({
   selector: 'app-add-user',
- templateUrl: './add-user.component.html',
- styleUrls: ['./add-user.component.css']
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.css']
 })
 
 export class AddUserComponent implements OnInit {
   set isSent(value: boolean) {
     this._isSent = value;
   }
+
   user: User;
 
   hide: boolean = true;
@@ -53,10 +55,12 @@ export class AddUserComponent implements OnInit {
               private snackBar: MatSnackBar,
               private fb: FormBuilder,
               public userService: UserService,
+              public  matDialogRef: MatDialogRef<AddUserComponent>,
               private breadcrumbService: BreadcrumbService) {
     this.breadcrumbService.hideRoute('/main/user');
 
   }
+
   emailControl: FormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -86,21 +90,22 @@ export class AddUserComponent implements OnInit {
       lastName: this.lastnameControl,
       email: this.emailControl,
       password: this.passwordControl,
-      passwordConfirmation: this. passwordConfirmationControl
+      passwordConfirmation: this.passwordConfirmationControl
     }, {
       validator: PasswordValidation.MatchPassword
     });
   }
 
 
-  createUser () {
+  createUser() {
     this.user = this.userForm.value;
     this.userService.createUser(this.user).subscribe((info: InfoResponse) => {
       this.snackBar.open(info.response, null, {
         duration: 4000
       });
       this._isSent = true;
-      }, (error) => {
+      setTimeout(() =>  this.matDialogRef.close(), 4000);
+    }, (error) => {
       if (error instanceof HttpErrorResponse) {
         this.snackBar.open(error.error.message, null, {
           duration: 5000
@@ -112,7 +117,6 @@ export class AddUserComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
   }
-
 
 
 }

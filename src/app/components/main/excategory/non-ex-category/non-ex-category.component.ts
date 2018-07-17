@@ -26,9 +26,11 @@ export class NonExCategoryComponent implements OnInit {
   private transitChild: TransitsComponent;
 
   constructor(private service: NonExCategoryService,
-    private route: ActivatedRoute,
-    private breadcrumbService: BreadcrumbService) {
-    this.breadcrumbService.hideRoute('/main/Public%20Transport');
+              private route: ActivatedRoute,
+              private breadcrumbService: BreadcrumbService) {
+    this.route.params.subscribe(params => {
+      this.breadcrumbService.hideRoute('/main/' + encodeURI(params['top']));
+    });
   }
 
   ngOnInit() {

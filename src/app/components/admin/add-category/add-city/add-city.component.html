@@ -1,0 +1,24 @@
+<div class="add-category">
+
+  <h4 mat-dialog-title>{{'Type in category name' | translate}}</h4>
+  <mat-form-field appearance="standard">
+    <mat-select *ngIf= "topCategories" placeholder="Category" [(ngModel)]="selectedCategory">
+      <mat-option *ngFor="let top of topCategories" [value]="top">
+        {{ top.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>{{'City' | translate}}</mat-label>
+    <input matInput placeholder="{{'City' | translate}}" [(ngModel)]="cityName" id="name" name="name ">
+  </mat-form-field>
+  <div class="button">
+    <div class="stroked-button-left">
+      <button mat-stroked-button (click)="close()">{{'Close' | translate}}</button>
+    </div>
+    <div class="stroked-button-right">
+      <button mat-stroked-button (click)="saveCategory()">{{'Save' | translate}}</button>
+    </div>
+  </div>
+</div>
+

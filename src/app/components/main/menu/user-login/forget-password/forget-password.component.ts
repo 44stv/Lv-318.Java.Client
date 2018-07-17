@@ -75,13 +75,14 @@ export class ForgetPasswordComponent implements OnInit {
     this.login = this.forgetPasswordForm.value;
     this.userService.sendForgetPasswordConfirmation(this.login).subscribe((info: InfoResponse) => {
       this.snackBar.open(info.response, null, {
-        duration: 5000
+        duration: 3000
       });
       this._isSent = true;
+      setTimeout(() =>  this.matDialogRef.close(), 3000);
     }, (error) => {
       if (error instanceof HttpErrorResponse) {
         this.snackBar.open(error.error.response, null, {
-          duration: 5000
+          duration: 3000
         });
       }
     });

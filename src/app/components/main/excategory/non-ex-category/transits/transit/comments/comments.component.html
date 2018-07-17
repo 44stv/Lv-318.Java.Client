@@ -5,28 +5,37 @@
 
       <mat-form-field appearance="outline" class="leaveComment">
         <textarea matInput maxlength="256"
-                  placeholder="Leave comment"
-                  [(ngModel)]="addCommentText"
+                  placeholder="{{ 'leaveComment' | translate }}"
+                  [(ngModel)]="addCommentText" [rows]="7"
                   [required]="true"></textarea>
       </mat-form-field>
     </div>
 
-    <div class="row">
-        <button class="postButton"
-                mdc-button
-                [secondary]="true"
-                [raised]="true"
-                type="submit" (click)="addTopLevelComment()">Post comment
-        </button>
+    <div style="display: flex" class="row">
 
-        <mat-form-field class="sortComments">
-          <mat-select placeholder="Select sort type"
-                      [(value)]="sortMode"
-                      (selectionChange)="sortComments()">
-            <mat-option value="ASC">Newer first</mat-option>
-            <mat-option value="DESC">Older first</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <div class="picsButton" (click)="choosePics.click()">
+        <input #choosePics
+               style="display:none"
+               type="file"
+               (change)="openChooseDialog($event)"
+               multiple="multiple">
+        <mat-icon style="font-size: 36px; padding-top: 7px;" [inline]="true">add_a_photo</mat-icon>
+      </div>
+      <button class="postButton"
+              mdc-button
+              [secondary]="false"
+              [raised]="true"
+              type="submit" (click)="addTopLevelComment()">{{ 'postComment' | translate }}
+      </button>
+
+      <mat-form-field class="sortComments">
+        <mat-select placeholder="{{ 'sortType' | translate }}"
+                    [(value)]="sortMode"
+                    (selectionChange)="sortComments()">
+          <mat-option value="ASC">{{ 'newerFirst' | translate }}</mat-option>
+          <mat-option value="DESC">{{ 'olderFirst' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
 

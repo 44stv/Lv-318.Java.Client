@@ -73,13 +73,14 @@ export class UpdatePasswordComponent implements OnInit {
     this.updatePassword = this.updatePasswordForm.value;
     this.userService.sendUpdatePassword(this.updatePassword).subscribe((info: InfoResponse) => {
       this.snackBar.open(info.response, null, {
-        duration: 5000
+        duration: 3000
       });
       this._isSent = true;
+      setTimeout(() =>  this.matDialogRef.close(), 3000);
     }, (error) => {
       if (error instanceof HttpErrorResponse) {
         this.snackBar.open(error.error.message, null, {
-          duration: 5000
+          duration: 3000
         });
       }
     });
