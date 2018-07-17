@@ -5,6 +5,7 @@ import {BreadcrumbService} from 'ng5-breadcrumb';
 import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material';
 import {ChooseTransitComponent} from './components/main/choose-transit/choose.transit.component';
+import {CustomAuthService} from './services/auth/custom-auth.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ export class AppComponent {
 
   constructor(private translate: TranslateService, private breadcrumbService: BreadcrumbService,
               private location: Location,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private authService: CustomAuthService) {
 
     translate.setDefaultLang('ua');
     this.breadcrumbService.addFriendlyNameForRoute('/main', 'Home');
@@ -32,9 +34,8 @@ export class AppComponent {
   open() {
     this.sideNav.toggle();
   }
-
   isFeedbackActivated(): boolean {
-    return this.location.path().indexOf('/show-transit-scheme/') > -1;
+    return (this.location.path().indexOf('/transit/') > -1 || this.location.path().indexOf('/admin/') > -1);
   }
 
   openChooseTransitModal() {

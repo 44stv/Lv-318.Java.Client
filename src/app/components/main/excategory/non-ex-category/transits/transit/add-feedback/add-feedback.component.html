@@ -10,45 +10,125 @@
             <mat-list *ngIf="questioner.type == 'RATING'">
           <p *ngFor="let question of questioner.questions;let i =index">
             <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
-            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10"
-                        [(ngModel)]="questioner.answer[i]" [ngModelOptions]="{standalone: true}"></mat-slider>
+            <mat-slider thumbLabel
+                        [displayWith]="formatLabel"
+                        tickInterval="1"
+                        min="1"
+                        max="10"
+                        [(ngModel)]="questioner.answer[i]"
+                        [ngModelOptions]="{standalone: true}">
+
+            </mat-slider>
           </p>
         </mat-list>
         </p>
         </mat-list>
         <mat-form-field appearance="outline" class="comment">
-          <textarea matInput #message maxlength="256" placeholder="Comment" [(ngModel)]="transitComment.commentText" [ngModelOptions]="{standalone: true}"></textarea>
+          <textarea matInput #message
+                    maxlength="256"
+                    placeholder="Comment"
+                    [(ngModel)]="transitComment.commentText"
+                    [ngModelOptions]="{standalone: true}"></textarea>
           <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
         </mat-form-field>
 
       </mat-card-content>
     </mat-tab>
-    <mat-tab label="{{ 'Quantity' | translate}}" style="height: 500px">
+    <mat-tab label="{{ 'Quantity' | translate}}">
       <mat-card-content>
         <mat-list>
           <p *ngFor="let questioner of qualitySurvey">
+
+
             <mat-list *ngIf="questioner.type == 'SIMPLE'">
           <p *ngFor="let question of questioner.questions">
             <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
-            <mat-radio-group class="radio" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
+            <mat-radio-group class="radio"
+                             [(ngModel)]="questioner.answer"
+                             [ngModelOptions]="{standalone: true}">
               <mat-radio-button class="example-radio-button" *ngFor="let answer of checkBoxAnswers" [value]="answer">
                 {{ answer | lowercase | translate }}
               </mat-radio-button>
             </mat-radio-group>
-           </p>
-           </mat-list>
-
-
+          </p>
+        </mat-list>
 
         <mat-list *ngIf="questioner.type == 'QUANTITY_LOAD'">
           <p *ngFor="let question of questioner.questions">
             <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
-            <mat-radio-group class="radio" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
-              <mat-radio-button class="example-radio-button" *ngFor="let answer of quantityLoadAnswers" [value]="answer">
-                {{ answer | lowercase | translate }}
-              </mat-radio-button>
-            </mat-radio-group>
-          </p>
+            <mat-list>
+              <mat-radio-group class="tile" [(ngModel)]="questioner.answer" [ngModelOptions]="{standalone: true}">
+                <mat-radio-button class="tile-content" [value]="'SIT'">
+                  <img class="capacity-image" src="../../../../../../../../assets/img/sit.ico">
+          <p class="capacity-legend">{{ 'Sit' | translate }}</p>
+          </mat-radio-button>
+          <mat-radio-button class="tile-content" [value]="'STAY'">
+            <img class="capacity-image" src="../../../../../../../../assets/img/stay.ico">
+            <p class="capacity-legend">{{ 'Stay' | translate }}</p>
+          </mat-radio-button>
+          <mat-radio-button class="tile-content" [value]="'CROWDING'">
+            <img class="capacity-image" src="../../../../../../../../assets/img/CrowdingNew.ico">
+            <p class="capacity-legend">{{ 'Crowding' | translate }}</p>
+          </mat-radio-button>
+          <mat-radio-button class="tile-content" [value]="'MISS'">
+            <img class="capacity-image" src="../../../../../../../../assets/img/miss.ico">
+            <p class="capacity-legend"> {{ 'Miss' | translate }}</p>
+          </mat-radio-button>
+          </mat-radio-group>
+        </mat-list>
+        </p>
+        </mat-list>
+
+
+        <mat-list *ngIf="questioner.type == 'CONFLICT'">
+          <p *ngFor="let question of questioner.questions">
+            <mat-accordion>
+              <mat-expansion-panel class="Hours">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <mat-hint align="center"><strong>Конфлікти</strong></mat-hint>
+                  </mat-panel-title>
+
+                </mat-expansion-panel-header>
+                <mat-hint align="center"><strong>Чи траплялись конфлікти?</strong></mat-hint>
+                <mat-radio-group class="radio" [(ngModel)]="haveConflicts" [ngModelOptions]="{standalone: true}">
+                  <mat-radio-button [value]="true">{{'yes' | translate}}</mat-radio-button>
+                  <mat-radio-button [value]="false">{{'no' | translate}}</mat-radio-button>
+                </mat-radio-group>
+
+          <p *ngIf="haveConflicts == true">
+            <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
+            <mat-list>
+              <mat-checkbox class="conflict-content" (click)="isSelectedConflict('WITHOUT_CHANGE')">
+                <img class="conflict-image" src="../../../../../../../../assets/img/cash.ico">
+          <p class="capacity-legend">{{'Did not get change' | translate}}</p>
+          </mat-checkbox>
+          <mat-checkbox class="conflict-content" (click)="isSelectedConflict('UNPAID_TRAVEL')">
+            <img class="conflict-image" src="../../../../../../../../assets/img/rabbit.ico">
+            <p class="capacity-legend">{{'Unpaid travel' | translate}}</p>
+          </mat-checkbox>
+          <mat-checkbox class="conflict-content" (click)="isSelectedConflict('THEFT')">
+            <img class="conflict-image" src="../../../../../../../../assets/img/criminal.ico">
+            <p class="capacity-legend">{{'Theft' | translate}}</p>
+          </mat-checkbox>
+          <mat-checkbox class="conflict-content" (click)="isSelectedConflict('GRANDMA_QUARREL')">
+            <img class="conflict-image" src="../../../../../../../../assets/img/grandma.ico">
+            <p class="capacity-legend">{{'Quarrel with elderly' | translate}}</p>
+          </mat-checkbox>
+          <mat-checkbox class="conflict-content" (click)="isSelectedConflict('WINDOW_QUARREL')">
+            <img class="conflict-image" src="../../../../../../../../assets/img/window.ico">
+            <p class="capacity-legend">{{'Quarrel through window' | translate}}</p>
+          </mat-checkbox>
+          <mat-checkbox class="conflict-content" (click)="isSelectedConflict('DRUNK')">
+            <img class="conflict-image" src="../../../../../../../../assets/img/drunk_man.ico">
+            <p class="capacity-legend"> {{'Drunk passengers' | translate}}</p>
+          </mat-checkbox>
+        </mat-list>
+        </p>
+
+        </mat-expansion-panel>
+        </mat-accordion>
+        </p>
         </mat-list>
         </p>
         </mat-list>
@@ -71,7 +151,9 @@
                 <mat-list *ngIf="question.type == 'TIME'">
                   <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
                   <mat-form-field class="Time">
-                    <input matInput [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" [(ngModel)]="questioner.answer[i]"
+                    <input matInput [owlDateTimeTrigger]="dt4"
+                           [owlDateTime]="dt4"
+                           [(ngModel)]="questioner.answer[i]"
                            [ngModelOptions]="{standalone: true}">
                     <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
                   </mat-form-field>
@@ -86,25 +168,56 @@
               {{ 'Routes' | translate}}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <!-- <mat-hint align="center"><strong>Вкажіть напрям</strong></mat-hint>
-          <mat-radio-group class="radio"  [(ngModel)]="direction" [ngModelOptions]="{standalone: true}">
-              <mat-radio-button class="example-radio-button" *ngFor="let direction of directions" [value]="direction">
-                  {{ direction | lowercase | translate }}
+
+          <p *ngIf="feedbackFromMaps == false">
+            <mat-hint align="center"><strong>Вкажіть напрям</strong></mat-hint>
+            <mat-radio-group class="radio"
+                             [(ngModel)]="direction"
+                             [ngModelOptions]="{standalone: true}">
+              <mat-radio-button class="example-radio-button"
+                                *ngFor="let direction of directions"
+                                [value]="direction">
+                {{ direction | lowercase | translate }}
               </mat-radio-button>
-          </mat-radio-group> -->
+            </mat-radio-group>
+          </p>
 
           <p *ngFor="let questioner of capacitySurvey">
             <mat-list>
-          <p *ngFor="let question of questioner.routeQuestions;let i =index">
+          <p *ngFor="let question of questioner.routeQuestions;let i = index ">
             <mat-list *ngIf="question.type == 'STOP'">
-              <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
-              <mat-form-field class="stopSelect">
-                <mat-select [(ngModel)]="questioner.answer[i]" name="stop">
-                  <mat-option *ngFor="let stop of stops | async" [value]="stop">
-                    {{stop.street | translate}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+
+              <mat-list *ngIf="direction == 'FORWARD'">
+                <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
+                <mat-form-field class="stopSelect">
+                  <mat-select [compareWith]="compareStop"
+                              [(value)]="questioner.answer[i]"
+                              [(ngModel)]="questioner.answer[i]"
+                              [ngModelOptions]="{standalone: true}">
+
+                    <mat-option *ngFor="let stop of forwardStops " [value]="stop">
+                      {{stop.street | translate}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-list>
+
+              <mat-list *ngIf="direction == 'BACKWARD'">
+                <mat-hint align="center"><strong>{{question.name}}</strong></mat-hint>
+                <mat-form-field class="stopSelect">
+
+                  <mat-select [compareWith]="compareStop"
+                              [(value)]="questioner.answer[i]"
+                              [(ngModel)]="questioner.answer[i]"
+                              [ngModelOptions]="{standalone: true}">
+
+                    <mat-option *ngFor="let stop of backwardStops " [value]="stop">
+                      {{stop.street | translate}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </mat-list>
             </mat-list>
           </p>
           </mat-list >
@@ -119,13 +232,15 @@
           </mat-expansion-panel-header>
           <mat-hint align="center"><strong>Оцініть завантаження у відсотках</strong></mat-hint>
           <mat-form-field appearance="outline" class="capacity">
-            <input matInput min="0" max="100" placeholder="Capacity" [(ngModel)]="capacity"
+            <input matInput min="0"
+                   max="100"
+                   placeholder="Capacity"
+                   [(ngModel)]="capacity"
                    [ngModelOptions]="{standalone: true}">
           </mat-form-field>
           <mat-icon mat-font-set="regular-font">%</mat-icon>
 
         </mat-expansion-panel>
-
 
         </mat-accordion>
 
@@ -133,10 +248,8 @@
       </mat-card-content>
     </mat-tab>
   </mat-tab-group>
-  <!-- <mat-card-actions> -->
   <mat-card-footer>
     <button mat-raised-button color="primary" (click)="saveAllFeedback()">{{ 'Save' | translate}}</button>
     <button mat-raised-button (click)="close()">{{ 'Close' | translate}}</button>
   </mat-card-footer>
-  <!-- </mat-card-actions> -->
 </form>

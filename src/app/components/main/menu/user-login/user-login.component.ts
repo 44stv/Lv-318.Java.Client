@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Login } from '../../../../models/login.model';
-import { CustomAuthService } from '../../../../services/auth/custom-auth.service';
-import { TokenModel } from '../../../../services/auth/token/token-model';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatSnackBar } from '@angular/material';
-import { MatDialogRef } from '@angular/material/dialog';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Login} from '../../../../models/login.model';
+import {CustomAuthService} from '../../../../services/auth/custom-auth.service';
+import {TokenModel} from '../../../../services/auth/token/token-model';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
 
 import { HttpErrorResponse } from '@angular/common/http';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
@@ -91,7 +91,3 @@ export class UserLoginComponent implements OnInit {
   }
 
 }
-
-
-
-

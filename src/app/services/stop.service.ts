@@ -27,6 +27,6 @@ export class StopService {
   }
 
   getStopsByTransitIdAndDirection(transitId: number, direction: String): Observable<Stop[]> {
-    return this.http.get<Stop[]>(this.serviceUrl + '?transit-id=' + transitId + '&dir=' + direction);
+    return this.http.get<Stop[]>(this.serviceUrl + '?id=' + transitId + '&dir=' + direction);
   }
 }
