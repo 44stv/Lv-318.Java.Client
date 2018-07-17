@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Login} from '../../../../models/login.model';
 import {CustomAuthService} from '../../../../services/auth/custom-auth.service';
 import {TokenModel} from '../../../../services/auth/token/token-model';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {MatDialogRef} from '@angular/material/dialog';
 
@@ -18,16 +18,11 @@ import {ForgetPasswordComponent} from './forget-password/forget-password.compone
 })
 export class UserLoginComponent implements OnInit {
 
-  login: Login ;
+  login: Login;
   loginForm: FormGroup;
   hide: boolean = true;
+  returnUrl: string;
 
-  constructor(public  matDialogRef: MatDialogRef<UserLoginComponent>,
-              private snackBar: MatSnackBar,
-              private fb: FormBuilder, private router: Router,
-              private authService: CustomAuthService,
-              private dialog: MatDialog) {
-  }
 
   emailControl: FormControl = new FormControl('', [
     Validators.required,
@@ -45,6 +40,18 @@ export class UserLoginComponent implements OnInit {
     Validators.minLength(6),
     Validators.maxLength(16),
   ]);
+
+  constructor(public  matDialogRef: MatDialogRef<UserLoginComponent>,
+              private snackBar: MatSnackBar,
+              private route: ActivatedRoute,
+              private fb: FormBuilder, private router: Router,
+              private authService: CustomAuthService,
+              private dialog: MatDialog) {
+  }
+
+  ngOnInit(): void {
+    this.createForm();
+  }
 
   logIn() {
       this.login = this.loginForm.value;
@@ -67,9 +74,9 @@ export class UserLoginComponent implements OnInit {
               });
             }
           }
-        });
-    }
-
+        }
+      });
+  }
 
 
   createForm() {
@@ -79,9 +86,6 @@ export class UserLoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.createForm();
-  }
   openForgetPassword() {
     this.dialog.open(ForgetPasswordComponent);
     this.matDialogRef.close();

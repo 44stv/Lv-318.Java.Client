@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 
-import { FeedbackCriteriaService } from '../../../../services/feedback-criteria.service';
-import { FeedbackCriteria } from '../../../../models/feedback-criteria.model';
+import { FeedbackCriteriaService } from '../../../services/feedback-criteria.service';
+import { FeedbackCriteria } from '../../../models/feedback-criteria.model';
 import { filter } from 'rxjs/operators';
-import { Question } from '../../../../models/question.model';
+import { Question } from '../../../models/question.model';
 
 @Component({
   selector: 'app-feedback-criteria',

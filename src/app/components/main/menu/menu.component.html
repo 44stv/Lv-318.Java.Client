@@ -32,12 +32,12 @@
       </div>
 
       <div class="userProfile" style="margin-left: 15px">
-        <a [routerLink]="['/main/user/profile']" *ngIf="hasToken()">
-          <button mdc-button [secondary]="true" type="submit">{{'MyProfile' | translate }}</button>
+        <a [routerLink]="['/main/user/profile']" *ngIf="hasToken() && (getRole() === role.User)">
+          <button mdc-button [secondary]="true" type="submit">{{'MyProfile' | translate}}</button>
         </a>
-       <!-- <a [routerLink]="['/main/admin']" *ngIf="hasToken() && getRole() === role.Admin">
-          <button mdc-button [secondary]="true" type="submit">{{'Admin' | translate}}</button>
-        </a>-->
+        <a [routerLink]="['/main/admin']" *ngIf="hasToken() && getRole() === role.Admin">
+          <button mdc-button [secondary]="true" type="submit">{{'MyProfile' | translate}}</button>
+        </a>
       </div>
     </mdc-toolbar-section>
     <div class="Search">

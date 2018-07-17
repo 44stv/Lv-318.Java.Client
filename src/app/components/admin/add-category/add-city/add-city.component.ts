@@ -1,21 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {Location} from '@angular/common';
-import {Category} from '../../../../models/category.model';
 import {ExcategoryService} from '../../../../services/excategory.service';
-import {MatSnackBar} from '@angular/material';
+import {Category} from '../../../../models/category.model';
+import {Location} from '@angular/common';
+import {ExcategoryModel} from '../../../../models/excategory.model';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 import {MatDialogRef} from '@angular/material/dialog';
 import {UpdateRoleComponent} from '../../update-role/update-role.component';
 
-
 @Component({
-  selector: 'app-add-top-category',
-  templateUrl: './add-top-category.component.html',
-  styleUrls: ['./add-top-category.component.css']
+  selector: 'app-add-city',
+  templateUrl: './add-city.component.html',
+  styleUrls: ['./add-city.component.css']
 })
-export class AddTopCategoryComponent implements OnInit {
+export class AddCityComponent implements OnInit {
 
-  categoryModel = new Category();
+  categoryModel = new ExcategoryModel();
+  topCategories: Category[] = [];
+  selectedCategory: ExcategoryModel;
+  cityName: string;
 
   constructor(private location: Location,
               private excatServ: ExcategoryService,
@@ -27,11 +30,16 @@ export class AddTopCategoryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.excatServ.getTopCategories().subscribe(
+      result => this.topCategories = result
+  );
+    console.log(this.categoryModel);
   }
 
   saveCategory(): void {
+    this.add(this.cityName, this.selectedCategory);
     this.excatServ.save(this.categoryModel).subscribe(() => {
-      this.snackBar.open('Category added sucsessfully.', null, {
+      this.snackBar.open('City added sucsessfully.', null, {
         duration: 2000
       });
       this.matDialogRef.close();
@@ -43,7 +51,15 @@ export class AddTopCategoryComponent implements OnInit {
     });
   }
 
+  add(city: string, top: ExcategoryModel) {
+    if (!(top == null && city == null)) {
+      this.categoryModel.name = city;
+      this.categoryModel.nextLevelCategory = top;
+    }
+  }
+
   close() {
     this.matDialogRef.close();
   }
+
 }
