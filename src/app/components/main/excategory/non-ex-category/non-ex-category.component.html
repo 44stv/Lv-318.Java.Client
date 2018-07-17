@@ -14,7 +14,7 @@
           {{category.name}}
         </div>
         <div class="rating">
-          <div class="rating-number">{{category.rating}}</div>
+          <div class="rating-number">{{category.rating | number : '1.1-1'}}</div>
           <div class="rating-text">Average rating</div>
           <circle-progress
             [percent]="category.rating * 10"
