@@ -58,10 +58,8 @@ export class UpdateFormComponent implements OnInit {
 
 
   add(role: string, userEmail: string) {
-    if (!(role == null && this.userEmail == null)) {
-      this.updateRoleModel.email = userEmail;
-      this.updateRoleModel.role = role;
-    }
+    this.updateRoleModel.email = userEmail;
+    this.updateRoleModel.role = role;
   }
 
   close() {
