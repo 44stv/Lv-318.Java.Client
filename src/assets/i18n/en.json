@@ -60,7 +60,7 @@
   "reload": "Reload chart",
   "MyProfile": "MyProfile",
   "Invite friend": "Invite friend",
-  "Change password": "Change password"
+  "Change password": "Change password",
   "firstName": "First Name",
   "lastName": "Last Name",
   "role": "Role",
@@ -79,7 +79,7 @@
   "Type in non-ex category name": "Type in category name (type of transport)",
   "Category": "Category",
   "Type in user e-mail": "Type in user e-mail",
-  "Select role for": "Select role for"
+  "Select role for": "Select role for",
   "reload": "Reload chart",
   "postComment": "PostComment"
 }

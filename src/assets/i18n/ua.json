@@ -60,7 +60,7 @@
   "reload": "Оновити графік",
   "MyProfile": "Мій кабінет",
   "Invite friend": "Запросити друга",
-  "Change password": "Змінити пароль"
+  "Change password": "Змінити пароль",
   "firstName": "Ім'я",
   "lastName": "Прізвище",
   "role": "Роль",
@@ -79,7 +79,7 @@
   "Type in non-ex category name": "Введіть ім'я категорії (тип транспорту)",
   "Category": "Категорія",
   "Type in user e-mail": "Введіть e-mail користувача",
-  "Select role for": "Оберіть роль для"
+  "Select role for": "Оберіть роль для",
   "reload": "Оновити графік",
   "postComment": "Залишити коментар"
 }
