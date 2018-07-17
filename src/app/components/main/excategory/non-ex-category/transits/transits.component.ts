@@ -3,11 +3,11 @@ import {ActivatedRoute} from '@angular/router';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {environment} from '../../../../../../environments/environment';
 
-import { Transit } from '../../../../../models/transit.model';
-import { TransitService } from '../../../../../services/transit.service';
-import { DiagramService } from '../../../../../services/diagram.service';
-import { BreadcrumbService } from 'ng5-breadcrumb';
-import { NonExCategoryService } from '../../../../../services/non-ex-category.service';
+import {Transit} from '../../../../../models/transit.model';
+import {TransitService} from '../../../../../services/transit.service';
+import {DiagramService} from '../../../../../services/diagram.service';
+import {BreadcrumbService} from 'ng5-breadcrumb';
+import {NonExCategoryService} from '../../../../../services/non-ex-category.service';
 
 
 @Component({
@@ -118,4 +118,11 @@ export class TransitsComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  getCategoryid(categoryIdFromAngular: number, categoryIdFromBase: number): number {
+    if (categoryIdFromAngular !== undefined) {
+      return categoryIdFromAngular;
+    }
+
+    return categoryIdFromBase;
+  }
 }

@@ -2,10 +2,10 @@
 .feedbackCriteria{
   font-size: 14px;
   width: 50%;
-  margin: 150px 400px;
+  margin: auto auto;
 }
 .mat-elevation-z8{
-  width: 100%; 
+  width: 100%;
 }
 .mat-stroked-button{
   position: right;
@@ -15,17 +15,17 @@
   float: left;
 }
 .mat-paginator{
-  right: 1px;  
+  right: 1px;
 }
 .mat-column-type{
   max-width: 150px;
 }
 .mat-column-weight{
-  max-width: 100px; 
+  max-width: 100px;
 }
 .mat-column-questionType{
   max-width: 100px;
-  right: 5px;  
+  right: 5px;
 }
 .mat-cell{
   margin-bottom: 1%;

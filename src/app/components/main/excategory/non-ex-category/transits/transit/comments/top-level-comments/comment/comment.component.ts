@@ -45,6 +45,7 @@ export class CommentComponent implements OnInit {
     this.modified = this.comment.modifiedDate != null;
     this.postCommentDate = this.calculateTimeDiffBetweenNowAndDate(new Date(this.comment.postDate));
     this.modifiedCommentDate = new Date(this.comment.modifiedDate).toString();
+
     if (this.comment.images !== null) {
       this.images = JSON.parse(this.comment.images);
     }
@@ -169,8 +170,6 @@ export class CommentComponent implements OnInit {
     } else {
       alert('invalid format!');
     }
-
-    console.log(this.selectedFiles);
   }
 
   uploadPics(comment: MyComment) {
@@ -178,13 +177,11 @@ export class CommentComponent implements OnInit {
     const subDir = `subDir=transitId${comment.transitId}/commentId${comment.id}`;
 
     for (let i = 0; i < this.selectedFiles.length; i++) {
-      console.log('state ' + i + ', ' + this.selectedFiles.item(i).name);
       this.commentService.uploadFile(this.selectedFiles.item(i), subDir).subscribe(res => {
         uploadedImageURLs.push(res);
 
         if (uploadedImageURLs.length === this.selectedFiles.length) {
           this.commentService.addImagesToComment(comment.id, JSON.stringify(uploadedImageURLs)).subscribe(res1 => {
-            console.log(res1);
             this.getChildrenComments();
           });
         }

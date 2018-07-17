@@ -1,28 +1,26 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import * as moment from 'moment/moment';
-import { Observable } from 'rxjs';
-import { MatSnackBar } from '@angular/material';
-import { HttpParams } from '@angular/common/http';
+import {HttpParams} from '@angular/common/http';
 
 import {
-  SimpleAnswer,
+  CapacityHoursFeedback,
+  CapacityRouteFeedback,
   Feedback,
   Questioner,
   RatingAnswer,
-  CapacityRouteFeedback,
-  CapacityHoursFeedback,
+  SimpleAnswer,
   Time
 } from '../../../../../../../models/feedback.model';
-import { FeedbackService } from '../../../../../../../services/feedback.service';
-import { StopService } from '../../../../../../../services/stop.service';
-import { FeedbackCriteriaService } from '../../../../../../../services/feedback-criteria.service';
-import { FeedbackCriteria } from '../../../../../../../models/feedback-criteria.model';
-import { Question } from '../../../../../../../models/question.model';
-import { Stop } from '../../../../../../../models/stop.model';
-import { MyComment } from '../../../../../../../models/comment.model';
-import { CommentService } from '../../../../../../../services/comment.service';
-import { CustomAuthService } from '../../../../../../../services/auth/custom-auth.service';
+import {FeedbackService} from '../../../../../../../services/feedback.service';
+import {StopService} from '../../../../../../../services/stop.service';
+import {FeedbackCriteriaService} from '../../../../../../../services/feedback-criteria.service';
+import {FeedbackCriteria} from '../../../../../../../models/feedback-criteria.model';
+import {Question} from '../../../../../../../models/question.model';
+import {Stop} from '../../../../../../../models/stop.model';
+import {MyComment} from '../../../../../../../models/comment.model';
+import {CommentService} from '../../../../../../../services/comment.service';
+import {CustomAuthService} from '../../../../../../../services/auth/custom-auth.service';
 
 
 @Component({
@@ -35,33 +33,39 @@ export class AddFeedbackComponent implements OnInit {
   @Input() qualitySurvey: Questioner[] = [];
   @Input() capacitySurvey: Questioner[] = [];
   @Input() capacity = 0;
+  @Input() transitComment: MyComment = new MyComment();
+  @Input() direction: String;
   @Input() transitId: number = this.data.number;
   @Input() transitName: String = this.data.transitName;
-  @Input() private transitComment: MyComment = new MyComment();
-  private stops: Observable<Stop[]>;
+  @Input() feedbackFromMaps: boolean = (this.data.fromMaps) ? this.data.fromMaps : false;
+  @Input() imageAnswer: String = '';
+  @Input() haveConflicts: boolean;
+  @Input() conflicts: String[] = [];
   private categoryId: number = this.data.categoryId;
-  private userId = 1;
+
+  private forwardStops: Stop [] = [];
+  private backwardStops: Stop [] = [];
   private checkBoxAnswers: String[] = ['YES', 'NO', 'MAYBE'];
-  private quantityLoadAnswers: String[] = ['SIT', 'STAY', 'HARD_LOAD', 'LOSER'];
   successMessage = 'Feedback and Comment posted';
   failedMessage = 'Empty feedback';
-  loginMessage = 'Please, log in';
   action = 'Hide';
-  // private directions: String[] = ['FORWARD', 'BACKWARD'];
-  // private direction: String;
+  private directions: String[] = ['FORWARD', 'BACKWARD'];
 
-  constructor(private dialogRef: MatDialogRef<AddFeedbackComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-    private feedbackService: FeedbackService, private criteriaService: FeedbackCriteriaService,
-    private stopService: StopService,
-    private commentService: CommentService,
-    public snackBar: MatSnackBar,
-    public auth: CustomAuthService) {
+
+  constructor(private dialogRef: MatDialogRef<AddFeedbackComponent>, @ Inject(MAT_DIALOG_DATA) public data: any,
+              private feedbackService: FeedbackService, private criteriaService: FeedbackCriteriaService,
+              private stopService: StopService,
+              private commentService: CommentService,
+              public snackBar: MatSnackBar,
+              public auth: CustomAuthService) {
 
     this.survey = this.buildSurveyByCriteriaType(['RATING']);
-    this.qualitySurvey = this.buildSurveyByCriteriaType(['SIMPLE', 'QUALITY'])
+    this.qualitySurvey = this.buildSurveyByCriteriaType(['SIMPLE', 'QUANTITY_LOAD', 'CONFLICT']);
     this.capacitySurvey = this.buildSurveyByCriteriaType(['ROUTE_CAPACITY', 'HOURS_CAPACITY']);
-    this.stops = this.stopService.getStopsByTransitId(this.transitId);
-    // this.stops= this.stopService.getStopsByTransitIdAndDirection(this.transitId,this.direction);
+    this.direction = this.getDirection();
+    this.forwardStops = this.getByTransitAndDirection('FORWARD');
+    this.backwardStops = this.getByTransitAndDirection('BACKWARD');
+
 
   }
 
@@ -76,21 +80,26 @@ export class AddFeedbackComponent implements OnInit {
     const feedbacks: Feedback[] = this.toFeedbackList(this.survey);
     const capFeedbacks: Feedback[] = this.toFeedbackList(this.capacitySurvey);
     const quantityFeedbacks: Feedback[] = this.toFeedbackList(this.qualitySurvey);
-    console.log(feedbacks.concat(capFeedbacks, quantityFeedbacks));
-    // if (this.transitComment.commentText) {
-    //   this.addComment();
-    // }
-    if (feedbacks.concat(capFeedbacks, quantityFeedbacks).length > 0 || this.transitComment.commentText) {
-      this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks)).subscribe();
+    if (feedbacks.concat(capFeedbacks, quantityFeedbacks).length > 0 && this.transitComment.commentText) {
+      this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks, quantityFeedbacks)).subscribe();
       this.addComment();
       this.openSnackBar(this.successMessage);
+      this.dialogRef.close();
+    } else if (this.transitComment.commentText) {
+      this.addComment();
+      this.openSnackBar('Comment posted');
+      this.dialogRef.close();
+    } else if (feedbacks.concat(capFeedbacks, quantityFeedbacks).length > 0) {
+      this.feedbackService.saveAllFeedback(feedbacks.concat(capFeedbacks, quantityFeedbacks)).subscribe();
+      this.openSnackBar('Feedback posted');
+      this.dialogRef.close();
     } else {
       this.openSnackBar(this.failedMessage);
+      this.dialogRef.close();
     }
-    this.dialogRef.close();
   }
 
-  public buildSurveyByCriteriaType(types: String[]): Questioner[] {
+  public buildSurveyByCriteriaType(types: String []): Questioner[] {
     const survey: Questioner[] = [];
     types.forEach(type => {
       this.criteriaService.getAllFeedbackCriteriaByTypeAndCategoryId(this.categoryId, type)
@@ -101,6 +110,7 @@ export class AddFeedbackComponent implements OnInit {
               return b.priority - a.priority;
             });
             survey.push(questioner);
+            survey.sort(this.sortQuestioner);
           });
         });
     });
@@ -121,25 +131,28 @@ export class AddFeedbackComponent implements OnInit {
 
   public buildAnswerModel(questioner: Questioner, criteria: FeedbackCriteria) {
     switch (questioner.type) {
-      case 'RATING':
+      case 'RATING' :
         questioner.answer = new Array<number>(criteria.questions.length);
         break;
-      case 'SIMPLE':
+      case 'SIMPLE' :
         questioner.answer = new SimpleAnswer();
         break;
-      case 'QUALITY':
+      case 'QUANTITY_LOAD' :
         questioner.answer = new SimpleAnswer();
         break;
-      case 'ROUTE_CAPACITY':
-        questioner.answer = new Array<Stop>(questioner.routeQuestions.length);
+      case 'ROUTE_CAPACITY' :
+        questioner.answer = (this.data.fromStopId && this.data.toStopId) ? this.getStopsAnswerModel() :
+          new Array<Stop>(questioner.routeQuestions.length);
         break;
-      case 'HOURS_CAPACITY':
+      case 'HOURS_CAPACITY' :
         questioner.answer = new Array<String>(questioner.timeQuestions.length);
+        break;
+      case 'CONFLICT' :
+        questioner.answer = new SimpleAnswer();
         break;
     }
 
   }
-
 
   public toFeedbackList(survey: Questioner[]): Feedback[] {
     const feedbacks: Feedback[] = [];
@@ -159,16 +172,18 @@ export class AddFeedbackComponent implements OnInit {
 
   public answerFormatter(questioner: Questioner): string {
     switch (questioner.type) {
-      case 'RATING':
+      case 'RATING' :
         return this.buildRatingAnswer(questioner);
-      case 'SIMPLE':
+      case 'SIMPLE' :
         return this.buildSimpleAnswer(questioner);
-      case 'QUALITY':
+      case 'QUANTITY_LOAD' :
         return this.buildSimpleAnswer(questioner);
-      case 'ROUTE_CAPACITY':
+      case 'ROUTE_CAPACITY' :
         return this.buildCapacityRouteAnswer(questioner);
-      case 'HOURS_CAPACITY':
+      case 'HOURS_CAPACITY' :
         return this.buildCapacityHoursAnswer(questioner);
+      case 'CONFLICT' :
+        return this.buildConflictFeedbackAnswer();
     }
   }
 
@@ -181,6 +196,16 @@ export class AddFeedbackComponent implements OnInit {
     }
   }
 
+  public buildConflictFeedbackAnswer(): string {
+    let conflicts: String[] = [];
+    if (this.conflicts && this.conflicts.length > 0) {
+      return JSON.stringify(this.conflicts);
+    } else if (this.haveConflicts === false) {
+      conflicts.push('NO_CONFLICT');
+      return JSON.stringify(conflicts);
+    }
+    return '';
+  }
 
   public buildRatingAnswer(questioner: Questioner): string {
     const rates: RatingAnswer[] = [];
@@ -228,20 +253,15 @@ export class AddFeedbackComponent implements OnInit {
         times.push(time);
       }
     }
-
-    // TODO:new sorting
     if (times.length > 1) {
       times.sort((time1: Time, time2: Time) => {
         if (time1.hour > time2.hour) {
           return 1;
-        }
-        else if (time1.hour < time2.hour) {
+        } else if (time1.hour < time2.hour) {
           return -1;
-        }
-        else if (time1.minute > time2.minute) {
+        } else if (time1.minute > time2.minute) {
           return 1;
-        }
-        else if (time1.minute > time2.minute) {
+        } else if (time1.minute > time2.minute) {
           return -1;
         }
         return 0;
@@ -271,7 +291,7 @@ export class AddFeedbackComponent implements OnInit {
   public addComment() {
     let params = new HttpParams();
     params = params.set('transitId', this.transitId.toString());
-    params = params.set('userId', this.userId.toString());
+    params = params.set('userId', this.auth.getUserId().toString());
     this.commentService.addComment(params, this.transitComment)
       .subscribe(comment => console.log(comment));
   }
@@ -282,8 +302,55 @@ export class AddFeedbackComponent implements OnInit {
     });
   }
 
-  // public getByTransitAndDirection(direction: String){
-  //   this.stops =this.stopService.getStopsByTransitIdAndDirection(this.transitId,direction);
-  // }
+  public getStopsAnswerModel(): Stop[] {
+    const defaultStops: Stop[] = [];
+    this.stopService.getStopsByTransitIdAndDirection(this.transitId, this.direction).subscribe(stops => {
+      stops.forEach(stop => {
+          if (stop.id === this.data.fromStopId || stop.id === this.data.toStopId) {
+            defaultStops.push(stop);
+          }
+        }
+      );
+    });
+    return defaultStops;
+  }
+
+  public compareStop(c1: Stop, c2: Stop): boolean {
+    return (c1 && c2) ? c1.street === c2.street : c1 === c2;
+  }
+
+  public getTransitStops(): Stop[] {
+    const stops: Stop[] = [];
+    this.stopService.getStopsByTransitId(this.transitId).subscribe(data => {
+      data.forEach(stop => stops.push(stop));
+    });
+    return stops;
+  }
+
+  public getByTransitAndDirection(direction: String) {
+    const stops: Stop[] = [];
+    this.stopService.getStopsByTransitIdAndDirection(this.transitId, direction).subscribe(data => {
+      data.forEach(stop => {
+        stops.push(stop);
+      });
+    });
+    return stops;
+  }
+
+  public getDirection(): String {
+    let direction: String;
+    if (this.data.direction) {
+      direction = this.data.direction.toUpperCase();
+    }
+    return direction;
+  }
+
+  public isSelectedConflict(conflict: String) {
+    this.conflicts.push(conflict);
+  }
+
+  public sortQuestioner(questioner1: Questioner, questioner2: Questioner): number {
+    return questioner1.getPriority() - questioner2.getPriority();
+  }
 }
 

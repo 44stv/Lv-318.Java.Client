@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { Category } from '../../../../models/category.model';
-import { ExcategoryService } from '../../../../services/excategory.service';
-import { MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
+import {Category} from '../../../../models/category.model';
+import {ExcategoryService} from '../../../../services/excategory.service';
+import {MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
+import {MatDialogRef} from '@angular/material/dialog';
+import {UpdateRoleComponent} from '../../update-role/update-role.component';
 
 
 @Component({
@@ -16,9 +18,11 @@ export class AddTopCategoryComponent implements OnInit {
   categoryModel = new Category();
 
   constructor(private location: Location,
-    private excatServ: ExcategoryService,
-    private snackBar: MatSnackBar,
-    private router: Router) {
+              private excatServ: ExcategoryService,
+              private snackBar: MatSnackBar,
+              private router: Router,
+              private  matDialogRef: MatDialogRef<UpdateRoleComponent>,
+  ) {
 
   }
 
@@ -30,7 +34,7 @@ export class AddTopCategoryComponent implements OnInit {
       this.snackBar.open('Category added sucsessfully.', null, {
         duration: 2000
       });
-      this.router.navigate(['/main/admin']);
+      this.matDialogRef.close();
     }, error => {
       this.snackBar.open('Provider  with the such name is already exists in database .'
         , null, {
@@ -40,6 +44,6 @@ export class AddTopCategoryComponent implements OnInit {
   }
 
   close() {
-    this.location.back();
+    this.matDialogRef.close();
   }
 }

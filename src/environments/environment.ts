@@ -6,9 +6,8 @@ export const environment = {
   production: false,
   clientUrl: 'http://localhost:4200/',
   imageServerURL: 'http://localhost:8090',
-  serverURL: 'https://localhost:8443',
+  serverURL: 'http://localhost:8080',
   // serverURL: 'https://uatransport.tk',
-
 
   accessTokenHeader: 'Authorization',
   refreshTokenHeader: 'Refresh-token',

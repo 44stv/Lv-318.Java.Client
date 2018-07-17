@@ -1,16 +1,16 @@
-<div class="addfeedbackcriteria">
+<div class="add-category">
 
-  <h4 mat-dialog-title>Type in category name</h4>
+  <h4 mat-dialog-title>{{'Type in category name' | translate}}</h4>
   <mat-form-field appearance="outline">
-    <mat-label>Category name</mat-label>
-    <input matInput placeholder="Category" [(ngModel)]="categoryModel.name" id="name" name="name ">
+    <mat-label>{{'Category name' | translate}}</mat-label>
+    <input matInput placeholder="{{'Category name' | translate}}" [(ngModel)]="categoryModel.name" id="name" name="name ">
   </mat-form-field>
   <div class="button">
     <div class="stroked-button-left">
-      <button mat-stroked-button (click)="close()">Close</button>
+      <button mat-stroked-button (click)="close()">{{'Close' | translate}}</button>
     </div>
     <div class="stroked-button-right">
-      <button mat-stroked-button (click)="saveCategory()"> Save</button>
+      <button mat-stroked-button (click)="saveCategory()">{{'Save' | translate}}</button>
     </div>
   </div>
 </div>

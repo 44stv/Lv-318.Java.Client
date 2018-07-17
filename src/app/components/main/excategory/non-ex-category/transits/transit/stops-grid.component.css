@@ -1,5 +1,5 @@
 .demo-grid-list {
-  width: auto;
+  width: 90%;
   padding-left: 2px;
   margin-left: auto;
   margin-right: auto;
@@ -13,7 +13,7 @@ p {
 .tile {
   text-align: center;
   font-size: 14px;
-  width:85px;
+  width: 85px;
   display: inline-block;
   padding-bottom: 0px;
 }
@@ -22,11 +22,12 @@ p {
   align-content: center;
 }
 
-.tile-content{
+.tile-content {
   font-weight: lighter;
   font-size: 12px;
   align-items: flex-end;
 }
+
 .image-opacity {
   opacity: 0.4;
 }
@@ -34,5 +35,7 @@ p {
 .tile-content:hover {
   opacity: 0.7;
 }
+
+
 
 
