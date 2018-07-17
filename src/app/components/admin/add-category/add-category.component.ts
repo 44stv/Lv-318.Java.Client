@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ExcategoryService } from '../../../services/excategory.service';
-import { FormBuilder } from '@angular/forms';
-import { getAllCategoryLevel } from './category-level.model';
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ExcategoryService} from '../../../services/excategory.service';
+import {FormBuilder} from '@angular/forms';
+import {getAllCategoryLevel} from './category-level.model';
+import {Location} from '@angular/common';
+import {MatDialogRef} from '@angular/material/dialog';
+import {UpdateRoleComponent} from '../update-role/update-role.component';
 
 @Component({
   selector: 'app-add-category',
@@ -15,19 +17,20 @@ export class AddCategoryComponent implements OnInit {
   levels: string[] = getAllCategoryLevel();
 
   constructor(private exCategotyService: ExcategoryService,
-    private formBuilder: FormBuilder,
-    private location: Location) {
+              private formBuilder: FormBuilder,
+              private location: Location,
+              private  matDialogRef: MatDialogRef<UpdateRoleComponent>,
+  ) {
   }
 
   ngOnInit() {
     this.levels = getAllCategoryLevel();
-    // this.topCategories = this.exCategotyService.getTopCategories();
     console.log(this.levels);
 
   }
 
   close() {
-    this.location.back();
+    this.matDialogRef.close();
   }
 
 }

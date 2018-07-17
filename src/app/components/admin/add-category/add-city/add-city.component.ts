@@ -5,6 +5,8 @@ import {Location} from '@angular/common';
 import {ExcategoryModel} from '../../../../models/excategory.model';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
+import {UpdateRoleComponent} from '../../update-role/update-role.component';
 
 @Component({
   selector: 'app-add-city',
@@ -21,7 +23,9 @@ export class AddCityComponent implements OnInit {
   constructor(private location: Location,
               private excatServ: ExcategoryService,
               private snackBar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private  matDialogRef: MatDialogRef<UpdateRoleComponent>,
+  ) {
 
   }
 
@@ -38,7 +42,7 @@ export class AddCityComponent implements OnInit {
       this.snackBar.open('City added sucsessfully.', null, {
         duration: 2000
       });
-      this.router.navigate(['/main/admin']);
+      this.matDialogRef.close();
     }, error => {
       this.snackBar.open('Provider  with the such name is already exists in database .'
         , null, {
@@ -55,7 +59,7 @@ export class AddCityComponent implements OnInit {
   }
 
   close() {
-    this.location.back();
+    this.matDialogRef.close();
   }
 
 }

@@ -5,6 +5,8 @@ import {ExcategoryService} from '../../../../services/excategory.service';
 import {MatSnackBar} from '@angular/material';
 import {ExcategoryModel} from '../../../../models/excategory.model';
 import {Location} from '@angular/common';
+import {MatDialogRef} from '@angular/material/dialog';
+import {UpdateRoleComponent} from '../../update-role/update-role.component';
 
 @Component({
   selector: 'app-add-nonextendable-category',
@@ -23,7 +25,9 @@ export class AddNonextendableCategoryComponent implements OnInit {
   constructor(private location: Location,
               private excatServ: ExcategoryService,
               private snackBar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private  matDialogRef: MatDialogRef<UpdateRoleComponent>,
+  ) {
 
   }
 
@@ -39,7 +43,7 @@ export class AddNonextendableCategoryComponent implements OnInit {
       this.snackBar.open('City added sucsessfully.', null, {
         duration: 2000
       });
-      this.router.navigate(['/main/admin']);
+      this.matDialogRef.close();
     }, error => {
       this.snackBar.open('Provider  with the such name is already exists in database .'
         , null, {
@@ -63,6 +67,6 @@ export class AddNonextendableCategoryComponent implements OnInit {
   }
 
   close() {
-    this.location.back();
+    this.matDialogRef.close();
   }
 }
