@@ -51,13 +51,14 @@ export class FriendInvitationComponent implements OnInit {
     this.friend = this.friendForm.value;
     this.userService.sendInvitation(this.friend).subscribe((info: InfoResponse) => {
       this.snackBar.open(info.response, null, {
-        duration: 4000
+        duration: 3000
       });
       this._isSent = true;
+      setTimeout(() =>  this.matDialogRef.close(), 3000);
     }, (error) => {
       if (error instanceof HttpErrorResponse) {
         this.snackBar.open(error.error.message, null, {
-          duration: 5000
+          duration: 3000
         });
       }
     });

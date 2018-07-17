@@ -2,7 +2,7 @@ export enum Role {
   Unauthorized,
   User,
   Manager,
-  Admin,
+  Admin
 }
 
 export function determineRole(input: string): Role {

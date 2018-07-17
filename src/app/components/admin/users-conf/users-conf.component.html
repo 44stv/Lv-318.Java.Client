@@ -1,0 +1,42 @@
+<app-back-to-previous-page-btn></app-back-to-previous-page-btn>
+<div class="mat-elevation-z8">
+  <div class="row">
+    <div class="col-xs-6">
+      <mat-form-field >
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+    <div class="col-xs-6">
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="firstname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'firstName' | translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.firstName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'lastName' | translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.lastName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> E-Mail </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'role' | translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.role }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns; let user;"
+             (click) = "openModal(user)" class="mat-row-hover"></mat-row>
+  </mat-table>
+
+</div>
+

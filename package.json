@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --ssl true --ssl-key 'ssl/server.key' --ssl-cert 'ssl/server.crt' --host 0.0.0.0 ",
+    "start": "ng serve --ssl true --ssl-key 'ssl/server.key' --ssl-cert 'ssl/server.crt' --host 0.0.0.0",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -43,6 +43,7 @@
     "angular2-jwt": "^0.2.3",
     "angular2-moment": "^1.9.0",
     "angular4-carousel": "^3.1.8",
+    "angular4-material-table": "^0.6.7",
     "auth0-js": "^9.6.1",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.7.2",

@@ -42,7 +42,7 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let transit;"
-             [routerLink]="['/main/', topName, cityName , transit.categoryId, 'transit',
+             [routerLink]="['/main/', topName, cityName , getCategoryid(categoryId, transit.categoryId), 'transit',
              transit.id, transit.name, transit.categoryIconURL]"></mat-row>
   </mat-table>
 
