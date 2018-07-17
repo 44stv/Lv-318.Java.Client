@@ -5,7 +5,8 @@ export class MyComment {
   modifiedDate:    string;
   userId:          number;
   transitId:       number;
-  parentCommentId: null;
+  parentCommentId: string;
   parent:          boolean;
+  level:           number;
+  images:          string;
 }
-
