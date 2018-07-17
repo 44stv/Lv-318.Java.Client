@@ -8,9 +8,6 @@
         <img src="{{ categoryIconURL }}{{ transit.category.iconURL }}" style="width:20px; height:20px;">
         {{transit.name}}
       </mat-option>
-      <mat-option *ngFor="let stop of filteredStreets | async" [value]="stop" a routerLink="search/{{stop}}">
-      {{stop}}
-      </mat-option>
     </mat-autocomplete>
   </mat-form-field>
 

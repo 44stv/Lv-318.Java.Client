@@ -10,7 +10,6 @@ import {MatDialog} from '@angular/material';
 import {AddUserComponent} from './add-user/add-user.component';
 import {UserLoginComponent} from './user-login/user-login.component';
 import {FormControl} from '@angular/forms';
-import { FormControl } from '@angular/forms';
 import {AuthService} from 'angular-6-social-login';
 
 @Component({

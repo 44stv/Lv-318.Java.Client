@@ -12,6 +12,7 @@ import { Category } from '../../../../models/category.model';
 import { TransitService } from '../../../../services/transit.service';
 import { environment } from '../../../../../environments/environment';
 import { ExcategoryService } from '../../../../services/excategory.service';
+import { StopsGridComponent } from '../../excategory/non-ex-category/transits/transit/stops-grid.component';
 
 @Component({
   selector: 'app-search-field',
@@ -57,10 +58,10 @@ export class SearchFieldComponent implements OnInit, OnChanges {
         .pipe(startWith(this.myControl.value),
           map(valueLocal => this._filter(value))
         );
-      this.filteredStreets = this.myControl.valueChanges.pipe(delay(this.delayMs),
-        startWith(delay(this.delayMsNumber),
-          this.myControl.value),
-        map(valueLocal => this.filterStreet(value)));
+      // this.filteredStreets = this.myControl.valueChanges.pipe(delay(this.delayMs),
+      //   startWith(delay(this.delayMsNumber),
+      //     this.myControl.value),
+      //   map(valueLocal => this.filterStreet(value)));
 
     }
   }
@@ -74,10 +75,10 @@ export class SearchFieldComponent implements OnInit, OnChanges {
       ;
   }
 
-  private filterStreet(value: string): string [] {
-    const filterValue = value.toString().toLowerCase();
-    return this.uniqueStreet.filter(street => street.toLowerCase().includes(filterValue));
-  }
+  // private filterStreet(value: string): string [] {
+  //   const filterValue = value.toString().toLowerCase();
+  //   return this.uniqueStreet.filter(street => street.toLowerCase().includes(filterValue));
+  // }
 
   getData(searchTerm: string) {
     if (this.globalSearchService.isLocationChange === true) {
@@ -86,17 +87,6 @@ export class SearchFieldComponent implements OnInit, OnChanges {
     }
     this.globalSearchService.getResults(searchTerm).subscribe((transits: Transit[]) => {
       this.transits = transits;
-      console.log(this.transits);
-      transits.map(stops =>
-        stops.stops.map(value => {
-          console.log(this.streets);
-          if (!(value.street === null)) {
-            this.streets.push(value.street
-            );
-          }
-
-        }));
-      this.uniqueStreet = Array.from(new Set(this.streets));
     });
   }
 
@@ -109,13 +99,14 @@ export class SearchFieldComponent implements OnInit, OnChanges {
         this.nonExService.getNameByCategoryId(this.choosenTransit.categoryId).subscribe(
           category => {
             this.choosenCategory = category;
-            this.router.navigate(['show-transit-scheme/main/Public Transport/' + '/' +
-            this.choosenCategory[0].nextLevelCategory.name + '/' + this.choosenCategory[0].id + '/' +
-            this.choosenTransit.id + '/' + this.choosenTransit.name + '/' + this.choosenTransit.categoryIconURL.replace('/', '%2F')]);
+            this.router.navigate(['/main/Public Transport/' + '/' +
+            this.choosenCategory[0].nextLevelCategory.id + '/' + this.choosenCategory[0].id + '/' +
+            this.choosenTransit.id + '/' + this.choosenTransit.name + '/' + this.choosenTransit.categoryIconURL]);
           });
       }
     );
+    // {path: 'main/:top/:city/:id/transit/:id-transit/:name/:iconUrl', component: StopsGridComponent},
   }
 
 }
-
+// 'show-transit-scheme/main/:top/:city/:id/:id-transit/:name/:iconUrl', component: StopsGridComponent},
