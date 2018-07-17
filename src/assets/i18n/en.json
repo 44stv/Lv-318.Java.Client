@@ -93,5 +93,17 @@
   "Type in user e-mail": "Type in user e-mail",
   "Select role for": "Select role for",
   "Open stops scheme with charts":"Open stops scheme with charts",
-  "Open comments":"Open comments"
+  "Open comments":"Open comments",
+  "postComment": "Post new comment",
+  "newerFirst": "Newer first",
+  "olderFirst": "Older first",
+  "leaveComment": "Enter comment",
+  "sortType": "Select sort type",
+  "replyComment": "Reply",
+  "leaveReply": "Enter your reply",
+  "transitsTableCategory": "Category",
+  "transitName": "Name",
+  "routeName": "Route",
+  "averageRate": "Average rate",
+  "transitsTableFilter": "Filter"
 }

@@ -93,5 +93,18 @@
   "Type in user e-mail": "Введіть e-mail користувача",
   "Select role for": "Оберіть роль для",
   "Open stops scheme with charts":"Відкрити схему зупинок із інформативними графіками",
-  "Open comments":"Відкрити коментарі"
+  "Open comments":"Відкрити коментарі",
+  "postComment": "Залишити новий коментар",
+  "newerFirst": "Новіші спочатку",
+  "olderFirst": "Старіші спочатку",
+  "leaveComment": "Введіть коментар",
+  "sortType": "Виберіть тип сортування",
+  "replyComment": "Відповісти",
+  "leaveReply": "Введіть відповідь",
+  "transitsTableCategory": "Категорія",
+  "transitName": "Ім'я",
+  "routeName": "Маршрут",
+  "averageRate": "Рейтинг",
+  "transitsTableFilter": "Фільтрувати"
+
 }

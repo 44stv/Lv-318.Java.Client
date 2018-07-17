@@ -7,8 +7,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {MatDialogRef} from '@angular/material/dialog';
 
-import {HttpErrorResponse} from '@angular/common/http';
-import {ForgetPasswordComponent} from './forget-password/forget-password.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 
 @Component({
@@ -49,7 +49,7 @@ export class UserLoginComponent implements OnInit {
               private dialog: MatDialog) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.createForm();
   }
 
@@ -78,17 +78,16 @@ export class UserLoginComponent implements OnInit {
   }
 
 
+  createForm() {
+    this.loginForm = this.fb.group({
+      email: this.emailControl,
+      password: this.passwordControl,
+    });
+  }
 
-public createForm(){
-  this.loginForm = this.fb.group({
-    email: this.emailControl,
-    password: this.passwordControl
-  });
- }
-
-public openForgetPassword() {
-  this.dialog.open(ForgetPasswordComponent);
-  this.matDialogRef.close();
- }
+  openForgetPassword() {
+    this.dialog.open(ForgetPasswordComponent);
+    this.matDialogRef.close();
+  }
 
 }

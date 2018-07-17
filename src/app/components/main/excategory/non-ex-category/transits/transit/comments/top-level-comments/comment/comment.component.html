@@ -19,7 +19,7 @@
       <div class="replyArea">
         <mat-form-field>
           <textarea matInput
-                    placeholder="Enter your reply"
+                    placeholder="{{ 'leaveReply' | translate }}"
                     maxlength="256"
                     [(ngModel)]="replyCommentText"
                     [required]="true"></textarea>
@@ -38,7 +38,7 @@
           <button mdc-button
                   [secondary]="false"
                   [raised]="true"
-                  type="submit" (click)="addChildComment()"> Reply
+                  type="submit" (click)="addChildComment()">{{ 'replyComment' | translate }}
           </button>
         </div>
       </div>
