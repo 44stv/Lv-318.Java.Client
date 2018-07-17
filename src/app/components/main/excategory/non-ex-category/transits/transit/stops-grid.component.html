@@ -2,40 +2,56 @@
   <app-back-to-previous-page-btn></app-back-to-previous-page-btn>
   <p style="text-align: center">{{"Route" | translate}}<span> {{transitName}}</span></p>
   <app-maps (toggleDirection)="changeDirection($event)"></app-maps>
-  <div class="stops-scheme">
-    <div *ngIf="directionForward">
-      <h4 align="center">{{forwardStops[0].street}} - {{forwardStops[forwardStops.length-1].street}}</h4>
-      <div *ngIf="forwardStops.length">
-        <div *ngFor="let i=index; let tile of forwardStops" class="tile"
-             (click)="selectStop(tile); busyStopsDiagram.onClick()">
-          <label [for]="tile.id" class="tile-content">
-            <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
-            <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
-                 [ngClass]="{'image-opacity': isSelected(tile)}">
-          </label>
-          <img height="22" width="85px" src="../../../../../../../assets/img/road-icon.png">
+
+  <mat-expansion-panel style="width: auto; top: 20px; position: relative; margin: 5px 0px 10px">
+    <mat-expansion-panel-header style="background-color: #43659c">
+      <mat-panel-title>
+        <font color="white"> Open stops scheme with charts </font>
+      </mat-panel-title>
+      <mat-panel-description>
+
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      <div class="stops-scheme">
+        <div *ngIf="directionForward">
+          <h4 align="center">{{forwardStops[0].street}} - {{forwardStops[forwardStops.length-1].street}}</h4>
+          <div *ngIf="forwardStops.length">
+            <div *ngFor="let i=index; let tile of forwardStops" class="tile"
+                 (click)="selectStop(tile); busyStopsDiagram.onClick()">
+              <label [for]="tile.id" class="tile-content">
+                <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
+                <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
+                     [ngClass]="{'image-opacity': isSelected(tile)}">
+              </label>
+              <img height="22" width="85px" src="../../../../../../../assets/img/road-icon.png">
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!directionForward">
+          <h4 align="center">{{backwardStops[0].street}} - {{backwardStops[backwardStops.length-1].street}}</h4>
+          <div *ngFor="let i=index; let tile of backwardStops" class="tile"
+               (click)="selectStop(tile); busyStopsDiagram.onClick()">
+            <label [for]="tile.id" class="tile-content">
+              <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
+              <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
+                   [ngClass]="{'image-opacity': isSelected(tile)}">
+            </label>
+            <img height="22" width="85px" src="../../../../../../../assets/img/road-icon.png">
+          </div>
         </div>
       </div>
-    </div>
-    <div *ngIf="!directionForward">
-      <h4 align="center">{{backwardStops[0].street}} - {{backwardStops[backwardStops.length-1].street}}</h4>
-      <div *ngFor="let i=index; let tile of backwardStops" class="tile"
-           (click)="selectStop(tile); busyStopsDiagram.onClick()">
-        <label [for]="tile.id" class="tile-content">
-          <div><span>{{i+1}}.</span><span>{{tile.street}}</span></div>
-          <img height="32" width="42" src="{{ categoryIconURL }}{{ iconURL }}"
-               [ngClass]="{'image-opacity': isSelected(tile)}">
-        </label>
-        <img height="22" width="85px" src="../../../../../../../assets/img/road-icon.png">
-      </div>
-    </div>
-  </div>
 
-  <app-raiting-diagram [id]="idTransit"></app-raiting-diagram>
-  <app-average-rate [id]="idTransit"></app-average-rate>
-  <app-my-rate [id]="idTransit" [userId]="1" *ngIf="this.authService.hasToken()"></app-my-rate>
-  <app-busy-stops-diagram [id]="idTransit" [stopList]="selectedStops"></app-busy-stops-diagram>
-  <app-busy-hours-diagram [id]="idTransit"></app-busy-hours-diagram>
+      <app-raiting-diagram [id]="idTransit"></app-raiting-diagram>
+      <app-average-rate [id]="idTransit"></app-average-rate>
+      <app-my-rate [id]="idTransit" [userId]="1" *ngIf="this.authService.hasToken()"></app-my-rate>
+      <app-busy-stops-diagram [id]="idTransit" [stopList]="selectedStops"></app-busy-stops-diagram>
+      <app-busy-hours-diagram [id]="idTransit"></app-busy-hours-diagram>
+
+    </ng-template>
+  </mat-expansion-panel>
+
+
 
   <mat-expansion-panel style="width: 70%; top: 50px; position: relative; margin: 20px auto 0">
     <mat-expansion-panel-header style="background-color: #43659c">
