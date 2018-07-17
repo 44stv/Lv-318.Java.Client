@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Login} from '../../../../models/login.model';
-import {CustomAuthService} from '../../../../services/auth/custom-auth.service';
-import {TokenModel} from '../../../../services/auth/token/token-model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialog, MatSnackBar} from '@angular/material';
-import {MatDialogRef} from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Login } from '../../../../models/login.model';
+import { CustomAuthService } from '../../../../services/auth/custom-auth.service';
+import { TokenModel } from '../../../../services/auth/token/token-model';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 
-import {HttpErrorResponse} from '@angular/common/http';
-import {ForgetPasswordComponent} from './forget-password/forget-password.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 
 @Component({
@@ -54,25 +54,24 @@ export class UserLoginComponent implements OnInit {
   }
 
   logIn() {
-      this.login = this.loginForm.value;
-      this.authService.signIn(this.login)
-        .subscribe((token: TokenModel) => {
-          this.authService.setToken(token);
-          this.snackBar.open('User loged successfully', null, {
-            duration: 3000
-          });
-          setTimeout(() =>  this.matDialogRef.close(), 3000);
-        }, (error) => {
-          if (error instanceof HttpErrorResponse) {
-            if (error.error.description === 'User is disabled') {
-              this.snackBar.open('Your account is not activated. Please confirm the registration', null, {
-                duration: 3000
-              });
-            } else {
-              this.snackBar.open(error.error.message, null, {
-                duration: 3000
-              });
-            }
+    this.login = this.loginForm.value;
+    this.authService.signIn(this.login)
+      .subscribe((token: TokenModel) => {
+        this.authService.setToken(token);
+        this.snackBar.open('User loged successfully', null, {
+          duration: 3000
+        });
+        setTimeout(() => this.matDialogRef.close(), 3000);
+      }, (error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.error.description === 'User is disabled') {
+            this.snackBar.open('Your account is not activated. Please confirm the registration', null, {
+              duration: 3000
+            });
+          } else {
+            this.snackBar.open(error.error.message, null, {
+              duration: 3000
+            });
           }
         }
       });
@@ -90,4 +89,9 @@ export class UserLoginComponent implements OnInit {
     this.dialog.open(ForgetPasswordComponent);
     this.matDialogRef.close();
   }
+
 }
+
+
+
+

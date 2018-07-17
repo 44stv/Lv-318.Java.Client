@@ -81,5 +81,16 @@
   "Type in user e-mail": "Type in user e-mail",
   "Select role for": "Select role for",
   "reload": "Reload chart",
-  "postComment": "PostComment"
+  "postComment": "Post new comment",
+  "newerFirst": "Newer first",
+  "olderFirst": "Older first",
+  "leaveComment": "Enter comment",
+  "sortType": "Select sort type",
+  "replyComment": "Reply",
+  "leaveReply": "Enter your reply",
+  "transitsTableCategory": "Category",
+  "transitName": "Name",
+  "routeName": "Route",
+  "averageRate": "Average rate",
+  "transitsTableFilter": "Filter"
 }

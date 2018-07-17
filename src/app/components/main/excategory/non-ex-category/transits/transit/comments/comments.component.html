@@ -5,7 +5,7 @@
 
       <mat-form-field appearance="outline" class="leaveComment">
         <textarea matInput maxlength="256"
-                  placeholder="Leave comment"
+                  placeholder="{{ 'leaveComment' | translate }}"
                   [(ngModel)]="addCommentText" [rows]="7"
                   [required]="true"></textarea>
       </mat-form-field>
@@ -29,11 +29,11 @@
       </button>
 
       <mat-form-field class="sortComments">
-        <mat-select placeholder="Select sort type"
+        <mat-select placeholder="{{ 'sortType' | translate }}"
                     [(value)]="sortMode"
                     (selectionChange)="sortComments()">
-          <mat-option value="ASC">Newer first</mat-option>
-          <mat-option value="DESC">Older first</mat-option>
+          <mat-option value="ASC">{{ 'newerFirst' | translate }}</mat-option>
+          <mat-option value="DESC">{{ 'olderFirst' | translate }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
