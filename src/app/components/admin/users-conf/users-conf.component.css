@@ -28,3 +28,6 @@
 .mat-column-averageRate {
   flex: 0 0 20%;
 }
+.mat-row-hover:hover {
+  background: #FAFAFA;
+}
