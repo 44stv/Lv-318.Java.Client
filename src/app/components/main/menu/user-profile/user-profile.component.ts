@@ -32,7 +32,7 @@ export class UserProfileComponent implements OnInit {
 
   dataSource: MatTableDataSource<Transit> = new MatTableDataSource();
 
-  userId = this.authService.getUserId();
+  /*userId = this.authService.getUserId();*/
 
 
   constructor(private transitService: TransitService,
@@ -58,7 +58,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getAllUserTransits(): void {
-    this.transitService.getAllUserTransits(this.userId)
+    this.transitService.getAllUserTransits(1)
       .subscribe(transits => {
         this.dataSource.data = transits;
       });
