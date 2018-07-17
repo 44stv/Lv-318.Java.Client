@@ -94,14 +94,18 @@ import { SearchFieldComponent } from './components/main/menu/search-field/search
 import { BackToPreviousPageBtnComponent } from './components/main/back-button/back-to-previous-page-btn.component';
 import { AddUserComponent } from './components/main/menu/add-user/add-user.component';
 import { StopsGridComponent } from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
-import { AddQuestionComponent } from './components/admin/feedback-criteria/add-question/add-question.component';
+import { AddQuestionComponent } from './components/main/menu/feedback-criteria/add-question/add-question.component';
 import { AverageRateComponent } from './components/main/excategory/non-ex-category/transits/transit/average-rate/average-rate.component';
-import { OneFeedbackCriteriaComponent } from './components/admin/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
-import { AddFeedbackCriteriaComponent } from './components/admin/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
+import {
+  OneFeedbackCriteriaComponent
+} from './components/main/menu/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
+import {
+  AddFeedbackCriteriaComponent
+} from './components/main/menu/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
 import { GlobalSearchComponent } from './components/main/menu/global-search/global-search.component';
 import { TransitsComponent } from './components/main/excategory/non-ex-category/transits/transits.component';
 import { MapsComponent } from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
-import { FeedbackCriteriaComponent } from './components/admin/feedback-criteria/feedback-criteria.component';
+import { FeedbackCriteriaComponent } from './components/main/menu/feedback-criteria/feedback-criteria.component';
 import { AddFeedbackComponent } from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import { UserLoginComponent } from './components/main/menu/user-login/user-login.component';
 import { MyRateComponent } from './components/main/excategory/non-ex-category/transits/transit/my-rate/my-rate.component';
@@ -142,6 +146,8 @@ import {
 } from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/top-level-comments.component';
 import { UpdatePasswordComponent } from './components/main/menu/user-profile/update-password/update-password.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { NewsComponent, ReadNewsComponent } from './components/main/news/news.component';
+import { NgxGalleryModule } from 'ngx-gallery';
 import { UsersConfComponent } from './components/admin/users-conf/users-conf.component';
 import { UpdateFormComponent } from './components/admin/update-role/update-form/update-form.component';
 import { AddCityComponent } from './components/admin/add-category/add-city/add-city.component';
@@ -226,6 +232,8 @@ export function getAuthServiceConfigs() {
     UpdateFormComponent,
     AddCityComponent,
     AddNonextendableCategoryComponent
+    NewsComponent,
+    ReadNewsComponent
   ],
   exports: [
     MatAutocompleteModule,
@@ -268,6 +276,7 @@ export function getAuthServiceConfigs() {
     NgxMaterialTimepickerModule.forRoot(),
     MatButtonToggleModule,
     StarRatingModule.forRoot(),
+    NgxGalleryModule,
     MomentModule,
     MatProgressBarModule,
     MatAutocompleteModule,
@@ -297,7 +306,6 @@ export function getAuthServiceConfigs() {
     MatInputModule,
     MatButtonModule,
     MatToolbarModule,
-    SlideshowModule,
     HttpClientModule,
     MatOptionModule,
     MatSelectModule,
@@ -330,7 +338,7 @@ export function getAuthServiceConfigs() {
     NgxChartsModule,
     Ng5BreadcrumbModule.forRoot(),
     NgCircleProgressModule.forRoot(),
-    NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyB5LStf6_Uo0i89bPRxdYXJkjQrl4yn3NM' })
+    NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBMbh1BuDtFteF5bxb03EKe2-hpKYre79g' })
   ],
   providers: [
     {
@@ -367,6 +375,7 @@ export function getAuthServiceConfigs() {
     ChooseTransitComponent,
     FriendInvitationComponent,
     UpdatePasswordComponent,
+    ReadNewsComponent,
     UsersConfComponent,
     UpdateFormComponent
   ]

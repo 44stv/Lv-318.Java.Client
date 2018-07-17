@@ -1,5 +1,12 @@
+@import "~@angular-mdc/theme/material";
+
+$mdc-theme-primary: #43659c; // change primary color example
+$mdc-theme-secondary:#ffffff; // change secondary color example
+
 .comment {
-  margin: 20px;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .childComments {
@@ -7,8 +14,8 @@
 }
 
 .commentText {
-  width: 100%;
-  margin-left: 0;
+  width: 99%;
+  margin-left: 5px;
   font-size: large;
 }
 
@@ -28,17 +35,27 @@
 }
 
 .reply {
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .replyArea {
   width: 98.5%;
-  margin: 10px;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.picsAndReply {
+  margin-bottom: 15px;
+  margin-left: 20px;
+  display: flex;
 }
 
 .replyButton {
-  margin-left: 80%;
-  margin-bottom: 10px;
+  margin-left: 20px;
 }
 
 .mat-form-field {
@@ -49,12 +66,6 @@
   text-indent: 10px;
 }
 
-.commentText {
-  margin-top: 10px;
-}
-
-.underline {
-  border-bottom: 1px solid #ccc!important;
-  width: inherit;
-  margin-right: 20px;
+.mat-card-image {
+  height: 200px;
 }

@@ -1,17 +1,15 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {StopService} from '../../../../../../services/stop.service';
-import {TransitService} from '../../../../../../services/transit.service';
-import {Observable} from 'rxjs';
-import {MatDialog} from '@angular/material';
-import {AddFeedbackComponent} from './add-feedback/add-feedback.component';
-import {Stop} from '../../../../../../models/stop.model';
-import {BreadcrumbService} from 'ng5-breadcrumb';
-import {environment} from '../../../../../../../environments/environment';
-import {NonExCategoryService} from '../../../../../../services/non-ex-category.service';
-import {Location} from '@angular/common';
-import {CustomAuthService} from '../../../../../../services/auth/custom-auth.service';
-import {BusyStopsDiagramComponent} from './busy-stops-diagram/busy-stops-diagram.component';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { StopService } from '../../../../../../services/stop.service';
+import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
+import { Stop } from '../../../../../../models/stop.model';
+import { BreadcrumbService } from 'ng5-breadcrumb';
+import { environment } from '../../../../../../../environments/environment';
+import { NonExCategoryService } from '../../../../../../services/non-ex-category.service';
+import { CustomAuthService } from '../../../../../../services/auth/custom-auth.service';
+import { BusyStopsDiagramComponent } from './busy-stops-diagram/busy-stops-diagram.component';
 
 
 @Component({
@@ -42,9 +40,7 @@ export class StopsGridComponent implements OnInit {
               private route: ActivatedRoute,
               public dialog: MatDialog,
               private breadcrumbService: BreadcrumbService,
-              private nonExCatServ: NonExCategoryService,
-              private transitService: TransitService,
-              private location: Location) {
+              private nonExCatServ: NonExCategoryService) {
     this.route.params.subscribe(params => {
       const paramTransitName = encodeURI(params['name']);
       const paramIdTransit = params['id-transit'];
@@ -84,38 +80,6 @@ export class StopsGridComponent implements OnInit {
 
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      const transitName = encodeURI(params['name']);
-      const idTransit = params['id-transit'];
-      const topCategoryName = encodeURI(params['top']);
-      const id = params['id'];
-      const city = encodeURI(params['city']);
-      const iconURL = (<string>params['iconUrl']).replace('/', '%2F');
-
-      let newUrl = '';
-
-      if (id === 'undefined') {
-        this.transitService.getTransitById(idTransit)
-          .subscribe(data => {
-
-            const id1 = data.categoryId;
-
-            // Add friendly name for category id
-            this.nonExCatServ
-              .getNameByCategoryId(id1)
-              .subscribe(item => {
-                this.breadcrumbService
-                  .addFriendlyNameForRoute('/main/' + topCategoryName + '/' + city + '/' + id, item[0].name);
-              });
-
-            newUrl = '/main/' + topCategoryName +
-              '/' + city + '/' + id1 + '/transit/' + idTransit + '/' + transitName +
-              '/' + iconURL;
-
-            this.location.go(newUrl);
-          });
-      }
-    });
     this.sub = this.route.params.forEach(params => {
       this.idTransit = params['id-transit'];
       this.categoryId = params['id'];

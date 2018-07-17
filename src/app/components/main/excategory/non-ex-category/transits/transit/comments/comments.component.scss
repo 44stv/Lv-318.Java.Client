@@ -1,10 +1,17 @@
+@import "~@angular-mdc/theme/material";
+
+$mdc-theme-primary: #43659c; // change primary color example
+$mdc-theme-secondary:#ffffff; // change secondary color example
+
 .allComments {
   position: relative;
-  top: 50px;
-  width: 60%;
-  border: 1px solid #ccc!important;
-  border-radius: 10px;
-  margin: 20px auto;
+  //top: 50px; //regular
+  //width: 70%; //regular
+  width: 100%; // expansion panel
+  //border: 1px solid #ccc!important; //regular
+  //border-radius: 10px; //regular
+  //margin: 20px auto; //regular
+  margin: 0 auto 50px; // expansion panel
 }
 
 .oneComment {
@@ -22,12 +29,7 @@
 }
 
 .postButton {
-  margin-top: 2px;
-  margin-left: 15px;
-}
-
-.row {
-  position: relative;
+  margin-left: 20px;
 }
 
 .sortComments {
