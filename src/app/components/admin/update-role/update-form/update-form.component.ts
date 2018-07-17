@@ -31,24 +31,29 @@ export class UpdateFormComponent implements OnInit {
   ngOnInit() {
     this.roles = getAllRoles();
 
-    console.log(this.userEmail);
   }
 
   updateRole(): void {
-    this.add(this.role, this.userEmail);
-    this.userService.updateRole(this.updateRoleModel)
-      .subscribe(() => {
-          this.snackBar.open('User updated successfully', null, {
-            duration: 4000
-          });
-        this.matDialogRef.close();
-        }, (error) => {
-          this.snackBar.open(error.error.message, null, {
-            duration: 5000
-          });
-        this.matDialogRef.close();
-        }
-      );
+    if (this.role !== undefined && this.userEmail !== undefined) {
+      this.add(this.role, this.userEmail);
+      this.userService.updateRole(this.updateRoleModel)
+        .subscribe(() => {
+            this.snackBar.open('User updated successfully', null, {
+              duration: 4000
+            });
+            this.matDialogRef.close();
+          }, (error) => {
+            this.snackBar.open(error.error.message, null, {
+              duration: 5000
+            });
+            this.matDialogRef.close();
+          }
+        );
+    } else {
+      this.snackBar.open('Please, specify the data to update', null, {
+        duration: 4000
+      });
+    }
   }
 
 
