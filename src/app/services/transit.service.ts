@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Transit} from '../models/transit.model';
 import {environment} from '../../environments/environment';
 import {Paginator} from '../models/paginator.model';
+import {CustomAuthService} from './auth/custom-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class TransitService {
 
   constructor(private http: HttpClient) {
   }
+
 
   getTransits(): Observable<Transit[]> {
     return this.http.get<Transit[]>(this.serviceUrl);
@@ -41,5 +43,10 @@ export class TransitService {
 
   getTransitRateById(transitId: number) {
     return this.http.get(`${environment.serverURL}/feedback/rating/${transitId}`);
+  }
+
+  getAllUserTransits(userId: number): Observable<Transit[]> {
+    return this.http.get<Transit[]>(`${environment.serverURL}/transit/user/${userId}`);
+
   }
 }

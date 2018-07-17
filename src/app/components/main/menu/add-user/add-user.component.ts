@@ -10,6 +10,8 @@ import {Router} from '@angular/router';
 
 import {UserService} from '../../../../services/user.service';
 import {BreadcrumbService} from 'ng5-breadcrumb';
+import {FriendInvitationComponent} from '../user-profile/friend-invitation/friend-invitation.component';
+import {MatDialogRef} from '@angular/material/dialog';
 
 export class InfoResponse {
   response: string;
@@ -53,6 +55,7 @@ export class AddUserComponent implements OnInit {
               private snackBar: MatSnackBar,
               private fb: FormBuilder,
               public userService: UserService,
+              public  matDialogRef: MatDialogRef<AddUserComponent>,
               private breadcrumbService: BreadcrumbService) {
     this.breadcrumbService.hideRoute('/main/user');
 
@@ -101,6 +104,7 @@ export class AddUserComponent implements OnInit {
         duration: 4000
       });
       this._isSent = true;
+      setTimeout(() =>  this.matDialogRef.close(), 4000);
     }, (error) => {
       if (error instanceof HttpErrorResponse) {
         this.snackBar.open(error.error.message, null, {

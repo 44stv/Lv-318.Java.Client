@@ -1,8 +1,32 @@
 <div class="userProfile">
   <div class="NewUser">
-      <button mdc-button class="button" [secondary]="true" type="submit" (click)="openModal()">Invite friend</button>
-  </div>
-  <div class="NewUser">
-    <button mdc-button class="button" [secondary]="true" type="submit" (click)="openUpdatePassModal()">Change password</button>
+    <button mdc-button class="button" [secondary]="true" type="submit" (click)="openModal()">{{'Invite friend' | translate }}</button>
+    <button mdc-button class="button" [secondary]="true" type="submit" (click)="openUpdatePassModal()">{{ 'Change password' | translate}}</button>
   </div>
 </div>
+
+<div class = "userTransit">
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="categoryIcon">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
+      <mat-cell *matCellDef="let transit"> <img height="32" width="32" src="{{ categoryIconURL }}{{ transit.categoryIconURL }}"></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let transit"> {{ transit.name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="routeName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Route </mat-header-cell>
+      <mat-cell *matCellDef="let transit"> {{ transit.routeName }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns; let transit;"
+             [routerLink]="['/main/', topName, cityName , categoryId, 'transit',
+             transit.id, transit.name, transit.categoryIconURL]"></mat-row>
+  </mat-table>
+</div>
+

@@ -1,13 +1,14 @@
 
 .NewUserForm {
-  width: 300px;
-  height: 300px;
+  width: auto;
+  height: 400px;
   background-color: white;
   font-size: large;
 }
 .title{
   width: 100%;
-  background-color: #00BCD4;
+  background-color: #43659c;
+  color: white;
   height: 15%;
   vertical-align: middle;
   text-align: center;
@@ -20,12 +21,14 @@
 }
 
 .button{
-  background-color: #ff4081;
+  background-color: #43659c;
+  color: white;
   float: right;
 
 }
 .button2{
-  background-color: #ff4081;
+  background-color: #43659c;
+  color: white;
   float: left;
 
 }

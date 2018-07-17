@@ -13,7 +13,7 @@ $mdc-theme-secondary:#ffffff; // change secondary color example
 @import "~@angular-mdc/theme/material";
 @import "~@material/typography/mdc-typography";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
-@import '~angular-star-rating/scss/star-rating.scss';
+@import '~angular-star-rating/scss/star-rating.scss';*/
 
 .add{
     @include mdc-fab-accessible($material-color-blue-500);
