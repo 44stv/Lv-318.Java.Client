@@ -27,8 +27,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;let transit;" [routerLink]="['/show-transit-scheme', transit.categoryId,
-          transit.id, transit.name]">
+    <mat-row *matRowDef="let row; columns: displayedColumns;let transit;" (click)="seeOne(transit)">
     </mat-row>
   </mat-table>
 </div>

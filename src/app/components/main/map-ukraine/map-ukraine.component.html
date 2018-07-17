@@ -1,14 +1,24 @@
-<div class="map-ukraine">
-<ngui-map
-  zoom="5"
-  center="49.4871968, 31.2718321"
-  (mapReady$)="onMapReady($event)"
-  (mapClick)="onMapClick($event)"
-  (idle)="onIdle($event)"
-  mapTypeId="roadmap">
-    <marker *ngFor="let pos of positions"
-      [position]="pos"
-      (initialized$)="onMarkerInit($event)"></marker>
-      loadMapShapes($event);
-</ngui-map>
-</div>
+<div class="mapUkraine">
+<agm-map [latitude]="48.3794" [longitude]="31.1656" [zoom]="zoom"
+[fullscreenControl]="true"
+[disableDoubleClickZoom]="false"
+[mapTypeControl]="true">
+       <agm-marker *ngFor="let mar of markers"
+       [latitude]="mar.lat"
+       [longitude]="mar.long"
+       [iconUrl]="iconUrl"
+       (markerClick)="openInfo(mar.city)">
+       <agm-info-window [disableAutoPan]="true" [maxWidth]="140">
+         <content>
+         <span style="color:rgb(209, 24, 24);font-size:20px;" ><b><u>
+         <a a routerLink="./Public%20Transport/{{mar.city}}">{{mar.city}}</a></u></b></span>
+          <br>
+          <span *ngFor="let transit of mar.transits">
+           <b>{{transit.countOfTransits}}</b>
+            <img src="{{serverURL}}{{transit.iconURL}}" style="width:20px; height:20px;"/>
+          </span>
+        </content>
+       </agm-info-window>
+      </agm-marker>
+     </agm-map>
+    </div>

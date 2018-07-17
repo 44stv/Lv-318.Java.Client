@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 import { Transit } from '../../../../models/transit.model';
 import { GlobalSearchService } from '../../../../services/global-search.service';
+import { ExcategoryService } from '../../../../services/excategory.service';
+import { NonExCategoryService } from '../../../../services/non-ex-category.service';
+import { Category } from '../../../../models/category.model';
 
 @Component({
   selector: 'app-global-search',
@@ -18,13 +21,16 @@ export class GlobalSearchComponent implements OnInit {
   displayedColumns = ['categoryId', 'name', 'routeName'];
   dataSource = new MatTableDataSource();
   categoryIconURL = `${environment.serverURL}/category/img?link=`;
-
+  choosenCategory: Category[];
+  tmpTransit: Transit;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private globalSearchService: GlobalSearchService,
-    private location: Location,
-    private route: ActivatedRoute,
-    private router: Router) {
+              private location: Location,
+              private route: ActivatedRoute,
+              private router: Router,
+              private nonExService: NonExCategoryService,
+  ) {
   }
 
   ngOnInit() {
@@ -40,11 +46,22 @@ export class GlobalSearchComponent implements OnInit {
       if (transits.length === 1) {
         this.transitOne = transits;
         this.transitOne.map(tmp => {
-          this.router.navigate(['show-transit-scheme/' + tmp.categoryId + '/' + tmp.id + '/' + tmp.name]);
+          this.tmpTransit = tmp;
+          this.nonExService.getNameByCategoryId(this.tmpTransit.categoryId).subscribe(
+            category => {
+              this.choosenCategory = category;
+              this.router.navigate(['show-transit-scheme/main/Public Transport/' + '/' +
+              this.choosenCategory[0].nextLevelCategory.name + '/' + this.choosenCategory[0].id + '/' +
+              this.tmpTransit.id + '/' + this.tmpTransit.name + '/' + this.tmpTransit.categoryIconURL.replace('/', '%2F')]);
+            });
         });
       }
     });
 
+  }
+
+  seeOne(choosenTransit: Transit) {
+    console.log(choosenTransit);
   }
 
   applyFilter(filterValue: string) {

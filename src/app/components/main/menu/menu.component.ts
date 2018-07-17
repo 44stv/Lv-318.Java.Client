@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material';
 import {AddUserComponent} from './add-user/add-user.component';
 import {UserLoginComponent} from './user-login/user-login.component';
 import {FormControl} from '@angular/forms';
+import {AuthService} from 'angular-6-social-login';
 
 @Component({
   selector: 'app-menu',
@@ -21,6 +22,7 @@ export class MenuComponent implements OnInit, OnChanges {
   role: any = Role;
 
   constructor(public app: AppComponent,
+              private socialAuthService: AuthService,
               private router: Router,
               private authService: CustomAuthService,
               private globalSearchComponent: GlobalSearchService,
@@ -50,6 +52,7 @@ export class MenuComponent implements OnInit, OnChanges {
   logOut() {
     this.authService.logOut();
     this.router.navigate(['/main']);
+    this.socialAuthService.signOut();
   }
 
   openModal() {
