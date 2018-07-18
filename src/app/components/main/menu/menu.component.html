@@ -8,13 +8,6 @@
         <a [routerLink]="['/main']" [ngStyle]="{'color' : 'white'}">Transport</a>
       </div>
 
-      <div class="criteriaButton">
-        <a [routerLink]="['/main/feedback-criteria']">
-          <button mdc-button [secondary]="true" type="submit">{{ 'Feedback'| translate}}</button>
-        </a>
-      </div>
-
-
       <div class="NewUser">
         <a *ngIf="!hasToken()">
           <button mdc-button [secondary]="true" type="submit" (click)="openModal()">{{'Sign Up' | translate}}</button>

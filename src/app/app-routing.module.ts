@@ -7,12 +7,18 @@ import {GlobalSearchComponent} from './components/main/menu/global-search/global
 import {NonExCategoryComponent} from './components/main/excategory/non-ex-category/non-ex-category.component';
 import {TransitsComponent} from './components/main/excategory/non-ex-category/transits/transits.component';
 import {StopsGridComponent} from './components/main/excategory/non-ex-category/transits/transit/stops-grid.component';
-import {AddFeedbackCriteriaComponent} from './components/admin/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
+import {
+  AddFeedbackCriteriaComponent
+} from './components/admin/feedback-criteria/add-feedback-criteria/add-feedback-criteria.component';
 import {OneFeedbackCriteriaComponent} from './components/admin/feedback-criteria/one-feedback-criteria/one-feedback-criteria.component';
 import {AddFeedbackComponent} from './components/main/excategory/non-ex-category/transits/transit/add-feedback/add-feedback.component';
 import {MapsComponent} from './components/main/excategory/non-ex-category/transits/transit/maps/maps.component';
-import {RegistarationConfirmationComponent} from './components/main/menu/add-user/registaration-confirmation/registaration-confirmation.component';
-import {ForgetPasswordConfirmationComponent} from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
+import {
+  RegistarationConfirmationComponent
+} from './components/main/menu/add-user/registaration-confirmation/registaration-confirmation.component';
+import {
+  ForgetPasswordConfirmationComponent
+} from './components/main/menu/user-login/forget-password/forget-password-confirmation/forget-password-confirmation.component';
 import {UserProfileComponent} from './components/main/menu/user-profile/user-profile.component';
 import {AdminComponent} from './components/admin/admin.component';
 import {ClientGuardService} from './services/guard/client-guard.service';
