@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
 import {environment} from '../../../environments/environment';
-import {User} from '../../models/user.model';
 import {TokenModel} from './token/token-model';
 import {determineRole, Role} from './roles';
 import {Login} from '../../models/login.model';
@@ -26,10 +25,6 @@ export class CustomAuthService {
 
   signIn(loginData: Login): Observable<any> {
     return this.http.post(`${this.serviceUrl}/user/signin`, loginData);
-  }
-
-  signUp(user: User): Observable<User> {
-    return this.http.post<User>(`this.serviceUrl/user/signup`, user);
   }
 
   public setToken(token: TokenModel): void {

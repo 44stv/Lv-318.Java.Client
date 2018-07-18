@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
 import {CustomAuthService} from '../auth/custom-auth.service';
 import {Role} from '../auth/roles';
 import {ForbiddenComponent} from '../../components/main/errors/forbidden/forbidden.component';
 import {MatDialog} from '@angular/material';
 
 @Injectable()
-export class ClientGuardService {
+export class ClientGuardService implements CanActivate, CanActivateChild {
 
   constructor(private authService: CustomAuthService,
               private router: Router,
