@@ -30,9 +30,6 @@
             secondStopMarker.name : "Choose a stop" | translate }}
           </ng-template>
           <div>
-            <div class="stop-list" *ngFor="let s of stopList">
-              {{s.name}}
-            </div>
             <button mat-button matStepperNext (click)="openModal()">{{'Make Feedback' | translate}}</button>
             <button mat-button matStepperPrevious>{{'Back' | translate}}</button>
             <button mat-button (click)="stepper.reset(); clearStopSecond(); clearStopFirst()">{{'Clear' | translate}}</button>
@@ -94,4 +91,10 @@
   <button mat-button (click)="setDirectionAndRefresh('backward')">
     {{'Backward'| translate}}
   </button>
+  <div>
+  <div class="stop-list" *ngFor="let s of stopList">
+    {{s.name}} <span [ngStyle]="{'color':'red', 'font-size':'24'}">&#183;</span>
+  </div>
+  </div>
+
 </div>
