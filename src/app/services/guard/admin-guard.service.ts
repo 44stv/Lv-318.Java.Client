@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { CustomAuthService } from '../auth/custom-auth.service';
-import { Role } from '../auth/roles';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
+import {CustomAuthService} from '../auth/custom-auth.service';
+import {Role} from '../auth/roles';
 import {MatDialog} from '@angular/material';
 import {ForbiddenComponent} from '../../components/main/errors/forbidden/forbidden.component';
 
 @Injectable()
-export class AdminGuardService {
+export class AdminGuardService implements CanActivate, CanActivateChild {
 
   constructor(private authService: CustomAuthService,
               private router: Router,
@@ -22,7 +22,6 @@ export class AdminGuardService {
   }
 
   checkRights(): boolean {
-    console.log('inside AdminGuard');
     if ((this.authService.getRole() === Role.Admin) && !this.authService.isExpired()) {
       return true;
     } else {
