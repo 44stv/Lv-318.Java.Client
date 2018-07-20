@@ -34,7 +34,6 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit() {
     this.getTopLevelComments();
-    console.log(this.authService.getUserId());
   }
 
   getTopLevelComments() {
@@ -48,9 +47,6 @@ export class CommentsComponent implements OnInit {
       const newComment = new MyComment();
       if (this.addCommentText) {
         newComment.commentText = this.addCommentText;
-        const date = new Date(Date.now());
-        date.setMinutes(date.getMinutes() - new Date(Date.now()).getTimezoneOffset());
-        newComment.createdDate = date.toJSON();
         let params = new HttpParams();
         params = params.set('transitId', this.id.toString());
         params = params.set('userId', this.authService.getUserId().toString());
