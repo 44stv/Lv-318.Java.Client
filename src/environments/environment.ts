@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   clientUrl: 'http://localhost:4200/',
-  imageServerURL: 'http://195.160.232.248/',
+  imageServerURL: 'http://localhost:8090',
   // serverURL: 'https://localhost:8443',
   serverURL: 'https://uatransport.tk',
 
