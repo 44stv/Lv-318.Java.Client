@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MyComment } from '../models/comment.model';
+import { CommentRating } from '../models/comment-rating.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,14 @@ export class CommentService {
 
   addImagesToComment(id: number, imageURLs: string): Observable<MyComment> {
     return this.http.put<MyComment>(`${this.serviceUrl}?commentId=${id}`, imageURLs);
+  }
+
+  likeComment(commentId: number, userId: number): Observable<CommentRating> {
+    return this.http.post<CommentRating>(`${this.serviceUrl}/${commentId}/like/${userId}`, null);
+  }
+
+  dislikeComment(commentId: number, userId: number): Observable<CommentRating> {
+    return this.http.post<CommentRating>(`${this.serviceUrl}/${commentId}/dislike/${userId}`, null);
   }
 
   uploadFile(file: File, subDir: string) {

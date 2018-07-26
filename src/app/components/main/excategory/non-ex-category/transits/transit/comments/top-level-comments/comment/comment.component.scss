@@ -9,14 +9,24 @@ $mdc-theme-secondary:#ffffff; // change secondary color example
   margin-bottom: 10px;
 }
 
+.commentInformation {
+  position: relative;
+}
+
+.rating {
+  position: absolute;
+  right: 10px;
+}
+
 .childComments {
   margin-left: 20px;
 }
 
 .commentText {
-  width: 99%;
+  width: 95%;
   margin-left: 5px;
   font-size: large;
+  word-wrap: break-word;
 }
 
 .userAndPostedTime {
@@ -38,6 +48,7 @@ $mdc-theme-secondary:#ffffff; // change secondary color example
   margin-left: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
+  width: 30px;
 }
 
 .replyArea {

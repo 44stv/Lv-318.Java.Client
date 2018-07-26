@@ -13,14 +13,17 @@
 
     <div style="display: flex" class="row">
 
-      <div class="picsButton" (click)="choosePics.click()">
-        <input #choosePics
-               style="display:none"
-               type="file"
-               (change)="openChooseDialog($event)"
-               multiple="multiple">
-        <mat-icon style="font-size: 36px; padding-top: 7px;" [inline]="true">add_a_photo</mat-icon>
-      </div>
+      <mdc-ripple [attachTo]="picsdiv">
+        <div #picsdiv class="picsButton" (click)="choosePics.click()">
+          <input #choosePics
+                 style="display:none"
+                 type="file"
+                 (change)="openChooseDialog($event)"
+                 multiple="multiple">
+          <mat-icon style="font-size: 36px; padding-top: 7px;" [inline]="true">add_a_photo</mat-icon>
+        </div>
+      </mdc-ripple>
+
       <button class="postButton"
               mdc-button
               [secondary]="false"

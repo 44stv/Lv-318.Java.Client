@@ -1,6 +1,9 @@
 <div class="comment">
 
   <div class="commentInformation">
+    <div class="rating">
+      <app-rating [comment]="comment"></app-rating>
+    </div>
     <div class="row userAndPostedTime">
       <span style="font-size: large"> {{ userInfo.firstName }} {{ userInfo.lastName }} </span>
       <span style="font-size: small">{{ postCommentDate }}</span>
@@ -15,6 +18,7 @@
     <div class="reply" (click)="toggleReply()" *ngIf="comment.level < 5">
       <mdc-icon>reply</mdc-icon>
     </div>
+
     <div id="{{ comment.id }}" class="replyElement">
       <div class="replyArea">
         <mat-form-field>
@@ -26,14 +30,17 @@
         </mat-form-field>
       </div>
       <div class="picsAndReply">
-        <div class="picsButton" (click)="choosePics.click()">
-          <input #choosePics
-                 style="display:none"
-                 type="file"
-                 (change)="openChooseDialog($event)"
-                 multiple="multiple">
-          <mat-icon style="font-size: 36px; padding-top: 7px;" [inline]="true">add_a_photo</mat-icon>
-        </div>
+        <mdc-ripple [attachTo]="picsdiv">
+          <div #picsdiv class="picsButton" (click)="choosePics.click()">
+            <input #choosePics
+                   style="display:none"
+                   type="file"
+                   (change)="openChooseDialog($event)"
+                   multiple="multiple">
+            <mat-icon style="font-size: 36px; padding-top: 7px;" [inline]="true">add_a_photo</mat-icon>
+          </div>
+        </mdc-ripple>
+
         <div class="replyButton">
           <button mdc-button
                   [secondary]="false"
