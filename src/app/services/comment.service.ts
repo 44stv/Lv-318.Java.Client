@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MyComment } from '../models/comment.model';
 import { CommentRating } from '../models/comment-rating.model';
+import { UserInfo } from '../models/userInfo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,10 @@ export class CommentService {
 
   dislikeComment(commentId: number, userId: number): Observable<CommentRating> {
     return this.http.post<CommentRating>(`${this.serviceUrl}/${commentId}/dislike/${userId}`, null);
+  }
+
+  getVotedUsers(commentId: number): Observable<UserInfo[]> {
+    return this.http.get<UserInfo[]>(`${this.serviceUrl}/${commentId}/voted`);
   }
 
   uploadFile(file: File, subDir: string) {

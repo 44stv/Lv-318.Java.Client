@@ -12,3 +12,19 @@
 .like {
   display: flex;
 }
+
+.numberRating {
+  font-size: 24px;
+  text-align: center;
+}
+
+.likedUser {
+  display: none;
+  position: absolute;
+  right: 25px;
+  background-color: #A8A8A8;
+}
+
+.numberRating:hover .likedUser {
+  display: block;
+}

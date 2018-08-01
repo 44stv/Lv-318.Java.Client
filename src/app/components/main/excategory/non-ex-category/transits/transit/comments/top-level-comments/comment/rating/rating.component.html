@@ -4,9 +4,15 @@
   </div>
 </mdc-ripple>
 
-<div style="font-size: 24px; text-align: center">
+<div class="numberRating" (mouseover)="getVotedUsers()">
     {{ rating }}
+  <div class="likedUser">
+    <div *ngFor="let user of userInfo">
+      <span style="font-size: small">{{ user.firstName }}</span>
+      <span style="font-size: small">{{ user.lastName }}</span>
+    </div>
   </div>
+</div>
 
 <mdc-ripple [attachTo]="dislikediv">
   <div #dislikediv class="like" (click)="dislike()">
