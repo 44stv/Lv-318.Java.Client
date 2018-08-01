@@ -154,7 +154,6 @@ import {AddCityComponent} from './components/admin/add-category/add-city/add-cit
 import {
   AddNonextendableCategoryComponent
 } from './components/admin/add-category/add-nonextendable-category/add-nonextendable-category.component';
-import { RatingComponent } from './components/main/excategory/non-ex-category/transits/transit/comments/top-level-comments/comment/rating/rating.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -221,7 +220,6 @@ export function getAuthServiceConfigs() {
     RegistarationConfirmationComponent,
     CommentsComponent,
     CommentComponent,
-    RatingComponent,
     TopLevelCommentsComponent,
     LocationPickerComponent,
     LocationPickerComponent,

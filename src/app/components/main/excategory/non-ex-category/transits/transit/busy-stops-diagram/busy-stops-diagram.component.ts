@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {Stop} from '../../../../../../../models/stop.model';
 import {DiagramService} from '../../../../../../../services/diagram.service';
+import {HeatMapInputData} from '../../../../../../../models/heat-map-input-data';
 
 @Component({
   selector: 'app-busy-stops-diagram',
@@ -19,14 +20,24 @@ export class BusyStopsDiagramComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.diagramService.getHeatMapData(this.id, this.stopList)
-      .subscribe(res => this.data = res);
+    const heatMapInpData: HeatMapInputData = new HeatMapInputData();
+    console.log(this.diagramService.getHeatMapData(this.id, this.stopList).subscribe(res => {
+      heatMapInpData.hourCapacityMap = res['hourCapacityMap'];
+      heatMapInpData.stopCapacityMap = res['stopCapacityMap'];
+      this.data = heatMapInpData.returnHeatMapData();
+      console.log(heatMapInpData.returnHeatMapData());
+    }));
     this.visible = true;
   }
 
   onClick(): void {
-    this.diagramService.getHeatMapData(this.id, this.stopList)
-      .subscribe(res => this.data = res);
+    const heatMapInpData: HeatMapInputData = new HeatMapInputData();
+    this.diagramService.getHeatMapData(this.id, this.stopList).subscribe(res => {
+      heatMapInpData.hourCapacityMap = res['hourCapacityMap'];
+      heatMapInpData.stopCapacityMap = res['stopCapacityMap'];
+      this.data = heatMapInpData.returnHeatMapData();
+      console.log(heatMapInpData.returnHeatMapData());
+    });
     this.visible = true;
   }
 }

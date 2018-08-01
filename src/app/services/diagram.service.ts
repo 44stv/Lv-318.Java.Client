@@ -1,14 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Stop} from '../models/stop.model';
-
-const httpOptions = {
-  headers: new HttpHeaders(({
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  })),
-};
+import {HeatMapInputData} from '../models/heat-map-input-data';
 
 @Injectable()
 export class DiagramService {
@@ -21,6 +14,6 @@ export class DiagramService {
 
   getHeatMapData(transitId, stopList) {
     stopList.map(data => JSON.stringify(data));
-    return this.http.post(environment.serverURL + '/feedback/heat-map/' + transitId, stopList);
+    return this.http.get(environment.serverURL + '/feedback/heat-map/' + transitId + '?stop-list=' + stopList);
   }
 }
