@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/index";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { NewsPaginator } from "../components/main/news/news.component";
+import { NewsModel } from "../models/news.model";
 
 @Injectable({
   providedIn: 'root'

@@ -12,7 +12,7 @@
           </ng-template>
           <div>
             <button mat-button matStepperNext>{{'Next' | translate}}</button>
-            <button mat-button (click)="clearStopFirst()">
+            <button mat-button (click)="clearStopFirst(); clearStopSecond()">
               {{'Clear'| translate}}
             </button>
           </div>
@@ -21,11 +21,8 @@
           <ng-template matStepLabel>{{secondStopMarker.name ? secondStopMarker.name : "Choose a stop" | translate }}
           </ng-template>
           <div>
-            <button mat-button matStepperPrevious>{{'Back' | translate}}</button>
+            <button mat-button matStepperPrevious (click)="clearStopSecond()">{{'Back' | translate}}</button>
             <button mat-button matStepperNext>{{'Next' | translate}}</button>
-            <button mat-button (click)="clearStopSecond()">
-              {{'Clear'| translate}}
-            </button>
           </div>
         </mat-step>
         <mat-step [stepControl]="firstFormGroup" label="Step 3">
@@ -33,12 +30,9 @@
             secondStopMarker.name : "Choose a stop" | translate }}
           </ng-template>
           <div>
-            <div class="stop-list" *ngFor="let s of stopList">
-              {{s.name}}
-            </div>
             <button mat-button matStepperNext (click)="openModal()">{{'Make Feedback' | translate}}</button>
             <button mat-button matStepperPrevious>{{'Back' | translate}}</button>
-            <button mat-button (click)="stepper.reset(); clearStopSecond(); clearStopFirst()">Reset</button>
+            <button mat-button (click)="stepper.reset(); clearStopSecond(); clearStopFirst()">{{'Clear' | translate}}</button>
           </div>
         </mat-step>
       </mat-vertical-stepper>
@@ -97,7 +91,10 @@
   <button mat-button (click)="setDirectionAndRefresh('backward')">
     {{'Backward'| translate}}
   </button>
-  <button mat-button (click)="getMyPosition">
-    getmypostion
-  </button>
+  <div>
+  <div class="stop-list" *ngFor="let s of stopList">
+    {{s.name}} <span [ngStyle]="{'color':'red', 'font-size':'24'}">&#183;</span>
+  </div>
+  </div>
+
 </div>

@@ -32,12 +32,12 @@ export class NewsComponent implements OnInit {
       });
   }
 
-  openNews() {
-    this.selectedNews = this.data.content[0];
+  openNews(i) {
+    console.log(i);
+    console.log(this.data.content[i]);
     this.dialog.open(ReadNewsComponent, {
-      width: '60%', height: '50%', data: this.selectedNews
+      width: '60%', height: '70%', data: this.data.content[i]
     });
-
   }
 
   getAllNews(page: number, size: number) {

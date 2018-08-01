@@ -57,8 +57,9 @@ margin-left: 5px;
 .news-button{
 height: 20px;
    margin-left: 5px;
-   position: relative;
-   top: 0px;
+   position: absolute;
+   bottom: 11px;
+       right: 2px;
    font-family: Roboto, sans-serif;
   font-weight: 500;
   color: blue;
@@ -103,14 +104,20 @@ button{
        font-size: 20px;
 }
 .right-button{
+color: white;
  position: absolute;
     top: 45%;
-    left: 10%;
+    left: 1%;
+    font-size: 30px;
+        border: 0px;
 }
 .left-button{
 position: absolute;
     top: 45%;
-    right: 10%;
+    right: 1%;
+    color: white;
+    font-size: 30px;
+    border: 0px;
 }
 
 
